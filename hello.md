@@ -1,2 +1,4 @@
 # hello. first markdown file.
-# go hard !
+# go hard 
+# git hard study
+# wldmsdl Wkd!
