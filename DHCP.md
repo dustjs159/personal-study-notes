@@ -10,15 +10,15 @@ DHCP(Dynamic Host Configuration Protocol)
 IPv4 주소체계에서 주소가 고갈되는 현상을 해소할 수 있다.
 
 * 과정   
-1. DHCP Server Discover
+1. DHCP Server Discover   
 클라이언트는 처음에 DHCP의 서버를 모르기 때문에 자신의 MAC주소와 함께 DHCP서버를 찾는 메세지를 브로드캐스팅
-2. DHCP Server Offer
+2. DHCP Server Offer   
 DHCP가 브로드캐스트 메시지를 받으면 클라이언트에게 서버 자신의 IP주소를 알려주고
 이 때 클라이언트가 사용할 IP주소, IP주소 할당(임대)시간을 전달
 하지만 클라이언트의 IP주소를 알지 못하기 때문에 브로드캐스팅으로 전달
-3. DHCP Request
+3. DHCP Request   
 클라이언트는 서버의 응답을 받고 해당 서버에 DHCP 요청 메시지 전송
-4. DHCP ACK
+4. DHCP ACK   
 클라이언트의 요청을 받아서 IP주소 할당 진행
 
 * 장점
