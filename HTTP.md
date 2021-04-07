@@ -21,10 +21,10 @@ HTTP(HyperText Transfer Protocol)
 ### Request 메시지   
 시작줄, Header, Body로 구성   
 1. 시작줄 : HTTP Method + 요청 대상(주로 URL) + HTTP 버전
->> HTTP Method
->>> GET : 데이터 요청 / POST : 데이터 입력
->>> PUT : 데이터 갱신 / DELETE : 데이터 삭제
->>> HEAD : 웹 서버의 정보 또는 정상 작동 여부 확인시 사용
->>> OPTIONS : 웹 서버가 지원하는 메소드 종류 확인
+> HTTP Method
+>> GET : 데이터 요청 / POST : 데이터 입력   
+>> PUT : 데이터 갱신 / DELETE : 데이터 삭제   
+>> HEAD : 웹 서버의 정보 또는 정상 작동 여부 확인시 사용   
+>> OPTIONS : 웹 서버가 지원하는 메소드 종류 확인
 
 
