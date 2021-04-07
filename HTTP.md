@@ -25,6 +25,16 @@ HTTP(HyperText Transfer Protocol)
 >> GET : 데이터 요청 / POST : 데이터 입력   
 >> PUT : 데이터 갱신 / DELETE : 데이터 삭제   
 >> HEAD : 웹 서버의 정보 또는 정상 작동 여부 확인시 사용   
->> OPTIONS : 웹 서버가 지원하는 메소드 종류 확인
+>> OPTIONS : 웹 서버가 지원하는 메소드 종류 확인   
+> 요청 대상 - 주소의 URL
+>> origin형식 : 끝에 '?'와 쿼리 문자열이 붙는 절대경로   
+>> absolute형식 : 완전한 URL형식   
+> HTTP 버전 - HTTP/1.1, HTTP/2.0 
+>> HTTP/1.1은 기본적으로 연결당 하나의 요청과 응답을 처리   
+따라서 동시 전송 문제와 다수의 리소스 처리 속도 문제 발생   
+>> HTTP/2.0은 이러한 HTTP/1.1의 문제점을 개선하고자 등장   
+- Multiplexed Steams : 한 연결에 여러 메시지를 동시에 송,수신 가능
+- Stream Prioitization : 요청 리소스 간 의존관계 설정
+- Server Pu
 
 
