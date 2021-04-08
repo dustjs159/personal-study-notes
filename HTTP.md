@@ -18,7 +18,7 @@ HTTP(HyperText Transfer Protocol)
 1. 클라이언트가 서버에 Request 메시지 전송
 2. 서버는 클라이언트의 Request 메시지를 확인 후 클라이언트에게 Response 메시지 전송   
 
-### Request 메시지   
+## Request 메시지   
 시작줄, Header, Body로 구성   
 1. 시작줄 : HTTP Method + 요청 대상(주로 URL) + HTTP 버전
 > HTTP Method
