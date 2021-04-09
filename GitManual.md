@@ -13,5 +13,5 @@
 > Git 프로젝트에 포함되어 있는 데이터들은 파일 시스템상에서 스냅샷 기능을 함(특정 시간에 파일을 복사 후 보관하여 백업 및 복구를 해줌)   
 > 프로젝트를 commit하여 적용할 때의 순간을 포착   
 > 파일 자체를 저장하기 보다 수정 내역 자체를 저장함
-![Alt text](C:/Users/YYS/Desktop/자습/gitimage.png)
+![Alt text](https://github.com/dustjs159/gitstudy/blob/master/gitimage.png)
 
