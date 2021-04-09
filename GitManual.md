@@ -20,6 +20,12 @@
 4. Remote Repository : 원격지의 저장소
 
 # Git 명령어 및 관련 용어
+### init : 초기화. 해당 디렉토리를 로컬 깃 저장소로 만들어 줌   
+```git init```
+
+### status : 저장소의 깃 상태 확인 및 상태 변경이 필요한 파일 확인 가능   
+```git status```
+
 ### add : 작업이 완료된 파일을 Staging Area에 올림. 아직 수정이 덜 되었거나 보완이 필요한 파일은 나중에 add.
 ```git add <파일명>```   
 
