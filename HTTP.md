@@ -21,6 +21,7 @@ HTTP(HyperText Transfer Protocol)
 # HTTP Request
 > 요청라인+헤더+본문으로 구성 
 1. 요청라인 : HTTP Request Method + 요청URL + HTTP 버전
+> * HTTP Request Method   
 > - GET : 데이터 요청   
 > - POST : 데이터 입력   
 > - PUT : 데이터 갱신   
