@@ -22,12 +22,12 @@ HTTP(HyperText Transfer Protocol)
 > 요청라인+헤더+본문으로 구성 
 1. 요청라인 : HTTP Request Method + 요청URL + HTTP 버전
 > * HTTP Request Method   
-> - GET : 데이터 요청   
-> - POST : 데이터 입력   
-> - PUT : 데이터 갱신   
-> - DELETE : 데이터 삭제   
-> - HEAD : 웹 서버의 정보 또는 정상 작동 여부 확인시 사용   
-> - OPTIONS : 웹 서버가 지원하는 메소드 종류 확인   
+>> - GET : 데이터 요청   
+>> - POST : 데이터 입력   
+>> - PUT : 데이터 갱신   
+>> - DELETE : 데이터 삭제   
+>> - HEAD : 웹 서버의 정보 또는 정상 작동 여부 확인시 사용   
+>> - OPTIONS : 웹 서버가 지원하는 메소드 종류 확인   
 > 요청 대상 - 주소의 URL
 >> origin형식 : 끝에 '?'와 쿼리 문자열이 붙는 절대경로   
 >> absolute형식 : 완전한 URL형식   
