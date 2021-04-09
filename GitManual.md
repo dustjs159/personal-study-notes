@@ -21,28 +21,29 @@
 
 # Git 명령어 및 관련 용어
 ### add : 작업이 완료된 파일을 Staging Area에 올림. 아직 수정이 덜 되었거나 보완이 필요한 파일은 나중에 add.
-'''git add <파일명>'''   
+```git add <파일명>```   
 
 ### commit : 어떤 순간 작업 공간의 상태를 저장한 것. 어떤 시점의 스냅샷. Staging Area에 올라가있는(정상적으로 add된) 파일들을 Local Repository에 올림.   
-'''git commit -m "commit메시지"'''   
+```git commit -m "commit메시지"```   
 
 ### push : Local Repository에 올라가 있던 파일을 Remote Repository에 올림   
-'''git push <원격 저장소 이름> <push 할 브랜치 이름>'''   
+```git push <원격 저장소 이름> <push 할 브랜치 이름>```   
 
 ### fetch : Remote Repository의 파일을 다운. 최신 이력 확인 가능   
-'''git fetch'''   
+```git fetch```   
 
 ### merge : 다른 브랜치에서의 작업을 합칠 수 있음   
-'''git merge <브랜치 이름>'''   
+```git merge <브랜치 이름>```   
 
-### pull : Remote Repository의 파일을 다운+병합. 원격 저장소와 로컬 저장소의 동기화 역할도 함   '''git pull <원격 저장소 이름> <pull할 브랜치 이름>'''   
+### pull : Remote Repository의 파일을 다운+병합. 원격 저장소와 로컬 저장소의 동기화 역할도 함   
+```git pull <원격 저장소 이름> <pull할 브랜치 이름>```   
 
 ### clone : 기존 원격 저장소의 디렉토리를 로컬 저장소로 복사해옴   
-'''git clone <원격 저장소 주소>'''   
+```git clone <원격 저장소 주소>```   
 
 ### remote : 원격 저장소와 연결   
-'''git remote add <원격 저장소 이름><원격지 주소>'''   
+```git remote add <원격 저장소 이름><원격지 주소>```   
 
 ### branch : 또 다른 작업을 하고있는 다른 사용자의 이름. 브랜치 이름은 master가 아닌 다른 이름으로 하여 작업 완료 후 master브랜치와 병합
-브랜치 생성 : '''git branch <브랜치이름>'''
+브랜치 생성 : ```git branch <브랜치이름>```
 
