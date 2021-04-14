@@ -20,5 +20,10 @@ Proxy
 > * **캐싱 기능**이 있기 때문에 자주 사용되는 컨텐츠들은 성능 향상을 기대할 수 있다   
 > * 특정 사이트의 접근 제한을 걸 수도 있기 때문에 기업에서 많이 사용 됨   
 
+![Alt text](https://t1.daumcdn.net/cfile/tistory/990743455A43A1A109)
+
 2. Reverse Proxy
 > * 
+
+
+![Alt text](https://t1.daumcdn.net/cfile/tistory/992759465A43A1DA30)
