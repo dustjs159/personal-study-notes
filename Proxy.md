@@ -1,7 +1,5 @@
 Proxy
 ==================================
-Proxy Server
-----------------------------------
 
 # Proxy Server
 
@@ -15,6 +13,8 @@ Proxy Server
 # Forward Proxy
 
 ![Alt text](forwardproxy.PNG)   
+* 클라이언트와 가까운 곳에 위치한 Proxy Server   
+* 클라이언트가 웹 사이트에 연결하려고 요청을 보내면 서버에 직접 요청을 전송하는 것이 아니라 Forward Proxy가 요청을 받아서 웹 사이트에 연결 후 결과를 클라이언트에게 전달
 
 1. 캐싱
 > - 전송 시간 절약 + 응답 속도 향상   
@@ -29,11 +29,14 @@ Proxy Server
 # Reverse Proxy
 
 ![Alt text](reverseproxy.PNG)   
+* 서버와 가까운 곳에 위치한 Proxy Server
+* 클라이언트가 웹 사이트에 리소스를 요청하면 Reverse Proxy는 요청을 받아서 내부 서버에서 리소스를 받은 후에 클라이언트에게 리소스 전달
+* 클라이언트는 접근하고자 하는 목적지 서버가 최종 목적지가 되는 것이 아니라 Reverse Proxy가 최종 목적지가 됨
 
 1. 캐싱
 > - 응답 속도 향상   
  
-2. 보안
+2. 보안성
 > - 클라이언트 측에서는 서버들의 IP 주소를 직접 알지 못하기 때문에 Reverse Proxy에 요청을 보내고, Reverse Proxy는 자신이 알고있는 서버에게 요청을 전송.(클라이언트는 Reverse Proxy가 실제 서버라고 인식)   
 > - 실제 서버의 IP가 노출되지 않음   
 
