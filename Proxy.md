@@ -14,28 +14,30 @@ Proxy Server
 
 # Forward Proxy
 
+![Alt text](forwardproxy.PNG)   
+
 1. 캐싱
-> 전송 시간 절약 + 응답 속도 향상   
-> 불필요한 외부전송X   
-> 외부 요청 감소(네트워크 과부하 방지)  
+> - 전송 시간 절약 + 응답 속도 향상   
+> - 불필요한 외부전송X   
+> - 외부 요청 감소(네트워크 과부하 방지)  
 
 2. 익명성
-> 클라이언트가 보낸 요청을 숨김   
-> 서버가 받은 요청을 누가 보냈는지 알지 못하게 함   
+> - 클라이언트가 보낸 요청을 숨김   
+> - 서버가 받은 요청을 누가 보냈는지 알지 못하게 함   
 
-![Alt text](forwardproxy.PNG)
 
 # Reverse Proxy
 
+![Alt text](reverseproxy.PNG)   
+
 1. 캐싱
-> 응답 속도 향상   
+> - 응답 속도 향상   
  
 2. 보안
-> 클라이언트 측에서는 서버들의 IP 주소를 직접 알지 못하기 때문에 Reverse Proxy에 요청을 보내고, Reverse Proxy는 자신이 알고있는 서버에게 요청을 전송.(클라이언트는 Reverse Proxy가 실제 서버라고 인식)   
-> 실제 서버의 IP가 노출되지 않음   
+> - 클라이언트 측에서는 서버들의 IP 주소를 직접 알지 못하기 때문에 Reverse Proxy에 요청을 보내고, Reverse Proxy는 자신이 알고있는 서버에게 요청을 전송.(클라이언트는 Reverse Proxy가 실제 서버라고 인식)   
+> - 실제 서버의 IP가 노출되지 않음   
 
 3. 로드밸런싱
-> 서버의 부하 분산   
+> - 서버의 부하 분산   
 
-![Alt text](reverseproxy.PNG)
 
