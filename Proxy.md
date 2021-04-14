@@ -23,7 +23,7 @@ Proxy Server
 > 클라이언트가 보낸 요청을 숨김   
 > 서버가 받은 요청을 누가 보냈는지 알지 못하게 함   
 
-![Alt text]
+![Alt text](forwardproxy.PNG)
 
 # Reverse Proxy
 
@@ -35,6 +35,7 @@ Proxy Server
 > 실제 서버의 IP가 노출되지 않음   
 
 3. 로드밸런싱
-> 서버의 부하 분산
+> 서버의 부하 분산   
 
-![Alt text]
+![Alt text](reverseproxy.PNG)
+
