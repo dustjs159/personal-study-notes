@@ -20,7 +20,7 @@
 4. Remote Repository : 원격지의 저장소
 
 
-# 리눅스(CentOS)에서 Git을 설치하고 사용해 보자
+# 리눅스(CentOS)에서 Git을 설치하고 사용하기
 1. Git 설치
 ```yum install git```   
 
@@ -44,10 +44,15 @@ Repoistory name 작성하고 Create repository
 repository 생성(원격지의 저장소 생성 완료)   
 
 
-# Git 명령어 및 관련 용어
-### init : 초기화. 해당 디렉토리를 로컬 깃 저장소로 만들어 줌   
+# 로컬 깃 저장소에서 만든 파일을 원격 저장소에 올리기
+
+1. init : 초기화. 해당 디렉토리를 로컬 깃 저장소로 만들어 줌. 이 곳에서 작업 진행   
 ```git init```
 
+2. add : 작업이 완료된 파일을 Staging Area에 올림. 아직 수정이 완료되지 않았거나 보완이 필요한 파일은 나중에 add 한다.    
+```git add <파일명>```   
+
+3. commit : Staging Area에 올라가 있는
 ### clone : 기존 원격 저장소의 디렉토리를 로컬 저장소로 복사해옴   
 ```git clone <원격 저장소 주소>```   
 
