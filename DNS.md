@@ -39,9 +39,9 @@ DNS(Domain Name System)
 
 * 4, 5 : 이를 수신한 Local DNS 서버는 다시 com DNS 서버에게 정보를 요청하고, com DNS 서버도 자신의 하위 레벨 Domain인 google.com의 DNS서버 주소를 알려줌
 
-* 6, 7 : 이를 수신한 Local DNS 서버는 다시 google.com DNS 서버에게 www 호스트에 대한 정보를 요청하고, google.com DNS 서버는 www.google.com에 대한 IP서버 주소를 알려줌
+* 6, 7 : 이를 수신한 Local DNS 서버는 다시 google.com DNS 서버에게 www 호스트에 대한 정보를 요청하고, google.com DNS 서버는 www.google.com 에 대한 IP서버 주소를 알려줌
 
-* 8 : Local DNS 서버는 위와 같이 www.naver.com 에 대한 IP주소를 수신 후 자신의 DNS Cache에 등록하고 해당 정보를 요청했던 클라이언트에에게 응답 전송
+* 8 : Local DNS 서버는 위와 같이 www.google.com 에 대한 IP주소를 수신 후 자신의 DNS Cache에 등록하고 해당 정보를 요청했던 클라이언트에에게 응답 전송
 
 
 
