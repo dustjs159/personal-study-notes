@@ -21,27 +21,31 @@
 
 
 # 리눅스(CentOS)에서 Git을 설치하고 사용하기
-1. Git 설치
+1. Git 설치   
+
 ```yum install git```   
 
-<img width="301" alt="gitinstall1" src="https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png">   
+<img width="500" alt="gitinstall1" src="https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png">   
 
 
 * Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
 
-2. GitHub에 접속해서 Repository를 생성
+2. GitHub에 접속해서 Repository를 생성   
 
-[GitHub](https://github.com "github link")
+GitHub 링크 : [GitHub](https://github.com "github link")   
 
 계정 생성이 안되어있다면 계정 생성 후   
    
-![Alt text](gitinstall2.png)   
+<img width="500" alt="gitinstall2" src="https://user-images.githubusercontent.com/57285121/115059665-d0c15380-9f21-11eb-969c-dbb1e59f5733.png">
+
 Create repository   
    
-![Alt text](gitinstall3.png)   
+<img width="288" alt="gitinstall3" src="https://user-images.githubusercontent.com/57285121/115059709-df0f6f80-9f21-11eb-874c-18d9768a1408.png">
+   
 Repoistory name 작성하고 Create repository
    
-![Alt text](gitinstall4.png)   
+<img width="299" alt="gitinstall4" src="https://user-images.githubusercontent.com/57285121/115059748-edf62200-9f21-11eb-9c4c-4238b97e6ebf.png">
+   
 repository 생성(원격지의 저장소 생성 완료)   
 
 
