@@ -27,8 +27,8 @@
 
 <img width="500" alt="gitinstall1" src="https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png">   
 
+Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
 
-* Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
 
 2. GitHub에 접속해서 Repository를 생성   
 
@@ -40,11 +40,11 @@ GitHub 링크 : [GitHub](https://github.com "github link")
 
 Create repository   
    
-<img width="288" alt="gitinstall3" src="https://user-images.githubusercontent.com/57285121/115059709-df0f6f80-9f21-11eb-874c-18d9768a1408.png">
+<img width="500" alt="gitinstall3" src="https://user-images.githubusercontent.com/57285121/115059709-df0f6f80-9f21-11eb-874c-18d9768a1408.png">
    
 Repoistory name 작성하고 Create repository
    
-<img width="299" alt="gitinstall4" src="https://user-images.githubusercontent.com/57285121/115059748-edf62200-9f21-11eb-9c4c-4238b97e6ebf.png">
+<img width="500" alt="gitinstall4" src="https://user-images.githubusercontent.com/57285121/115059748-edf62200-9f21-11eb-9c4c-4238b97e6ebf.png">
    
 repository 생성(원격지의 저장소 생성 완료)   
 
