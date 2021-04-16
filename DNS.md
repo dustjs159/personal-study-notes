@@ -17,8 +17,8 @@ DNS(Domain Name System)
 * DNS는 전 세계 분산형 DB 구조로 동작   
 1. Domain Name Space   
 > DNS가 저장, 관리하는 계층적 자료구조   
-
-![Alt text](DNS.PNG)   
+  
+![DNS](https://user-images.githubusercontent.com/57285121/115060392-c5baf300-9f22-11eb-8b78-70527a4f04ba.PNG)   
    
 > 최상위에 루트 DNS서버가 존재하고 그 밑으로 인터넷에 연결된 노드가 연속해서 이어진 계층구조로 구성   
 > 각 층의 도메인들은 그 하위 도메인에 관한 정보를 관리하는 구조   
@@ -32,8 +32,8 @@ DNS(Domain Name System)
 > 네임 서버에 요청을 했을 때, 해당 서버의 정보가 없으면 다른 네임 서버에게 요청을 보내 정보를 받아온다   
 
 # 동작 과정
-
-![Alt text](DNS2.PNG)   
+   
+![DNS2](https://user-images.githubusercontent.com/57285121/115060487-dff4d100-9f22-11eb-86ab-313cce828808.PNG)   
    
 * 1,2,3 : Root DNS 서버는 전체 도메인 정보는 알지 못하기 때문에 자신의 하위 Domain인 COM DNS 서버의 주소를 알려줌
 
