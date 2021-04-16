@@ -12,7 +12,8 @@ Proxy
 
 # Forward Proxy
 
-![Alt text](forwardproxy.PNG)   
+![forwardproxy](https://user-images.githubusercontent.com/57285121/115058597-6bb92e00-9f20-11eb-8b1d-5b3916c1e62a.PNG)   
+   
 * 클라이언트와 가까운 곳에 위치한 Proxy Server   
 * 클라이언트가 웹 사이트에 연결하려고 요청을 보내면 서버에 직접 요청을 전송하는 것이 아니라 Forward Proxy가 요청을 받아서 웹 사이트에 연결 후 결과를 클라이언트에게 전달
 
