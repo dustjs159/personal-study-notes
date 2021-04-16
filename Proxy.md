@@ -29,7 +29,8 @@ Proxy
 
 # Reverse Proxy
 
-![Alt text](reverseproxy.PNG)   
+![reverseproxy](https://user-images.githubusercontent.com/57285121/115059042-f39f3800-9f20-11eb-9875-9c932a90843c.PNG)   
+   
 * 서버와 가까운 곳에 위치한 Proxy Server
 * 클라이언트가 웹 사이트에 리소스를 요청하면 Reverse Proxy는 요청을 받아서 내부 서버에서 리소스를 받은 후에 클라이언트에게 리소스 전달
 * 클라이언트는 접근하고자 하는 목적지 서버가 최종 목적지가 되는 것이 아니라 Reverse Proxy가 최종 목적지가 됨
