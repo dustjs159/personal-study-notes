@@ -18,7 +18,7 @@ DNS(Domain Name System)
 1. Domain Name Space   
 > DNS가 저장, 관리하는 계층적 자료구조   
 
-![Alt text](DNS.png)   
+![Alt text](DNS.PNG)   
    
 > 최상위에 루트 DNS서버가 존재하고 그 밑으로 인터넷에 연결된 노드가 연속해서 이어진 계층구조로 구성   
 > 각 층의 도메인들은 그 하위 도메인에 관한 정보를 관리하는 구조   
@@ -33,15 +33,15 @@ DNS(Domain Name System)
 
 # 동작 과정
 
-![Alt text](DNS2.png)   
+![Alt text](DNS2.PNG)   
    
 * 1,2,3 : Root DNS 서버는 전체 도메인 정보는 알지 못하기 때문에 자신의 하위 Domain인 COM DNS 서버의 주소를 알려줌
 
-* 4, 5 : 이를 수신한 Local DNS 서버는 다시 Iterative Query를 사용하여 com DNS 서버에게 정보를 요청하고, com DNS 서버도 자신의 하위 레벨 Domain인 naver.com의 DNS서버 주소를 알려줌
+* 4, 5 : 이를 수신한 Local DNS 서버는 다시 com DNS 서버에게 정보를 요청하고, com DNS 서버도 자신의 하위 레벨 Domain인 google.com의 DNS서버 주소를 알려줌
 
-* 6, 7 : 이를 수신한 Local DNS 서버는 다시 Iterative Query를 사용하여 naver.com DNS 서버에게 www 호스트에 대한 정보를 요청하고, naver.com DNS 서버는 www.naver.com에 대한 IP서버 주소를 알려줌
+* 6, 7 : 이를 수신한 Local DNS 서버는 다시 google.com DNS 서버에게 www 호스트에 대한 정보를 요청하고, google.com DNS 서버는 www.google.com에 대한 IP서버 주소를 알려줌
 
-* 8 : Local DNS 서버는 위와 같이 www.naver.com 에 대한 IP주소를 수신 후 자신의 DNS Cache에 등록하고 해당 정보를 요청했던 Client에게 응답메세지로 답변
+* 8 : Local DNS 서버는 위와 같이 www.naver.com 에 대한 IP주소를 수신 후 자신의 DNS Cache에 등록하고 해당 정보를 요청했던 클라이언트에에게 응답 전송
 
 
 
