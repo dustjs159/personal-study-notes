@@ -1,7 +1,5 @@
 VM Network Setting
 =====================================
-
-# VM Network Setting
    
 ![vmnet1](https://user-images.githubusercontent.com/57285121/115063468-9312f980-9f26-11eb-9d26-715d7490baac.png)   
    
