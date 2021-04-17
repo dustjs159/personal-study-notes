@@ -1,8 +1,10 @@
-리눅스에서 Git을 사용 해보자
+Git
 ====================================
 # Git 이란?
-> 리누스 토르발즈가 개발한 분산형 버전 관리 시스템.   
-> 많은 종류의 버전 관리 시스템이 있지만 그 중에서 압도적인 점유율을 차지하고 있다.
+* 리누스 토르발즈가 개발한 분산형 버전 관리 시스템.   
+* 주로 개발자들이 프로그램과 관련된 파일들을 저장할 때 사용   
+* 게임의 세이브 포인트와 비슷함. 언제든지 저장 시점으로 되돌아 갈 수 있다.
+* 많은 종류의 버전 관리 시스템이 있지만 그 중에서 압도적인 점유율을 차지하고 있다.
 
 # Git의 주요 목적
 1. Version 관리
@@ -19,37 +21,49 @@
 3. Local Directory : Git  프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리
 4. Remote Repository : 원격지의 저장소
 
+# commit
+* 게임의 세이브에 해당하는 행동을 git에서는 커밋이라고 한다(언제든지 커밋한 시점으로 돌아갈 수 있다)   
+* 커밋을 할 때 저장하고자 하는 파일들을 묶어서 커밋을 수행
+* 커밋을 하면 현재 작업중인 내용의 세이브 데이터가 내 컴퓨터에 저장이 됨
 
-# 리눅스(CentOS)에서 Git을 설치하고 사용하기
-1. Git 설치   
+# add
+* 스테이지에 올리기
+* 커밋을 하기 전에 저장하고자 하는 파일들을 묶는 작업(= Stage에 파일을 올리는 작업)
 
-```yum install git```   
+# push
+* 
 
-<img width="500" alt="gitinstall1" src="https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png">   
+# Git 설치 (Linux - CentOS)   
 
-Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
+![gitinstall](https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png)   
+
+* Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
 
 
-2. GitHub에 접속해서 Repository를 생성   
+# GitHub에 접속해서 Repository를 생성   
 
 GitHub 링크 : [GitHub](https://github.com "github link")   
 
-계정 생성이 안되어있다면 계정 생성 후   
+1. 계정 생성이 안되어있다면 계정 생성 후   
    
 <img width="500" alt="gitinstall2" src="https://user-images.githubusercontent.com/57285121/115059665-d0c15380-9f21-11eb-969c-dbb1e59f5733.png">
 
-Create repository   
+2. Create repository   
    
 <img width="500" alt="gitinstall3" src="https://user-images.githubusercontent.com/57285121/115059709-df0f6f80-9f21-11eb-874c-18d9768a1408.png">
    
-Repoistory name 작성하고 Create repository
+3. Repoistory name 작성하고 Create repository
    
 <img width="500" alt="gitinstall4" src="https://user-images.githubusercontent.com/57285121/115059748-edf62200-9f21-11eb-9c4c-4238b97e6ebf.png">
    
-repository 생성(원격지의 저장소 생성 완료)   
+4. repository 생성(원격지의 저장소 생성 완료)   
 
 
-# 로컬 깃 저장소에서 만든 파일을 원격 저장소에 올리기
+# 파일 업로드
+
+* add →  commit →  push
+
+clone 후 add,commit,push
 
 1. init : 초기화. 해당 디렉토리를 로컬 깃 저장소로 만들어 줌. 이 곳에서 작업 진행   
 ```git init```
