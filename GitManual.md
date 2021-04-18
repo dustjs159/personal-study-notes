@@ -1,37 +1,50 @@
-Git
-====================================
-# Git 이란?
-* 리누스 토르발즈가 개발한 분산형 버전 관리 시스템.   
-* 주로 개발자들이 프로그램과 관련된 파일들을 저장할 때 사용   
-* 게임의 세이브 포인트와 비슷함. 언제든지 저장 시점으로 되돌아 갈 수 있다.
-* 많은 종류의 버전 관리 시스템이 있지만 그 중에서 압도적인 점유율을 차지하고 있다.
+# Git
+* 리누스 토르발즈가 개발한 소프트웨어 버전 관리 도구
+* 분산 저장소 방식 : 하나의 원격 저장소와 분산된 개발자의 로컬 저장소에 같이 저장되어 관리하는 방식
+* 로컬 저장소에서 버전 관리가 가능하므로 원격 저장소에 문제가 생겨도 정상적으로 로컬 저장소에서 작업이 가능
 
 # Git의 주요 목적
-1. Version 관리
-2. Backup
-3. Collaborate
+* Version 관리
+* Backup
+* Collaborate
 
 # Git 동작 원리
-> Git 프로젝트에 포함되어 있는 데이터들은 파일 시스템상에서 스냅샷 기능을 함(특정 시간에 파일을 복사 후 보관하여 백업 및 복구를 해줌)   
-> 프로젝트를 commit하여 적용할 때의 순간을 포착   
-> 파일 자체를 저장하기 보다 수정 내역 자체를 저장함   
-![gitimage](https://user-images.githubusercontent.com/57285121/115059311-57c1fc00-9f21-11eb-9bfc-de2c3d5f2034.png)   
-1. Working Directory : 작업중인 파일이 위치하고 있는 디렉토리
-2. Staging Area : commit을 수행할 파일들이 올라가는 영역
-3. Local Directory : Git  프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리
-4. Remote Repository : 원격지의 저장소
+* 2개의 저장소(Local Repository, Remote Repository)가 존재
+* Local Repository : 실제 개발이 진행되는 장소. 버전 관리가 수행된다.
+* Remote Repository : 여러 사람들이 협업을 위해 버전을 공동으로 관리. 자신의 버전 관리 내역을 반영하거나 다른 개발자의 변경내용을 가져올 때 사용.
+* 파일의 변화를 스냅샷으로 저장, 스냅샷은 이전 스냅샷의 포인터를 가지므로 버전의 흐름 파악 가능
+* 프로젝트를 commit하여 적용할 때의 순간을 포착   
+* 파일 자체를 저장하기 보다 수정 내역 자체를 저장함   
 
-# commit
-* 게임의 세이브에 해당하는 행동을 git에서는 커밋이라고 한다(언제든지 커밋한 시점으로 돌아갈 수 있다)   
-* 커밋을 할 때 저장하고자 하는 파일들을 묶어서 커밋을 수행
-* 커밋을 하면 현재 작업중인 내용의 세이브 데이터가 내 컴퓨터에 저장이 됨
+# Git 작업 순서   
+
+![gitimage](https://user-images.githubusercontent.com/57285121/115059311-57c1fc00-9f21-11eb-9bfc-de2c3d5f2034.png)   
+* Working Directory   
+작업중인 파일이 위치하고 있는 디렉토리   
+* Staging Area : commit을 수행할 파일들이 올라가는 영역
+* Local Directory   
+git 프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리   
+git이 작업중인 파일에 대한 버전을 관리하기 위해서는 작업하고 있는 Working Directory를 git이 알아야 함   
+Working Directory에 ```git init``` 이라는 명령어를 입력하면 해당 Working Directory는 git repository가 되고, 이 git repository를 Local Repository라고 함   
+
+* Remote Repository : 원격지의 저장소
 
 # add
 * 스테이지에 올리기
-* 커밋을 하기 전에 저장하고자 하는 파일들을 묶는 작업(= Stage에 파일을 올리는 작업)
+* 커밋을 하기 전에 저장하고자 하는 파일들을 묶는 작업(= Stage에 파일을 올리는 작업) 
+* ``` git add <file name> ```
+
+# commit
+* 게임의 세이브에 해당하는 작업을 git에서는 커밋이라고 한다(언제든지 커밋한 시점으로 돌아갈 수 있다)   
+* 커밋을 할 때 저장하고자 하는 파일들을 묶어서 커밋을 수행
+* 커밋을 하면 현재 작업중인 내용의 세이브 데이터가 내 컴퓨터에 저장이 됨
 
 # push
-* 
+* github에 업로드
+* github에 업로드를 하게되면 다른사람과 공유할 수도 있고, 내 컴퓨터의 데이터가 날아가도 안전하게 다시 복구할 수 있음
+
+# init
+ 
 
 # Git 설치 (Linux - CentOS)   
 
