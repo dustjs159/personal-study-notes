@@ -23,35 +23,85 @@
 
 * Staging Area : commit을 수행할 파일들이 올라가는 영역   
    
-작업 내역을 바로 commit을 하지 않고, Staging Area를 경유하는 이유는 작업 내용을 한번 더 확인하여 선별적으로 Local Repository에 반영하기 위함   
-   
-Staging Area를 사용하게 되면 그렇지 않을 때보다 시간이 더 소요되지만 보다 더 안정된 버전관리 작업이 가능   
+> 작업 내역을 바로 commit을 하지 않고, Staging Area를 경유하는 이유는 작업 내용을 한번 더 확인하여 선별적으로 Local Repository에 반영하기 위함   
+> Staging Area를 사용하게 되면 그렇지 않을 때보다 시간이 더 소요되지만 보다 더 안정된 버전관리 작업이 가능   
 
 * Local Repository : git 프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리   
     
-git이 작업중인 파일에 대한 버전을 관리하기 위해서는 작업하고 있는 Working Directory를 git이 알아야 함   
+> git이 작업중인 파일에 대한 버전을 관리하기 위해서는 작업하고 있는 Working Directory를 git이 알아야 함   
    
-Working Directory에 ```git init``` 이라는 명령어를 입력하면 해당 Working Directory는 git repository가 되고, 이 git repository를 Local Repository라고 함      
-Local Repository 안의 .git폴더가 해당 디렉토리 안에서 일어나는 일들(변경, 수정사항 등)은 git이 실시간으로 알게 됨   
+> Working Directory에 ```git init``` 이라는 명령어를 입력하면 해당 Working Directory는 git repository가 되고, 이 git repository를 Local Repository라고 함      
+> Local Repository 안의 .git폴더가 해당 디렉토리 안에서 일어나는 일들(변경, 수정사항 등)은 git이 실시간으로 알게 됨   
    
 * Remote Repository : 원격지의 저장소
 
 # add
-* 스테이지에 올리기
-* 커밋을 하기 전에 저장하고자 하는 파일들을 묶는 작업(= Stage에 파일을 올리는 작업) 
-* ``` git add <file name> ```
+* Staging Area에 올리기
+* commit을 하기 전에 저장하고자 하는 파일들을 묶는 작업(= Stage에 파일을 올리는 작업) 
+* ```git add <file name>```
 
 # commit
-* 게임의 세이브에 해당하는 작업을 git에서는 커밋이라고 한다(언제든지 커밋한 시점으로 돌아갈 수 있다)   
-* 커밋을 할 때 저장하고자 하는 파일들을 묶어서 커밋을 수행
-* 커밋을 하면 현재 작업중인 내용의 세이브 데이터가 내 컴퓨터에 저장이 됨
+* 게임의 세이브에 해당하는 작업을 git에서는 commit이라고 한다(언제든지 commit한 시점으로 돌아갈 수 있다)   
+* commit을 할 때 저장하고자 하는 파일들을 묶어서 커밋을 수행
+* commit을 하면 변경사항들이 git 디렉토리에 영구적인 스냅샷으로 저장
+* ```git commit -m <commit message>```
 
 # push
-* github에 업로드
+* github에 업로드(Local Repository의 변경 사항을 Remote Repository에 반영)
 * github에 업로드를 하게되면 다른사람과 공유할 수도 있고, 내 컴퓨터의 데이터가 날아가도 안전하게 다시 복구할 수 있음
+* ```git push <remote repository name> <branch name>```
 
 # init
- 
+* 해당 디렉토리를 git 디렉토리(Local Repository)로 만들어줌(깃 저장소 초기화)
+* master branch를 자동으로 만들어 줌
+* ```git init```
+
+# remote
+* Local Repository와 Remote Repository를 연결하거나 현재 연결되어있는 정보를 확인할 수 있음
+* 연결 :  ```git remote add <remote repository name> <remote repository address>```
+* 연결정보 확인 : ```git remote -v```
+
+# clone
+* Remote Repository의 파일들을 받아옴
+* 자동으로 Remote Repository와 연결(git remote)
+* 자동으로 Local Repository 초기화(git init)
+* ```git clone <remote repository address>```
+
+# branch
+* commit을 가리키고있는 일종의 포인터.
+* 프로젝트의 master branch에서 다른이름으로 따와서 작업을 마친 후 master branch에 다시 merge함
+* ```git init```을 통해 master branch가 자동으로 만들어짐
+* HEAD : 현재 작업중인 branch를 가리킴
+* ```git branch <branch name>```
+
+# checkout
+* 지정한 branch로 이동
+* HEAD를 지정한 branch로 이동
+* ```git checkout <branch name>```
+
+# status
+* git repository의 상태를 확인할 수 있음
+* ```git status```
+
+# merge
+* master branch가 아닌 다른 branch에서 작업을 한 후에 다시 master branch로 병합을 할 때 사용
+* 모든 변경사항을 master branch로 추가함
+* ```git merge <branch name>```
+
+# fetch
+* Remote Repository의 최신 버전을 받아올 때 사용
+* 병합은 진행하지 않고 저장소의 파일을 받아오기만 함
+* 파일을 다운로드만 하고 병합을 하지 않기 때문에 병합 전, Local Repository와 Remote Repository의 차이점을 비교해 볼 수 있다.
+* ```git fetch <remote repository name> <branch name>```
+
+# pull 
+* Remote Repository의 최신 버전을 받아올 때  사용
+* 병합도 추가적으로 같이 진행(다운로드 + 병합)
+* ```git pull <remote repository name> <branch name>```
+
+# fork
+* 타인의 github의 저장소에서 내가 어떤 부분을 수정하거나 추가 기능을 넣고 싶을 때 해당 저장소를 내 github저장소에 그대로 가져옴
+* 타인의 저장소에 권한이 없는 사용자가 fork를 통해 가져온 내 저장소에 변경 사항을 push한 후 타인의 저장소에 Pull Request 요청을 보내고, 승인이 되면 타인의 저장소에 merge됨
 
 # Git 설치 (Linux - CentOS)   
 
@@ -77,48 +127,4 @@ GitHub 링크 : [GitHub](https://github.com "github link")
 <img width="500" alt="gitinstall4" src="https://user-images.githubusercontent.com/57285121/115059748-edf62200-9f21-11eb-9c4c-4238b97e6ebf.png">
    
 4. repository 생성(원격지의 저장소 생성 완료)   
-
-
-# 파일 업로드
-
-* add →  commit →  push
-
-clone 후 add,commit,push
-
-1. init : 초기화. 해당 디렉토리를 로컬 깃 저장소로 만들어 줌. 이 곳에서 작업 진행   
-```git init```
-
-2. add : 작업이 완료된 파일을 Staging Area에 올림. 아직 수정이 완료되지 않았거나 보완이 필요한 파일은 나중에 add 한다.    
-```git add <파일명>```   
-
-3. commit : Staging Area에 올라가 있는
-### clone : 기존 원격 저장소의 디렉토리를 로컬 저장소로 복사해옴   
-```git clone <원격 저장소 주소>```   
-
-### status : 저장소의 깃 상태 확인 및 상태 변경이 필요한 파일 확인 가능   
-```git status```
-
-### add : 작업이 완료된 파일을 Staging Area에 올림. 아직 수정이 덜 되었거나 보완이 필요한 파일은 나중에 add.
-```git add <파일명>```   
-
-### commit : 어떤 순간 작업 공간의 상태를 저장한 것. 어떤 시점의 스냅샷. Staging Area에 올라가있는(정상적으로 add된) 파일들을 Local Repository에 올림.   
-```git commit -m "commit메시지"```   
-
-### push : Local Repository에 올라가 있던 파일을 Remote Repository에 올림   
-```git push <원격 저장소 이름> <push 할 브랜치 이름>```   
-
-### fetch : Remote Repository의 파일을 다운. 최신 이력 확인 가능   
-```git fetch```   
-
-### merge : 다른 브랜치에서의 작업을 합칠 수 있음   
-```git merge <브랜치 이름>```   
-
-### pull : Remote Repository의 파일을 다운+병합. 원격 저장소와 로컬 저장소의 동기화 역할도 함   
-```git pull <원격 저장소 이름> <pull할 브랜치 이름>```   
-
-### remote : 원격 저장소와 연결   
-```git remote add <원격 저장소 이름><원격지 주소>```   
-
-### branch : 작업을 분기해서 할 수 있는 것.
-```git branch <브랜치이름>```
 
