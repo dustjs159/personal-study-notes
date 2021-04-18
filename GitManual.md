@@ -21,10 +21,18 @@
 ![gitimage](https://user-images.githubusercontent.com/57285121/115059311-57c1fc00-9f21-11eb-9bfc-de2c3d5f2034.png)   
 * Working Directory   
 작업중인 파일이 위치하고 있는 디렉토리   
-* Staging Area : commit을 수행할 파일들이 올라가는 영역
-* Local Directory   
-git 프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리   
+* Staging Area   
+commit을 수행할 파일들이 올라가는 영역   
+   
+작업 내역을 바로 commit을 하지 않고, Staging Area를 경유하는 이유는 작업 내용을 한번 더 확인하여 선별적으로 Local Repository에 반영하기 위함   
+   
+Staging Area를 사용하게 되면 그렇지 않을 때보다 시간이 더 소요되지만 보다 더 안정된 버전관리 작업이 가능   
+
+* Local Repository   
+git 프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리  
+    
 git이 작업중인 파일에 대한 버전을 관리하기 위해서는 작업하고 있는 Working Directory를 git이 알아야 함   
+   
 Working Directory에 ```git init``` 이라는 명령어를 입력하면 해당 Working Directory는 git repository가 되고, 이 git repository를 Local Repository라고 함   
 
 * Remote Repository : 원격지의 저장소
