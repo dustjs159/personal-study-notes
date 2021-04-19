@@ -17,6 +17,16 @@ OSI 7 Layer
 * 사용되는 네트워크 장비 : 리피터, 허브 
 
 # 2. 데이터 링크 계층(Data Link Layer)
-* 근접한 시스템 간에 신뢰성 있는 정보를 전송
-* Flow contorl, Framing, Error control, Sequence Contorl
+* 근접한 시스템 간에 신뢰성 있는 데이터를 전송
+* **MAC주소**를 기반으로 목적지에 데이터를 전송
+* 흐름제어(Flow contorl) : 송신측에서 수신측의 처리속도를 고려하여 데이터를 전송
+* 프레임동기화(Framing) : 비트들을 Frame이라는 논리적 단위로 변환
+* 오류제어(Error control) : Framing과정에서 발생하는 오류들을 검출하고 오류 발생 시 재전송 요청
+* 데이터 전송 단위 : Frame
+* 사용되는 네트워크 장비 : 랜카드, 브리지, **스위치**
+* 프로토콜 : Ethernet
+
+# 3. 네트워크 계층(Network Layer)
+* 시스템 간의 네트워크 연결을 설정, 유지, 해제
+
 
