@@ -89,7 +89,6 @@ Network Equipment
 ![l4switch2](https://user-images.githubusercontent.com/57285121/115347104-f71a1400-a1eb-11eb-9214-abccd34cbb95.PNG)   
 * 외부에서 접속할 때 사요하는 IP와 port번호를 갖고있는 L4 스위치의 구성요소를 **Virtual Server**라고 함
 * Virtual Server의 IP를 VIP(Vitrual IP)라고 함. L4 스위치는 다수의 Virtual Server를 가질 수 있음
-* 실제 데이터(HTTP의 쿠키 등)를 분석해**보안성에 있어서 정교한 로드밸런싱**이 가능해짐
 * Virtual Server은 받은 요청들을 서버들의 집합에 전달하게 되는데 이 집합을 Pool이라고 하고 그 Pool을 구성하는 서버들을 Pool 멤버라고 부름(Pool은 다수의 Pool 멤버로 구성)
 * Pool 멤버들은 단순 IP가 아니라 IP와 port번호로 구성된 서버.(IP가 같아도 port번호가 다르면 다른 멤버)
 
