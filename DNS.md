@@ -15,7 +15,7 @@ DNS(Domain Name System)
 
 # 구성요소
 * DNS는 전 세계 분산형 DB 구조로 동작   
-1. Domain Name Space   
+* 1. Domain Name Space   
 > DNS가 저장, 관리하는 계층적 자료구조   
   
 ![DNS](https://user-images.githubusercontent.com/57285121/115060392-c5baf300-9f22-11eb-8b78-70527a4f04ba.PNG)   
@@ -23,16 +23,20 @@ DNS(Domain Name System)
 > 최상위에 루트 DNS서버가 존재하고 그 밑으로 인터넷에 연결된 노드가 연속해서 이어진 계층구조로 구성   
 > 각 층의 도메인들은 그 하위 도메인에 관한 정보를 관리하는 구조   
 
-2. Name Server  
+2. Resource Record
+> 도메인 이름에 설정할 수 있는 데이터 타입들   
+
+
+3. Name Server  
 > 영어/한글로 표현된 도메인 이름을 IP주소로 변환하기 위한 Domain NameSpace의 데이터를 갖고 있는 서버   
 > Resolver로부터 요청받은 도메인 이므에 대한 IP정보를 다시 Resolver로 전달   
 
-3. Resolver(Client S/W)   
+4. Resolver(Client S/W)   
 > 클라이언트의 요청을 네임 서버로 전달 및 네임 서버로부터 도메인 이름과 IP주소를 받아 클라이언트에게 제공   
 > 네임 서버에 요청을 했을 때, 해당 서버의 정보가 없으면 다른 네임 서버에게 요청을 보내 정보를 받아온다   
 
 # 동작 과정
-   
+    
 ![DNS2](https://user-images.githubusercontent.com/57285121/115060487-dff4d100-9f22-11eb-86ab-313cce828808.PNG)   
    
 * 1,2,3 : Root DNS 서버는 전체 도메인 정보는 알지 못하기 때문에 자신의 하위 Domain인 COM DNS 서버의 주소를 알려줌
