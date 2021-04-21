@@ -41,6 +41,17 @@ Network Equipment
 * 계층별 사용하는 스위치에 따라 L2, L3, L4, L7 스위치로 분류
 
 # 라우터(Router)
+* 둘 이상의 네트워크 간 데이터 통신을 하기위한 최적의 경로를 찾아주는 장비
+* 네트워크와 네트워크를 연결
+* 라우팅 테이블(최적의 라우팅 정보를 기록한 테이블)을 참조해서 라우팅 진행
+* 라우팅 알고리즘
+> * 거리 벡터 알고리즘 : 인접한 라우터 간 거리와 벡터(방향)에 대한 정보를 바탕으로 경로를 찾고, 그 경로를 이용할 수 없다면 다른 경로를 찾음. (RIP, IGRP)
+> * 링크 상태 알고리즘 : 라우터와 라우터간 모든 경로를 파악하고 미리 대체 경로를 마련하는 알고리즘. 거리 벡터 알고리즘의 단점을 보완. (OSPF)   
+* 라우팅 프로토콜 
+> * RIP(Routing  Information Protocol)
+> * IGRP(Interior Gataway Routing Protocol)
+> * OSPF(Open Shortest Path First Protocol)
+> * BGP(Border Gateway Protocol)
 
 # 게이트웨이(Gateway)
 
