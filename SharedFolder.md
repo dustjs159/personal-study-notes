@@ -26,4 +26,11 @@ Local(Windows)에서 폴더를 생성하고 해당 폴더를 VM과 공유하기
    
 ![share7](https://user-images.githubusercontent.com/57285121/115686005-bbba4980-a393-11eb-9edf-fe29cee39371.PNG)
 
+# 공유 폴더의 파일들을 Hard Link / Symbolic Link
+
+* Hard Link   
+![hard](https://user-images.githubusercontent.com/57285121/115766240-b7694d00-a3e2-11eb-9650-871167448d87.png)   
+
+* Symbolic Link   
+![soft](https://user-images.githubusercontent.com/57285121/115766317-cbad4a00-a3e2-11eb-8727-95ff073cc195.png)
 
