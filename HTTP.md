@@ -157,6 +157,11 @@ HTTP / HTTPS
 > 강화된 보안(안전하지 않은 암호화 방식 지원X)   
 > 최초 연결 시에 암호화 통신을 개시하는 절차를 간소화하여 성능 개선    
 
+# HTTP Request Method Test
+* 크롬의 개발자 도구를 통해 확인
+* 구글에 'python'검색   
+<img width="500" alt="methodt1" src="https://user-images.githubusercontent.com/57285121/115695417-c200f380-a39c-11eb-980e-c8d86410e55a.png">
+ 
 # 인증서
 ## 정의
 > 클라이언트와 서버 간 통신의 안정을 보증해주는 문서   
