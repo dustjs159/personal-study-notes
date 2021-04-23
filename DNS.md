@@ -94,6 +94,16 @@ DNS(Domain Name System)
 
 10. 웹 페이지 출력
 
+# URL & URI 차이점
+* URL : Uniform Resource Locator
+> * 정형화 된 리소스 위치 표시(리소스의 위치)   
+
+* URI : Uniform Resource Identifier
+> * 해당 서버의 자원 식별자(리소스 식별자)   
+
+* http://google.com/rabel : 웹 페이지에서 rabel의 리소스의 위치를 나타냄(URL)
+* http://google.com/132 : 132라는 식별자를 통해 해당 웹 페이지의 리소스를 나타냄(URI)
+* **URI**가 더 상위 개념
 
 
 
