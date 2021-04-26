@@ -18,7 +18,7 @@ ARP
 3. 생성된 ARP Request가 Broadcast로 전송  
  
 ![apr2](https://user-images.githubusercontent.com/57285121/116060350-c3902b80-a6bc-11eb-972e-7b49728906eb.PNG)   
-4. Broadcast로 ARP Request를 수신한 호스트 중에서 목적지 IP Address가 일치하는 시스템은 자신의 MAC주소를 포함한 ARP Reply(응답 메시지)를 송신측에 전송
+4. Broadcast로 ARP Request를 수신한 호스트 중에서 목적지 IP Address가 일치하는 시스템은 자신의 MAC주소를 포함한 ARP Reply(응답 메시지)를 송신측에 전송   
 5. 최초 송신측은 목적지의 IP Address에 대응하는 MAC주소 획득   
 
 
