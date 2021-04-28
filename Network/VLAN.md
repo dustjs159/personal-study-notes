@@ -68,7 +68,9 @@ IEEE 802.1Q 프로토콜을 이용하여 VLAN ID를 구별
 * Static VLAN(Port기반)
 > * 관리자가 직접 스위치의 포트에 VLAN을 할당
 > * Default 설정 방식   
-> * 관리자가 직접 관리와 설정을 해야함   
+> * 관리자가 직접 관리와 설정을 해야함  
+![svlan](https://user-images.githubusercontent.com/57285121/116406837-10fecb00-a86c-11eb-9bea-9ecc1a4cc4ef.PNG)   
+ 
 
 * Dynamic VLAN(MAC주소/프로토콜 기반)
 > * 스위치의 포트에 VLAN할당을 동적으로 자동화   
@@ -76,6 +78,7 @@ IEEE 802.1Q 프로토콜을 이용하여 VLAN ID를 구별
 > * VMPS(VLAN Membership Policy Server)에서 해당 장비의 MAC주소를 기반으로 할당할 VLAN을 준비해 놓고 요청이 들어왔을 때 할당할 VLAN정보를 스위치에 반환하고 해당 스위치가 VLAN 정보 세팅  
 > * VMPS가 장애가 생기면 VLAN을 이용하는 모든 네트워크 서비스에 장애가 발생하게 됨   
 > * 장비의 MAC주소에 따라 해당 네트워크를 자동으로 찾기 때문에 이동이 잦은 환경에서 사용하기 적합    
+![dvlan](https://user-images.githubusercontent.com/57285121/116406930-28d64f00-a86c-11eb-86af-a6a4cae1159c.PNG)   
 
 # VLAN 사용 목적
 * 불필요한 브로드캐스트 트래픽 차단(과부하 감소)
