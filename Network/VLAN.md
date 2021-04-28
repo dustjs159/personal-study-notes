@@ -39,10 +39,47 @@ VLAN ID가 10인 PC1과 VLAN ID가 20인 PC2, PC3과는 통신 불가. PC2와 PC
 * 다른 스위치에서는 프레임을 수신할 때 프레임에 붙은 Tag를 보고 VLAN ID를 확인   
 * 프레임을 확장하는 방식   
 ![vlan3](https://user-images.githubusercontent.com/57285121/116127933-56ec4f80-a703-11eb-9f2a-9980b86e33df.PNG)   
-IEEE 802.1Q 프로토콜을 이용하여 VLAN ID를 구별   
+IEEE 802.1Q 프로토콜을 이용하여 VLAN ID를 구별  
+ 
+# Inter-VLAN
+* L2 스위치로 VLAN을 구성할 수 있지만, 통신은 불가능   
+* 서로 다른 VLAN(Broadcast영역이 다른)간 통신을 위해 라우터 or L3 이상 스위치를 사용하여 IP Routing을 해야함   
+* 라우터의 서브 인터페이스 사용   
+> * 라우터의 물리적인 인터페이스 하나를 여러 논리 인터페이스 나누고 그 각각을 VLAN으로 구성
+* L3 스위치   
+> * SVI(Switch Virtual Interface) : 스위치에 가상의 인터페이스를 만들고 IP를 할당하여 Routing
+> * Routed port
+
+# VLAN 구성 방식
+* End-to-End VLAN   
+> * 물리적인 위치에 관계 없이 동일한 VLAN을 구성하는 방식   
+> * VLAN이 전체 스위치에 걸쳐져 있기 때문에 사용자가 물리적인 위치를 이동해도 동일한 VLAN일 수 있음   
+> * 장점 : 설정이 간편하고 편리(별 다른 VLAN구축이 필요 없고 하나만 만들어주면 됨)   
+> * 단점 : 트래픽이 모두 Broadcast됨(트래픽이 많이 발생)   
+![vlan4](https://user-images.githubusercontent.com/57285121/116401848-ac8d3d00-a866-11eb-867f-21f7c479a977.PNG)   
+
+* Local VLAN
+> * 물리적인 위치마다 각각 다른 VLAN을 구성하는 방식(End-to-End VLAN과 반대)   
+> * 사용자가 물리적인 위치를 이동하게 되면 다른 VLAN에 소속 될 수 있음   
+> * 장점 : 네트워크 구조를 확장하기 쉽고 트래픽 흐름 예측을 통해서 장애를 발견하기 쉽다. 이중화가 쉽다.   
+> * 단점 : 설정과 관리가 복잡하고 상위계층의 장비(L3 스위치 or 라우터)가 필요함   
+![vlan5](https://user-images.githubusercontent.com/57285121/116402525-7c926980-a867-11eb-90b9-a4ae51506a1c.PNG)   
+
+* Static VLAN(Port기반)
+> * 관리자가 직접 스위치의 포트에 VLAN을 할당
+> * Default 설정 방식   
+> * 관리자가 직접 관리와 설정을 해야함   
+
+* Dynamic VLAN(MAC주소/프로토콜 기반)
+> * 스위치의 포트에 VLAN할당을 동적으로 자동화   
+> * Static VLAN처럼 포트별로 VLAN을 할당하는 것이 아니고 포트에 접속하는 장비의 MAC주소에 따라 VLAN을 할당하는 방식   
+> * VMPS(VLAN Membership Policy Server)에서 해당 장비의 MAC주소를 기반으로 할당할 VLAN을 준비해 놓고 요청이 들어왔을 때 할당할 VLAN정보를 스위치에 반환하고 해당 스위치가 VLAN 정보 세팅  
+> * VMPS가 장애가 생기면 VLAN을 이용하는 모든 네트워크 서비스에 장애가 발생하게 됨   
+> * 장비의 MAC주소에 따라 해당 네트워크를 자동으로 찾기 때문에 이동이 잦은 환경에서 사용하기 적합    
 
 # VLAN 사용 목적
 * 불필요한 브로드캐스트 트래픽 차단(과부하 감소)
-* 네트워크 보안성 강화(다른 네트워크와 분리)
+* 네트워크를 분리하여 접근이 허가된 대상만 접근할 수 있도록 설정하여 보안성 향상 가능(보안성)
+* 기존 네트워크의 물리적인 변화를 주지 않고도 구조를 변경할 수 있음(유연성)
 * 이중화
 

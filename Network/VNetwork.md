@@ -22,9 +22,9 @@ Network Virtualizaion
 
 # Network Overlay
 * 스위치의 기능만 가상화
-* NIC하나에 vSwitch를 생성하고 관리하는 방식
-* 물리적 스위치로 연결된 같은 네트워크 대역폭의 NIC를 하나로 묶어 vSwitch를 생성하여 관리하는 방식
-
+* 물리적 스위치로 연결된 같은 네트워크 대역폭의 NIC를 하나로 묶어 vSwitch를 생성하여 관리하는 방식   
+![vnet1](https://user-images.githubusercontent.com/57285121/116400223-c4fc5800-a864-11eb-98ed-b65186d78f8d.PNG)   
+> * 여러 호스트들의 NIC를 하나의 스위치에서 관리할 수 있게되어 관리가 쉬워짐
 
 * 네트워크에 연결되어 있는 host의 수가 점차 증가하면서 네트워크의 구성이 복잡해>짐
 * 이렇게 복잡한 네트워크 구성의 어려움을 해결하기 위해 구축한 가상의 네트워크(Network Overlay)
