@@ -1,11 +1,10 @@
+TCP/UDP
 ===========================================
-
-
-
 
 # TCP(Transmission Control Protocol)
 * End-to-End간 신뢰성 있는 데이터 통신을 지원하는 프로토콜
 * 데이터를 전송함에 있어서 신뢰성있는 전송이 주 목적
+* 응용 프로그램간 구별을 위해 Port번호 사용
 * 연결형 서비스, 가상회선 방식
 * 데이터의 순차전송을 보장
 * 흐름제어, 혼잡제어, 오류제어 기능 지원
@@ -13,14 +12,16 @@
 
 # 3 way-handshake / 4 way-handshake
 * 3 way-handshake : 데이터를 전송하기 전 정확한 전송을 위해 송신측과 수신측의 연결(세션)을 수립하는 과정
-* 연결을 위한 3 way-handshake
+* 연결을 위한 3 way-handshake   
+![tcp1](https://user-images.githubusercontent.com/57285121/116592013-75985380-a95a-11eb-9fc6-39aaf1a1281c.png)   
 * 과정
 > * 1. Client는 Server에 연결 요청을 위해 SYN패킷 전송   
 > * 2. Server는 LISTEN 상태에서 SYN을 받고 SYN_RCV 상태로 바뀌면서 Client의 연결 요청을 정상적으로 받았다는 의미로 ACK와 Client도 포트를 열어달라는 SYN 을 함께 전송   > * 3. Client는 Server의 ACK와 SYN을 받고(이 때 ACK가 도착하지 않았다면 다시 Server에 SYN을 보냄)ESTABLISHED 상태가 되며 Server의 요청을 정상적으로 받았다는 의미로 ACK를 전송.  
 > * 4. Server는 ACK를 받고 Server역시 ESTABLISHED 상태로 변경.  
 > * 5. Client/Server 둘 다 ESTABLISHED 상태가 되면 데이터 송, 수신 가능.  
 
-* 4 way-handshake : 데이터 송, 수신이 모두 종료된 후 송신측과 수신측간 연결(세션)을 종료하는 과정
+* 4 way-handshake : 데이터 송, 수신이 모두 종료된 후 송신측과 수신측간 연결(세션)을 종료하는 과정   
+![tcp2](https://user-images.githubusercontent.com/57285121/116592385-e7709d00-a95a-11eb-88c3-a75103765837.png)
 * 과정
 > * 1. Client는 FIN 패킷 전송, Client는 FIN_WAIT_1 상태로 변경.  
 > * 2. Server는 CLOSE_WAIT상태로 바뀌고 Client의 FIN패킷을 잘 받았다는 ACK를 Client에 전송 + 해당 포트의 응용프로그램 상태를 Close()로 만듦   
@@ -34,7 +35,11 @@
 * 송신측과 수신측 간의 데이터 처리 속도 차이에서 발생하는 문제점을 해결하기 위한 방법(속도 조절)
 * 수신측 데이터 처리 속도가 송신측보다 빠르면 문제가 되지 않지만, 송신측이 더 빠를 경우 문제 발생
 * 수신측의 저장공간을 넘어서는 양의 데이터 수신 시 손실 가능성
-* Stop and Wait / Sliding Window
+* Stop and Wait   
+![tcp3](https://user-images.githubusercontent.com/57285121/116593135-be044100-a95b-11eb-9c9c-654e8d2c3c8c.png)   
+> * 매번 전송한 패킷에 대해 확인(ACK)을 해야만 다음 패킷을 전송하는 방법   
+> * 간단한 구조이지만 하나씩만 주고 받기 때문에 비효율
+
 
 
 # 혼잡제어(Congestion Control)
