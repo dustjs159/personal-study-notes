@@ -3,6 +3,7 @@ NAT
 
 # NAT(Network Address Translation)
 * 사설 IP 주소를 공인 IP 주소로 바꿔주는 기술
+* 랜 카드를 두 개 이상 가지고 있는 공유기(라우터)가 사설 네트워크와 외부 인터넷 사이에서 중개자 역할을 
 
 # 공인 IP : Public IP
 * ISP(Internet Service Provider, 인터넷 서비스 공급자)가 제공하는 전 세계에서 단 하나 뿐인 IP
@@ -12,6 +13,7 @@ NAT
 # 사설 IP : Private IP
 * 가정이나 회사 내부 등에 할당된 네트워크의 IP 주소
 * 내부 네트워크에서만 사용되고 외부에서는 사용이 불가.  
+* 사설 IP 주소로 사용 가능 한 IP 주소는 클래스 별로 정해져 있음   
    
 |구분|공인IP|사설IP|
 |------|---|---|   
@@ -20,17 +22,51 @@ NAT
 |고유성|인터넷 상 유일한 주소(고유성O)|하나의 내부 네트워크에서만 유일(고유성X)|   
 |접근성|외부에서 접근 가능|외부에서 접근 불가(내부에서만 접근 가능)|   
    
+***공인 IP 주소는 인터넷에 접속하는 호스트에 유일하게 딱 하나만 할당되어야 하기 때문에 사설 IP 주소와 명확히 구분되어야 함***   
+![nat1](https://user-images.githubusercontent.com/57285121/116577126-2b5ba600-a94b-11eb-9396-6ee85030ce0c.png)   
+(사설 IP 주소를 할당받은 네트워크 내 호스트와 공인 IP 주소를 할당 받은 인터넷과 직접적인 통신은 불가)   
 
-# NAT 작동원리
-# NAT 작동방식
-# NAT 종류
+# NAT 작동원리   
+![nat2](https://user-images.githubusercontent.com/57285121/116577937-e421e500-a94b-11eb-9e87-666e37153408.png)   
+* 외부 인터넷과 직접적으로 통신하지 못하는 사설 네트워크 내 호스트들을 외부 인터넷과 통신이 가능하도록 해주는 기술
+* 사설 IP 주소를 할당받은 호스트도 NAT를 통해 외부와 통싱할 수 있게 됨
+
 # NAT 사용목적
+* IPv4 주소 체계의 주소 고갈 문제를 해결할 수 있음
+* 보안 : 외부 인터넷 사용자들의 직접적인 접근을 차단하기 때문에 내부 네트워크에 침입하고자 하는 인터넷의 외부 침입자들로부터 보호가 가능함
 
-# SNAT(Source Network Address Translation)
-* 내부에서 외부로 트래픽이 나가는 경우, 내부 네트워크 내 호스트의 사설 IP주소를 외부의 공인 IP주소로 변환하는 방식 
-* Ex) 가정에서 사용하는 공유기
+# NAT 작동방식
+* 1. 사설 네트워크의 호스트는 공유기나 NAT 기능을 지원하는 라우터에 송신지의 사설 IP 주소와 목적지의 공인 IP 주소를 담은 패킷을 전송
+* 2. 라우터 혹은 공유기는 수신한 패킷의 송신측 IP 주소를 자신의 공인 IP 주소로 변환하여 목적지 IP 주소로 전송
+* 3. 이 때 NAT 기능을 지원하는 라우터 혹은 공유기는 변환 전, 후의 IP 주소를 기록한 테이블을 생성
+* 4. 서버에서는 응답 패킷을 라우터 혹은 공유기의 공인 IP 주소로 전송
+* 5. 라우터 혹은 공유기는 패킷 수신 시 적어놓은 테이블을 참조하여 다시 사설 네트워크 내 호스트에게 전송   
+![nat3](https://user-images.githubusercontent.com/57285121/116583265-226dd300-a951-11eb-8b26-cf1c3acbc227.png)   
 
-# DNAT(Destination Network Address Translation)
-* 외부에서 내부로 트래픽이 들어오는 경우, 외부의 공인 IP주소를 내부 네트워크의 사설 IP주소로 변환하는 방식
-* Ex) 로드밸런서
+# NAT 종류 - 주소 할당 방식
+* Static NAT   
+![nat4](https://user-images.githubusercontent.com/57285121/116585819-bb055280-a953-11eb-83a5-5c313828b4fa.png)   
+> * 사설 네트워크 내 호스트들의 사설 IP 주소와 공인 IP 주소를 1:1로 맵핑   
+> * 가장 쉬운 방법이지만 부족한 IP 주소를 효율적으로 사욯하기 위한 방법으로는 부적합   
+* Dynamic NAT   
+![nat5](https://user-images.githubusercontent.com/57285121/116586283-40890280-a954-11eb-9164-3c07f33f0889.png)   
+> * 사설 네트워크 내 호스트들의 사설 IP 주소와 공인 IP 주소를 동적으로 할당   
+> * 공인 IP 주소가 사설 IP 주소보다 적을 경우 사용   
+> * 효율적인 IP 주소 사용 가능(NAT의 목적에 부합)   
+
+# NAT 종류 - 패킷 진행 방향에 따른 방식
+* SNAT(Source Network Address Translation)   
+![snat](https://user-images.githubusercontent.com/57285121/116587056-0f5d0200-a955-11eb-80d1-ad13d369f51b.png)   
+> * 내부에서 외부로 트래픽이 나가는 경우, 내부 네트워크 내 호스트의 사설 IP주소를 외부의 공인 IP주소로 변환하는 방식 
+> * Ex) 가정에서 사용하는 공유기
+
+* DNAT(Destination Network Address Translation)   
+![dnat](https://user-images.githubusercontent.com/57285121/116587399-61058c80-a955-11eb-8295-37df76834037.png)   
+> * 외부에서 내부로 트래픽이 들어오는 경우, 외부의 공인 IP주소를 내부 네트워크의 사설 IP주소로 변환하는 방식
+> * Ex) 로드밸런서
+
+# NAPT(Network Address Port Translation)
+* 사설 네트워크 내 여러 호스트들이 동시에 같은 목적지로 요청을 했을 때의 곤란함을 해결
+* NAT의 테이블에 송신자와 목적지의 포트번호까지 기록하여 포트번호까지 참조하여 목적지에 전달   
+![nat8](https://user-images.githubusercontent.com/57285121/116585237-226ed280-a953-11eb-8817-59e1107a2dd5.png)   
 
