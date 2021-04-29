@@ -52,6 +52,13 @@ Network Equipment
 > * IGRP(Interior Gataway Routing Protocol)
 > * OSPF(Open Shortest Path First Protocol)
 > * BGP(Border Gateway Protocol)
+* 라우터와 공유기의 차이점     
+   
+|구분|공유기|라우터|   
+|------|---|---|   
+|주 사용장소|가정|기업|   
+|포인트 기능|NAT|Routing|   
+|가격|비교적 저렴|고가의 장비|    
 
 # 게이트웨이(Gateway)
 
