@@ -67,9 +67,8 @@ TCP/UDP
 * TCP가 데이터 전송에 있어서 신뢰성을 보장하기 위한 기능
 * 주로 재전송 기반 오류 제어(ARQ)를 사용
 * ARQ(Automatic Repeat reQuest) : 에러 발생시 재전송을 요구하는 방식   
-![tcp5](https://user-images.githubusercontent.com/57285121/116641797-6c35d800-a9a8-11eb-8dbe-54fa5520fe17.png)   
+![tcp6](https://user-images.githubusercontent.com/57285121/116654714-b5942080-a9c4-11eb-9ea5-f4df990d8f2f.png)   
 > * 송신측으로부터 2번이 와야하는데 2번이 안오고 3번이 왔을 때 2번을 다시 보내야한다고 알려줌(이 횟수가 3회 이상 넘어가면 에러로 판단)
-
 
 # UDP(User Datagram Protocol)
 * 비연결형 서비스, 데이터그램 방식을 사용하여 패킷을 교환
@@ -104,6 +103,27 @@ TCP/UDP
 * 다랑의 데이터를 연속적으로 전송 : 가상회선 방식 선택
 * 소량의 데이터를 일시적으로 전송 : 데이터그램 방식 선택
 
+# PORT
+* 네트워크 서비스나 특정 프로세스(응용프로그램)를 식별하는 번호
+* OSI 7 계층중 4계층(Transport)에서 사용됨
+* IP 주소가 호스트를 찾기 위한 주소라면 포트번호는 그 호스트 안에서 프로그램들을 찾기 위한 수단
+* IP 주소 하나 당 0~65535 까지의 포트번호 사용 가능
+* Well Known Port : 유명한 서버, 특정 서버들이 사용하는 번호   
 
+|포트번호|프로토콜|
+|:----------:|:-------------:|
+|20|FTP(경로설정)|
+|21|FTP(데이터 전송)|
+|22|SSH(Secure Shell Protocol)|
+|23|Telnet|
+|25|SMTP(Simple Mail Transfer Protocol)|
+|53|DNS(Domain Name System)|
+|80|HTTP(HyperText Transfer Protocol)|
+|443|HTTPS(Secure)|
 
+* Registerd Port : 기관이나 사업자들이 사용할 수 있도록 예약된 번호   
 
+|포트번호|프로토콜|
+|:----------:|:-------------:|
+|3306|MySQL|
+|8080|HTTP 대체|
