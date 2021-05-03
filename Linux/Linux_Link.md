@@ -17,8 +17,9 @@ Link in Linux
 * 파일을 안전하게 보관하고 싶을 때 사용
 * ln <원본파일> <하드링크로 생성할 파일의 이름>   
 <img width="470" alt="스크린샷 2021-05-03 오후 9 14 25" src="https://user-images.githubusercontent.com/57285121/116874611-8bf12880-ac54-11eb-8210-67d8cd381e80.png">   
-* 원본 파일을 삭제해도 하드링크 파일은 삭제되지 않고 보존
 
+* 원본 파일을 삭제해도 하드링크 파일은 삭제되지 않고 보존   
+<img width="463" alt="스크린샷 2021-05-03 오후 10 53 17" src="https://user-images.githubusercontent.com/57285121/116885008-5ce1b380-ac62-11eb-8bec-460368aaa011.png">   
 
 # Symbolic Link(Soft Link)
 * 원본 파일의 바로가기를 생성
@@ -28,10 +29,9 @@ Link in Linux
 <img width="596" alt="스크린샷 2021-05-03 오후 9 16 15" src="https://user-images.githubusercontent.com/57285121/116874767-ce1a6a00-ac54-11eb-8fc3-8ae73b6e3334.png">   
 
 * 원본 삭제시 심볼릭링크 파일도 삭제   
-<img width="835" alt="스크린샷 2021-05-03 오후 9 45 32" src="https://user-images.githubusercontent.com/57285121/116877422-e5f3ed00-ac58-11eb-83e3-5c2799f44fa1.png">   
+<img width="596" alt="스크린샷 2021-05-03 오후 10 49 59" src="https://user-images.githubusercontent.com/57285121/116884621-e644b600-ac61-11eb-9c30-bbe2afa7bd22.png">   
 
-
-# 전체적인 구조   
+# Hard Link & Symbolic Link   
 
 <img width="896" alt="스크린샷 2021-05-03 오후 9 44 39" src="https://user-images.githubusercontent.com/57285121/116877339-c6f55b00-ac58-11eb-8a7c-8141724b461c.png">
 
