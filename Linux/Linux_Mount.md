@@ -49,6 +49,7 @@ Mount in Linux
 * mount : 디스크를 디렉토리에 마운트함   
 > * mount <포맷완료된 디스크> <마운트할 디렉토리>   
 <img width="597" alt="스크린샷 2021-05-03 오후 7 45 20" src="https://user-images.githubusercontent.com/57285121/116867420-1aab7880-ac48-11eb-91f6-13c2dbb74b89.png">   
+
 * umount : 마운트 해제   
 > * umount <디스크>   
 <img width="553" alt="스크린샷 2021-05-03 오후 7 49 02" src="https://user-images.githubusercontent.com/57285121/116867763-9f969200-ac48-11eb-84f6-c04be69ae7e7.png">   
@@ -58,7 +59,9 @@ Mount in Linux
 * /etc/fstab파일 수정   
 > * <디스크이름> <마운트 디렉토리 위치> <파일시스템명> <마운트옵션> <Dump(백업)필드> <File Sequence Check Option>   
 <img width="412" alt="스크린샷 2021-05-03 오후 7 58 01" src="https://user-images.githubusercontent.com/57285121/116868518-e0db7180-ac49-11eb-92f5-72ae3c19a393.png">   
+
 > * 마운트옵션   
+
 |옵션|이름|   
 |------|---|   
 |auto|부팅 시 자동마운트|   
@@ -68,6 +71,7 @@ Mount in Linux
 |user|일반 사용자 마운트 가능|   
 |nouser|일반 사용자 마운트 불가능, root만 가능|   
 |default|rw, nouser, auto, exec, suid속성을 모두설정|   
+
 > * Dump(백업)필드   
 > > * 0 : Dump 불가 / 1 : Dump 가능   
 
