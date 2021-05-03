@@ -9,11 +9,12 @@ Mount in Linux
 # 0. 디스크의 정보 확인
 * df : 현재 디스크 여유 공간 확인 (disk free)  
 <img width="570" alt="스크린샷 2021-05-03 오후 12 13 20" src="https://user-images.githubusercontent.com/57285121/116838329-f54b4a00-ac08-11eb-94fb-7f928879773f.png">   
+
 > * -T : 파일 시스템 타입 출력   
 > * -h : 사람이 읽을 수 있는 단위의 용량으로 표시   
 
 # 1. 디스크 파티션 나누기
-* fdisk : 파티션 테이블을 관리하는 명령어   
+* fdisk : 파티션 테이블을 관리하는 명령어    
 > * 리눅스의 디스크 파티션을 생성, 수정, 삭제할 수 있는 유틸리티.   
 > * fdisk -l : 디스크 파티션 리스트 출력   
 <img width="653" alt="스크린샷 2021-04-30 오후 10 22 54" src="https://user-images.githubusercontent.com/57285121/116863344-2182bd00-ac41-11eb-93b6-31de074588d6.png">   
