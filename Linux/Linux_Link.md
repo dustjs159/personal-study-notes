@@ -28,9 +28,10 @@ Link in Linux
 <img width="596" alt="스크린샷 2021-05-03 오후 9 16 15" src="https://user-images.githubusercontent.com/57285121/116874767-ce1a6a00-ac54-11eb-8fc3-8ae73b6e3334.png">   
 
 * 원본 삭제시 심볼릭링크 파일도 삭제   
-<img width="595" alt="스크린샷 2021-05-03 오후 9 38 23" src="https://user-images.githubusercontent.com/57285121/116876755-ee97f380-ac57-11eb-8634-6735ae34deee.png">
+<img width="835" alt="스크린샷 2021-05-03 오후 9 45 32" src="https://user-images.githubusercontent.com/57285121/116877422-e5f3ed00-ac58-11eb-83e3-5c2799f44fa1.png">   
 
 
+# 전체적인 구조   
 
 <img width="896" alt="스크린샷 2021-05-03 오후 9 44 39" src="https://user-images.githubusercontent.com/57285121/116877339-c6f55b00-ac58-11eb-8a7c-8141724b461c.png">
 
