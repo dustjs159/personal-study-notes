@@ -8,8 +8,9 @@ Mount in Linux
 
 
 # df (disk free)
-* 디스크 여유 공간 확인   
+* 현재 디스크 여유 공간 확인   
 <img width="570" alt="스크린샷 2021-05-03 오후 12 13 20" src="https://user-images.githubusercontent.com/57285121/116838329-f54b4a00-ac08-11eb-94fb-7f928879773f.png">   
+
 * -T : 파일 시스템 타입 출력
 * -h : 사람이 읽을 수 있는 단위의 용량으로 표시
 
