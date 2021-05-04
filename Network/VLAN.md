@@ -36,19 +36,20 @@ VLAN ID가 10인 PC1과 VLAN ID가 20인 PC2, PC3과는 통신 불가. PC2와 PC
 * 만약 한 스위치 내 하나의 포트에 여러 VLAN들의 프레임이 지나갈 때 해당 프레임이 어느 VLAN의 프레임인지 구별을 하기위한 방법 : 프레임에 Tag(VLAN의 정보)붙이기(Tagging)   
 * IEEE 802.1Q : VLAN을 지원하는 트렁킹 프로토콜 중 하나
 * 프레임들이 Trunk포트에 진입할 때 해당 프레임에 VLAN ID가 적힌 Tag를 프레임 내부에 끼워넣음(Tagging).   
+* Tag의 크기는 4 bytes
 * 다른 스위치에서는 프레임을 수신할 때 프레임에 붙은 Tag를 보고 VLAN ID를 확인   
 * 프레임을 확장하는 방식   
 ![vlan3](https://user-images.githubusercontent.com/57285121/116127933-56ec4f80-a703-11eb-9f2a-9980b86e33df.PNG)   
 IEEE 802.1Q 프로토콜을 이용하여 VLAN ID를 구별  
- 
-# Inter-VLAN
-* L2 스위치로 VLAN을 구성할 수 있지만, 통신은 불가능   
-* 서로 다른 VLAN(Broadcast영역이 다른)간 통신을 위해 라우터 or L3 이상 스위치를 사용하여 IP Routing을 해야함   
-* 라우터의 서브 인터페이스 사용   
-> * 라우터의 물리적인 인터페이스 하나를 여러 논리 인터페이스 나누고 그 각각을 VLAN으로 구성
-* L3 스위치   
-> * SVI(Switch Virtual Interface) : 스위치에 가상의 인터페이스를 만들고 IP를 할당하여 Routing
-> * Routed port
+
+# Native VLAN 
+* Untagged VLAN : Tag를 달지 않은 프레임도 통신이 가능
+* 4 bytes의 Tag가 모든 프레임에 붙을 경우 속도 저하 가능성 존재
+* Tag가 붙어있지 않는 프레임을 모두 VLAN 1(Default)로 처리(Native VLAN Tag)
+* Tag를 붙이고 분해하는 과정이 없어서 속도가 빠르기 때문에 실시간 데이터(실시간 영상 스트리밍)전송에 유리함
+* 라우터에서는 VLAN을 인식할 수 없기 때문에 WAN 을 연결할 때 Native VLAN 사용
+* 보안 취약점 존재 
+> * Native VLAN은 Default값이 VLAN 1이기 때문에 이 설정값을 변경하지 않으면 Default값을 통해 외부의 침입자가 내부로 접근이 가능하게 됨
 
 # VLAN 구성 방식
 * End-to-End VLAN   
