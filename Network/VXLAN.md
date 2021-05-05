@@ -2,7 +2,8 @@ VXLAN
 =============================================
 
 # Network Overlay
-* 실제 물리적인 Network 위에 가상의 Network를 구축하는 기술   
+* 실제 물리적인 네트워크 위에 가상의 네트워크를 구축하는 기술   
+* 오버레이 네트워크의 노드들은 논리적인 링크로 연결될 수 있으며 논리적 링크는 고려하지 않음
 <img width="529" alt="스크린샷 2021-05-04 오후 5 20 04" src="https://user-images.githubusercontent.com/57285121/116977117-037a9280-acfd-11eb-87f0-f2db6c3522cc.png">   
 
 # VXLAN(Virtual eXtensible Local Area Network)
