@@ -105,7 +105,7 @@ HTTP / HTTPS
 
 # HTTPS(HyperText Transfer Protocol Secure)
 * HTTP의 보얀 취약점을 개선하기 위해 보안 기능을 추가한 프로토콜   
-* 기존 HTTP에 SSL을 사용   
+* 기존 HTTP에 SSL(Secure Socket Layer)을 사용   
 * 포트 번호는 443번
 * SSL 인증서
 > * 보호받아야 할 개인정보를 제 3자가 알아볼 수 없도록 암호화   
@@ -123,3 +123,12 @@ HTTP / HTTPS
 > * CA(Certification Authority) : 디지털 인증서를 발급하는 기관. 공개키 기반 구조   
 > * RA(Registration Authority) : 디지털 인증서에 관한 사용자 요청을 검증하여 CA가 그것을 발급하도록 알려주는 네트웍 상의 기관. 사용자들이 정보를 보다 안전하게 교환할 수 있는 시스템인 공개키 기반구조의 일부. 디지털 인증서는 전자서명과 메시지의 암,복호화에 사용되는 공개키를 담고있음   
 > * VA(Validation Authority) : 디지털 인증서 유효성을 검증
+
+# curl 명령어를 이용한 HTTP method Test
+* curl(cURL) http/https 에서 데이터를 주고받을 수 있는 명령어 기반의 웹 요청 도구
+* 주요 옵션 
+* GET
+* POST
+* DELETE
+* PUT
+
