@@ -27,13 +27,16 @@ Load Balancer
 # Load Balancing 알고리즘
 * Round Robin   
 > * 다수의 서버에게 순서대로 트래픽을 할당하는 방법. 차례대로 들어온 요청을 할당하여 분산   
-<img width="529" alt="스크린샷 2021-05-04 오후 9 52 27" src="https://user-images.githubusercontent.com/57285121/117006130-07211000-ad23-11eb-9b75-111201c78689.png">   
+<img width="529" alt="스크린샷 2021-05-04 오후 9 52 27" src="https://user-images.githubusercontent.com/57285121/117006130-07211000-ad23-11eb-9b75-111201c78689.png">  
+ 
 * Least Connection   
 > * 사용자와 서버가 정상적으로 연결을 맺으면 Connection 을 생성. 로드밸런서도 이 Connection 정보를 갖고 있고, Connection이 가장 적은 서버에게 요청을 할당하여 트래픽을 분산(가장 많이 사용)    
 <img width="502" alt="스크린샷 2021-05-04 오후 9 54 13" src="https://user-images.githubusercontent.com/57285121/117006344-464f6100-ad23-11eb-97a5-1b3073b49994.png">   
+
 * Weight or Ratio
 > * 서버의 처리 능력을 확인하여 서버가 가질 수 있는 Connection 비율을 설정하고 해당 비율 만큼 요청을 할당하여 트래픽을 분산   
 <img width="505" alt="스크린샷 2021-05-04 오후 10 05 23" src="https://user-images.githubusercontent.com/57285121/117007619-d510ad80-ad24-11eb-865e-34493d221209.png">   
+
 * Response Time
 > * 응답속도가 가장 빠른 서버에게 우선적으로 요청을 할당하여 트래픽을 분산.   
 * Hash   
