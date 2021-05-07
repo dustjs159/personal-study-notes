@@ -23,6 +23,8 @@ Local(Windows)에서 SSH프토토콜을 이용해 원격 접속 해보자
 # SSH Server 작동
 
 * SSH의 포트번호인 22번을 열어줌
+* ssh_config : 내부 서버에서 외부 서버에 접속하기 위한 설정
+* sshd_config : 외부 서버에서 내부 서버에 접속하기 위한 설정
 * /etc/ssh에 있는 sshd_config파일 수정   
 ![ssh2](https://user-images.githubusercontent.com/57285121/115656016-62402380-a36f-11eb-9ca1-fd9e271ac4d3.PNG)
 * Port 22의 주석을 해제   
