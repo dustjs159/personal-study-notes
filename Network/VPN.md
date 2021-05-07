@@ -126,14 +126,10 @@ POP : ISP에서 제공하는 인터넷(공용 망)에 접근하기 위한 접점
 > * AH에서 제공하는 보안성 뿐만 아니라 암호화 제공을 통한 기밀성까지도 보장   
 <img width="589" alt="스크린샷 2021-05-07 오전 2 05 28" src="https://user-images.githubusercontent.com/57285121/117337740-b3f0be00-aed8-11eb-8050-ec5b46df3d15.png">   
 
-
-
-
-
 * IP계층에서 안전한 데이터 송,수신을 위한 3계층 터널링 프로토콜
 * AH(Authentication Header), ESP(Encapsulation Security)를 통해 데이터 인중, 무결성, 기밀성 제공(보안 3요소) 
 * IP헤더 + 페이로드로 이루어진 패킷이 터널 안으로 들어가면서 AH가 추가되어 캡슐화가 이루어지고 ESP헤더가 붙으면서 패킷을 암호화
+* L2TP + IPsec   
+<img width="575" alt="스크린샷 2021-05-07 오후 3 19 26" src="https://user-images.githubusercontent.com/57285121/117406163-a7577e80-af47-11eb-9404-5aa6fb1a094a.png">   
 
-
-# 암호화 및 인증
-* 사설 망의 패킷이 공용 망을 지나다니기 위해서는 해당 패킷을 보안처리해야 함
+* IPsec의 터널모드를 통해 L2TP의 IP 헤더 부분을 제외한 패킷을 암호화하여 데이터를 전송함으로써 L2TP의 암호화가 없다는 점을 보완함
