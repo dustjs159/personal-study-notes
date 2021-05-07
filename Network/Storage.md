@@ -28,6 +28,7 @@ Storage
 * DAS에 네트워크 기능을 탑재
 * 호스트와 저장장치가 스위치를 통해 네트워크(LAN)에 연결됨
 <img width="711" alt="스크린샷 2021-05-06 오후 5 03 31" src="https://user-images.githubusercontent.com/57285121/117263196-fee4e400-ae8c-11eb-9268-75e6b92a6b8d.png">   
+
 * 주요 프로토콜   
 > * FTP(File Transfer Protocol)   
 > * NFS(Network File System)   
