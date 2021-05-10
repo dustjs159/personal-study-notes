@@ -28,6 +28,13 @@
 
 * 클라이언트와 Reverse Proxy는 HTTPS 통신을 하고 Reverse Proxy와 서버 그룹들은 HTTP 통신을 함   
 * **Reverse Proxy 서버에 SSL 관련 작업을 위임**
+* SSL Termination   
+> * 일반적인 SSL 오프로딩의 구현 방법. 클라이언트와 Reverse Proxy는 SSL 연결을 통해 생성된 세션 키를 대칭키 방식으로 암호화를 하여 데이터를 주고 받으며 Reverse Proxy와 서버들의 그룹간에는 복호화된 데이터를 주고 받음   
+> * Reverse Proxy의 부하를 줄여줌으로 성능 향상   
+> * Reverse Proxy와 서버 그룹들간에는 보안성이 떨어질 수 있다는 단점 존재   
+* SSL Bridging   
+> * Reverse Proxy가 서버 그룹에게 데이터를 전송할 때 한번 더 암호화 과정을 거쳐서 데이터를 전송하는 방법   
+> * SSL Termination의 보안 취약점을 개선할 수 있으나 Reverse Proxy는 암호화 과정을 한번 더 거쳐야 하므로 부하 상승으로 인해 성능이 떨어질 수도 있음   
 
 # SSL 버전
 1. SSL 1.0   

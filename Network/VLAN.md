@@ -23,6 +23,23 @@ VLAN
 ![vlan1](https://user-images.githubusercontent.com/57285121/116118745-98c3c880-a6f8-11eb-8801-822440a141b6.PNG)   
 VLAN ID가 10인 PC1과 VLAN ID가 20인 PC2, PC3과는 통신 불가. PC2와 PC3은 VLAN ID가 같으므로 통신 가능   
 
+# VLAN PORT Mode
+* VLAN이 설정되는 스위치의 포트의 동작 방식
+* Access Port Mode   
+<img width="359" alt="스크린샷 2021-05-10 오후 7 09 31" src="https://user-images.githubusercontent.com/57285121/117643348-43d98500-b1c3-11eb-9e07-fd2e0c585d6f.png">   
+
+> * PC와 스위치간 연결일 때 Tag을 붙이지 않고 나감   
+> * 하나의 호스트가 하나의 VLAN만 지원 가능   
+> * Access Mode로 동작하는 포트에 VLAN ID 할당   
+> * 프레임 전송 시 스위치에서 Tag를 제거   
+
+* Trunk Port   
+<img width="348" alt="스크린샷 2021-05-10 오후 8 54 58" src="https://user-images.githubusercontent.com/57285121/117655405-fd3f5700-b1d1-11eb-9428-7543d4e26b31.png">   
+
+> * 스위치와 스위치간 연결일 때 Tag를 붙인 채로 나감   
+> * VLAN ID가 포함된 Tag를 통해 여러 VLAN의 프레임들을 구별하여 전송 가능   
+> * Tag를 통해 여러 VLAN의 프레임들을 수용할 수 있음   
+
 # Trunk(Tagging)
 * 만약에 VLAN이 폭발적으로 증가하게 된다면, 스위치의 포트 하나 하나에 일일이 VLAN을 구성하기가 힘들어짐(현실적으로 불가능)
 * 트렁크는 스위치들 간에 프레임 전송 시에 하나의 포트에 다수의 VLAN이 지나갈 수 있도록 하는 기능   
@@ -42,14 +59,15 @@ VLAN ID가 10인 PC1과 VLAN ID가 20인 PC2, PC3과는 통신 불가. PC2와 PC
 ![vlan3](https://user-images.githubusercontent.com/57285121/116127933-56ec4f80-a703-11eb-9f2a-9980b86e33df.PNG)   
 IEEE 802.1Q 프로토콜을 이용하여 VLAN ID를 구별  
 
-# Native VLAN 
-* Untagged VLAN : Tag를 달지 않은 프레임도 통신이 가능
+# Untagged VLAN 
+* Untagged Frame : Tag를 달지 않은 프레임
+* Access Port로 프레임 송, 수신
 * 4 bytes의 Tag가 모든 프레임에 붙을 경우 속도 저하 가능성 존재
-* Tag가 붙어있지 않는 프레임을 모두 VLAN 1(Default)로 처리(Native VLAN Tag)
+* Tag가 붙어있지 않는 프레임을 모두 VLAN 1(Default)로 처리
 * Tag를 붙이고 분해하는 과정이 없어서 속도가 빠르기 때문에 실시간 데이터(실시간 영상 스트리밍)전송에 유리함
-* 라우터에서는 VLAN을 인식할 수 없기 때문에 WAN 을 연결할 때 Native VLAN 사용
+* 라우터에서는 VLAN을 인식할 수 없기 때문에 WAN 을 연결할 때 Untagged VLAN 사용
 * 보안 취약점 존재 
-> * Native VLAN은 Default값이 VLAN 1이기 때문에 이 설정값을 변경하지 않으면 Default값을 통해 외부의 침입자가 내부로 접근이 가능하게 됨
+> * Untagged VLAN은 Default값이 VLAN 1이기 때문에 이 설정값을 변경하지 않으면 Default값을 통해 외부의 침입자가 내부로 접근이 가능하게 됨
 
 # VLAN 구성 방식
 * End-to-End VLAN   
