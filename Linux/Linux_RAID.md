@@ -120,7 +120,7 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 > * --raid-devices=n <장치이름1, 2 ... n> 	: RAID로 사용할 장치 개수와 이름   
 
 
-### Linear RAID 구현   
+## Linear RAID 구현   
 <img width="878" alt="스크린샷 2021-05-09 오후 3 07 28" src="https://user-images.githubusercontent.com/57285121/117760406-87ce9780-b260-11eb-833e-0b01dccef510.png">   
 
 <img width="751" alt="스크린샷 2021-05-09 오후 3 08 16" src="https://user-images.githubusercontent.com/57285121/117761015-99646f00-b261-11eb-8a0f-f92b4a2a4905.png">   
@@ -132,19 +132,40 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 
 > * mount 명령어를 통해 해당 디렉토리에 마운트 진행   
 
-### RAID 0 구현   
-<img width="719" alt="스크린샷 2021-05-09 오후 3 25 24" src="https://user-images.githubusercontent.com/57285121/117761264-07109b00-b262-11eb-9392-6582f46c8948.png">   
+## RAID 0 구현   
+<img width="726" alt="스크린샷 2021-05-11 오후 3 01 17" src="https://user-images.githubusercontent.com/57285121/117765964-c74db180-b269-11eb-89b8-2c53c2aaa3e0.png">   
 
-### RAID 1 구현   
-<img width="721" alt="스크린샷 2021-05-09 오후 3 51 59" src="https://user-images.githubusercontent.com/57285121/117761338-23acd300-b262-11eb-9005-942fbc70a621.png">   
+<img width="681" alt="스크린샷 2021-05-11 오후 3 10 06" src="https://user-images.githubusercontent.com/57285121/117766739-ff092900-b26a-11eb-96ab-6f90add84e78.png">   
 
-### RAID 5 구현
+<img width="569" alt="스크린샷 2021-05-11 오후 3 11 15" src="https://user-images.githubusercontent.com/57285121/117766848-22cc6f00-b26b-11eb-8eae-792ca40097a9.png">   
 
-### RAID 6 구현
+<img width="723" alt="스크린샷 2021-05-11 오후 3 45 16" src="https://user-images.githubusercontent.com/57285121/117770453-e51e1500-b26f-11eb-9232-7c5c6586d010.png">   
 
-### RAID 0+1 구현
+## RAID 1 구현   
+<img width="725" alt="스크린샷 2021-05-11 오후 3 31 33" src="https://user-images.githubusercontent.com/57285121/117768885-f8c87c00-b26d-11eb-8cec-d710b503a210.png">   
 
-### RAID 1+0 구현
+<img width="679" alt="스크린샷 2021-05-11 오후 3 32 09" src="https://user-images.githubusercontent.com/57285121/117768939-0ed63c80-b26e-11eb-87c0-a749904a81af.png">   
+
+<img width="563" alt="스크린샷 2021-05-11 오후 3 33 17" src="https://user-images.githubusercontent.com/57285121/117769100-36c5a000-b26e-11eb-94d3-1c9f15ca57bd.png">   
+
+<img width="719" alt="스크린샷 2021-05-11 오후 3 45 58" src="https://user-images.githubusercontent.com/57285121/117770529-fd8e2f80-b26f-11eb-9e15-f1ada46ec58a.png">
+
+## RAID 5 구현   
+<img width="725" alt="스크린샷 2021-05-11 오후 3 41 33" src="https://user-images.githubusercontent.com/57285121/117770001-5f01ce80-b26f-11eb-8420-6de7d383e5c3.png">   
+
+<img width="677" alt="스크린샷 2021-05-11 오후 3 43 10" src="https://user-images.githubusercontent.com/57285121/117770176-983a3e80-b26f-11eb-8594-28257acc92e1.png">   
+
+<img width="559" alt="스크린샷 2021-05-11 오후 3 43 59" src="https://user-images.githubusercontent.com/57285121/117770273-b4d67680-b26f-11eb-9b20-10596485131b.png">   
+
+<img width="722" alt="스크린샷 2021-05-11 오후 3 46 50" src="https://user-images.githubusercontent.com/57285121/117770622-1bf42b00-b270-11eb-9a53-b8a48f82eb56.png">   
+
+## RAID 6 구현
+   
+
+
+## RAID 0+1 구현
+
+## RAID 1+0 구현
 
 
 
