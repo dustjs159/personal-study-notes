@@ -33,7 +33,7 @@ VLAN ID가 10인 PC1과 VLAN ID가 20인 PC2, PC3과는 통신 불가. PC2와 PC
 > * Access Mode로 동작하는 포트에 VLAN ID 할당   
 > * 프레임 전송 시 스위치에서 Tag를 제거   
 
-* Trunk Port   
+* Trunk Port Mode   
 <img width="348" alt="스크린샷 2021-05-10 오후 8 54 58" src="https://user-images.githubusercontent.com/57285121/117655405-fd3f5700-b1d1-11eb-9428-7543d4e26b31.png">   
 
 > * 스위치와 스위치간 연결일 때 Tag를 붙인 채로 나감   
