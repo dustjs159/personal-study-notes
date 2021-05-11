@@ -159,14 +159,23 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 
 <img width="722" alt="스크린샷 2021-05-11 오후 3 46 50" src="https://user-images.githubusercontent.com/57285121/117770622-1bf42b00-b270-11eb-9a53-b8a48f82eb56.png">   
 
-## RAID 6 구현
-   
+## RAID 6 구현   
+<img width="723" alt="스크린샷 2021-05-12 오전 12 50 03" src="https://user-images.githubusercontent.com/57285121/117846000-fee54980-b2bb-11eb-9061-052892a27c20.png">   
+
+<img width="661" alt="스크린샷 2021-05-12 오전 12 51 06" src="https://user-images.githubusercontent.com/57285121/117846165-263c1680-b2bc-11eb-8f42-fdeb7c6dcc47.png">   
+
+<img width="562" alt="스크린샷 2021-05-12 오전 12 59 34" src="https://user-images.githubusercontent.com/57285121/117847509-5d5ef780-b2bd-11eb-916d-13a5f851ee44.png">   
+
+<img width="720" alt="스크린샷 2021-05-12 오전 12 55 04" src="https://user-images.githubusercontent.com/57285121/117846775-b4180180-b2bc-11eb-9423-ea32f7ec0959.png">   
 
 
 ## RAID 0+1 구현
 
 ## RAID 1+0 구현
 
+# RAID 구성 시 발생할 수 있는 문제들과 조치 방법 테스트
+* RAID로 구성된 하드디스크중 하나를 제거(고장난 것과 같은 효과)
+* 
 
 
 
