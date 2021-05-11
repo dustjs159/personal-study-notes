@@ -97,37 +97,54 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 1. fdisk -l 명령어로 디스크의 파티션 설정 현황 확인   
 <img width="533" alt="스크린샷 2021-05-09 오후 2 46 49" src="https://user-images.githubusercontent.com/57285121/117752799-62d32800-b252-11eb-9af3-79c1b5d4fc74.png">   
 
-2. 파티션이 생성되어있지 않기 때문에 fdisk <diskname> 명령어로 하드디스크 파티션 생성 작업 진행   
+2. 파티션이 생성되어있지 않기 때문에 fdisk <장치이름> 명령어로 하드디스크 파티션 생성 작업 진행   
 <img width="698" alt="스크린샷 2021-05-09 오후 3 06 44" src="https://user-images.githubusercontent.com/57285121/117753099-decd7000-b252-11eb-920d-0b64fab6ec48.png">   
 
 <img width="689" alt="스크린샷 2021-05-09 오후 3 06 26" src="https://user-images.githubusercontent.com/57285121/117753824-1852ab00-b254-11eb-8c9d-d7a71c3c99a9.png">   
 
-> * Command : n		 	( 새로운 파티션 분할)   
+> * Command : n		 	(새로운 파티션 분할)   
 > * Selcet : p			(Primary 파티션 선택)   
 > * Partition number : 1	(생성할 파티션 개수)   
 > * First sector : Enter	(시작 섹터 번호)   
 > * Last sector : Enter		(마지막 섹터 번호)   
 > * Command : t			(파일 시스템 유형 선택)   
-> * **Hex Code : fd		(Linux raid autodetect)**   
+> * **Hex Code : fd		(Linux raid autodetect : RAID 구성에 이용되는 파일 시스템)**   
 > * Command : w			(설정 저장)   
 
 3. 파티션이 제대로 생성 되었는지 fdisk -l 명령어로 다시 확인   
 <img width="626" alt="스크린샷 2021-05-11 오후 12 24 36" src="https://user-images.githubusercontent.com/57285121/117753684-de81a480-b253-11eb-818d-f6f1bbd08c17.png">   
 
+4. **mdadm(Multiple Device ADMinistration) : 소프트웨어 RAID 장치를 생성/관리하는 명령어**   
+> * --create <장치이름> : 	장치에 RAID 생성   
+> * --level=<raid level> :  	raid level = linear, 0, 1 등등 RAID의 level   
+> * --raid-devices=n <장치이름1, 2 ... n> 	: RAID로 사용할 장치 개수와 이름   
 
-# Linear RAID 구현
 
-# RAID 0 구현
+### Linear RAID 구현   
+<img width="878" alt="스크린샷 2021-05-09 오후 3 07 28" src="https://user-images.githubusercontent.com/57285121/117760406-87ce9780-b260-11eb-833e-0b01dccef510.png">   
 
-# RAID 1 구현
+<img width="751" alt="스크린샷 2021-05-09 오후 3 08 16" src="https://user-images.githubusercontent.com/57285121/117761015-99646f00-b261-11eb-8a0f-f92b4a2a4905.png">   
 
-# RAID 5 구현
+<img width="693" alt="스크린샷 2021-05-09 오후 3 25 45" src="https://user-images.githubusercontent.com/57285121/117761437-4e972700-b262-11eb-89f2-3079de106a05.png">   
 
-# RAID 6 구현
+> * mkfs.<파일시스템이름> <장치이름> :	장치에 파일시스템을 입혀줌(포맷)   
+<img width="557" alt="스크린샷 2021-05-09 오후 3 09 01" src="https://user-images.githubusercontent.com/57285121/117761540-771f2100-b262-11eb-88b4-88cd16f3578e.png">   
 
-# RAID 0+1 구현
+> * mount 명령어를 통해 해당 디렉토리에 마운트 진행   
 
-# RAID 1+0 구현
+### RAID 0 구현   
+<img width="719" alt="스크린샷 2021-05-09 오후 3 25 24" src="https://user-images.githubusercontent.com/57285121/117761264-07109b00-b262-11eb-9392-6582f46c8948.png">   
+
+### RAID 1 구현   
+<img width="721" alt="스크린샷 2021-05-09 오후 3 51 59" src="https://user-images.githubusercontent.com/57285121/117761338-23acd300-b262-11eb-9005-942fbc70a621.png">   
+
+### RAID 5 구현
+
+### RAID 6 구현
+
+### RAID 0+1 구현
+
+### RAID 1+0 구현
 
 
 
