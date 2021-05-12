@@ -174,8 +174,43 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 ## RAID 1+0 구현
 
 # RAID 구성 시 발생할 수 있는 문제들과 조치 방법 테스트
+* RAID 0 2개(/dev/md0), RAID 1 2개(/dev/md1), RAID 5 3개(/dev/md5), RAID 6 4개(/dev/md6) 총 11개의 디스크가 추가되어 있는 상태
+* RAID 0의 디스크 하나, RAID 1의 디스크 하나, RAID 5의 디스크 하나, RAID 6의 디스크 둘을 고장내보고 RAID Level별 특징을 확인
 * RAID로 구성된 하드디스크중 하나를 제거(고장난 것과 같은 효과)
-* 
+* 각 RAID Level에 임시의 testfile을 저장해 놓고 고장 시 파일들이 어떻게 되는지 확인 및 조치(결함 허용 확인)
+* 테스트 전 RAID가 마운트 되어 있어야함 
+* 하드디스크를 제거하고 부팅을 하게되면 응급 모드(Emergency mode)로 접속됨   
+<img width="796" alt="스크린샷 2021-05-12 오후 4 11 21" src="https://user-images.githubusercontent.com/57285121/117933611-b326b480-b33c-11eb-8ab3-517c02515adf.png">   
+응급 모드로 접속된 모습   
+
+<img width="497" alt="스크린샷 2021-05-12 오후 4 13 45" src="https://user-images.githubusercontent.com/57285121/117933914-0862c600-b33d-11eb-90d2-a630ab308914.png">   
+응급 모드로 접속 후 root계정으로 로그인하여 디스크의 상태를 확인. 결함 허용을 제공하지 않는 RAID 0은 사라져 있음   
+
+## RAID 0 확인   
+<img width="770" alt="스크린샷 2021-05-12 오후 4 20 45" src="https://user-images.githubusercontent.com/57285121/117934815-03524680-b33e-11eb-9850-df7b9c351b31.png">   
+mdadm 명령어를 통해 RAID 0이 구성되어있던 /dev/md0의 상태가 inactive로 바뀌어있고 구성 디스크가 하나밖에 없음을 확인   
+   
+<img width="418" alt="스크린샷 2021-05-12 오후 4 30 43" src="https://user-images.githubusercontent.com/57285121/117936097-68f30280-b33f-11eb-8c99-2d7501ee3aa6.png">   
+testfile도 없어져 있음   
 
 
+## RAID 1 확인   
+<img width="762" alt="스크린샷 2021-05-12 오후 4 23 25" src="https://user-images.githubusercontent.com/57285121/117935144-6348ed00-b33e-11eb-8864-e0baf236b11e.png">   
+mdadm 명령어를 통해 RAID 1이 구성되어있던 /dev/md1의 상태가 clean, degraded(사용할 수는 있으나 이대로 사용하면 백업 기능 사용 불가)로 되어있고 디스크 하나가 제거되어 있음을 확인   
 
+<img width="547" alt="스크린샷 2021-05-12 오후 4 32 27" src="https://user-images.githubusercontent.com/57285121/117936291-a6579000-b33f-11eb-9c3a-7b14a26e62f6.png">   
+testfile이 아직 그대로 있음(결함 허용)   
+
+## RAID 5 확인   
+<img width="774" alt="스크린샷 2021-05-12 오후 4 27 11" src="https://user-images.githubusercontent.com/57285121/117935661-ea966080-b33e-11eb-9913-d5997b11df1f.png">   
+mdadm 명령어를 통해 RAID 5가 구성되어 있던 /dev/md5의 상태가 clean, degraded상태로 되어있고 디스크 하나가 제거되어 있음을 확인   
+
+<img width="549" alt="스크린샷 2021-05-12 오후 4 33 48" src="https://user-images.githubusercontent.com/57285121/117936452-d56e0180-b33f-11eb-94c1-b619e6fa0409.png">   
+testfile이 아직 그대로 있음(결함 허용)
+
+## RAID 6 확인   
+<img width="769" alt="스크린샷 2021-05-12 오후 4 29 03" src="https://user-images.githubusercontent.com/57285121/117935890-2b8e7500-b33f-11eb-8fa7-d8ea04f7f30c.png">   
+mdadm 명령어를 통해 RAID 6이 구성되어 있던 /dev/md6의 상태가 clean, degraded상태로 되어있고 디스크 두 개가 제거되어 있음을 확인   
+
+<img width="550" alt="스크린샷 2021-05-12 오후 4 34 45" src="https://user-images.githubusercontent.com/57285121/117936564-f6ceed80-b33f-11eb-8416-181476a2fc6a.png">   
+testfile이 아직 그대로 있음(결함 허용)
