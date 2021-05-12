@@ -1,7 +1,5 @@
 RAID
 ====================================
-RAID(Redundnat Array of Independent Disk)
-------------------------------------
 
 # RAID(Redundant Array of Independent Disk)
 * 복원을 위해 중복되는 데이터를 만들고 전체 데이터들을 나누어 각 독립적인 디스크들에게 배열하는 기술
@@ -118,7 +116,9 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 > * --create <장치이름> : 	장치에 RAID 생성   
 > * --level=<raid level> :  	raid level = linear, 0, 1 등등 RAID의 level   
 > * --raid-devices=n <장치이름1, 2 ... n> 	: RAID로 사용할 장치 개수와 이름   
-
+> * --stop <장치이름>		: RAID 장치 중지   
+> * --run <장치이름>		: 중지된 RAID 장치 다시 작동   
+> * --detail <장치이름>		: 장치의 상세 내역 출력   
 
 ## Linear RAID 구현   
 <img width="878" alt="스크린샷 2021-05-09 오후 3 07 28" src="https://user-images.githubusercontent.com/57285121/117760406-87ce9780-b260-11eb-833e-0b01dccef510.png">   
@@ -184,22 +184,21 @@ RAID 1+0 방식으로 디스크 ABCD를 묶었을 때 디스크 A에서 결함�
 응급 모드로 접속된 모습   
 
 <img width="497" alt="스크린샷 2021-05-12 오후 4 13 45" src="https://user-images.githubusercontent.com/57285121/117933914-0862c600-b33d-11eb-90d2-a630ab308914.png">   
-응급 모드로 접속 후 root계정으로 로그인하여 디스크의 상태를 확인. 결함 허용을 제공하지 않는 RAID 0은 사라져 있음   
+응급 모드로 접속 후 root계정으로 로그인하여 디스크의 상태를 확인. 결함 허용을 제공하지 않는 RAID 0은 사라져 있음
 
 ## RAID 0 확인   
 <img width="770" alt="스크린샷 2021-05-12 오후 4 20 45" src="https://user-images.githubusercontent.com/57285121/117934815-03524680-b33e-11eb-9850-df7b9c351b31.png">   
 mdadm 명령어를 통해 RAID 0이 구성되어있던 /dev/md0의 상태가 inactive로 바뀌어있고 구성 디스크가 하나밖에 없음을 확인   
    
 <img width="418" alt="스크린샷 2021-05-12 오후 4 30 43" src="https://user-images.githubusercontent.com/57285121/117936097-68f30280-b33f-11eb-8c99-2d7501ee3aa6.png">   
-testfile도 없어져 있음   
-
+testfile도 없어져 있음
 
 ## RAID 1 확인   
 <img width="762" alt="스크린샷 2021-05-12 오후 4 23 25" src="https://user-images.githubusercontent.com/57285121/117935144-6348ed00-b33e-11eb-8864-e0baf236b11e.png">   
 mdadm 명령어를 통해 RAID 1이 구성되어있던 /dev/md1의 상태가 clean, degraded(사용할 수는 있으나 이대로 사용하면 백업 기능 사용 불가)로 되어있고 디스크 하나가 제거되어 있음을 확인   
 
 <img width="547" alt="스크린샷 2021-05-12 오후 4 32 27" src="https://user-images.githubusercontent.com/57285121/117936291-a6579000-b33f-11eb-9c3a-7b14a26e62f6.png">   
-testfile이 아직 그대로 있음(결함 허용)   
+testfile이 아직 그대로 있음(결함 허용)
 
 ## RAID 5 확인   
 <img width="774" alt="스크린샷 2021-05-12 오후 4 27 11" src="https://user-images.githubusercontent.com/57285121/117935661-ea966080-b33e-11eb-9913-d5997b11df1f.png">   
@@ -214,3 +213,41 @@ mdadm 명령어를 통해 RAID 6이 구성되어 있던 /dev/md6의 상태가 cl
 
 <img width="550" alt="스크린샷 2021-05-12 오후 4 34 45" src="https://user-images.githubusercontent.com/57285121/117936564-f6ceed80-b33f-11eb-8416-181476a2fc6a.png">   
 testfile이 아직 그대로 있음(결함 허용)
+
+# 고장난 RAID를 다시 작동 
+* mdadm --run 명령어를 통해 작동   
+<img width="516" alt="스크린샷 2021-05-12 오후 4 53 11" src="https://user-images.githubusercontent.com/57285121/117938980-942b2100-b342-11eb-8b72-48b0f8303806.png">   
+mdadm명령어로 RAID 0, 1, 5, 6을 작동시켰으나 0은 작동이 되지 않음   
+
+<img width="755" alt="스크린샷 2021-05-12 오후 4 54 28" src="https://user-images.githubusercontent.com/57285121/117939117-b9b82a80-b342-11eb-8793-6db1bc007e0a.png">   
+상태가 active, FAILED, Not started로 나옴(사용 불가)   
+
+<img width="756" alt="스크린샷 2021-05-12 오후 4 57 32" src="https://user-images.githubusercontent.com/57285121/117939565-26332980-b343-11eb-8dc0-1be7a8d671e5.png">   
+RAID 1 (/dev/md1)은 사용 가능이긴 하나 백업 불가 상태(clean, degraded)   
+
+<img width="773" alt="스크린샷 2021-05-12 오후 4 58 42" src="https://user-images.githubusercontent.com/57285121/117939714-4fec5080-b343-11eb-938e-d71b688d80e0.png">   
+RAID 5 (/dev/md5)도 마찬가지로 clean, degraded   
+
+<img width="753" alt="스크린샷 2021-05-12 오후 4 59 55" src="https://user-images.githubusercontent.com/57285121/117939916-7c07d180-b343-11eb-93a6-7174b1117e90.png">   
+RAID 6 (/dev/md6(도 마찬가지.
+
+* 시스템 정상 작동을 위해 응급 모드 탈출을 해야함
+* RAID 0은 사용 불능 상태이므로 RAID 중지 후 영구 마운트 해제 해야함
+* mdadm --stop 명령어로 RAID 중지   
+<img width="403" alt="스크린샷 2021-05-12 오후 5 09 09" src="https://user-images.githubusercontent.com/57285121/117941144-c76eaf80-b344-11eb-9a38-6ef5a170e738.png">   
+
+* /etc/fstab을 열어서 영구 마운트 해제   
+<img width="489" alt="스크린샷 2021-05-12 오후 5 11 00" src="https://user-images.githubusercontent.com/57285121/117941425-07ce2d80-b345-11eb-890e-9d16d0a24129.png">   
+* 재부팅 후 시스템 정상 작동   
+
+# RAID 원상 복구 
+* 고장냈던 디스크 5개를 다시 추가
+* RAID 0은 추가한 디스크를 통해 재구성을 해줘야 하며 RAID 1, 5, 6은 새로운 디스크를 추가해 주기만 하면 된다.
+
+ 
+
+# RAID의 원상복구
+* RAID 0은 원상복구 하기 위해서는 
+
+
+
