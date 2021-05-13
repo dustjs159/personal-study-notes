@@ -7,7 +7,8 @@ Storage
 * 대용량의 데이터를 저장하기 위해 별도의 네트워크 스토리지 구축 가능
 
 
-# Storage Type - File Storage
+# Storage Type
+## File Storage
 * 일반적으로 NAS 혹은 DAS에서 사용
 * 파일 기반 스토리지
 * 파일과 디렉토리가 계층적 구조를 이루고 있음
@@ -24,7 +25,8 @@ Storage
 * 단점   
 > * 저장되는 파일의 수가 많아질 경우에는 파일을 찾기 어려워짐   
 
-# Storage Type - Block Storage
+# Storage Type
+## Block Storage
 * 일반적으로 SAN에서 사용
 * 균등한 크기로 정의된 블록에 데이터를 분할해서 저장하는 스토리지
 * 블록이라는 특정 공간 위치에 데이터를 저장하고 접근하는 방식(C드라이브, D드라이브같은 개념)
@@ -32,9 +34,7 @@ Storage
 * 보통 데이터센터의 서버에 가깝게 위치(서버에서 접근이 가능한 볼륨으로 스토리지를 구성)
 * 서버가 데이터 관리의 주체가 되기 때문에 서버가 고장나면 이용할 수 없고 사용자와 스토리지가 1:1로 데이터를 공유해야함
 * 데이터를 저장하고 읽기 위해서는(데이터 입, 출력) 컨트롤러가 필요함(여기저기 분할된 데이터 블록들을 다시 합침)
-* 파일 스토리지와는 다르게 경로에 의존하지 않음
-* 다른 OS에서도 접근이 가능함
-* 비용이 많이 들고 관리의 부담이 늘어나게 됨   
+* 파일 스토리지와는 다르게 경로에 의존하지 않음   
 <img width="641" alt="스크린샷 2021-05-13 오전 2 19 25" src="https://user-images.githubusercontent.com/57285121/118017487-a54f4e80-b391-11eb-8ecd-6eb28ab22a3d.png">   
 
 * 장점   
@@ -43,50 +43,81 @@ Storage
 * 단점   
 > * 구성하는데 있어서 복잡하고 비용적으로 많이 듦   
 
-# Storage Type - Object Storage
-* 오브젝트 기반 스토리지
-* 별도의 저장소에 논리적인 오브젝트 단위로 데이터를 저장
+# Storage Type
+## Object Storage
+* 오브젝트(객체) 기반 스토리지
+* 별도의 저장소에 논리적인 객체 단위로 데이터를 저장
 * 계층적 구조가 아닌 flat한 구조로 저장
-* 최상의 접근성과 안정성을 제공
-* 데이터 저장소(풀)에 데이터+메타데이터+키 형태로 저장
+* 동시에 많은 사용자가 스토리지에 접근이 가능
+* 데이터 저장 시 저장소(풀)에 데이터+메타데이터+키 형태로 저장   
+<img width="445" alt="스크린샷 2021-05-13 오후 5 11 43" src="https://user-images.githubusercontent.com/57285121/118097992-54ca0680-b40e-11eb-822a-36ee7df5733f.png">   
 
-
-# DAS
-* Direct Attached Storage
-* HDD를 여러 개 장착한 스토리지
-* 유선으로 외장하드처럼 사용이 가능함   
-<img width="480" alt="스크린샷 2021-05-06 오후 4 56 47" src="https://user-images.githubusercontent.com/57285121/117262297-0f488f00-ae8c-11eb-927f-3fadf1c54aae.png">   
-
-* 호스트에 직접 꽂아서 1:1로 사용(USB처럼)
-* 각 호스트는 자신이 직접 파일 시스템 관리
+* 고유 식별자(메타데이터 혹은 키)로 검색
+* 비정형 데이터 저장에 적합
+* REST API(HTTP)을 사용하기 때문에 GET이나 POST요청을 통해 데이터를 가져올 수 있음
+* API를 사용하여 애플리케이션 수준에서 접근
 * 장점   
-> * 저장장치를 직접 연결하므로 속도가 빠르며 확장이 쉽다  
-> * 저장장치까지 가까운 곳에서 접근이 가능   
+> * 데이터 검색 속도가 빠름   
+> * 유연한 확장성   
+> * 저렴한 비용으로 많은 양의 데이터를 관리하기에 적합   
 * 단점   
-> * 연결 수에 한계가 있음   
-> * 호스트 장애 시 스토리지 접근이 제한됨   
-> * 물리적 공간이 부족할 때 확장이 어려움   
+> * 오브젝트 수정이 불가능함   
+<img width="984" alt="스크린샷 2021-05-13 오후 6 42 27" src="https://user-images.githubusercontent.com/57285121/118108446-f9524580-b41a-11eb-8a90-ab580c483604.png">   
 
-# NAS
-* Network Attached Stroage
-* DAS에 네트워크 기능을 탑재
-* 호스트와 저장장치가 스위치를 통해 네트워크(LAN)에 연결됨
-<img width="711" alt="스크린샷 2021-05-06 오후 5 03 31" src="https://user-images.githubusercontent.com/57285121/117263196-fee4e400-ae8c-11eb-9268-75e6b92a6b8d.png">   
+# Storage Architecture 
+## Local Storage 
+* 서버 본체 내 장착된 내장 디스크.
+* 외부 스토리지를 사용하지 않기 때문에 물리적 공간을 절약할 수 있음
+* 설치할 수 있는 디스크의 개수와 확장성에 한계가 있음
+* 별도의 백업을 하지 않으면 서버 고장 시 복구가 어려움
+ 
+# Storage Architecture 
+## External Storage : DAS
+* Direct Attached Storage   
+<img width="1012" alt="스크린샷 2021-05-13 오후 11 43 26" src="https://user-images.githubusercontent.com/57285121/118142106-07b55700-b445-11eb-9b3d-8108a0e38f34.png">   
 
-* 주요 프로토콜   
-> * FTP(File Transfer Protocol)   
-> * NFS(Network File System)   
+* 하드디스크를 여러 개 장착한 스토리지
+* 유선으로 외장하드처럼 사용 가능 
+* 로컬 스토리지와 유사한 물리적 구조
+* 서버에 스토리지를 1:1로 직접 연결해서 사용하는 방식
+* 각 서버가 연결된 스토리지의 파일 시스템을 관리
+* File Storage   
+<img width="348" alt="스크린샷 2021-05-13 오후 6 45 24" src="https://user-images.githubusercontent.com/57285121/118108798-62d25400-b41b-11eb-8f94-5777160a67cb.png">   
+
 * 장점   
-> * 네트워크를 통해 데이터를 저장 및 공유하므로 빠른 네트워크 속도를 통한 전송 속도 향상 가능   
-* 단점
-> * 네트워크의 접속자가 많아지면 성능이 저하될 수 있고 DAS에 비해 속도가 느림   
+> * 저장장치를 외부에 연결함으로 저장공간을 더 쉽게 확장할 수 있음      
+> * 설치 과정이 어렵지 않음
+* 단점   
+> * 서버에 종속되어 있기 때문에 특정 데이터에 접근하기 위해서는 서버를 거쳐야 하는데 서버 고장 시 해당 서버에 연결된 스토리지를 이용할 수 없게 됨   
+> * 여러 사용자들 간 파일 공유가 가능은 하나 수의 제한이 있음
+
+# Storage Architecture 
+## External Storage : NAS
+* Network Attached Storage   
+<img width="1004" alt="스크린샷 2021-05-13 오후 11 44 44" src="https://user-images.githubusercontent.com/57285121/118142297-33d0d800-b445-11eb-89b6-9ee394a0474e.png">   
+
+* PC와 직접 연결하는 것이 아닌 네트워크(LAN)를 통해 스토리지와 연결
+* 네트워크를 통해 스토리지에 접속이 가능
+* DAS의 단점이였던 사용자들 간 파일 공유에 제한이 있다는 점을 해결(윈도우의 공유 폴더처럼)
+* 네트워크의 대역폭이 낮은 경우에는 전송 속도가 떨어짐
+* 다양한 OS 간 **파일 전송 및 공유**를 위한 여러 프로토콜 지원(**파일서버**)   
+> * FTP(File Transfer Protocol) : 파일 업로드 / 다운로드 만을 위한 프로토콜   
+> * 윈도우와 윈도우 간 : CIFS(Common Internet File System)   
+> * 리눅스와 리눅스 간 : NFS(Network File System)   
+> * 리눅스와 윈도우 간 : SMB(Server Message Block)/CIFS
+* File Storage   
+<img width="373" alt="스크린샷 2021-05-14 오전 12 03 41" src="https://user-images.githubusercontent.com/57285121/118144819-dab67380-b447-11eb-986c-a3ef5aa855e0.png">   
+
+* 장점   
+> * 다수의 사용자가 네트워크를 통해 접근하여 파일 공유가 가능함   
+* 단점   
+> * 사용자가 많아지면 네트워크 속도가 느려질 수 있음   
 
 # SAN
 * Storage Area Network
 * 여러 스토리지를 하나의 네트워크에 연결하고 연결한 네트워크를 스토리지 전용 네트워크(SAN)로 구성
 * 스토리지에 접근하려면 각 호스트들은 모두 SAN네트워크를 거쳐서 접근해야함 
 * 별도의 SAN 스위치가 필요함
-<img width="711" alt="스크린샷 2021-05-06 오후 5 08 17" src="https://user-images.githubusercontent.com/57285121/117263883-ab26ca80-ae8d-11eb-9703-52743f78de42.png">   
 
 * FC-SAN(Fiber Channel SAN) : 광 케이블을 이용하여 스토리지에 접근
 * IP-SAN : IP를 이용하여 스토리지에 접근
