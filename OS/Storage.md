@@ -1,13 +1,14 @@
 Storage
 ===========================
 
-# Storage
+# 스토리지(Storage)
 * 데이터를 저장할 수 있는 장소
 * 직접 서버에 연결이 가능
 * 대용량의 데이터를 저장하기 위해 별도의 네트워크 스토리지 구축 가능
 
 
 # Storage Type
+
 ## File Storage
 * 일반적으로 NAS 혹은 DAS에서 사용
 * 파일 기반 스토리지
@@ -25,7 +26,6 @@ Storage
 * 단점   
 > * 저장되는 파일의 수가 많아질 경우에는 파일을 찾기 어려워짐   
 
-# Storage Type
 ## Block Storage
 * 일반적으로 SAN에서 사용
 * 균등한 크기로 정의된 블록에 데이터를 분할해서 저장하는 스토리지
@@ -43,7 +43,6 @@ Storage
 * 단점   
 > * 구성하는데 있어서 복잡하고 비용적으로 많이 듦   
 
-# Storage Type
 ## Object Storage
 * 오브젝트(객체) 기반 스토리지
 * 별도의 저장소에 논리적인 객체 단위로 데이터를 저장
@@ -65,13 +64,13 @@ Storage
 <img width="984" alt="스크린샷 2021-05-13 오후 6 42 27" src="https://user-images.githubusercontent.com/57285121/118108446-f9524580-b41a-11eb-8a90-ab580c483604.png">   
 
 # Storage Architecture 
+
 ## Local Storage 
 * 서버 본체 내 장착된 내장 디스크.
 * 외부 스토리지를 사용하지 않기 때문에 물리적 공간을 절약할 수 있음
 * 설치할 수 있는 디스크의 개수와 확장성에 한계가 있음
 * 별도의 백업을 하지 않으면 서버 고장 시 복구가 어려움
  
-# Storage Architecture 
 ## External Storage : DAS
 * Direct Attached Storage   
 <img width="1012" alt="스크린샷 2021-05-13 오후 11 43 26" src="https://user-images.githubusercontent.com/57285121/118142106-07b55700-b445-11eb-9b3d-8108a0e38f34.png">   
@@ -91,7 +90,6 @@ Storage
 > * 서버에 종속되어 있기 때문에 특정 데이터에 접근하기 위해서는 서버를 거쳐야 하는데 서버 고장 시 해당 서버에 연결된 스토리지를 이용할 수 없게 됨   
 > * 여러 사용자들 간 파일 공유가 가능은 하나 수의 제한이 있음
 
-# Storage Architecture 
 ## External Storage : NAS
 * Network Attached Storage   
 <img width="1004" alt="스크린샷 2021-05-13 오후 11 44 44" src="https://user-images.githubusercontent.com/57285121/118142297-33d0d800-b445-11eb-89b6-9ee394a0474e.png">   
@@ -115,7 +113,6 @@ Storage
 > * 사용자가 많아지면 네트워크 속도가 느려질 수 있음   
 > * 네트워크를 기반으로 파일을 전송 및 공유를 하다보니 DAS보다 속도가 느림
 
-# Storage Architecture
 ## External Storage : SAN
 * Storage Area Network
 * 스토리지만을 위한 고속 네트워크를 새로 구축
