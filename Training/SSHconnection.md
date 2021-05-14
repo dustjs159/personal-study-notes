@@ -86,9 +86,8 @@ id_rsa.pub 수신 성공
 <img width="474" alt="스크린샷 2021-05-14 오후 11 06 54" src="https://user-images.githubusercontent.com/57285121/118282270-15341500-b509-11eb-94bf-dc6c5d742881.png">
 
 cp 명령어를 이용해서 home 디렉토리의 id_rsa.pub을 .ssh디렉토리 아래에 authorized_keys라는 이름으로 저장(home 디렉토리의 id_rsa.pub는 그대로)
-<img width="542" alt="스크린샷 2021-05-14 오후 11 36 27" src="https://user-images.githubusercontent.com/57285121/118286235-36970000-b50d-11eb-877f-38b08dcc02e8.png">
+<img width="542" alt="스크린샷 2021-05-14 오후 11 36 27" src="https://user-images.githubusercontent.com/57285121/118286235-36970000-b50d-11eb-877f-38b08dcc02e8.png">   
 
 ssh <계정명>@<IP주소> 명령어를 통해 원격지에 접속
 <img width="636" alt="스크린샷 2021-05-14 오후 11 37 47" src="https://user-images.githubusercontent.com/57285121/118286424-6514db00-b50d-11eb-8efc-6292322ecdd5.png">
-
 비밀번호를 통한 로그인이 아닌 키 인증으로 로그인 성공
