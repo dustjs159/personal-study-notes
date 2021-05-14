@@ -1,6 +1,17 @@
 Network Virtualization
 ===========================
 
+# 네트워크 가상화
+* 물리적으로 구현되어있는 네트워크(Underlay) 위에 여러 프로토콜을 운영하는 하나 이상의 논리적 네트워크(Overlay)를 구현하는 기술
+
+# Underlay/Overlay   
+<img width="410" alt="스크린샷 2021-05-15 오전 12 05 47" src="https://user-images.githubusercontent.com/57285121/118290358-529ca080-b511-11eb-98a7-b7d7d099b23d.png">   
+## Underlay
+* 물리적 네트워크
+## Overlay 
+* 논리적 네트워크
+* **Tunneling**이 가장 중요한 기술
+* 
 # 네트워크 가상화가 등장한 배경   
 * 하드웨어 의존적인 인프라 구축은 많은 비용이 요구됨
 * 기존 인프라 확장 시 Down시간으로 인한 고가용성 하락
