@@ -6,6 +6,7 @@ Network Virtualization
 
 # Underlay/Overlay   
 <img width="410" alt="스크린샷 2021-05-15 오전 12 05 47" src="https://user-images.githubusercontent.com/57285121/118290358-529ca080-b511-11eb-98a7-b7d7d099b23d.png">   
+
 ## Underlay
 * 물리적 네트워크
 ## Overlay 
@@ -57,10 +58,4 @@ Network Virtualization
 * 라우터는 Data Plane의 패킷의 전송(Forwarding)만 담당하고 Control Plane의 라우팅은 중앙의 서버(**SDN Contorller**)가 담당
 
 
-# Network Overlay
-* 서비스의 인프라 규모가 커지면서 네트워크의 구성이 점점 복잡해짐
-* 이러한 배경을 바탕으로 실제 물리적인 네트워크 위에 가상의 네트워크를 구축하는 기술을 통해 네트워크 구성의 복잡함을 해결   
-* 오버레이 네트워크의 노드들은 논리적인 링크로 연결될 수 있으며 논리적 링크는 고려하지 않음
-<img width="529" alt="스크린샷 2021-05-04 오후 5 20 04" src="https://user-images.githubusercontent.com/57285121/116977117-037a9280-acfd-11eb-87f0-f2db6c3522cc.png">   
 
-# Hypervisor
