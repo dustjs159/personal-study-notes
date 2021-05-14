@@ -76,7 +76,6 @@ POP : ISP에서 제공하는 인터넷(공용 망)에 접근하기 위한 접점
 > * GRE를 위한 20byte의 IP Header(출발지와 목적지의 공용 망 IP 주소) + GRE 관련 정보 4byte   
 
 <img width="419" alt="스크린샷 2021-05-06 오후 3 22 27" src="https://user-images.githubusercontent.com/57285121/117250921-e53ca000-ae7e-11eb-914d-27c328497351.png">   
-
 원래의 패킷(PPP 프레임)과 IP Header, GRE Header로 구성된 PPTP에서 전송되는 데이터.    
 
 * 장점
@@ -99,18 +98,49 @@ POP : ISP에서 제공하는 인터넷(공용 망)에 접근하기 위한 접점
 
 # IPsec VPN
 * IP계층에서 안전한 데이터 송,수신을 위한 3계층 터널링 프로토콜
+* 인증, 무결성, 기밀성 제공
 * IPsec의 터널모드 이용
-* AH(Authentication Header), ESP(Encapsulation Security)를 통해 데이터 인증, 무결성, 기밀성 제공(보안 3요소) 
-* IP헤더 + 페이로드로 이루어진 패킷이 터널 안으로 들어가면서 AH가 추가되어 캡슐화가 이루어지고 ESP헤더가 붙으면서 패킷을 암호화
-* L2TP + IPsec   
-<img width="575" alt="스크린샷 2021-05-07 오후 3 19 26" src="https://user-images.githubusercontent.com/57285121/117406163-a7577e80-af47-11eb-9404-5aa6fb1a094a.png">   
+* AH(Authentication Header)
+> * 인증/무결성은 보장되지만 암호화는 제공하지 않음   
+* ESP(Encapsulation Security)
+> * AH가 제공하지 않던 암호화까지 제공   
+> * IP헤더 + 페이로드로 이루어진 패킷이 터널 안으로 들어가면서 ESP헤더가 붙으며 패킷을 암호화   
+<img width="657" alt="스크린샷 2021-05-15 오전 2 24 20" src="https://user-images.githubusercontent.com/57285121/118306643-a9f83c00-b524-11eb-85b5-14e81646cbf7.png">   
 
-* IPsec의 터널모드를 통해 L2TP의 IP 헤더 부분을 제외한 패킷을 암호화하여 데이터를 전송함으로써 L2TP의 암호화가 없다는 점을 보완함
+## IKE(Internet Ket Exchange)
+* 보안 관련 설정들(사용자 인증 방법, 암호화 방식 등)을 설정하고 관리하는 프로토콜
+* IPsec의 AH는 송신자와 수신자가 같은 키를 공유하고 이 키로 해시를 돌려서 데이터의 일치 여부를 통해 인증을 진행
+* IPsec의 ESP는 송신자와 수신자가 같은 키를 공유하고 대칭형 암호화 알고리즘을 통해 패킷을 암, 복호화를 진행
+* 여기서 키를 어떻게 공유하는지, 암호화 알고리즘은 어떤 것을 사용하는지 등의 사전 협상
+* 이러한 과정을 SA(Security Association, 보안 협상) 설정 절차라고 함
+* IPsec VPN을 위한 선 처리 과정   
+<img width="508" alt="스크린샷 2021-05-15 오전 2 41 50" src="https://user-images.githubusercontent.com/57285121/118308610-1bd18500-b527-11eb-8e6f-4027044860f3.png">   
 
+* Phase 1, Phase 2 2단계로 진행
 
+### Phase 1 (ISAKMP SA)
+* 보안이 설정되지 않은 환경에서 보안이 설정된 터널을 만들기 위한 단계
+* ISAKMP(Internet Security Assocation and Key Management Protocol)   
+> * SA를 위한 절차 등을 정의한 프로토콜   
+> * SA 항목 : 인증을 위한 키 공유, 암호화 알고리즘 협상 등
 
+### Phase 2 (IPsec SA)
+* 터널이 설정된 후 실제 데이터를 전송하기 위한 방법을 협상
+> * Phase 1에서 설정된 SA를 바탕으로 실제 데이터 전송
 
 # SSL VPN
-* IPsec VPN의 단점을 보완
-* 클라이언트/서버 모델
-* 
+* SSL을 이용해 애플리케이션 계층에서 클라이언트와 SSL VPN 장비간 통신에 대한 보안 제공
+* 유동적인 IP를 사용하는 기기의 사용자가 내부로 접근할 때 유용
+* IPsec VPN은 3계층에서만 적용이 가능하지만 SSL VPN은 4~7계층에서 모두 적용 가능
+* 웹 브라우저 자체에서 지원
+* Site to Site 보다는 Site to Client 에 더 적합
+* IPsec VPN은 Site to Site를 위해 두 지점 다 IPsec VPN장비가 필요했지만 SSL VPN은 사용자가 외부 기기로 SSL VPN에 로그인하여 사용가능   
+<img width="656" alt="스크린샷 2021-05-15 오전 4 27 03" src="https://user-images.githubusercontent.com/57285121/118319484-cea8df80-b535-11eb-9037-5b6614b79766.png">   
+* 클라이언트는 SSL 장비에 로그인을 함(SSL 인증서 방식을 통해)
+* 클라이언트가 SSL에 로그인이 성공한 후에 데이터 전송
+
+<img width="479" alt="스크린샷 2021-05-15 오전 4 21 34" src="https://user-images.githubusercontent.com/57285121/118318943-0b280b80-b535-11eb-88f4-03a819aac515.png">   
+
+<img width="662" alt="스크린샷 2021-05-15 오전 4 40 03" src="https://user-images.githubusercontent.com/57285121/118320745-a02c0400-b537-11eb-9afc-54eaef2a55af.png">   
+
+* 로그인에 성공하면 **가상 IP**를 할당받고 내부 서버들에 접속이 가능

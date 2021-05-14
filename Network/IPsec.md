@@ -7,17 +7,19 @@ IPsec
 
 ## 전송모드   
 <img width="493" alt="스크린샷 2021-05-06 오후 9 16 09" src="https://user-images.githubusercontent.com/57285121/117296673-4a5cb980-aeb0-11eb-8d33-b6b97b4831af.png">   
+
 * IP 패킷의 페이로드를 보호하는 모드. 즉 IP보다 상위 계층의 프로토콜의 데이터들을 보호   
-* 상위 계층의 프로토콜만 보호하기 때문에 목적지 IP 주소와 출발지 IP 주소는 그대로 노출이 됨(보안에 있어서 약점이 될 수도 있음)   
+* 상위 계층의 프로토콜과 페이로드만 보호하기 때문에 목적지 IP 주소와 출발지 IP 주소는 그대로 노출이 됨(보안에 있어서 약점이 될 수도 있음)   
 
 ## 터널 모드   
 <img width="594" alt="스크린샷 2021-05-07 오전 1 11 16" src="https://user-images.githubusercontent.com/57285121/117330904-21005580-aed1-11eb-939e-f86ad6ce5d00.png">   
+
 * IP 패킷 전체를 보호하는 모드. IP 패킷 전체를 IPsec로 캡슐화하면 IP 헤더를 식별할 수 없기 때문에 주소 정보를 담은 새 IP 헤더를 추가   
 * 원본 IP 헤더를 보호하지만 새로 추가된 IP 헤더의 정보는 노출됨(제한적인 기밀성)   
 * 새 IP 헤더에는 터널링이 시작되는 게이트웨이의 IP 주소만이 들어있음   
 
 # IPsec 세부 프로토콜
-* AH / ESP
+* AH(Authentication Header), ESP(Encapsulation Security)를 통해 데이터 인증, 무결성, 기밀성 제공(보안 3요소) 
 
 ## AH(Authentication Header)
 * 인증을 담당하는 프로토콜   
