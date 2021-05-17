@@ -10,6 +10,19 @@ TCP/UDP
 * 흐름제어, 혼잡제어, 오류제어 기능 지원
 * 데이터를 전송할 때 마다 3 way-handshake를 통해 연결을 해야하므로 시간이 상대적으로 많이 소요됨
 
+# TCP Header   
+<img width="667" alt="스크린샷 2021-05-18 오전 12 50 29" src="https://user-images.githubusercontent.com/57285121/118518401-0d77a900-b773-11eb-8fab-dd6ee36ea2a8.png">   
+
+* **Source Port** : 출발지 Port 번호
+* **Destination Port** : 목적지 Port 번호
+* Sequence Number : 순서 번호
+* Acknowledgement Number : 확인 응답 번호
+* Data offset : TCP header 길이 값
+* Reserved : 예약값
+* **Window** : 윈도우 크기
+* Checksum : 오류검출
+* Urgent Pointer(긴급 포인터) : 긴급 데이터 처리
+
 # 3 way-handshake / 4 way-handshake
 * 3 way-handshake : 데이터를 전송하기 전 정확한 전송을 위해 송신측과 수신측의 연결(세션)을 수립하는 과정
 * 연결을 위한 3 way-handshake   

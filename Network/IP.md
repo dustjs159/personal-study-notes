@@ -10,6 +10,22 @@ Internet Protocol
 * IP는 신뢰성을 중요하게 생각하지 않고 빠르게 전송할 수 있는 최적의 경로만을 찾아 패킷을 분해하고 조립하는 과정을 진행함
 * OSI 7 계층 중 3 계층에서 사용
 
+# IP Packet Header   
+<img width="700" alt="스크린샷 2021-05-18 오전 12 10 45" src="https://user-images.githubusercontent.com/57285121/118512126-7fe58a80-b76d-11eb-9f54-cb3e38523e05.png">   
+
+* Version : IP 버전 정보
+* IHL : IP 헤더 길이 값
+* Type of Service : 데이터 우선 순위
+* Total Length : IP 패킷 전체 크기
+* Identification : 단편화 되기 전 원본 데이터 식별자
+* IP Flags : 단편화 정보 표시(x : 사용하지 않는 bit / D : 단편화된 경우 0 안되면 1 / M : 마지막 단편화 조각이면 0 아니면 1)
+* Fragment offset : 단편화 데이터 순서
+* **TTL(Time To Live)** : 패킷이 거쳐야 할 라우터의 개수. 라우터 하나 거칠 때 마다 1씩 감소. 0되면 폐기
+* Protocol : 상위 프로토콜 정보
+* Header Checksum : IP 헤더 오류 혹은 변조 여부를 확인하기 위한 값
+* **Source IP** : 출발지 IP 주소 
+* **Destination IP** : 목적지 IP 주소
+ 
 
 # IP 주소(IP Address)
 * 인터넷 상에 있는 컴퓨터의 고유한 주소(사람의 주민등록 번호)
