@@ -37,9 +37,9 @@ Exam1 Review
 * ext4 : 리눅스의 파일 시스템 중 하나. 최대 1EB(10^18) 의 볼륨 크기와 16TiB(2^50)크기의 파일을 지원. 하위 디렉토리 개수의 제한이 64000 까지 증가함. 또한 하위 ext3, ext와도 호환(마운트)이 가능
 * xfs : 대용량 파일 처리에 적합한 64비트 리눅스 파일 시스템. CentOS 7 이상부터 지원. ext4보다 속도가 많이 향상되었으며 대용량의 파일 처리에는 효율적이지만 저용량의 파일들의 처리에 대해서는 비효율적이다. 또한 ext4보다 호환성이 떨어진다는 단점이 존재
 
-# 8. UEFI BIOS, Legacy BIOS
+# 8. UEFI, Legacy BIOS
 * Legacy BIOS : 구형 BIOS. 2TB이상의 대용량 저장장치를 인식하지 못하며 64bit OS 지원이 불가능하다. 최신 PC 와의 호환이 어렵기 때문에 최신 BIOS인 UEFI BIOS로 전환하는 추세   
-* UEFI BIOS(Unified Extensible Firmware Interface) : Legacy BIOS보다 부팅 속도가 빠르고 2TB이상의 저장장치를 인식할 수 있다. UI도 사용자가 사용하기 더 쉽게 구성
+* UEFI (Unified Extensible Firmware Interface) : Legacy BIOS보다 부팅 속도가 빠르고 2TB이상의 저장장치를 인식할 수 있다. UI도 사용자가 사용하기 더 쉽게 구성
 
 # 9. 리눅스 디렉토리 + 파일
 * /home : 사용자의 홈 디렉토리
@@ -53,7 +53,7 @@ Exam1 Review
 * /proc : 실행중인 프로세스에 대한 정보
 * /etc/sysconfig : 시스템 설정 정보
 * /etc/rc.d : 
-* /etc/cron.d : 
+* /etc/cron.d : 반복적인 작업을 설정하는 디렉토리
 * /etc/init.d : 시스템에서 제공되는 서비스에 대해 시작 및 중지를 할 수 있는 스크립트
 * /etc/systemd :
    
@@ -93,5 +93,16 @@ Exam1 Review
 * 복사 : cp, 옮기기 : mv, 삭제 : rm
 * 파일 안 특정 단어가 있는 라인 출력 : grep -r <찾을 단어> <대상 파일> 
 * 파일 안 특정 단어 개수 출력 : grep -wc <찾을 단어> <대상 파일>
-* 
+* 시스템 모니터링 : top
+* 현재 경로 용량 확인 : df -h
+
 # 16. vi 편집기 명령어 
+* 복사 : yy / 붙여넣기 : p
+* 되살리기 : u
+* 블럭 지정 : visual mode로 진입하여 블록 선택
+* 단어 치환 : %s/<원본단어>/<바꿀단어>
+* 현재 보이는 페이지 맨 위 : shift + h / 중간 : shift + m / 맨 아래 : shift + l
+* 라인 표시 : :set nu
+* 특정 문자열 검색 
+* 전체 페이지 맨 위 : gg / 전체 페이지 맨 아래 : G
+* 특정 문자열 검색 : :/<찾을 문자열>
