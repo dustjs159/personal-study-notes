@@ -28,5 +28,18 @@ OSI 7 Layer
 
 # 3. 네트워크 계층(Network Layer)
 * 시스템 간의 네트워크 연결을 설정, 유지, 해제
-* 프로토콜 : ARP, RARP, IPsec, ICMP 
+* IP 주소를 기반으로 네트워크 상 호스트에게 데이터를 전송
+* 데이터 전송 단위 : Packet
+* 프로토콜 : IP, ARP, RARP, IPsec, ICMP 
+* 
 
+# 4. 전송 계층(Transport Layer)
+* 
+
+# 5. 세션 계층(Session Layer)
+
+
+# 6. 표현 계층(Presentation Layer)
+
+
+# 7. 응용 계층(Application Layer)
