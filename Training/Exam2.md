@@ -11,6 +11,11 @@ Exam 2 Review
 > * 비연결형 서비스(데이터를 전송할 때 마다 최적의 경로를 찾아 전송)   
 
 # 2. 3, 4 way-handshake
+* 3 way-handshake : 데이터 송, 수신을 위한 경로를 연결하는 과정(세션 수립)   
+![tcp1](https://user-images.githubusercontent.com/57285121/116592013-75985380-a95a-11eb-9fc6-39aaf1a1281c.png)   
+
+* 4 way-handshake : 데이터 송, 수신이 모두 종료된 후 송신측과 수신측간 연결(세션)을 종료하는 과정   
+![tcp2](https://user-images.githubusercontent.com/57285121/116592385-e7709d00-a95a-11eb-88c3-a75103765837.png)
 
 
 # 3. 서브넷마스크, 게이트웨이, 서브넷팅, 슈퍼넷팅
@@ -74,6 +79,11 @@ Exam 2 Review
 > * Destination IP를 변경하여 전송하는 방식(외부 -> 내부)
 
 # 11. HTTP/HTTPS
+* HTTP : 클라이언트의 Reqeust(HTTP Method)에 대한 서버의 응답(HTTP Response)으로 통신하는 방식.
+* HTTPS : HTTP + Secure. HTTP와 보안을 위한 SSL을 적용하여 통신. HTTP의 보안 취약점을 개선 가능   
+
+<img width="712" alt="스크린샷 2021-05-15 오전 3 42 21" src="https://user-images.githubusercontent.com/57285121/118314774-90a8bd00-b52f-11eb-937a-dc909ccb4085.png">   
+
 
 # 12. HTTP Method
 * PUT : 리소스 수정
