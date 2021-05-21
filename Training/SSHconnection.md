@@ -15,9 +15,9 @@ Local(Windows)에서 SSH프토토콜을 이용해 원격 접속 해보자
 
 * 대부분 최신의 리눅스 배포판들은 SSH 서버가 탑재(설치)되어 있음
 * 만약 설치가 안되어 있다면 OpenSSH(SSH 프로토콜을 사용하여 원격 접속을 위한 프로그램)설치
-> * CentOS, RedHat : ```yum install openssh-server```   
-> * Ubuntu, Debian : ```apt-get install openssh-server```   
-* 잘 설치가 되었는지 확인 : ```which sshd```   
+> * CentOS, RedHat : yum install openssh-server   
+> * Ubuntu, Debian : apt-get install openssh-server   
+* 잘 설치가 되었는지 확인 : which sshd   
 ![ssh1](https://user-images.githubusercontent.com/57285121/115655878-18efd400-a36f-11eb-83e6-821f19b2e900.PNG)
 
 # SSH Server 작동
@@ -29,9 +29,9 @@ Local(Windows)에서 SSH프토토콜을 이용해 원격 접속 해보자
 ![ssh2](https://user-images.githubusercontent.com/57285121/115656016-62402380-a36f-11eb-9ca1-fd9e271ac4d3.PNG)
 * Port 22의 주석을 해제   
 ![ssh3](https://user-images.githubusercontent.com/57285121/115656122-9582b280-a36f-11eb-815d-3963311673c4.PNG)
-* SSH 서버 서비스 시작 : ```service sshd start```   
+* SSH 서버 서비스 시작 : service sshd start   
 ![ssh4](https://user-images.githubusercontent.com/57285121/115656344-0d50dd00-a370-11eb-94f3-19eb4d7ef16c.PNG)
-* SSH 서버의 상태 확인 : ```service sshd status```   
+* SSH 서버의 상태 확인 : service sshd status   
 ![ssh5](https://user-images.githubusercontent.com/57285121/115656783-bbf51d80-a370-11eb-9cb7-23ab35f9048d.PNG)   
 (active 상태 확인)
 
@@ -42,8 +42,8 @@ Local(Windows)에서 SSH프토토콜을 이용해 원격 접속 해보자
 
 # SSH Server에 접속하기 위한 사용자이름과 비밀번호 지정
 
-* 사용자 추가 : ```useradd <사용자 이름>```
-* 사용자 계정 비밀번호 설정 및 변경 : ```passwd <사용자 이름>```    
+* 사용자 추가 : useradd <사용자 이름>
+* 사용자 계정 비밀번호 설정 및 변경 : passwd <사용자 이름>    
 ![ssh7](https://user-images.githubusercontent.com/57285121/115659835-1ba1f780-a376-11eb-800d-66156c9efe59.PNG)
 
 # SSH Server 접속
@@ -65,14 +65,13 @@ Local(Windows)에서 SSH프토토콜을 이용해 원격 접속 해보자
 * 호스트가 원격지에 SSH 접속을 시도하면 호스트가 가지고 있는 Private Key와 원격지의 Public Key를 비교하여 일치하면 인증이 성공
 
 * **ssh-keygen** 명령어로 키 생성(default : RSA)
-<img width="707" alt="스크린샷 2021-05-14 오후 10 14 29" src="https://user-images.githubusercontent.com/57285121/118275738-c636b180-b501-11eb-8569-6a5b79e86827.png">
-비밀번호를 설정하지 않으면 비밀번호 없이 로그인이 가능해짐   
-해당 경로에 키를 생성   
+<img width="707" alt="스크린샷 2021-05-14 오후 10 14 29" src="https://user-images.githubusercontent.com/57285121/118275738-c636b180-b501-11eb-8569-6a5b79e86827.png">   
 
-<img width="506" alt="스크린샷 2021-05-14 오후 10 17 35" src="https://user-images.githubusercontent.com/57285121/118276082-32191a00-b502-11eb-849e-d47ef6fec727.png">
+<img width="506" alt="스크린샷 2021-05-14 오후 10 17 35" src="https://user-images.githubusercontent.com/57285121/118276082-32191a00-b502-11eb-849e-d47ef6fec727.png">   
+
 id_rsa : 클라이언트의 Private Key / id_rsa.pub : 원격지의 Public Key   
-id_rsa와 id_rsa.pub을 비교하여 인증을 진행하는 방식   
 
+id_rsa와 id_rsa.pub을 비교하여 인증을 진행   
 
 클라이언트 측에서 scp명령어를 이용하여 원격지에 id_rsa.pub파일을 전송
 scp <전송할 파일의 경로> <전송받을 계정명>@<IP 주소>:<전송받을 경로>
@@ -89,5 +88,8 @@ cp 명령어를 이용해서 home 디렉토리의 id_rsa.pub을 .ssh디렉토리
 <img width="542" alt="스크린샷 2021-05-14 오후 11 36 27" src="https://user-images.githubusercontent.com/57285121/118286235-36970000-b50d-11eb-877f-38b08dcc02e8.png">   
 
 ssh <계정명>@<IP주소> 명령어를 통해 원격지에 접속   
-<img width="636" alt="스크린샷 2021-05-14 오후 11 37 47" src="https://user-images.githubusercontent.com/57285121/118286424-6514db00-b50d-11eb-8efc-6292322ecdd5.png">
+<img width="636" alt="스크린샷 2021-05-14 오후 11 37 47" src="https://user-images.githubusercontent.com/57285121/118286424-6514db00-b50d-11eb-8efc-6292322ecdd5.png">   
 비밀번호를 통한 로그인이 아닌 키 인증으로 로그인 성공
+
+## SSH Key 통합 관리
+* 원격지 서버의 .ssh 디렉토리에 config파일 추가
