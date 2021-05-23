@@ -1,9 +1,13 @@
 ARP
-=========================
+=================================
+# Summary
+- Last Updated : 21.05.23 Sun   
+- Updated by : 윤연선
+-----------------------------------
 
 # ARP(Address Resolution Protocol)
 * 해당 목적지의 IP주소를 MAC주소로 변환시켜주는 프로토콜
-* 3계층(Network)에서 사용되는 프로토콜
+* Layer 3 (Network Layer)에서 사용되는 프로토콜
 
 # 동작원리
 * 송신자는 목적지의 MAC주소를 알아내기 위해 ARP Request 패킷을 Broadcast로 전송(목적지의 MAC주소를 모르기 때문에) 

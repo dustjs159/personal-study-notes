@@ -1,19 +1,23 @@
-Mount in Linux
-=====================
+Mount
+====================================
+# Summary
+- Last Updated : 21.05.23 Sun   
+- Updated by : 윤연선
+-----------------------------------
 
-# Mount ?
+# Mount 
 * 윈도우와 다르게 리눅스에서는 HDD의 파티션, CD/DVD, USB 등을 사용하려면 지정한 디렉토리의 위치에 연결해야함
 * 물리적 장치를 특정 디렉토리에 연결시키는 과정
 * 마운트 전, 하드 디스크를 추가하고 파티션하는 과정과 파일시스템을 입혀주는 포맷 과정이 필요
 
-# 0. 디스크의 정보 확인
+## 0. 디스크의 정보 확인
 * df : 현재 디스크 여유 공간 확인 (disk free)  
 <img width="570" alt="스크린샷 2021-05-03 오후 12 13 20" src="https://user-images.githubusercontent.com/57285121/116838329-f54b4a00-ac08-11eb-94fb-7f928879773f.png">   
 
 > * -T : 파일 시스템 타입 출력   
 > * -h : 사람이 읽을 수 있는 단위의 용량으로 표시   
 
-# 1. 디스크 파티션 나누기
+## 1. 디스크 파티션 나누기
 * fdisk : 파티션 테이블을 관리하는 명령어    
 > * 리눅스의 디스크 파티션을 생성, 수정, 삭제할 수 있는 유틸리티.   
 > * fdisk -l : 디스크 파티션 리스트 출력   
@@ -37,7 +41,7 @@ Mount in Linux
 <img width="693" alt="스크린샷 2021-04-30 오후 10 26 51" src="https://user-images.githubusercontent.com/57285121/116866691-d23f8b00-ac46-11eb-9d12-7a17c906b1f1.png">   
 
 
-# 2. 포맷(파일 시스템 적용)
+## 2. 포맷(파일 시스템 적용)
 * mkfs : 디스크에 파일시스템을 입혀주는 포맷작업을 진행    
 > * mkfs.<파일시스템명> <파티션을 나눈 디스크이름> : 해당 디스크에 파일 시스템을 적용하는 포맷 작업 진행   
 <img width="690" alt="스크린샷 2021-04-30 오후 10 29 13" src="https://user-images.githubusercontent.com/57285121/116863950-0795aa00-ac42-11eb-851f-addd76681cef.png">   
@@ -45,7 +49,7 @@ Mount in Linux
 <img width="609" alt="스크린샷 2021-04-30 오후 10 30 20" src="https://user-images.githubusercontent.com/57285121/116866883-0adf6480-ac47-11eb-83fe-f3ea1d00a126.png">   
 
 
-# 3. 마운트
+## 3. 마운트
 * mount : 디스크를 디렉토리에 마운트함   
 > * mount <포맷완료된 디스크> <마운트할 디렉토리>   
 <img width="597" alt="스크린샷 2021-05-03 오후 7 45 20" src="https://user-images.githubusercontent.com/57285121/116867420-1aab7880-ac48-11eb-91f6-13c2dbb74b89.png">   
@@ -54,7 +58,7 @@ Mount in Linux
 > * umount <디스크>   
 <img width="553" alt="스크린샷 2021-05-03 오후 7 49 02" src="https://user-images.githubusercontent.com/57285121/116867763-9f969200-ac48-11eb-84f6-c04be69ae7e7.png">   
 
-# 4. 영구적인 마운트
+## 4. 영구적인 마운트
 * 시스템 재부팅 시에도 마운트 상태 유지
 * /etc/fstab파일 수정   
 > * <디스크이름> <마운트 디렉토리 위치> <파일시스템명> <마운트옵션> <Dump(백업)필드> <File Sequence Check Option>   
