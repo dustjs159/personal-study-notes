@@ -1,7 +1,7 @@
 방화벽
 ========================
-# Summary
-- Last Updated : 21.05.23 Sun   
+## Summary
+- Last Updated : 21.05.24 Mon   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -14,9 +14,10 @@
 # ACL(Access Control List)
 * 허가되지 않은 사용자들의 네트워크 트래픽을 차단하기 위해 참조하는 목록   
 * Standard ACL : 패킷(트래픽)의 Source IP 주소만을 확인 후 트래픽 차단 여부 결정
-* Extended ACL : L3 헤더의 Source IP 주소 뿐 아니라 Destination IP 주소, 프로토콜 정보, TTL 그리고 L4 헤더의 Source Port 번호와 Destination Port 번호 등의 정보까지도 확인하여 트래픽 차단 여부 결정   
-<img width="667" alt="스크린샷 2021-05-19 오후 11 44 21" src="https://user-images.githubusercontent.com/57285121/118833106-28c1f000-b8fc-11eb-8dff-ff45d3f9da96.png">   
-
+* Extended ACL : L3 헤더의 Source IP 주소 뿐 아니라 Destination IP 주소, 프로토콜 정보, TTL 그리고 L4 헤더의 Source Port 번호와 Destination Port 번호 등의 정보까지도 확인하여 트래픽 차단 여부 결정
+   
+<img width="667" alt="스크린샷 2021-05-19 오후 11 44 21" src="https://user-images.githubusercontent.com/57285121/118833106-28c1f000-b8fc-11eb-8dff-ff45d3f9da96.png">
+   
 # 방화벽 운영 정책
 * **Deny All 정책** : 모든 트래픽을 먼저 차단하고 허용해야 할 트래픽을 선별적으로 허용(외부 -> 내부)
 * **Permit All 정책** : 모든 트래픽을 허용하고 특정 트래픽만 선별적으로 차단(내부 -> 외부)
@@ -36,6 +37,17 @@
 * Outbound 규칙으로 지정한 조건에 맞는 트래픽은 방화벽을 정상적으로 통과하여 네트워크 트래픽(데이터)이 클라이언트에 도착   
 > * 기본설정 : 모든접속 허용   
 > * **Permit All 정책**
+
+# Untrusted Zone / Trusted Zone
+   
+<img width="799" alt="스크린샷 2021-05-25 오전 1 09 32" src="https://user-images.githubusercontent.com/57285121/119375530-df0b4800-bcf5-11eb-9d5f-4435e514e437.png">
+   
+<img width="532" alt="스크린샷 2021-05-25 오전 1 28 14" src="https://user-images.githubusercontent.com/57285121/119377785-7bcee500-bcf8-11eb-91ed-c1716ef9415d.png">
+   
+* Untrusted Zone : 신뢰할 수 없는 지역(외부 네트워크)
+* Trusted Zone : 신뢰할 수 있는 지역(내부 네트워크)
+* 기본적으로 트래픽은 Untrusted Zone에서 Trusted Zone으로의 접근이 모두 차단됨(Deny ALL)
+* 반대로 Trusted Zone에서 Untrusted Zone으로 나가는 것은 모두 허용됨(Permit ALL)
 
 # 방화벽 주요 기능
 * 접근 제어(Access Control)   
@@ -59,6 +71,39 @@
 * **네트워크의 트래픽 통과 및 데이터 접근을 제한함으로써 외부 침입으로부터 보호하고 정보 유출을 막는다(전반적으로 보안성이 가장 핵심)**
 
 # Stateless / Stateful
+* 일반적으로 방화벽은 Inbound의 패킷은 Deny All 정책, Outbound의 패킷은 Permit All 정책 적용
+
+## Stateless
+* ACL을 참조
+* ACL의 접근 규칙을 기반으로 패킷의 진입 허용 및 차단을 결정함
+* Inbound와 Outbound의 접근 규칙이 각각 설정해야 함
+* 상태를 저장하지 않고 한 번 방화벽을 통과한 Inbound 패킷은 나갈 때 Outbound의 접근 규칙을 적용받음
+* 상태를 저장하지 않아 한 번 방화벽을 통과한 Outbound 패킷은 다시 들어올 때 Inbound의 접근 규칙을 적용받음
+* 장점   
+> * 패킷의 정보를 일부분만 확인하기 때문에 걸리는 시간이 적음(속도가 빠름)   
+* 단점   
+> * 방화벽에 부하가 많이 걸리게 될 수 있음   
+> * 한번 들어왔던 패킷도 다시 패킷의 정보를 확인해야 함   
+
+## Stateful
+* 기존의 접근 규칙과 Stateful Flow Table을 참조
+* Inbound의 접근 규칙만 설정(별도의 Outbound 접근 규칙을 만들 필요가 없음)
+* 상태를 저장하여 한 번 방화벽을 통과한 Inbound 패킷은 나갈 때 Outbound의 접근 규칙 적용을 받지 않음
+* 상태를 저장하여 한 번 방화벽을 통과한 Outbound 패킷은 다시 들어올 때 Inbound의 접근 규칙 적용을 받지 않음
+* 장점   
+> * Stateful Flow Table을 확인하여 지속적으로 세션의 상태를 모니터링 가능(지속적인 세션 점검)   
+* 단점   
+> * 방화벽 재 가동시 Stateful Flow Table의 정보가 훼손될 수 있기 때문에 정상적인 패킷도 거부될 수 있음   
+
+## TCP에서 세션을 맺을 때 Stateful Flow Table
+   
+<img width="866" alt="스크린샷 2021-05-24 오후 11 28 12" src="https://user-images.githubusercontent.com/57285121/119362487-b714e800-bce7-11eb-809e-2dba7a3c9f6f.png">
+   
+* 3 way-handshake 과정(세션을 수립하는 과정)
+1. 방화벽이 Untrusted Zone의 TCP SYN 패킷을 받아 접근 규칙을 확인하여 Trusted Zone으로 전달을 하고 이 때 방화벽은 Stateful Flow Table을 생성
+2. Stateful Flow Table에 SYN의 정보(Source IP, Destination IP 등)를 기록
+3. Trusted Zone에서는 요청받은 SYN 패킷에 응답하기 위해 SYN + ACK를 방화벽으로 전송(응답)
+4. 방화벽은 Stateful Flow Table을 참조하여 처음 받았던 SYN에 응답하는 패킷임을 확인하고 Untrusted Zone에 전달
 
 # Bastion Host 
 
