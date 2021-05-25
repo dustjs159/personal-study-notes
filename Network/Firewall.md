@@ -1,7 +1,7 @@
 방화벽
 ========================
 ## Summary
-- Last Updated : 21.05.24 Mon   
+- Last Updated : 21.05.25 Tue   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -20,8 +20,10 @@
    
 # 방화벽 운영 정책
 * **Deny All 정책** : 모든 트래픽을 먼저 차단하고 허용해야 할 트래픽을 선별적으로 허용(외부 -> 내부)
-* **Permit All 정책** : 모든 트래픽을 허용하고 특정 트래픽만 선별적으로 차단(내부 -> 외부)
-  
+* **Permit All 정책(Allow)** : 모든 트래픽을 허용하고 특정 트래픽만 선별적으로 차단(내부 -> 외부)
+* Whitelist(Positive rule) : 허용할 트래픽을 정의. 정의되지 않은 트래픽은 다 차단(Allow)
+* Blacklist(Negative rule) : 허용하지 않을(차단) 트래픽을 정의. 정의되지 않은 트래픽은 다 허용(Deny)
+
 # Inbound / Outbound   
 
 |Inbound|Outbound|
@@ -105,8 +107,6 @@
 3. Trusted Zone에서는 요청받은 SYN 패킷에 응답하기 위해 SYN + ACK를 방화벽으로 전송(응답)
 4. 방화벽은 Stateful Flow Table을 참조하여 처음 받았던 SYN에 응답하는 패킷임을 확인하고 Untrusted Zone에 전달
 
-# Bastion Host 
-
 # 방화벽 종류
 ## Packet Filtering
 * **Stateless**
@@ -164,6 +164,56 @@
 > * 들어오고 나가는 패킷에 대해 일일이 접근 제어를 하지 않고 동적으로 패킷의 접근 제어가 가능함(Stateful Flow Table을 이용해서)   
 * 단점   
 > * 방화벽을 종료하고 재시작 할 경우 Stateful Flow Table의 정보가 손실될 수 있어서 정상적인 패킷도 거부가 발생할 수 있음   
+
+# WAF(Web Appliaction Firewall)
+* 웹 방화벽
+* 웹의 비정상 트래픽을 탐지하고 차단하기 위한 방화벽
+* 기존 방화벽은 TCP/IP 헤더를 기반으로 접근 규칙을 설정함(Stateless & Stateful)
+* WAF는 Application Payload(URI 등)까지 확인하여 접근 규칙 설정
+* 웹 서버쪽으로 전송되는 Inbound의 HTTP Request 패킷을 확인하여 악의적인 정보를 전송하지 못하게 함(비정상적인 접근을 제한)
+* 웹 서버에서 외부로 응답하는 Outbound의 HTTP Response 패킷을 확인하여 특정 정보의 유출을 막음
+
+## Whitelist 
+   
+<img width="507" alt="스크린샷 2021-05-25 오후 2 20 09" src="https://user-images.githubusercontent.com/57285121/119443286-51b30c80-bd64-11eb-9236-722cd3524ed3.png">
+   
+* Positive rule
+* Whitelist에 허용할 URI를 등록하여 등록되지 않은 URI를 요청할 시 요청 거부
+* 관리자가 직접 허용할 패턴에 대해 직접 지정(잘못된 입력값은 다 차단)
+
+## Blacklist
+   
+<img width="507" alt="스크린샷 2021-05-25 오후 2 20 38" src="https://user-images.githubusercontent.com/57285121/119443313-62638280-bd64-11eb-9a44-0e365d2f6e61.png">
+   
+* Negative rule
+* Blacklist에는 URI를 확인하여 외부로부터 악의적인 공격 패턴을 검출하고 차단
+* 특정 악성 바이러스코드 혹은 공격에 대해 차단 가능
+## 1세대 WAF
+   
+<img width="391" alt="스크린샷 2021-05-25 오후 1 42 47" src="https://user-images.githubusercontent.com/57285121/119440352-18c46900-bd5f-11eb-920c-a5fbd07f533e.png">
+   
+* Whitelist, Blacklist 병행
+* 자동으로 Blacklist 온라인 업데이트 진행
+* 관리자가 Whitelist 직접 생성 및 관리해야함(관리자의 부담 상승)
+* 공격 유형이 다양해짐에 따라 등록해야 할 항목들이 많아짐
+
+## 2세대 WAF
+   
+<img width="397" alt="스크린샷 2021-05-25 오후 1 44 12" src="https://user-images.githubusercontent.com/57285121/119440446-4c06f800-bd5f-11eb-89a0-1c0aefd087e6.png">
+   
+* 보호받아야 할 웹 애플리케이션을 일정 기간동안 모니터링하여 분석한 후 Whitelist를 자동으로 생성
+* 다양한 공격 유형을 파악하지 못할수도 있음(오탐 가능성)
+* Whitelist를 자동으로 생성하긴 하지만 잘못된 Whitelist가 생성될 수 있기 때문에 관리자의 검토 및 관리가 필요(여전히 관리자의 부담 존재)
+
+## 3세대 WAF
+   
+<img width="437" alt="스크린샷 2021-05-25 오후 1 57 19" src="https://user-images.githubusercontent.com/57285121/119441466-211da380-bd61-11eb-96ea-b0f104d5c869.png">
+   
+* 지능형 웹방화벽
+* 공격 유형별 Blacklist, Whitelist 생성을 위한 URI 등의 트래픽 분석 기법을 논리적으로 결합
+* 공격 패턴을 분석하여 침입을 인식하는 논리적인 패턴을 생성하여 외부 공격으로부터 보호
+* 최소한의 패턴 추가만으로 오탐을 최소화함
+* 관리자의 리스트 관리(검토) 부담이 줄어들고 공격 유형별 정책 관리에 집중이 가능
 
 # 방화벽 구조
 ## Screening Router   
