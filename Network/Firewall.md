@@ -122,9 +122,8 @@
 * **Proxy 방화벽**
 * Layer 7(Application)에서 동작
 * 지나가는 패킷의 TCP/IP 헤더 뿐만 아니라 패킷 속 실제 데이터도 확인하여 접근 제어
-* 클라이언트와 서버 사이에 서비스 별 **Proxy**가 포함된 **Bastion Host**를 두고, 각 서비스의 요청에 대해 ACL을 적용하고 그에 따라 트래픽 허용 및 차단
-* **Bastion Host** : 침입 차단 소프트웨어가 설치된 호스트
-* 외부 네트워크와 내부 네트워크는 반드시 Bastion Host(Proxy)를 통해서만 연결이 되어야 함   
+* 클라이언트와 서버 사이에 서비스 별 **Proxy**가 포함, 각 서비스의 요청에 대해 ACL을 적용하고 그에 따라 트래픽 허용 및 차단
+* 외부 네트워크와 내부 네트워크는 반드시 Proxy를 통해서만 연결이 되어야 함   
 * 외부 네트워크와 내부 네트워크가 직접적인 연결을 하지 않기 때문에 내부 네트워크의 정보를 숨길 수 있음
 * Proxy가 패킷의 데이터까지 확인 후 이상이 없다면 목적지에 전송   
 <img width="446" alt="스크린샷 2021-05-20 오전 2 03 22" src="https://user-images.githubusercontent.com/57285121/118854250-90ce0180-b90f-11eb-928f-d9cf906bb77c.png">   
@@ -228,11 +227,16 @@
 > * ACL의 항목이 많아질 수록 트래픽 과부하 가능성   
 > * 접속 실패에 대한 로그 지원X   
 
-## Single-Homed Gateway   
-<img width="507" alt="스크린샷 2021-05-20 오후 11 35 49" src="https://user-images.githubusercontent.com/57285121/118998089-1f03bf80-b9c4-11eb-92b9-516b393ccdf8.png">   
-
-* **Bastion Host**, **Proxy 방화벽**   
-* 단순히 패킷 필터링만 수행하는 Screening Router와는 다르게 기본적인 접근제어와 프록시 + 인증 + 로깅 등 기능을 수행
+## Bastion Host
+   
+<img width="574" alt="스크린샷 2021-05-25 오후 3 10 25" src="https://user-images.githubusercontent.com/57285121/119447790-5fb85b80-bd6b-11eb-87ce-8b86aedea3c6.png">
+   
+* 침입 차단 소프트웨어가 설치되어 Untrusted Zone과 Trusted Zone 사이에서 연결점 역할을 수행하는 호스트
+* Untrusted Zone에서 Trusted Zone에 접근하기 위해서는 반드시 Bastion Host를 거쳐야함
+* Bastion Host는 외부에 유출되어 있기 때문에 Bastion Host에는 중요한 정보(사용자 계정 정보 등)를 포함시키지 않음
+* Proxy Server의 역할 
+* SSH를 통해 사용자 인증
+* 로깅을 통해 모니터링
 * 장점   
 > * Screening Router보다 강력한 접근 제어   
 > * 로깅 기능 제공   
@@ -242,11 +246,11 @@
 ## Dual-Homed Gateway   
 <img width="501" alt="스크린샷 2021-05-21 오전 12 05 47" src="https://user-images.githubusercontent.com/57285121/119002975-4eb4c680-b9c8-11eb-97de-24c32cd20570.png">   
 
-* NIC가 두 개 이상 갖춰진 방화벽
+* NIC가 두 개 이상 갖춰진 Bastion Host
 * 하나는 내부 네트워크, 하나는 외부 인터넷으로 연결(물리적 구분)
 * 라우팅 기능이 없기 때문에 내부 네트워크와 외부 인터넷의 직접적인 통신이 불가
 * 장점   
-> * 네트워크가 물리적으로 구분되어 있기 때문에 Single-Home Gateway보다 트래픽 관리가 효율적   
+> * 네트워크가 물리적으로 구분되어 있기 때문에 Bastion Host보다 트래픽 관리가 효율적   
 * 단점   
 > * Bastion Host에 대한 로그인 정보 유출 시 네트워크 보호가 불가능   
 
