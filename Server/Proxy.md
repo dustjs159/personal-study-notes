@@ -1,18 +1,22 @@
 Proxy
-==================================
+=================================
+## Summary
+- Last Updated : 21.05.25 Tue   
+- Updated by : 윤연선
+-----------------------------------
 
 # Proxy Server
-
 * 클라이언트와 서버 사이에서 요청과 응답을 전달해 주는 서버
 * PC와 외부 인터넷 사이의 징검다리 역할을 함
 * 캐시를 통해 자원들을 저장할 수 있음
 * Proxy Server를 거치는 요청 및 응답을 확인할 수 있음(Filter) : 보안성 향상, 로그 확인 가능
 * Proxy Server로 넘어온 데이터를 조작할 수 있음(Trancode) : 데이터 압축, 언어 변환
-* 클라이언트의 요청에 있어서 불필요한 부분은 걸러내고 서버에게 전송   
-<img width="532" alt="스크린샷 2021-05-17 오후 11 21 09" src="https://user-images.githubusercontent.com/57285121/118504544-91776400-b766-11eb-9dc8-ddb6188ba7aa.png">   
-
+* 클라이언트의 요청에 있어서 불필요한 부분은 걸러내고 서버에게 전송
+   
+<img width="532" alt="스크린샷 2021-05-17 오후 11 21 09" src="https://user-images.githubusercontent.com/57285121/118504544-91776400-b766-11eb-9dc8-ddb6188ba7aa.png">
+   
 # Forward Proxy
-
+   
 ![forwardproxy](https://user-images.githubusercontent.com/57285121/115058597-6bb92e00-9f20-11eb-8b1d-5b3916c1e62a.PNG)   
    
 * 클라이언트와 가까운 곳에 위치한 Proxy Server   
@@ -29,7 +33,7 @@ Proxy
 
 
 # Reverse Proxy
-
+   
 ![reverseproxy](https://user-images.githubusercontent.com/57285121/115059042-f39f3800-9f20-11eb-9875-9c932a90843c.PNG)   
    
 * 서버와 가까운 곳에 위치한 Proxy Server

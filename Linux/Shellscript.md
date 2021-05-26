@@ -1,7 +1,7 @@
 Shell Script
 ====================================
 ## Summary
-- Last Updated : 21.05.23 Sun   
+- Last Updated : 21.05.26 Wed   
 - Updated by : 윤연선
 -----------------------------------
 
