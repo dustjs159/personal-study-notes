@@ -1,14 +1,32 @@
 CentOS
 ====================================
 ## Summary
-- Last Updated : 21.05.24 Mon   
+- Last Updated : 21.05.27 Thr    
 - Updated by : 윤연선
 -----------------------------------
 
 # CentOS ?
 
 # CentOS 6 Vs CentOS 7
-## Systemed
+## service & systemctl
+   
+|기능|CentOS 6|CentOS 7|
+|------|---|---|
+|서비스 상태|service 서비스명 status|systemctl status 서비스명|
+|서비스 시작|service 서비스명 start|systemctl start 서비스명|
+|서비스 정지|service 서비스명 stop|systemctl stop 서비스명|
+|서비스 재시작|service 서비스명 restart|systemctl restart 서비스명|
+|서비스 리로드|service 서비스명 reload|systemctl reload 서비스명|
+   
+## chkconfig & systemctl
+   
+|기능|CentOS 6|CentOS 7|
+|------|---|---|
+|자동시작 확인|chkconfig 서비스명|systemctl is-enabled 서비스명|
+|자동시작 설정|chkconfig 서비스명 on|systemctl enable 서비스명|
+|자동시작 해제|chkconfig 서비스명 off|systemctl disable 서비스명|
+
+
 * 부팅되는 과정에서 시스템을 초기화하고 기타 서비스들을 위한 환경을 만들고 시작시켜주는 일을 하는 초기화 프로세스가 필요함
 * CentOS 6은 Sys V라고 해서 init프로세스가 이것을 담당(커널이 메모리에 올라가면 가장 먼저 init프로세스를 실행)
 * CentOS 7은 Sys V의 init프로세스를 버리고 systemd로 대체. 
