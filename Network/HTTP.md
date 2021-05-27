@@ -1,7 +1,7 @@
 HTTP & HTTPS
 ========================
 ## Summary
-- Last Updated : 21.05.25 Tue   
+- Last Updated : 21.05.28 Fri   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -15,6 +15,8 @@ HTTP & HTTPS
    
 ![http](https://user-images.githubusercontent.com/57285121/116813732-3b17fc00-ab90-11eb-9229-15149a7d1e61.png)   
    
+* Connection less : 연결을 매번 끊고 새로 생성
+
 ## HTTP 통신 과정
 1. 클라이언트가 웹 브라우저에 방문하고자 하는 사이트의 URL 주소 입력
 2. DNS 서버에서 클라이언트가 입력한 URL 주소에 대한 웹 서버의 IP 주소를 반환
