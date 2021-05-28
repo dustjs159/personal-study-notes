@@ -56,14 +56,14 @@ Shell Script
 
 ## Shell Script 문법 : 제어문(if & case)
 * if ~ else
-   
-``` if [ 조건 ]
+```
+    if [ 조건 ]
     then
 	True 일 때 실행
     else
 	False일 때 실행
-    fi```
-   
+    fi
+```
 * 조건문에 들어가는 비교 연산자 
    
 |비교 연산자|설명|
