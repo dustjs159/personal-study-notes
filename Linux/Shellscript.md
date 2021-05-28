@@ -57,12 +57,12 @@ Shell Script
 ## Shell Script 문법 : 제어문(if & case)
 * if ~ else
 ```
-    if [ 조건 ]
-    then
-	True 일 때 실행
-    else
-	False일 때 실행
-    fi
+	if [ 조건 ]
+	then
+		True 일 때 실행
+	else
+		False일 때 실행
+	fi
 ```
 * 조건문에 들어가는 비교 연산자 
    
@@ -78,6 +78,40 @@ Shell Script
 |수식1 -le 수식2|수식 1이 작거나 같으면 True ( '<=' )| 
 |!수식|수식의 NOT ( '!' )|
    
+* 파일에 관련된 조건
+   
+|파일 조건|설명|
+|------|---|
+|-d 파일이름|파일이 디렉토리면 True|
+|-e 파일이름|파일이 존재하면 True|
+|-r 파일이름|파일이 읽기 가능이면 True|
+|-w 파일이름|파일이 쓰기 가능이면 True|
+|-x 파일이름|파일이 실행 가능이면 True|
+   
+* case ~ esac
+```
+	case $변수 in
+		경우)
+		명령;;
+	exac
+```
+   
 ## Shell Script 문법 : 반복문(for & while)
+* for ~ in
+```
+	for 변수 in 값1, 값2, 값3 ...
+	do
+		반복할 명령
+	done
+```
 
+
+* while
+```
+	while [ 조건 ]
+	do
+		계속 반복할 명령
+	done
+		반복이 끝난 후 명령
+```
 
