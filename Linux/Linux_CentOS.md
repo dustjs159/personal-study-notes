@@ -9,6 +9,8 @@ CentOS
 
 # CentOS 6 Vs CentOS 7
 ## service & systemctl
+* CentOS 6이전 : /etc/rc.d/init.d디렉토리에 서비스 관리 스크립트가 존재하고, 스크립트를 통해 서비스 관리
+* CentOS 7 : 스크립트들이 서비스 유닛으로 변경. /etc/systemd에서 서비스 관리
    
 |기능|CentOS 6|CentOS 7|
 |------|---|---|
@@ -18,6 +20,7 @@ CentOS
 |서비스 재시작|service 서비스명 restart|systemctl restart 서비스명|
 |서비스 리로드|service 서비스명 reload|systemctl reload 서비스명|
    
+
 ## chkconfig & systemctl
    
 |기능|CentOS 6|CentOS 7|
@@ -32,19 +35,13 @@ CentOS
 * CentOS 7은 Sys V의 init프로세스를 버리고 systemd로 대체. 
 * init은 부팅시 순차적 처리 / systemd은 부팅시 병렬 처리 (부팅속도 향상)
 
-## Teaming
-* 2개 이상의 물리적인 네트워크 포트를 하나로 묶어서 가상의 인터페이스를 생성
-* 대역폭 향상 + 이중화를 통한 HA 보장
-
-## Docker
-* 컨테이너 기반 오픈소스 가상화 플랫폼
-* 다양한 프로그램, 실행환경을 컨테이너로 추상화
-
 ## xfs 파일시스템 지원
 * 기존 ext4 보다 최대 볼륨 크기가 커지고 처리 가능한 단일 파일의 크기가 증가한 파일 시스템 xfs 지원
 
 
 # CentOS 7 vs CentOS 8
+
+## iptables / nftables
 
 
 

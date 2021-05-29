@@ -17,28 +17,14 @@ WAS
 # WAS 종류
 
 ## Apache Tomcat
-* Apache HTTP Server(웹 서버)와 Tomcat을 연동
-* JAVA 언어로 개발할 수 있는 WAS
-* Servlet/JSP Container : Servlet, JSP를 이용하여 동적인 데이터들을 처리하여 정적인 페이지로 생성해주는 소프트웨어 모듈
-* Servlet   
-> * JAVA를 사용하여 웹을 만드는 기술
-   
-<img width="773" alt="스크린샷 2021-05-28 오전 3 40 47" src="https://user-images.githubusercontent.com/57285121/119879735-7f67a380-bf66-11eb-8b8d-4606d6b052eb.png">
-   
-1. 클라이언트의 요청을 웹 서버가 받아서 웹 컨테이너에게 전달
-2. 컨테이너가 스레드를 생성하고 요청 및 응답 객채(HttpServletRequest, HttpServletReques)를 생성하여 스레드에게 전달
-3. 스레드, 요청 및 응답 객체 생성 후 클라이언트의 요청에 맞는 Servlet을 호출
-4. 호출된 Servlet의 요청을 담당하는 스레드가 doGet(), doPost()호출
-5. 호출된 doPost(), doGet() 메소드는 생성된 동적 컨텐츠를 Response 객체에 실어 컨테이너에 전달
-6. 컨테이너는 Response객체를 HttpResponse형태로 전환하여 웹서버에 전달 하고 스레드 종료 + 요청 및 응답 객체 삭제
-
+* Apache(웹 서버)와 Tomcat(WAS)을 연동
+* Tomcat에는 Apache의 모든 기능이 포함되어 있지만 분리하여 구성하는 이유는 Apache가 정적 컨텐츠의 처리를, Tomcat이 동적 컨텐츠의 처리를 맡아 서버의 과부하를 방지(정적 컨텐츠도 처리가 가능하긴 함)
+* Servlet(JAVA 웹 애플리케이션 구성 요소)을 사용하여 동적인 처리를 담당
 * 장점   
+> * 정적 컨텐츠와 동적 컨텐츠의 처리를 각각 따로 맡아서 서버의 부하를 줄일 수 있음   
 > * 무료   
 * 단점   
-> * 
-
-## JEUS
-
-## Websphere
+> * 운영에 있어서 많은 지식이 필요함   
+> * 정적 데이터를 처리할 시에는 비효율적   
 
 
