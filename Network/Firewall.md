@@ -21,8 +21,8 @@
 # 방화벽 운영 정책
 * **Deny All 정책** : 모든 트래픽을 먼저 차단하고 허용해야 할 트래픽을 선별적으로 허용(외부 -> 내부)
 * **Permit All 정책(Allow)** : 모든 트래픽을 허용하고 특정 트래픽만 선별적으로 차단(내부 -> 외부)
-* Whitelist(Positive rule) : 허용할 트래픽을 정의. 정의되지 않은 트래픽은 다 차단(Allow)
-* Blacklist(Negative rule) : 허용하지 않을(차단) 트래픽을 정의. 정의되지 않은 트래픽은 다 허용(Deny)
+* Whitelist(Positive rule) : 모든 트래픽을 허용. 위험한 트래픽은 다 차단
+* Blacklist(Negative rule) : 모든 트래픽을 차단. 안전한 트래픽만 허용
 
 # Inbound / Outbound   
 

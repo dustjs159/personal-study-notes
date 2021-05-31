@@ -1,19 +1,59 @@
 Shell Script
 ====================================
 ## Summary
-- Last Updated : 21.05.28 Fri   
+- Last Updated : 21.05.31 Mon   
 - Updated by : 윤연선
 -----------------------------------
 
 # Shell
+   
+<img width="592" alt="스크린샷 2021-05-31 오전 1 34 34" src="https://user-images.githubusercontent.com/57285121/120112343-5c303480-c1b0-11eb-8d31-edf15a9edc12.png">
+   
 * 명령어 해석기
-* 사용자가 입력한 명령어를 해석하여 커널로 전달
+* 커널과 사용자 사이에서 사용자가 입력한 명령어를 해석하여 커널로 전달
 * 커널의 처리 결과를 사용자에게 전달
+* 주요 기능 및 역할   
+> * 대화식 사용 : 사용자의 요청을 즉각 처리 및 결과를 출력하는 대화형 구조   
+> * 프로그래밍 가능 : 복잡한 작업을 수행할 수 있도록 일련의 명령어들을 묶어서 사용 가능(Script)   
+* /etc/shells 파일에 현재 사용할 수 있는 shell들의 경로가 설정되어 있음
+   
+<img width="414" alt="스크린샷 2021-05-31 오전 1 37 43" src="https://user-images.githubusercontent.com/57285121/120112441-cd6fe780-c1b0-11eb-89b0-cc6f48ca5d84.png">
+   
+## Shell의 종류
+* sh(bourne shell)   
+> * 유닉스의 가장 기본적인 shell   
+> * 프로그래밍 언어를 사용하여 shell script구성 가능   
+
+* bash(bourne again shell)   
+> * **리눅스 표준 shell**   
+> * sh 기반으로 만들어짐(sh와 호환됨)   
+> * Alias(명령어 단축), History, 자동완성 등의 기능을 제공   
+
+* csh(C shell)   
+> * C언어 구문과 유사한 문법의 shell   
+
+* ksh(korn shell)   
+> * sh 기반으로 C shell을 추가하여 만든 shell
+
+* zsh(z shell)   
+> * sh 기반으로 만들어짐   
+> * 실행 중인 shell끼리 명령어의 history 공유 가능   
+> * 다양한 테마 지원   
+
+* dash   
+> * Ubuntu의 기본 shell   
+> * Ubuntu에서는 가볍다는 장점때문에 일부 기능(history, 로그인 등)을 제외하고 기본 shell로 전환   
+
+* tcsh(tc shell)   
+> * csh 기반   
+> * tcsh 스크립트 안에 함수를 정의할 수 없음   
 
 ## Shell 환경 변수
 * 프로그램을 간편하게 실행시키기 위한 변수를 설정
-* Shell에서 환경 변수 출력 명령어 : ```echo $환경변수이름```
-* 환경 변수 값 변경 : ```export 환경변수=값```
+* Shell에서 환경 변수 출력 명령어 : ```echo $환경변수```
+* 전역 환경 변수 값 등록 : ```export 환경변수=값```
+* 환경 변수 값 삭제 : ```unset 환경변수```
+* 기존 설정된 환경 변수 목록 출력 : ```printenv```
 * 주요 환경 변수
    
 |환경변수|설명|
@@ -38,7 +78,7 @@ Shell Script
 
 ## Shell Script 작성과 실행
 * 스크립트 파일의 확장자는 .sh
-* 스크립트 파일의 첫 줄은 ```#!사용할 shell디렉토리```
+* 스크립트 파일의 첫 줄에는 스크립트를 실행할 shell을 지정하는 선언문을 작성 :  ```#!사용할 shell디렉토리```
 * 스크립트 파일의 실행은 ```sh 실행파일```
    
 <img width="616" alt="스크린샷 2021-05-27 오후 11 00 34" src="https://user-images.githubusercontent.com/57285121/119839725-597ad880-bf3f-11eb-83c3-d0d8329de4a1.png">
