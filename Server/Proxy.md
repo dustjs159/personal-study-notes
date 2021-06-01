@@ -1,7 +1,7 @@
 Proxy
 =================================
 ## Summary
-- Last Updated : 21.05.25 Tue   
+- Last Updated : 21.06.02 Wed   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -16,8 +16,8 @@ Proxy
 <img width="532" alt="스크린샷 2021-05-17 오후 11 21 09" src="https://user-images.githubusercontent.com/57285121/118504544-91776400-b766-11eb-9dc8-ddb6188ba7aa.png">
    
 # Forward Proxy
-   
-![forwardproxy](https://user-images.githubusercontent.com/57285121/115058597-6bb92e00-9f20-11eb-8b1d-5b3916c1e62a.PNG)   
+  
+<img width="582" alt="스크린샷 2021-06-02 오전 2 57 25" src="https://user-images.githubusercontent.com/57285121/120369470-45274900-c34e-11eb-8e8e-b838bed89467.png"> 
    
 * 클라이언트와 가까운 곳에 위치한 Proxy Server   
 * 클라이언트가 웹 사이트에 연결하려고 요청을 보내면 서버에 직접 요청을 전송하는 것이 아니라 Forward Proxy가 요청을 받아서 웹 사이트에 연결 후 결과를 클라이언트에게 전달
@@ -34,7 +34,7 @@ Proxy
 
 # Reverse Proxy
    
-![reverseproxy](https://user-images.githubusercontent.com/57285121/115059042-f39f3800-9f20-11eb-9875-9c932a90843c.PNG)   
+<img width="604" alt="스크린샷 2021-06-02 오전 2 57 56" src="https://user-images.githubusercontent.com/57285121/120369525-5708ec00-c34e-11eb-929f-73fd9a7e0001.png">
    
 * 서버와 가까운 곳에 위치한 Proxy Server
 * 클라이언트가 웹 사이트에 리소스를 요청하면 Reverse Proxy는 요청을 받아서 내부 서버에서 리소스를 받은 후에 클라이언트에게 리소스 전달
