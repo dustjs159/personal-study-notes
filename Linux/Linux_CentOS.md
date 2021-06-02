@@ -1,7 +1,7 @@
 CentOS
 ====================================
 ## Summary
-- Last Updated : 21.05.27 Thr    
+- Last Updated : 21.06.02 Wed    
 - Updated by : 윤연선
 -----------------------------------
 
