@@ -107,8 +107,4 @@ Linux Network Command
 > * TIME : 구동 시간   
 > * CMD : 명령어   
 
-# route
-* 라우팅 테이블을 편집, 출력
-* 라우팅 테이블에 게이트웨이 추가 : 
-
 
