@@ -1,7 +1,7 @@
 CentOS
 ====================================
 ## Summary
-- Last Updated : 21.06.02 Wed    
+- Last Updated : 21.06.03 Thu    
 - Updated by : 윤연선
 -----------------------------------
 
@@ -9,8 +9,11 @@ CentOS
 
 # CentOS 6 Vs CentOS 7
 ## service & systemctl
-* CentOS 6이전 : /etc/rc.d/init.d디렉토리에 서비스 관리 스크립트가 존재하고, 스크립트를 통해 서비스 관리
+* CentOS 6이전 : /etc/rc.d/init.d 디렉토리에 서비스 관리 스크립트가 존재하고, 스크립트를 통해 서비스 관리
 * CentOS 7 : 스크립트들이 서비스 유닛으로 변경. /etc/systemd에서 서비스 관리
+* CentOS 7 이후 OS 들의 /etc/rc.d/init.d/README 파일을 확인
+   
+<img width="735" alt="스크린샷 2021-06-04 오전 12 22 55" src="https://user-images.githubusercontent.com/57285121/120670146-1bdff780-c4cb-11eb-9957-104e612fc0ee.png">
    
 |기능|CentOS 6|CentOS 7|
 |------|---|---|
@@ -20,7 +23,6 @@ CentOS
 |서비스 재시작|service 서비스명 restart|systemctl restart 서비스명|
 |서비스 리로드|service 서비스명 reload|systemctl reload 서비스명|
    
-
 ## chkconfig & systemctl
    
 |기능|CentOS 6|CentOS 7|
@@ -28,22 +30,27 @@ CentOS
 |자동시작 확인|chkconfig 서비스명|systemctl is-enabled 서비스명|
 |자동시작 설정|chkconfig 서비스명 on|systemctl enable 서비스명|
 |자동시작 해제|chkconfig 서비스명 off|systemctl disable 서비스명|
-
-
-* 부팅되는 과정에서 시스템을 초기화하고 기타 서비스들을 위한 환경을 만들고 시작시켜주는 일을 하는 초기화 프로세스가 필요함
-* CentOS 6은 Sys V라고 해서 init프로세스가 이것을 담당(커널이 메모리에 올라가면 가장 먼저 init프로세스를 실행)
-* CentOS 7은 Sys V의 init프로세스를 버리고 systemd로 대체. 
+   
+* service + chkconfig 명령어의 기능을 모두 포함하는 systemctl 명령어를 사용
 * init은 부팅시 순차적 처리 / systemd은 부팅시 병렬 처리 (부팅속도 향상)
 
 ## xfs 파일시스템 지원
 * 기존 ext4 보다 최대 볼륨 크기가 커지고 처리 가능한 단일 파일의 크기가 증가한 파일 시스템 xfs 지원
 
-
 # CentOS 7 vs CentOS 8
 
+## dnf
+* CentOS 8부터 기본적으로 설치 됨(/etc/dnf)
+* 기존의 YUM보다 성능이 향상되어 YUM을 대체하게 됨 
+
 ## iptables / nftables
+* iptables : 리눅스 환경에서 패킷을 제어하여 방화벽에대한 설정을 하는 도구(/etc/sysconfig)
+* CentOS 8부터 nftables가 설치됨(/etc/nftables.conf)
 
-
-
-
+## ntp / chrony
+* CentOS 8부터 ntpd 지원이 종료되고 네트워크 시간 동기화 관련하여 chronyd가 사용됨(CentOS 7에서는 선택적으로 사용 가능)
+* NTP는 /etc/npt에, chrony는 /etc/sysconfig에 위치
+* NTP(network time protocol) : 네트워크 상 호스트들의 시간을 동기화 하는 프로토콜
+* chronyd는 네트워크 혼잡시에도 성능이 상대적으로 우수
+* ntp보다 효율적인 메모리 사용
 

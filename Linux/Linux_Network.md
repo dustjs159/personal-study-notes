@@ -1,13 +1,14 @@
 Linux Network Command
 ====================================
 ## Summary
-- Last Updated : 21.06.02 Wed   
+- Last Updated : 21.06.03 Thu   
 - Updated by : 윤연선
 -----------------------------------
 
 # netstat
 * network statistics   
 * 네트워크 접속, 라우팅 테이블, 네트워크 인터페이스의 통계 정보를 보여주는 도구
+* 자주 쓰이는 옵션 : ```netstat -nlpt``` (연결 대기중인 tcp 프로토콜을 사용하는 프로그램 이름 목록)
    
 <img width="885" alt="스크린샷 2021-06-03 오전 2 52 14" src="https://user-images.githubusercontent.com/57285121/120528705-b6323380-c416-11eb-9f94-c40581c1ae6d.png">
    
@@ -30,7 +31,6 @@ Linux Network Command
 > * SYN_SENT : 클라이언트가 서버에 연결 요청을 한 상태   
 > * SYN_RECEIVED : 클라이언트에게 응답을 전달(SYN+ACK)했지만 클라이언트의 응답(ACK)이 오지 않은 상태   
 > * CLOSED : 연결 종료   
-* 자주 쓰이는 옵션 : ```netstat -nlpt``` (연결 대기중인 tcp 프로토콜을 사용하는 프로그램 이름 목록)
 
 # ifconfig
 * inteface configuration
@@ -68,12 +68,47 @@ Linux Network Command
 
 # top
 * 실시간 CPU 점유율 확인
+   
+<img width="972" alt="스크린샷 2021-06-03 오후 12 59 19" src="https://user-images.githubusercontent.com/57285121/120584843-a85acd80-c46b-11eb-9cf0-ed1f47c0265a.png">
+   
+* 구성(CPU & 메모리)   
+> * top : 서버 시간, 접속자 수, 부하율(load average)   
+> * Tasks : 가동중인 프로세스, 대기중인 프로세스   
+> * %Cpu(s) : 사용자(us) / 시스템(sy) 레벨 사용 CPU 비중, 유휴 상태(id)의 CPU 비중   
+> * Mem : 전체 메모리(total), 남아있는 여유메모리(free), 사용중인 메모리(used)   
+> * Swap : 전체 스왑 메모리(total), 남아있는 여유 스왑 메모리(free), 사용중인 스왑 메모리(used)   
+* 구성(프로세스 상태)   
+> * PID : 프로세스 ID   
+> * USER : 프로세스를 실행시킨 사용자 ID   
+> * PRI : 프로세스 우선 순위(낮을 수록 높음)   
+> * NI : nice value.(마이너스를 가질수록 우선순위가 높음)   
+> * VIRT : 가상 메모리 사용량(Swap+RES)   
+> * RES : 현재 페이지가 상주하고 있는 크기(Resident Size)   
+> * SHR : 프로세스에 의해 사용된 메모리를 나눈 메모리의 총합   
+> * S(Sleeping), R(Running)   
+> * %CPU, %MEM : 프로세스가 사용하는 CPU사용률, 메모리 사용률   
 
 # ps
 * Process Status
 * 실행중인 프로세스의 목록 확인
+   
+<img width="838" alt="스크린샷 2021-06-03 오후 6 28 29" src="https://user-images.githubusercontent.com/57285121/120622130-811af500-c499-11eb-91b2-8cbe0ef58a10.png">
+   
+* 옵션   
+> * -e : 실행중인 모든 프로세스 출력   
+> * -f : 프로세스에 대한 자세한(full) 정보 출력   
+* 구성   
+> * UID : 실행 유저   
+> * PID : 프로세스 ID   
+> * PPID : 부모 프로세스 ID   
+> * C : CPU 사용량   
+> * STIME : 시작 시간   
+> * TTY : 프로세스 제어 위치(호스트 : tty/n, 원격 : pts/n)   
+> * TIME : 구동 시간   
+> * CMD : 명령어   
 
 # route
-* 라우팅 테이블 추가 / 제거
+* 라우팅 테이블을 편집, 출력
+* 라우팅 테이블에 게이트웨이 추가 : 
 
 
