@@ -1,3 +1,10 @@
+Git
+====================================
+## Summary
+- Last Updated : 21.06.09 Wed   
+- Updated by : 윤연선
+-----------------------------------
+
 # Git
 * 리누스 토르발즈가 개발한 소프트웨어 버전 관리 도구
 * 분산 저장소 방식 : 하나의 원격 저장소와 분산된 개발자의 로컬 저장소에 같이 저장되어 관리하는 방식
@@ -23,15 +30,15 @@
 
 * Staging Area : commit을 수행할 파일들이 올라가는 영역   
    
-> 작업 내역을 바로 commit을 하지 않고, Staging Area를 경유하는 이유는 작업 내용을 한번 더 확인하여 선별적으로 Local Repository에 반영하기 위함   
-> Staging Area를 사용하게 되면 그렇지 않을 때보다 시간이 더 소요되지만 보다 더 안정된 버전관리 작업이 가능   
+> * 작업 내역을 바로 commit을 하지 않고, Staging Area를 경유하는 이유는 작업 내용을 한번 더 확인하여 선별적으로 Local Repository에 반영하기 위함   
+> * Staging Area를 사용하게 되면 그렇지 않을 때보다 시간이 더 소요되지만 보다 더 안정된 버전관리 작업이 가능   
 
 * Local Repository : git 프로젝트의 다양한 메타데이터와 데이터 정보가 들어있는 디렉토리   
     
-> git이 작업중인 파일에 대한 버전을 관리하기 위해서는 작업하고 있는 Working Directory를 git이 알아야 함   
+> * git이 작업중인 파일에 대한 버전을 관리하기 위해서는 작업하고 있는 Working Directory를 git이 알아야 함   
    
-> Working Directory에 ```git init``` 이라는 명령어를 입력하면 해당 Working Directory는 git repository가 되고, 이 git repository를 Local Repository라고 함      
-> Local Repository 안의 .git폴더가 해당 디렉토리 안에서 일어나는 일들(변경, 수정사항 등)은 git이 실시간으로 알게 됨   
+> * Working Directory에 ```git init``` 이라는 명령어를 입력하면 해당 Working Directory는 git repository가 되고, 이 git repository를 Local Repository라고 함      
+> * Local Repository 안의 .git폴더가 해당 디렉토리 안에서 일어나는 일들(변경, 수정사항 등)은 git이 실시간으로 알게 됨   
    
 * Remote Repository : 원격지의 저장소
 
@@ -49,7 +56,7 @@
 # push
 * github에 업로드(Local Repository의 변경 사항을 Remote Repository에 반영)
 * github에 업로드를 하게되면 다른사람과 공유할 수도 있고, 내 컴퓨터의 데이터가 날아가도 안전하게 다시 복구할 수 있음
-* ```git push <remote repository name> <branch name>```
+* ```git push <remote repository name alias> <branch name>```
 
 # init
 * 해당 디렉토리를 git 디렉토리(Local Repository)로 만들어줌(깃 저장소 초기화)
@@ -58,7 +65,7 @@
 
 # remote
 * Local Repository와 Remote Repository를 연결하거나 현재 연결되어있는 정보를 확인할 수 있음
-* 연결 :  ```git remote add <remote repository name> <remote repository address>```
+* 연결 :  ```git remote add <remote repository name alias> <remote repository address>```
 * 연결정보 확인 : ```git remote -v```
 
 # clone
@@ -92,12 +99,12 @@
 * Remote Repository의 최신 버전을 받아올 때 사용
 * 병합은 진행하지 않고 저장소의 파일을 받아오기만 함
 * 파일을 다운로드만 하고 병합을 하지 않기 때문에 병합 전, Local Repository와 Remote Repository의 차이점을 비교해 볼 수 있다.
-* ```git fetch <remote repository name> <branch name>```
+* ```git fetch <remote repository name alias> <branch name>```
 
 # pull 
 * Remote Repository의 최신 버전을 받아올 때  사용
 * 병합도 추가적으로 같이 진행(다운로드 + 병합)
-* ```git pull <remote repository name> <branch name>```
+* ```git pull <remote repository name alias> <branch name>```
 
 # fork
 * 타인의 github의 저장소에서 내가 어떤 부분을 수정하거나 추가 기능을 넣고 싶을 때 해당 저장소를 내 github저장소에 그대로 가져옴
