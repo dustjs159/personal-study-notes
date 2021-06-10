@@ -169,6 +169,9 @@ Git
 1. Github -> Settings -> Account security
 
 2. Two-factor authentication 의 Enable two-factor authentication 클릭   
+   
+<img width="759" alt="스크린샷 2021-06-11 오전 3 11 00" src="https://user-images.githubusercontent.com/57285121/121579118-5f57da00-ca66-11eb-913e-b28755026c6b.png">
+   
 > * 이 때 생성되는 복구 코드는 따로 보관해 두도록 한다   
 
 3. 모바일에 `Google Authenticator`어플 다운 후 QR코드 확인
