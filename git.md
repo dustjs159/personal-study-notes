@@ -42,84 +42,80 @@ Git
    
 * Remote Repository : 원격지의 저장소
 
-# add
+# Git 주요 용어 
+## add
 * Staging Area에 올리기
 * commit을 하기 전에 저장하고자 하는 파일들을 묶는 작업(= Stage에 파일을 올리는 작업) 
 * ```git add <file name>```
 
-# commit
+## commit
 * 게임의 세이브에 해당하는 작업을 git에서는 commit이라고 한다(언제든지 commit한 시점으로 돌아갈 수 있다)   
 * commit을 할 때 저장하고자 하는 파일들을 묶어서 커밋을 수행
 * commit을 하면 변경사항들이 git 디렉토리에 영구적인 스냅샷으로 저장
 * ```git commit -m <commit message>```
 
-# push
+## push
 * github에 업로드(Local Repository의 변경 사항을 Remote Repository에 반영)
 * github에 업로드를 하게되면 다른사람과 공유할 수도 있고, 내 컴퓨터의 데이터가 날아가도 안전하게 다시 복구할 수 있음
-* ```git push <remote repository name alias> <branch name>```
+* ```git push <remote repo alias> <branch name>```
 
-# init
+## init
 * 해당 디렉토리를 git 디렉토리(Local Repository)로 만들어줌(깃 저장소 초기화)
 * master branch를 자동으로 만들어 줌
 * ```git init```
 
-# remote
+## remote
 * Local Repository와 Remote Repository를 연결하거나 현재 연결되어있는 정보를 확인할 수 있음
-* 연결 :  ```git remote add <remote repository name alias> <remote repository address>```
+* 연결 :  ```git remote add <remote repo alias> <remote repo URL>```
 * 연결정보 확인 : ```git remote -v```
 
-# clone
+## clone
 * Remote Repository의 파일들을 받아옴
 * 자동으로 Remote Repository와 연결(git remote)
 * 자동으로 Local Repository 초기화(git init)
-* ```git clone <remote repository address>```
+* ```git clone <remote repo URL>```
 
-# branch
+## branch
 * commit을 가리키고있는 일종의 포인터.
 * 프로젝트의 master branch에서 다른이름으로 따와서 작업을 마친 후 master branch에 다시 merge함
 * ```git init```을 통해 master branch가 자동으로 만들어짐
 * HEAD : 현재 작업중인 branch를 가리킴
 * ```git branch <branch name>```
 
-# checkout
+## checkout
 * 지정한 branch로 이동
 * HEAD를 지정한 branch로 이동
 * ```git checkout <branch name>```
 
-# status
+## status
 * git repository의 상태를 확인할 수 있음
 * ```git status```
 
-# merge
+## merge
 * master branch가 아닌 다른 branch에서 작업을 한 후에 다시 master branch로 병합을 할 때 사용
 * 모든 변경사항을 master branch로 추가함
 * ```git merge <branch name>```
 
-# fetch
+## fetch
 * Remote Repository의 최신 버전을 받아올 때 사용
 * 병합은 진행하지 않고 저장소의 파일을 받아오기만 함
 * 파일을 다운로드만 하고 병합을 하지 않기 때문에 병합 전, Local Repository와 Remote Repository의 차이점을 비교해 볼 수 있다.
-* ```git fetch <remote repository name alias> <branch name>```
+* ```git fetch <remote repo alias> <branch name>```
 
-# pull 
+## pull 
 * Remote Repository의 최신 버전을 받아올 때  사용
 * 병합도 추가적으로 같이 진행(다운로드 + 병합)
-* ```git pull <remote repository name alias> <branch name>```
+* ```git pull <remote repo alias> <branch name>```
 
-# fork
+## fork
 * 타인의 github의 저장소에서 내가 어떤 부분을 수정하거나 추가 기능을 넣고 싶을 때 해당 저장소를 내 github저장소에 그대로 가져옴
 * 타인의 저장소에 권한이 없는 사용자가 fork를 통해 가져온 내 저장소에 변경 사항을 push한 후 타인의 저장소에 Pull Request 요청을 보내고, 승인이 되면 타인의 저장소에 merge됨
 
-# Git 설치 (Linux - CentOS)   
+# Git 사용하기
 
-![gitinstall](https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png)   
+## GitHub에 접속해서 Repository를 생성   
 
-* Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
-
-
-# GitHub에 접속해서 Repository를 생성   
-
-GitHub 링크 : [GitHub](https://github.com "github link")   
+* GitHub : [GitHub](https://github.com "github link")   
 
 1. 계정 생성이 안되어있다면 계정 생성 후   
    
@@ -133,5 +129,49 @@ GitHub 링크 : [GitHub](https://github.com "github link")
    
 <img width="500" alt="gitinstall4" src="https://user-images.githubusercontent.com/57285121/115059748-edf62200-9f21-11eb-9c4c-4238b97e6ebf.png">
    
-4. repository 생성(원격지의 저장소 생성 완료)   
+4. repository 생성(원격지의 저장소 생성 완료) 
+
+## Git 설치 (Linux - CentOS)   
+
+![gitinstall](https://user-images.githubusercontent.com/57285121/115059382-745e3400-9f21-11eb-8400-12084c48d8ea.png)   
+
+* Git을 사용할 Local Repository 디렉토리를 미리 만들것을 추천
+
+## Git Remote Repository에 파일 업로드(push)
+
+1. git 디렉토리로 사용할 디렉토리 생성 : ```mkdir 디렉토리명```
+
+2. git 디렉토리 초기화 : ```git init```
+
+3. Remote Repository 추가 : ```git remote add <remote repo alias> <remote repo URL>```
+
+4. add : ```git add <file name>```
+
+5. commit : ```git commit -m "<commit message>"```
+
+6. push : ```git push <remote repo alias> <branch name>```
+
+## Local Repository로 파일 다운로드(pull)
+
+1. git 디렉토리로 사용할 디렉토리 생성 : ```mkdir 디렉토리명```
+
+2. git 디렉토리 초기화 : ```git init```
+
+3. Remote Repository 추가 : ```git remote add <remote repo alias> <remote repo URL>```
+
+4. pull : ```git pull <remote repo alias> <branch name>```
+
+# Github 2 factor 인증
+
+* 2중 인증
+* ID/PW외에 추가적인 인증수단을 통해 계정을 보호
+
+1. Github -> Settings -> Account security
+
+2. Two-factor authentication 의 Enable two-factor authentication 클릭   
+> * 이 때 생성되는 복구 코드는 따로 보관해 두도록 한다   
+
+3. 모바일에 `Google Authenticator`어플 다운 후 QR코드 확인
+
+4. 인증 번호 확인 후 2 factor 인증 활성화
 
