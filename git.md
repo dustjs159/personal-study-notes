@@ -175,3 +175,13 @@ Git
 
 4. 인증 번호 확인 후 2 factor 인증 활성화
 
+## Command Line
+
+* push가 안되길래..
+
+1. Github -> Settings -> Developer settings -> Personal access tokens
+
+2. Note에 이름 등록 후 접근 권한 설정
+
+3. 생성한 토큰을 복사하고 push 할 때 사용자 계정 + 토큰을 입력해주면 push 성공
+ 
