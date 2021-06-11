@@ -49,12 +49,12 @@ CentOS
    
 |기능|명령어|
 |------|---|
-|firewall-cmd --state|방화벽 실행 여부 확인|
-|firewall-cmd --list-all|모든 zone의 정책 확인|
-|firewall-cmd --get-services|정의된 서비스 목록 확인|
-|firewall-cmd --list-services|허용된 서비스 목록 확인|
-|firewall-cmd --reload|변경 사항을 적용(리로드)|
-|firewall-cmd --permanent --zone=<zone이름> --add-service=<서비스이름>|영구적으로 서비스 등록|
+|방화벽 실행 여부 확인|firewall-cmd --state|
+|모든 zone의 정책 확인|firewall-cmd --list-all|
+|정의된 서비스 목록 확인|firewall-cmd --get-services|
+|허용된 서비스 목록 확인|firewall-cmd --list-services|
+|변경 사항을 적용(리로드)|firewall-cmd --reload|
+|영구적으로 서비스 등록|firewall-cmd --permanent --zone=<zone이름> --add-service=<서비스이름>|
 |firewall-cmd --get-services|정의된 서비스 목록 확인|
 |firewall-cmd --list -services|허용된 서비스 확인|
    
