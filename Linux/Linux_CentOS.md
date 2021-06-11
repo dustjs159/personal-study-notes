@@ -1,7 +1,7 @@
 CentOS
 ====================================
 ## Summary
-- Last Updated : 21.06.03 Thu    
+- Last Updated : 21.06.11 Fri    
 - Updated by : 윤연선
 -----------------------------------
 
@@ -37,6 +37,29 @@ CentOS
 ## xfs 파일시스템 지원
 * 기존 ext4 보다 최대 볼륨 크기가 커지고 처리 가능한 단일 파일의 크기가 증가한 파일 시스템 xfs 지원
 
+## iptables / firewalld
+* firewalld : CentOS 7부터 채택된 **패킷 필터링**
+* CentOS 6까지는 iptables에서 실행
+* Linux 커널의 Netfilter의 동작(패킷 필터링)을 설정 및 관리
+* iptables는 체인(INPUT, OUTPUT, FORWARD)마다 패킷 필터링을 적용
+* firewalld는 zone(default : public)이라는 그룹 단위로 규칙을 정의
+* iptables는 변경된 규칙을 적용하기 위해서는 서비스를 재시작해야함(서비스가 일시적으로 중단)
+* firewalld는 임시 규칙, 지속적 규칙을 각각 관리할 수 있으며 서비스 재시작 없이 변경사항을 반영할 수 있음
+* firewalld : **동적인 설정이 가능**
+   
+|기능|명령어|
+|------|---|
+|firewall-cmd --state|방화벽 실행 여부 확인|
+|firewall-cmd --list-all|모든 zone의 정책 확인|
+|firewall-cmd --get-services|정의된 서비스 목록 확인|
+|firewall-cmd --list-services|허용된 서비스 목록 확인|
+|firewall-cmd --reload|변경 사항을 적용(리로드)|
+|firewall-cmd --permanent --zone=<zone이름> --add-service=<서비스이름>|영구적으로 서비스 등록|
+|firewall-cmd --get-services|정의된 서비스 목록 확인|
+|firewall-cmd --list -services|허용된 서비스 확인|
+   
+* /usr/lib/firewalld/services에 직접 xml파일을 만들어서 저장해서 서비스 사용 가능
+
 # CentOS 7 vs CentOS 8
 
 ## dnf
@@ -52,5 +75,7 @@ CentOS
 * NTP는 /etc/npt에, chrony는 /etc/sysconfig에 위치
 * NTP(network time protocol) : 네트워크 상 호스트들의 시간을 동기화 하는 프로토콜
 * chronyd는 네트워크 혼잡시에도 성능이 상대적으로 우수
+
+## Cockpit
 * ntp보다 효율적인 메모리 사용
 
