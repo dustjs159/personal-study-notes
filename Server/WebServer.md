@@ -1,7 +1,7 @@
 Web Server
 =================================
 ## Summary
-- Last Updated : 21.06.02 Wed    
+- Last Updated : 21.06.12 Sat    
 - Updated by : 윤연선
 -----------------------------------
 
@@ -30,7 +30,10 @@ Web Server
 * MPM(Multi Processing Module)방식으로 HTTP 요청을 처리
 * 모듈이라는 개념으로 많은 기능을 덧붙일 수 있음
 * 클라이언트의 요청이 있을 때 마다 프로세스 혹은 스레드를 생성하는 구조.
-
+* OS의 JVM(Java Virtual Machine)을 통해 메모리를 관리함(메모리는 웹 서버 성능에 가장 큰 영향)   
+> * 웹 서버 운영 시 JVM은 OS로부터 메모리를 할당받음   
+> * JVM 메모리(Runtime Data Area)의 heap 영역에 프로세스를 생성   
+* Tomcat, Node.js와 묶어서 Load Balancer, Proxy 설정 가능
 * PreFork MPM(멀티 프로세스 + 단일 스레드)
    
 <img width="263" alt="스크린샷 2021-06-03 오전 1 12 44" src="https://user-images.githubusercontent.com/57285121/120514995-cf33e800-c408-11eb-9813-07dcf2f5f2fd.png">
@@ -83,6 +86,7 @@ Web Server
 <img width="374" alt="스크린샷 2021-06-02 오전 2 47 04" src="https://user-images.githubusercontent.com/57285121/120368260-d2699e00-c34c-11eb-95e9-f80ae9434472.png">
    
 * Reverse Proxy : 내부 서버들을 숨김(보안성)
+* Node.js와 묶어서 Load Balancer, Proxy 설정 가능
 * 장점   
 > * Apache에 비해 빠른 속도(우수한 성능)
 > * 새로운 프로세스와 스레드를 생성하지 않기 때문에 추가적인 자원이 소모되지 않음(적은 자원으로도 효율적인 운영 가능)   

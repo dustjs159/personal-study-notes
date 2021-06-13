@@ -55,8 +55,8 @@ CentOS
 |허용된 서비스 목록 확인|firewall-cmd --list-services|
 |변경 사항을 적용(리로드)|firewall-cmd --reload|
 |영구적으로 서비스 등록|firewall-cmd --permanent --zone=<zone이름> --add-service=<서비스이름>|
-|firewall-cmd --get-services|정의된 서비스 목록 확인|
-|firewall-cmd --list -services|허용된 서비스 확인|
+|정의된 서비스 목록 확인|firewall-cmd --get-services|
+|허용된 서비스 확인|firewall-cmd --list -services|
    
 * /usr/lib/firewalld/services에 직접 xml파일을 만들어서 저장해서 서비스 사용 가능
 

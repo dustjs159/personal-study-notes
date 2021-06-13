@@ -11,12 +11,6 @@ Apache Web Server Set
    
 ```yum install httpd```
    
-2. 방화벽 설정
-   
-<img width="577" alt="스크린샷 2021-06-08 오후 10 22 14" src="https://user-images.githubusercontent.com/57285121/121192503-fb87b280-c8a7-11eb-8e96-a0ebcf3e0840.png">
-   
-> * firewall-cmd 명령어를 통해 서비스 등록   
-
 # Apache httpd 디렉토리 구조와 구성 요소
 * /etc/httpd 확인
    
