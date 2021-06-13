@@ -1,7 +1,7 @@
 Linux Network Command
 ====================================
 ## Summary
-- Last Updated : 21.06.03 Thu   
+- Last Updated : 21.06.13 Sun   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -106,5 +106,18 @@ Linux Network Command
 > * TTY : 프로세스 제어 위치(호스트 : tty/n, 원격 : pts/n)   
 > * TIME : 구동 시간   
 > * CMD : 명령어   
+
+# route
+* 라우팅 테이블 수정 및 확인
+   
+<img width="721" alt="스크린샷 2021-06-13 오전 10 40 00" src="https://user-images.githubusercontent.com/57285121/121792752-b65eda00-cc33-11eb-8609-d255458f1b6f.png">
+   
+> * Gateway : 외부 네트워크와 연결하기 위한 게이트웨이 주소   
+> * Genmask : 목적지 네트워크의 넷마스크 주소(0.0.0.0 : default gateway)   
+> * Flags : 경로에 대한 정보(U : 살아있는 경로, G : 게이트웨이를 향하는 경로)   
+> * Metric : 목적지 네트워크까지 거리   
+> * Ref : 경로 참조 횟수   
+> * Use : 경로 탐색 횟수   
+> * Iface : 네트워크 인터페이스   
 
 
