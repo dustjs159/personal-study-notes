@@ -1,7 +1,7 @@
-Process & Daemon
+Process 
 ====================================
 ## Summary
-- Last Updated : 21.06.14 Mon   
+- Last Updated : 21.06.16 Wed   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -16,6 +16,7 @@ Process & Daemon
 ## Background Process
 * 실행은 되었지만 화면에는 나타나지 않고 실행되는 프로세스
 * 백신 프로그램, **서버 데몬** 등
+* Background Process 확인 : ```jobs -l```
 
 ## 프로세스 번호
 * 프로세스 식별자(PID : Process Identification Number)
@@ -53,6 +54,42 @@ Process & Daemon
 ### kill
 * 프로세스 강제종료
 * ```kill -9 <PID Number>```
-
+   
+<img width="921" alt="스크린샷 2021-06-16 오전 12 38 36" src="https://user-images.githubusercontent.com/57285121/122082721-30ad7b00-ce3b-11eb-9777-413249b37c89.png">
+   
 ### pstree
 * 부모 프로세스와 자식 프로세스의 관계를 트리 형태로 보여줌
+* 주로 ```pstree -p``` 형식으로 PID 번호까지 확인하여 사용
+   
+<img width="551" alt="스크린샷 2021-06-16 오전 1 30 36" src="https://user-images.githubusercontent.com/57285121/122090184-7588e000-ce42-11eb-8614-236f53dbbcca.png">
+   
+## Foreground / Background Process Test
+1. 30초 동안 동작을 멈추는 스크립트 작성 `test`
+   
+<img width="112" alt="스크린샷 2021-06-16 오전 1 53 33" src="https://user-images.githubusercontent.com/57285121/122093100-aa4a6680-ce45-11eb-9616-b96f7db9e038.png">
+   
+2. 스크립트 실행 : ```bash test```
+
+3. ```control + z``` 로 프로세스 일시 정지
+
+4. ```jobs -l```와 ```ps -ef | grep test```로 정지된 백그라운드 프로세스 확인
+   
+<img width="672" alt="스크린샷 2021-06-16 오전 2 26 00" src="https://user-images.githubusercontent.com/57285121/122097051-32cb0600-ce4a-11eb-835e-e37bfa92a874.png">
+   
+5. ``bg``로 프로세스를 백그라운드에서 실행 후 30초 중 남은 시간이 지나면 프로세스 동작 종료
+
+6. 다시 ```ps -ef | grep test```로 종료된 프로세스 확인
+   
+<img width="676" alt="스크린샷 2021-06-16 오전 2 29 10" src="https://user-images.githubusercontent.com/57285121/122097438-a40ab900-ce4a-11eb-87f2-dd97302b3c72.png">
+   
+### 처음부터 Background Process로 실행
+* 스크립트 실행 시 끝에 `&`를 붙여줌
+   
+<img width="429" alt="스크린샷 2021-06-16 오전 2 31 28" src="https://user-images.githubusercontent.com/57285121/122097724-f64bda00-ce4a-11eb-933e-422d76ba0b29.png">
+   
+### Background Process를 Foreground로 실행
+* ```fg <작업번호>```
+   
+<img width="317" alt="스크린샷 2021-06-16 오전 2 32 59" src="https://user-images.githubusercontent.com/57285121/122097919-2d21f000-ce4b-11eb-9c65-742e10eec097.png">
+   
+
