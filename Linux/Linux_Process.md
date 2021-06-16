@@ -7,6 +7,7 @@ Process
 
 # 프로세스(Process)
 * 보조기억장치(하드디스크, SSD 등)에 저장된 프로그램이 주기억장치(RAM, ROM)에 적재되어 활성화 된 것
+* 모든 프로세스들은 Foreground 혹은 Background 두가지 중 하나의 모드로 작동
 
 ## Foreground Process
 * 실행 시 화면에 나타나서 사용자와 상호 작용하는 프로세스
@@ -70,13 +71,13 @@ Process
    
 2. 스크립트 실행 : ```bash test```
 
-3. ```control + z``` 로 프로세스 일시 정지
+3. ```control + z``` 로 프로세스 일시 정지(프로세스 종료는 ```control + c```)
 
 4. ```jobs -l```와 ```ps -ef | grep test```로 정지된 백그라운드 프로세스 확인
    
 <img width="672" alt="스크린샷 2021-06-16 오전 2 26 00" src="https://user-images.githubusercontent.com/57285121/122097051-32cb0600-ce4a-11eb-835e-e37bfa92a874.png">
    
-5. ``bg``로 프로세스를 백그라운드에서 실행 후 30초 중 남은 시간이 지나면 프로세스 동작 종료
+5. ```bg <작업번호>```로 프로세스를 백그라운드에서 실행 후 30초 중 남은 시간이 지나면 프로세스 동작 종료
 
 6. 다시 ```ps -ef | grep test```로 종료된 프로세스 확인
    
