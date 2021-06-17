@@ -1,7 +1,7 @@
 Process 
 ====================================
 ## Summary
-- Last Updated : 21.06.16 Wed   
+- Last Updated : 21.06.18 Fri   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -89,8 +89,29 @@ Process
 <img width="429" alt="스크린샷 2021-06-16 오전 2 31 28" src="https://user-images.githubusercontent.com/57285121/122097724-f64bda00-ce4a-11eb-933e-422d76ba0b29.png">
    
 ### Background Process를 Foreground로 실행
-* ```fg <작업번호>```
+* ``fg <작업번호>``
    
 <img width="317" alt="스크린샷 2021-06-16 오전 2 32 59" src="https://user-images.githubusercontent.com/57285121/122097919-2d21f000-ce4b-11eb-9c65-742e10eec097.png">
    
+## top
+* 실시간 CPU 점유율 확인
+   
+<img width="972" alt="스크린샷 2021-06-03 오후 12 59 19" src="https://user-images.githubusercontent.com/57285121/120584843-a85acd80-c46b-11eb-9cf0-ed1f47c0265a.png">
+   
+* 구성(CPU & 메모리)   
+> * top : 서버 시간, 접속자 수, 부하율(load average)   
+> * Tasks : 가동중인 프로세스, 대기중인 프로세스   
+> * %Cpu(s) : 사용자(us) / 시스템(sy) 레벨 사용 CPU 비중, 유휴 상태(id)의 CPU 비중   
+> * Mem : 전체 메모리(total), 남아있는 여유메모리(free), 사용중인 메모리(used)   
+> * Swap : 전체 스왑 메모리(total), 남아있는 여유 스왑 메모리(free), 사용중인 스왑 메모리(used)   
+* 구성(프로세스 상태)   
+> * PID : 프로세스 ID   
+> * USER : 프로세스를 실행시킨 사용자 ID   
+> * PRI : 프로세스 우선 순위(낮을 수록 높음)   
+> * NI : nice value.(마이너스를 가질수록 우선순위가 높음)   
+> * VIRT : 가상 메모리 사용량(Swap+RES)   
+> * RES : 현재 페이지가 상주하고 있는 크기(Resident Size)   
+> * SHR : 프로세스에 의해 사용된 메모리를 나눈 메모리의 총합   
+> * S(Sleeping), R(Running)   
+> * %CPU, %MEM : 프로세스가 사용하는 CPU사용률, 메모리 사용률   
 
