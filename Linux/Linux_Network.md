@@ -1,14 +1,72 @@
 Linux Network Command
 ====================================
 ## Summary
-- Last Updated : 21.06.13 Sun   
+- Last Updated : 21.06.16 Fri   
 - Updated by : 윤연선
 -----------------------------------
 
-# netstat
+# 리눅스에서 네트워크 장치 이름
+* CentOS 7은 NIC 이름을 ens32 또는 ens33으로 할당
+* 이전 버전에서는 eth0, eth1로 인식
+## 디바이스명 규칙
+   
+<img width="474" alt="스크린샷 2021-06-18 오전 3 51 14" src="https://user-images.githubusercontent.com/57285121/122456369-6fccff00-cfe8-11eb-8a3b-80905c5a8750.png">
+   
+* systemd에 의해 결정
+* 인터페이스 타입   
+> * en : Ethernet   
+> * wl : 무선 LAN   
+> * ww : 무선 WAN   
+* 슬롯별 설정(랜카드 인터페이스 슬롯 번호)   
+> * MAC주소 방식 표기 : x<MAC> ex) enxb32fd2ads..  
+ 
+# 주요 네트워크 설정 파일
+* /etc/sysconfig/network-scripts/ifcfg-<NIC name>
+   
+<img width="386" alt="스크린샷 2021-06-18 오전 2 24 17" src="https://user-images.githubusercontent.com/57285121/122445216-49a16200-cfdc-11eb-8cac-624d0ca7b595.png">
+   
+> * NIC 장치에 설정된 네트워크 정보가 들어있는 파일   
+> * TYPE : 장치 타입   
+> * PROXY_METHOD : 프록시 관련 설정   
+> * BOOTPROTO : IP 할당 타입(none : 없음, **static : 고정**, dhcp : 동적)   
+> * DEFROUTE : default gateway 사용 여부   
+> * IPV4_FAILURE_FATAL : dhcp를 통한 IP 자동할당 실패 시 네트워크 종료 여부   
+> * NAME : NIC 별칭   
+> * UUID : NIC 구분을 위한 NIC 장치 ID   
+> * DEVICE : NIC 장치 인식명   
+> * ONBOOT : 부팅 시 NIC 자동 활성화 여부   
+
+* 고정 IP 설정을 위해서 추가할 항목   
+> * IPADDR=고정 IP 주소   
+> * NETMASK=Netmask 주소   
+> * GATEWAY=Gateway 주소   
+
+* 설정한 NIC 장치 비활성화 : ``ifdown 장치 이름``
+* 설정한 NIC 장치 활성화 : ``ifup 장치 이름``
+
+* /etc/resolv.conf   
+> * DNS 네임서버의 정보가 들어있는 파일   
+
+* 설정 파일 수정 후에는 네트워크를 재시작 : `systemctl restart network`
+
+# 네트워크 주요 명령어
+
+## nmtui
+   
+<img width="735" alt="스크린샷 2021-06-18 오전 1 32 39" src="https://user-images.githubusercontent.com/57285121/122437850-127b8280-cfd5-11eb-9ee8-c653e3d83847.png">
+   
+* Network Manager Text User Interface
+* /etc/NetworkManager에 있음
+* /usr/lib/systemd/system에 데몬 등록
+* 네트워크와 관련된 작업들을 직접 관리
+* 실행 : ``nmtui``
+* 변경 사항을 반영할 때는 반드시 재시작해야함
+* 시작, 중지, 재시작, 상태 확인 : `systemctl start/stop/restart/status Networkmanager`
+
+## netstat
 * network statistics   
 * 네트워크 접속, 라우팅 테이블, 네트워크 인터페이스의 통계 정보를 보여주는 도구
-* 자주 쓰이는 옵션 : ```netstat -nlpt``` (연결 대기중인 tcp 프로토콜을 사용하는 프로그램 이름 목록)
+* 자주 쓰이는 옵션 : ``netstat -nlpt`` (연결 대기중인 tcp 프로토콜을 사용하는 프로그램 이름 목록)
    
 <img width="885" alt="스크린샷 2021-06-03 오전 2 52 14" src="https://user-images.githubusercontent.com/57285121/120528705-b6323380-c416-11eb-9f94-c40581c1ae6d.png">
    
@@ -32,7 +90,7 @@ Linux Network Command
 > * SYN_RECEIVED : 클라이언트에게 응답을 전달(SYN+ACK)했지만 클라이언트의 응답(ACK)이 오지 않은 상태   
 > * CLOSED : 연결 종료   
 
-# ifconfig
+## ifconfig
 * inteface configuration
 * 네트워크 인터페이스 구성 확인
    
@@ -51,10 +109,8 @@ Linux Network Command
 > * TX packets : 전송 패킷 정보   
 * 옵션   
 > * -a (all) : 비활성화된 네트워크 인터페이스까지 확인   
-* 네트워크 인터페이스 비활성화 : ```ifdown 네트워크인터페이스 이름```
-* 네트워크 인터페이스 활성화 : ```ifup 네트워크인터페이스 이름```
- 
-# ping
+
+## ping
 * 목적지를 향해 일정 크기의 패킷을 전송한 후 목적지로부터 오는 응답 메시지를 통해 네트워크 상태를 점검
 * **ICMP 프로토콜을 사용함**
    
@@ -66,48 +122,30 @@ Linux Network Command
 * 옵션   
 > -c [n] : n개의 패킷만 전송   
 
-# top
-* 실시간 CPU 점유율 확인
+## firewalld
+* firewalld : CentOS 7부터 채택된 **패킷 필터링**
+* CentOS 6까지는 iptables에서 실행
+* Linux 커널의 Netfilter의 동작(패킷 필터링)을 설정 및 관리
+* iptables는 체인(INPUT, OUTPUT, FORWARD)마다 패킷 필터링을 적용
+* firewalld는 zone(default : public)이라는 그룹 단위로 규칙을 정의
+* iptables는 변경된 규칙을 적용하기 위해서는 서비스를 재시작해야함(서비스가 일시적으로 중단)
+* firewalld는 임시 규칙, 지속적 규칙을 각각 관리할 수 있으며 서비스 재시작 없이 변경사항을 반영할 수 있음
+* firewalld : **동적인 설정이 가능**
    
-<img width="972" alt="스크린샷 2021-06-03 오후 12 59 19" src="https://user-images.githubusercontent.com/57285121/120584843-a85acd80-c46b-11eb-9cf0-ed1f47c0265a.png">
+|기능|명령어|
+|------|---|
+|방화벽 실행 여부 확인|firewall-cmd --state|
+|모든 zone의 정책 확인|firewall-cmd --list-all|
+|정의된 서비스 목록 확인|firewall-cmd --get-services|
+|허용된 서비스 목록 확인|firewall-cmd --list-services|
+|변경 사항을 적용(리로드)|firewall-cmd --reload|
+|영구적으로 서비스 등록|firewall-cmd --permanent --zone=<zone이름> --add-service=<서비스이름>|
+|정의된 서비스 목록 확인|firewall-cmd --get-services|
+|허용된 서비스 확인|firewall-cmd --list -services|
    
-* 구성(CPU & 메모리)   
-> * top : 서버 시간, 접속자 수, 부하율(load average)   
-> * Tasks : 가동중인 프로세스, 대기중인 프로세스   
-> * %Cpu(s) : 사용자(us) / 시스템(sy) 레벨 사용 CPU 비중, 유휴 상태(id)의 CPU 비중   
-> * Mem : 전체 메모리(total), 남아있는 여유메모리(free), 사용중인 메모리(used)   
-> * Swap : 전체 스왑 메모리(total), 남아있는 여유 스왑 메모리(free), 사용중인 스왑 메모리(used)   
-* 구성(프로세스 상태)   
-> * PID : 프로세스 ID   
-> * USER : 프로세스를 실행시킨 사용자 ID   
-> * PRI : 프로세스 우선 순위(낮을 수록 높음)   
-> * NI : nice value.(마이너스를 가질수록 우선순위가 높음)   
-> * VIRT : 가상 메모리 사용량(Swap+RES)   
-> * RES : 현재 페이지가 상주하고 있는 크기(Resident Size)   
-> * SHR : 프로세스에 의해 사용된 메모리를 나눈 메모리의 총합   
-> * S(Sleeping), R(Running)   
-> * %CPU, %MEM : 프로세스가 사용하는 CPU사용률, 메모리 사용률   
+* /usr/lib/firewalld/services에 직접 xml파일을 만들어서 저장해서 서비스 사용 가능
 
-# ps
-* Process Status
-* 실행중인 프로세스의 목록 확인
-   
-<img width="838" alt="스크린샷 2021-06-03 오후 6 28 29" src="https://user-images.githubusercontent.com/57285121/120622130-811af500-c499-11eb-91b2-8cbe0ef58a10.png">
-   
-* 옵션   
-> * -e : 실행중인 모든 프로세스 출력   
-> * -f : 프로세스에 대한 자세한(full) 정보 출력   
-* 구성   
-> * UID : 실행 유저   
-> * PID : 프로세스 ID   
-> * PPID : 부모 프로세스 ID   
-> * C : CPU 사용량   
-> * STIME : 시작 시간   
-> * TTY : 프로세스 제어 위치(호스트 : tty/n, 원격 : pts/n)   
-> * TIME : 구동 시간   
-> * CMD : 명령어   
-
-# route
+## route
 * 라우팅 테이블 수정 및 확인
    
 <img width="721" alt="스크린샷 2021-06-13 오전 10 40 00" src="https://user-images.githubusercontent.com/57285121/121792752-b65eda00-cc33-11eb-8609-d255458f1b6f.png">
@@ -119,5 +157,3 @@ Linux Network Command
 > * Ref : 경로 참조 횟수   
 > * Use : 경로 탐색 횟수   
 > * Iface : 네트워크 인터페이스   
-
-
