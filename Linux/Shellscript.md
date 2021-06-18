@@ -1,7 +1,7 @@
 Shell Script
 ====================================
 ## Summary
-- Last Updated : 21.06.07 Mon   
+- Last Updated : 21.06.18 Fri   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -12,6 +12,7 @@ Shell Script
 * 명령어 해석기
 * 커널과 사용자 사이에서 사용자가 입력한 명령어를 해석하여 커널로 전달
 * 커널의 처리 결과를 사용자에게 전달
+* Shell에서 명령어를 입력하여 실행 시 Shell이 부모 프로세스가 됨. 즉, 쉘의 PID가 프로세스의 PPID가 됨
 * 주요 기능 및 역할   
 > * 대화식 사용 : 사용자의 요청을 즉각 처리 및 결과를 출력하는 대화형 구조   
 > * 프로그래밍 가능 : 복잡한 작업을 수행할 수 있도록 일련의 명령어들을 묶어서 사용 가능(Script)   
@@ -19,6 +20,19 @@ Shell Script
    
 <img width="414" alt="스크린샷 2021-05-31 오전 1 37 43" src="https://user-images.githubusercontent.com/57285121/120112441-cd6fe780-c1b0-11eb-89b0-cc6f48ca5d84.png">
    
+## 서브 쉘(Sub Shell) & exit
+* 서브 쉘(Sub Shell) : 한 Shell script에서 실행되는 또다른 Shell scrpit
+* exit : 서브 쉘의 종료 상태를 반환
+* 하나의 Shell script(test10)안에서 실행되는 서브 쉘(test11)과 성공적인 프로세스 종료를 통한(exit 0) 또 다른 서브 쉘(test12)
+   
+<img width="283" alt="스크린샷 2021-06-18 오후 3 12 12" src="https://user-images.githubusercontent.com/57285121/122515287-2b714b80-d048-11eb-8a7d-734a22310cb2.png">
+   
+<img width="125" alt="스크린샷 2021-06-18 오후 3 12 35" src="https://user-images.githubusercontent.com/57285121/122515372-50fe5500-d048-11eb-86f3-d982d08f5371.png">
+   
+<img width="205" alt="스크린샷 2021-06-18 오후 3 13 37" src="https://user-images.githubusercontent.com/57285121/122515397-59ef2680-d048-11eb-8511-7f9a190fc66a.png">
+   
+<img width="341" alt="스크린샷 2021-06-18 오후 3 16 23" src="https://user-images.githubusercontent.com/57285121/122515416-61163480-d048-11eb-942f-4af10f2e57ca.png">
+
 ## Shell의 종류
 * sh(bourne shell)   
 > * 유닉스의 가장 기본적인 shell   
