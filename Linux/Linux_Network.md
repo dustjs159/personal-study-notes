@@ -1,13 +1,14 @@
-Linux Network Command
+Linux Network 
 ====================================
 ## Summary
-- Last Updated : 21.06.16 Fri   
+- Last Updated : 21.06.26 Sat   
 - Updated by : 윤연선
 -----------------------------------
 
 # 리눅스에서 네트워크 장치 이름
 * CentOS 7은 NIC 이름을 ens32 또는 ens33으로 할당
 * 이전 버전에서는 eth0, eth1로 인식
+
 ## 디바이스명 규칙
    
 <img width="474" alt="스크린샷 2021-06-18 오전 3 51 14" src="https://user-images.githubusercontent.com/57285121/122456369-6fccff00-cfe8-11eb-8a3b-80905c5a8750.png">
@@ -18,9 +19,11 @@ Linux Network Command
 > * wl : 무선 LAN   
 > * ww : 무선 WAN   
 * 슬롯별 설정(랜카드 인터페이스 슬롯 번호)   
-> * MAC주소 방식 표기 : x<MAC> ex) enxb32fd2ads..  
+> * MAC주소 방식 표기 : x <MAC> ex) enxb32fd2ads..  
  
-# 주요 네트워크 설정 파일
+# 네트워크 설정 방법
+
+## config 파일 수정
 * /etc/sysconfig/network-scripts/ifcfg-<NIC name>
    
 <img width="386" alt="스크린샷 2021-06-18 오전 2 24 17" src="https://user-images.githubusercontent.com/57285121/122445216-49a16200-cfdc-11eb-8cac-624d0ca7b595.png">
@@ -47,11 +50,10 @@ Linux Network Command
 * /etc/resolv.conf   
 > * DNS 네임서버의 정보가 들어있는 파일   
 
-* 설정 파일 수정 후에는 네트워크를 재시작 : `systemctl restart network`
+* 설정 파일 수정 후에는 네트워크 관리 데몬(NetworkManager) 재시작 : `systemctl restart NetworkManager`
 
-# 네트워크 주요 명령어
 
-## nmtui
+## NetworkManager - nmtui
    
 <img width="735" alt="스크린샷 2021-06-18 오전 1 32 39" src="https://user-images.githubusercontent.com/57285121/122437850-127b8280-cfd5-11eb-9ee8-c653e3d83847.png">
    
@@ -62,6 +64,35 @@ Linux Network Command
 * 실행 : ``nmtui``
 * 변경 사항을 반영할 때는 반드시 재시작해야함
 * 시작, 중지, 재시작, 상태 확인 : `systemctl start/stop/restart/status Networkmanager`
+* CentOS 7까지는 network.service 데몬을 사용했지만 CentOS 8부터 NetworkManager데몬과 **nmcli**를 사용
+* ifcfg 스크립트를 수정하고 반영하기 위해서는 NetworkManager 데몬이 실행중이어야 함
+
+## nmcli
+
+* NetworkManager 데몬을 제어하는 명령어
+   
+|기능|명령어|
+|------|---|
+|모든 장치 확인|nmcli dev status|
+|장치 설정상태 확인|nmcli device show <장치명>|
+|장치 IP 주소 할당 방법 설정|nmcli con up static/dhcp|
+|변경사항 반영|nmcli con reload|
+|네트워크 연결 활성화|nmcli con up <장치명>|
+|네트워크 연결 비활성화|nmcli con down <장치명>|
+|네트워크 수정|nmcli con modify <장치명>|
+   
+* nmcli 명령어 옵션   
+> * con-name : static/dhcp/bond  
+> * ip4 : IP 주소 CIDR   
+> * gw4 : gateway IP 주소   
+
+## network bonding
+   
+<img width="685" alt="스크린샷 2021-06-26 오전 4 25 27" src="https://user-images.githubusercontent.com/57285121/123475569-8ac9ef80-d636-11eb-9ce0-ef3e7666711d.png">
+   
+* 두 개 이상의 네트워크 장치를 논리적으로 묶어 사용하는 방식
+* 대역폭 확장 가능
+* 주로 **이중화**목적으로 사용
 
 ## netstat
 * network statistics   
