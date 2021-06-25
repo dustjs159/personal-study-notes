@@ -1,5 +1,9 @@
-TCP/UDP
-===========================================
+TCP & UDP
+=================================
+## Summary
+- Last Updated : 21.06.25 Fri   
+- Updated by : 윤연선
+-----------------------------------
 
 # TCP(Transmission Control Protocol)
 * End-to-End간 신뢰성 있는 데이터 통신을 지원하는 프로토콜
@@ -10,7 +14,7 @@ TCP/UDP
 * 흐름제어, 혼잡제어, 오류제어 기능 지원
 * 데이터를 전송할 때 마다 3 way-handshake를 통해 연결을 해야하므로 시간이 상대적으로 많이 소요됨
 
-# TCP Header   
+## TCP Header   
 <img width="667" alt="스크린샷 2021-05-18 오전 12 50 29" src="https://user-images.githubusercontent.com/57285121/118518401-0d77a900-b773-11eb-8fab-dd6ee36ea2a8.png">   
 
 * **Source Port** : 출발지 Port 번호
@@ -23,7 +27,7 @@ TCP/UDP
 * Checksum : 오류검출
 * Urgent Pointer(긴급 포인터) : 긴급 데이터 처리
 
-# 3 way-handshake / 4 way-handshake
+## 3 way-handshake / 4 way-handshake
 * 3 way-handshake : 데이터를 전송하기 전 정확한 전송을 위해 송신측과 수신측의 연결(세션)을 수립하는 과정
 * 연결을 위한 3 way-handshake   
 ![tcp1](https://user-images.githubusercontent.com/57285121/116592013-75985380-a95a-11eb-9fc6-39aaf1a1281c.png)   
@@ -44,7 +48,7 @@ TCP/UDP
 >  5. FIN_WAIT_2 상태이던 Client는 FIN패킷을 받으면 TIME_WAIT 상태로 바뀌며 Server에게 ACK패킷(TIME_WAIT)을 전송.  
 >  6. 일정 시간이 지나면 TIME_WAIT 상태이던 Client가 종료되고 ACK를 받은 서버도 종료됨.  
 
-# 흐름제어(Flow Control)
+## 흐름제어(Flow Control)
 * TCP가 데이터 전송에 있어서 신뢰성을 보장하기 위한 기능
 * 송신측과 수신측 간의 데이터 처리 속도 차이에서 발생하는 문제점을 해결하기 위한 방법(속도 조절)
 * 수신측 데이터 처리 속도가 송신측보다 빠르면 문제가 되지 않지만, 송신측이 더 빠를 경우 문제 발생
@@ -58,7 +62,7 @@ TCP/UDP
 > * 3 way-handshake 과정에서 송신측이 수신측의 윈도우 크기(한 번에 수신할 수 있는 데이터 양)만큼 ACK 없이 패킷을 전송할 수 있게 동적으로 흐름 제어   
 ![tcp5](https://user-images.githubusercontent.com/57285121/116641797-6c35d800-a9a8-11eb-8dbe-54fa5520fe17.png)   
 
-# 혼잡제어(Congestion Control)
+## 혼잡제어(Congestion Control)
 * TCP가 데이터 전송에 있어서 신뢰성을 보장하기 위한 기능
 * 송신측의 데이터가 한 공유기나 라우터에 몰릴 경우(혼잡) 데이터를 처리하기 힘들어지게 되면서 호스트는 계속 재전송을 하게되어 Overflow발생
 * Overflow를 줄이기 위해 송신측이 데이터 전송속도를 강제로 줄임
@@ -76,12 +80,22 @@ TCP/UDP
 > * 윈도우 크기가 늘어나는 속도가 AIMD에 비해 상대적으로 빠르기 때문에 제대로된 속도로 통신하기 까지 시간이 상대적으로 적게 걸린다   
 * **혼잡 발생시 윈도우 크기를 줄이거나 증가시키며 혼잡을 회피하는 알고리즘**
 
-# 오류제어(Error Contorl)
+## 오류제어(Error Contorl)
 * TCP가 데이터 전송에 있어서 신뢰성을 보장하기 위한 기능
 * 주로 재전송 기반 오류 제어(ARQ)를 사용
 * ARQ(Automatic Repeat reQuest) : 에러 발생시 재전송을 요구하는 방식   
 ![tcp6](https://user-images.githubusercontent.com/57285121/116654714-b5942080-a9c4-11eb-9ea5-f4df990d8f2f.png)   
 > * 송신측으로부터 2번이 와야하는데 2번이 안오고 3번이 왔을 때 2번을 다시 보내야한다고 알려줌(이 횟수가 3회 이상 넘어가면 에러로 판단)
+
+## TCP Keep-Alive
+   
+<img width="264" alt="스크린샷 2021-06-26 오전 12 44 05" src="https://user-images.githubusercontent.com/57285121/123450358-9e199280-d617-11eb-9b18-4b25a2fc35fd.png">
+   
+* 3-way handshake를 통해 연결된 세션을 없애지 않고 계속 사용하는 방식
+* 일정 시간이 지나면 연결된 세션이 살아있는지 확인하기 위해 연결을 유지하길 원하는 쪽에서 아주 작은 양의 패킷 전송 
+* 3-way handshake를 통해 Keep Alive 타이머를 설정하고, 타이머가 0에 도달하면 연결되어 있던 상대에게 Keep Alive Probe 패킷을 보냄
+* 이 때 Probe 패킷(빈 껍데기 패킷)을 상대방에게 전송하고, 상대방이 연결을 유지하고 싶다면 응답으로 Probe패킷을 다시 전송하여 연결 유지 
+* OS 측면에서의 제어
 
 # UDP(User Datagram Protocol)
 * 비연결형 서비스, 데이터그램 방식을 사용하여 패킷을 교환
