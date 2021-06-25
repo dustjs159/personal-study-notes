@@ -1,7 +1,7 @@
 HTTP & HTTPS
 ========================
 ## Summary
-- Last Updated : 21.05.28 Fri   
+- Last Updated : 21.06.26 Sun   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -113,6 +113,12 @@ HTTP & HTTPS
 > * Server Push : 서버 측에서 클라이언트가 요청하지도 않은 리소스를 보냄(클라이언트의 요청을 최소화 해서 성능 향상을 기대할 수 있음)   
 > * Header Compression : 헤더 정보 압축. 여러 요청을 보낼 때 중복된 헤더를 검출하고 하나의 헤더만 전송.   
 
+## HTTP Keep-Alive
+* HTTP는 클라이언트의 요청과 서버의 응답 후 연결이 종료됨
+* 클라이언트의 요청이 많아지면 네트워크의 병목현상 발생
+* HTTP에서 세션의 수립과정에서 Keep-Alive의 Timeout을 정해놓고 해당 시간동안에는 연결을 끊지 않고 유지함
+* 네트워크 병목현상을 어느정도 해소할 수 있음
+ 
 # HTTPS(HyperText Transfer Protocol Secure)
 * HTTP의 보얀 취약점을 개선하기 위해 보안 기능을 추가한 프로토콜   
 * 기존 HTTP에 SSL(Secure Socket Layer)을 사용   
