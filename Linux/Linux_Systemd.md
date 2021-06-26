@@ -7,7 +7,7 @@ Linux Systemd
 
 # systemd
 * 기존의 리눅스에서 가장 먼저 실행되는 init 프로세스를 대체하는 시스템
-* **Unit**단위로 서비스(데몬)들을 관리하는 시스템 자원 통합 관리 매니저
+* **Unit**단위로 서비스(데몬)들을 관리하는 프로세스 자원 통합 관리 매니저
 * 모든 프로세스들의 부모 프로세스가 됨
 * /etc/systemd에 위치
 * **PID = 1**
@@ -41,11 +41,29 @@ Linux Systemd
 * Timer Unit : 타이머 관련 유닛. '타이머 유닛명.timer'
 * Socket Unit : 소켓 유닛. '소켓 유닛명.socket'
 
-## systemd 구성
-* coredump.conf
-* journald.conf
-* logind.conf
-* resolved.conf
-* system.conf
-* user.conf
- 
+# 주요 명령어
+## systemctl
+   
+|기능|명령어|
+|------|---|
+|유닛 상태 및 정보|systemctl status 유닛명|
+|유닛 실행|systemctl start 유닛명|
+|유닛 중지|systemctl stop 유닛명|
+|유닛 재시작|systemctl restart 유닛명|
+|유닛 리로드|systemctl reload 유닛명|
+|부팅시 자동시작 설정|systemctl enable 유닛명|
+|부팅시 자동시작 해제|systemctl disable 유닛명|
+|실행 상태인 유닛들 확인|systemctl list-units|
+|등록된 유닛들의 상태(활성화, 비활성화, static)|systemctl list-unit-files|
+
+* restart : stop 후 start(유닛 중단 후 다시 시작)
+* reload : config파일만 다시 불러옴
+* 서비스 상태의 static은 활성화 및 비활성화가 불가능. 다른 유닛과 의존성을 갖고있음
+
+## journalctl
+* systemd-journald.service데몬이 systemd의 로그를 기록
+* 부팅 시 발생하는 이벤트를 수집해서 바이너리 형태의 저널 데이터 저장
+* 저널 데이터는 /run/log/journal에 위치.(읽을 수 없다..) 재부팅시 삭제
+* /etc/systemd에 설정파일 journald.conf가 있음
+
+
