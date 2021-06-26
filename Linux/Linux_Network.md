@@ -31,7 +31,7 @@ Linux Network
 > * NIC 장치에 설정된 네트워크 정보가 들어있는 파일   
 > * TYPE : 장치 타입   
 > * PROXY_METHOD : 프록시 관련 설정   
-> * BOOTPROTO : IP 할당 타입(none : 없음, **static : 고정**, dhcp : 동적)   
+> * BOOTPROTO : IP 할당 타입(none : 없음, **static : 고정**, dhcp : 동적) 기본적으로 none=static, bond 구성시 none 사용   
 > * DEFROUTE : default gateway 사용 여부   
 > * IPV4_FAILURE_FATAL : dhcp를 통한 IP 자동할당 실패 시 네트워크 종료 여부   
 > * NAME : NIC 별칭   
