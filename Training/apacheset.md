@@ -1,7 +1,7 @@
 Apache Web Server Set
 =================================
 ## Summary
-- Last Updated : 21.06.12 Sat    
+- Last Updated : 21.06.25 Fri    
 - Updated by : 윤연선
 -----------------------------------
 
@@ -9,7 +9,15 @@ Apache Web Server Set
 
 1. Apache 설치
    
-```yum install httpd```
+`yum install httpd`
+
+## Apache 수동 설치
+
+1. gcc 컴파일러 설치
+   
+`yum install gcc*`
+   
+2. 
    
 # Apache httpd 디렉토리 구조와 구성 요소
 * /etc/httpd 확인
@@ -87,4 +95,39 @@ Apache Web Server Set
 ## /etc/httpd/modules
 * 설치되어 있는 모듈들
 
+## 포트 번호 18080으로 변경
+1. firewall-cmd 명령어로 허용할 port 추가   
+> * `firewall-cmd --permanent --zone=public --add-port=18080/tcp`   
+> * 확인 : `firewall-cmd --list-all`   
+   
+<img width="481" alt="스크린샷 2021-06-26 오전 12 06 22" src="https://user-images.githubusercontent.com/57285121/123444886-580e0000-d612-11eb-91b0-c23d0b63048e.png">
+   
+2. semanage 명령어로 port 오픈   
+> * `semanage port -a -t http_port_t -p tcp 18080`   
+> * 확인 : `semanage port -l | grep http_port_t`
+   
+<img width="804" alt="스크린샷 2021-06-26 오전 12 05 04" src="https://user-images.githubusercontent.com/57285121/123444728-2ac15200-d612-11eb-83e0-bcb661d8f0a4.png">
+   
+3. /etc/httpd/conf/httpd.conf 파일의 Listen 지시자에 18080 추가
+   
+<img width="137" alt="스크린샷 2021-06-26 오전 12 11 08" src="https://user-images.githubusercontent.com/57285121/123445605-03b75000-d613-11eb-9244-9e696bfdfb67.png">
+   
+4. 결과 확인
+   
+<img width="362" alt="스크린샷 2021-06-26 오전 12 11 40" src="https://user-images.githubusercontent.com/57285121/123445673-16318980-d613-11eb-911f-1091b3dd60fb.png">
+   
+## access / error log 경로 변경
+
+1. /etc/httpd/conff/httpd.confd의 CustomLog 지시자의 경로 변경
+   
+<img width="486" alt="스크린샷 2021-06-26 오전 12 35 02" src="https://user-images.githubusercontent.com/57285121/123449147-59d9c280-d616-11eb-9ddb-f602d07d4640.png">
+   
+2. ErrorLog 지시자의 경로도 변경
+   
+<img width="361" alt="스크린샷 2021-06-26 오전 12 36 23" src="https://user-images.githubusercontent.com/57285121/123449338-8988ca80-d616-11eb-8f8f-e71aa83d5117.png">
+   
+3. 결과 확인
+   
+<img width="847" alt="스크린샷 2021-06-26 오전 12 33 48" src="https://user-images.githubusercontent.com/57285121/123448955-2eef6e80-d616-11eb-860e-2676324c6ee5.png">
+   
 
