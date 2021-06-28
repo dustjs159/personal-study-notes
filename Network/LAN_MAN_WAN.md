@@ -26,7 +26,7 @@ LAN / MAN / WAN
 
 ### Ethernet
 * 이더넷은 OSI 7 계층중 1 계층(물리)과 2 계층(데이터 링크)에 대한 규격
-* 장치 고유의 번호**(MAC 주소)** 기반 이더넷 통신
+* 장치 고유의 번호(MAC 주소) 기반 이더넷 통신
 * 규격과 방식은 IEEE 802.3 표준을 구현
    
 ![ethernet1](https://user-images.githubusercontent.com/57285121/115180161-e98f5c00-a10f-11eb-8638-e819d738e0b8.PNG)   
