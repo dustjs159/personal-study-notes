@@ -1,7 +1,7 @@
 Linux Systemd 
 ====================================
 ## Summary
-- Last Updated : 21.06.24 Thu   
+- Last Updated : 21.06.29 Tue   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -35,12 +35,50 @@ Linux Systemd
 * WantedBy
 * RequiredBy
 
-## Unit 종류
-* Service Unit : 서비스 유닛. '서비스 유닛명.service'
-* Target Unit : 시스템 부팅환경과 관련된 유닛. '타겟 유닛명.target'
-* Timer Unit : 타이머 관련 유닛. '타이머 유닛명.timer'
-* Socket Unit : 소켓 유닛. '소켓 유닛명.socket'
+# Unit 종류
 
+## Service Unit
+   
+<img width="630" alt="스크린샷 2021-06-29 오전 2 54 33" src="https://user-images.githubusercontent.com/57285121/123681929-5ac45b80-d885-11eb-811f-b0be3d8cc4cf.png">
+   
+* 서비스 유닛. 'Service 유닛명.service'
+
+### Service Unit의 Service 섹션
+* Type : 유닛의 타입 선언   
+> * simple(default) : systemd가 실행될 때 ExecStart가 부모 프로세스가 됨
+> * notify : simple
+> * forking
+> * oneshot
+> * dbus
+> * idle
+* EnvironmentFile : 서비스 유닛의 환경 설정 파일
+* ExecStart
+* ExecReload
+* KillMode
+* Restart
+* RestartSec
+
+## Target Unit
+* 시스템 부팅환경과 관련된 유닛. 'Target 유닛명.target'
+
+### Target Unit의 Target 섹션 
+
+## Timer Unit
+* 타이머 관련 유닛. 'Timer 유닛명.timer'
+* 일정 시간 지난 이후에 작업을 수행
+* 기존 리눅스의 cron 프로세스가 systemd의 timer 유닛으로 넘어오게 됨
+
+### Timer Unit의 Timer 섹션
+* OnCalendar : realtimer 옵션. 지정한 날짜와 시간 및 요일마다 작업 수행   
+> * `["요일"] "Year"-"Month"-"Day" "Hour":"Min":"Sec" [Timezone"]`   
+> * 요일, Timezone은 생략 가능(Timezone 생략 시 시스템의 설정된 Timezone이 적용)   
+> * 요일 : Mon/Tus/Wed/Thu/Fri/Sat/Sun ( '..' 으로 범위 지정 가능. Mon..Fri : 월 ~ 금)   
+* AccuracySec : 타이머를 작동하는 주기(default : 1분)
+
+## Socket Unit
+* 소켓 유닛. 'Socket 유닛명.socket'
+
+### Socket Unit의 Socket 섹션
 # 주요 명령어
 ## systemctl
    
