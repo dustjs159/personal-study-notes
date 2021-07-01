@@ -1,7 +1,7 @@
 Nginx Web Server Set
 =================================
 ## Summary
-- Last Updated : 21.06.30 Wed    
+- Last Updated : 21.07.01 Thu    
 - Updated by : 윤연선
 -----------------------------------
 
@@ -22,10 +22,10 @@ Nginx Web Server Set
    
 <img width="335" alt="스크린샷 2021-06-12 오전 4 37 47" src="https://user-images.githubusercontent.com/57285121/121740357-f2147980-cb37-11eb-9b53-94ab20dce976.png">
    
-> * user : nginx 사용자   
+> * user : nginx 사용자. nginx 웹 서버를 동작시키는 사용자 기술   
 > * worker_processes : worker process의 개수를 지정   
 > * error_log : 에러 로그가 기록될 파일의 경로를 설정   
-> * pid : process ID가 기록될 파일   
+> * pid : nginx PID가 기록된 파일   
 * events 블록
       
 <img width="284" alt="스크린샷 2021-06-12 오후 2 21 18" src="https://user-images.githubusercontent.com/57285121/121765947-77744a00-cb89-11eb-8655-531cbffd3930.png">
@@ -53,7 +53,7 @@ Nginx Web Server Set
 ## Nginx 수동 설치하기
 
 1. nginx 홈페이지에서 wget 명령어로 사용 가능한 최신 버전 압축파일 다운로드(Stable version)   
-> * 설치 링크 : [nginx]:http://nginx.org/en/download.html   
+> * 설치 링크 : http://nginx.org/en/download.html   
 > * 설치 명령어 : ``$ wget http://nginx.org/download/nginx-1.20.1.tar.gz``   
    
 <img width="767" alt="스크린샷 2021-06-30 오후 5 35 33" src="https://user-images.githubusercontent.com/57285121/123929243-9e27e280-d9c9-11eb-913f-bc8431e3c0f0.png">
@@ -66,18 +66,18 @@ Nginx Web Server Set
 
 2-1. openSSL 설치
 * openSSL : SSL 오픈소스 라이브러리화   
-> * 설치 링크 : [openssl]:https://www.openssl.org/source/
+> * 설치 링크 : https://www.openssl.org/source/
 > * 설치 명령어 : ``$ wget https://www.openssl.org/source/openssl-3.0.0-beta1.tar.gz``   
 
 2-2. PCRE 설치
 * pcre2는 컴파일 에러가 뜨기 때문에 pcre를 사용
 * 최신 버전의 pcre 다운로드(나는 8.45)   
-> * 설치 링크 : [pcre]:https://sourceforge.net/projects/pcre/files/pcre/   
+> * 설치 링크 : https://sourceforge.net/projects/pcre/files/pcre/   
 > * 설치 명령어 : ``$ wget https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.gz``
 
 2-3. zlib 설치
 * zlib : 데이터 압축 라이브러리   
-> * 설치 링크 : [zlib]:https://zlib.net/fossils/   
+> * 설치 링크 : https://zlib.net/fossils/   
 > * 설치 명령어 : ``$ wget https://zlib.net/fossils/zlib-1.2.11.tar.gz``
 
 3. 압축 해제
@@ -114,8 +114,15 @@ Nginx Web Server Set
 * /usr/lib/systemd/system에 nginx.service 파일 생성
 * nginx 서비스 유닛에 다음과 같은 항목 작성
    
-<img width="737" alt="스크린샷 2021-07-01 오후 5 45 32" src="https://user-images.githubusercontent.com/57285121/124094866-22df3300-da94-11eb-8945-4adf32abe170.png">
-   
+ <img width="477" alt="스크린샷 2021-07-01 오후 11 11 04" src="https://user-images.githubusercontent.com/57285121/124138445-9d727780-dac1-11eb-80aa-39d9bdaa7182.png">
+  
+5-1. 서비스 유닛 수동 등록을 위한 Nginx 명령어
+* ``$ nginx`` : nginx 시작
+* ``$ nginx -s stop`` : nginx 정지
+* ``$ nginx -s reload`` : nginx 리로드
+* ``$ nginx -t`` : nginx 설정파일 체크
+* ``$ nginx -v`` : nginx 버전 확인
+
 6. 테스트
 * ``$ systemctl start nginx``
 * 만약 시작이 되지 않는다면 ``$ journalctl -xe``로 오류 내용 확인
@@ -143,4 +150,39 @@ Nginx Web Server Set
 <img width="404" alt="스크린샷 2021-07-01 오후 6 57 33" src="https://user-images.githubusercontent.com/57285121/124105476-342d3d00-da9e-11eb-95b3-0de257dd4611.png">
    
 * 접속 성공
+
+## 포트 번호 변경
+* nginx 웹 서버의 포트 번호를 18080으로 변경
+* ~/nginx/conf/nginx.conf의 http 블록 내 server 블록에 'listen'을 18080로 변경
+   
+<img width="268" alt="스크린샷 2021-07-01 오후 11 14 06" src="https://user-images.githubusercontent.com/57285121/124138868-0a860d00-dac2-11eb-9b27-fe25d2b9414f.png">
+   
+* 포트번호 허용(영구적)
+* ``$ firewall-cmd --permanent --add-port=18080/tcp``
+   
+<img width="442" alt="스크린샷 2021-07-01 오후 11 15 26" src="https://user-images.githubusercontent.com/57285121/124139138-4c16b800-dac2-11eb-97bf-7595ede7b855.png">
+   
+* 포트번호 18080으로 접속
+   
+<img width="403" alt="스크린샷 2021-07-01 오후 11 16 23" src="https://user-images.githubusercontent.com/57285121/124139213-5c2e9780-dac2-11eb-81a2-cb97fe76f92d.png">
+   
+## 로그 경로 변경
+* access_log와 error_log 경로 변경
+* ~/nginx/conf/nginx.conf의 http 블록 내에 access_log와 error_log의 경로를 변경
+   
+<img width="537" alt="스크린샷 2021-07-02 오전 12 47 20" src="https://user-images.githubusercontent.com/57285121/124153131-11674c80-dacf-11eb-9df2-63eead1e39be.png">
+   
+* nginx 재시작 후 확인 : ``$ systemctl reload nginx``
+   
+<img width="766" alt="스크린샷 2021-07-02 오전 12 48 44" src="https://user-images.githubusercontent.com/57285121/124153324-4378ae80-dacf-11eb-8232-d28e58a41d7c.png">
+   
+* 로그 경로 변경
+
+## 도메인으로 접속
+
+ 
+
+
+
+
 
