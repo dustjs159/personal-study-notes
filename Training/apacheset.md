@@ -9,16 +9,8 @@ Apache Web Server Set
 
 1. Apache 설치
    
-`yum install httpd`
+``$ yum install httpd``
 
-## Apache 수동 설치
-
-1. gcc 컴파일러 설치
-   
-`yum install gcc*`
-   
-2. 
-   
 # Apache httpd 디렉토리 구조와 구성 요소
 * /etc/httpd 확인
    
@@ -95,10 +87,104 @@ Apache Web Server Set
 ## /etc/httpd/modules
 * 설치되어 있는 모듈들
 
+
+## Apache 수동 설치하기
+
+1. Apache 홈페이지에서 wget 명령어로 사용 가능한 최신 버전 압축파일 다운로드(Stable Release)   
+> * 설치 링크 :  http://httpd.apache.org/download.cgi  
+> * 설치 명령어 : ``$ wget https://mirror.navercorp.com/apache//httpd/httpd-2.4.48.tar.gz``   
+  
+<img width="722" alt="스크린샷 2021-07-02 오후 5 48 16" src="https://user-images.githubusercontent.com/57285121/124248319-b0d32080-db5d-11eb-9965-71398dda5d46.png"> 
+   
+2. 추가 라이브러리 설치
+* Apache를 컴파일 설치하기 위해서는 몇 가지의 라이브러리 추가 설치가 필요함
+* apr
+* apr-util
+* pcre
+
+2-1. apr 설치
+* APR(Apache Portable Runtime) : apache 웹 서버 지원 라이브러리    
+> * 설치 링크 : http://mirror.apache-kr.org/apr/   
+> * 설치 명령어 : ``$ wget http://mirror.apache-kr.org/apr/apr-1.7.0.tar.gz``   
+
+2-2. apr-util 설치
+* apr과 함께 설치
+> * 설치 링크 : http://mirror.apache-kr.org/apr/   
+> * 설치 명령어 : ``$ wget http://mirror.apache-kr.org/apr/apr-util-1.6.1.tar.gz``
+
+2-3. pcre 설치
+* pcre2는 컴파일 에러가 뜨기 때문에 pcre를 사용   
+> * 설치 링크 : https://ftp.pcre.org/pub/pcre/
+> * 설치 명령어 : ``$ wget https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.gz``
+
+<img width="594" alt="스크린샷 2021-07-02 오후 5 59 28" src="https://user-images.githubusercontent.com/57285121/124249864-40c59a00-db5f-11eb-83ac-c0e58c872e3f.png">
+   
+3. 압축 해제
+* 확장자가 .tar.gz로 되어있는 압축파일들을 해제      
+* httpd 압축 파일을 먼저 해제한 후 그 해당 디렉토리 내에 apr, apr-util, pcre 순서로 압축 해제
+> * 압축 해제 명령어 : ``$ tar -xvf <압축파일>``
+   
+4. 소스 패키지 설치
+* 소스 패키지 설치는 confiugre / make / make install 세 단계로 진행
+
+4-0. c언어 컴파일러 gcc패키지 설치
+* c언어로 짜여진 소스 코드를 컴파일 하기위한 gcc 패키지 설치   
+> * ``$ yum install gcc*``   
+
+* 별도의 apr, apr-util, pcre 디렉토리 생성   
+> * /home/yys/apps   
+> * ``$ mkdir apr, apr-util, mypcre``   
+
+4-1. apr
+> * ``$ cd apr-1.7.0``   
+> * ``$ ./configure --prefix=/home/yys/apps/apr``   
+> * cannot remove 'libtoolT' 발생 시 ``$ cp -arp libtool libtoolT``   
+> * ``$ make``   
+> * ``$ make install``   
+
+4-2. apr-util   
+> * ``$ cd apr-util-1.6.1``   
+> * ``$ ./configure --prefix=/home/yys/apps/apr-util --with-apr=/home/yys/apps/apr``   
+> * ``$ make``   
+> * #include <expat.h> 발생 시 'expat-devel' 설치 : ``$ yum install expat-devel``   
+> * ``$ make install``
+
+4-3. pcre   
+> * ``$ cd pcre-8.45``   
+> * ``$ ./configure --prefix=/home/yys/apps/mypcre``   
+> * ``$ make``   
+> * ``$ make install``   
+
+4-4. apr, apr-util 파일을 /home/yys/apps/httpd-2.4.48/srclib 디렉토리로 이동   
+> * ``$ mv apr-1.7.0 /home/yys/apps/httpd-2.4.48/srclib``   
+> * ``$ mv apr-util-1.6.1 /home/yys/apps/httpd-2.4.48/srclib``   
+
+4-5. httpd   
+> * ``$ cd /home/yys/apps/httpd-2.4.48``    
+> * ``$ ./configure --prefix=/home/yys/apps/apache --with-included-apr --with-apr=/home/yys/apps/httpd-2.4.34/srclib/apr/ --with-apr-util=/home/yys/apps/httpd-2.4.34/srclib/apr-util/ --with-pcre=/home/yys/apps/mypcre``
+   
+<img width="438" alt="스크린샷 2021-07-02 오후 8 42 27" src="https://user-images.githubusercontent.com/57285121/124269585-05829580-db76-11eb-93cc-31123a4f02b5.png">
+   
+5. 서비스 유닛 수동 등록
+* 이렇게 설치까지는 완료되었으나 서비스 등록이 되어있지 않아 관리가 어렵다.
+* ``$ systemctl status httpd``로 httpd 서비스 확인이 되지 않음
+* 서비스 유닛을 수동으로 등록해줘야 함
+* /usr/lib/systemd/system에 httpd.service 파일 생성
+* httpd 서비스 유닛에 다음과 같은 항목 작성
+   
+  
+5-1. 서비스 유닛 수동 등록을 위한 httpd 명령어
+* ``$ httpd -k start`` : httpd 시작
+* ``$ httpd -k stop`` : httpd 정지
+* ``$ httpd -k reload`` : httpd 리로드
+* ``$ httpd -t`` : httpd 설정파일 체크
+
+
 ## 포트 번호 18080으로 변경
+
 1. firewall-cmd 명령어로 허용할 port 추가   
-> * `firewall-cmd --permanent --zone=public --add-port=18080/tcp`   
-> * 확인 : `firewall-cmd --list-all`   
+> * ``firewall-cmd --permanent --zone=public --add-port=18080/tcp``   
+> * 확인 : ``firewall-cmd --list-all``   
    
 <img width="481" alt="스크린샷 2021-06-26 오전 12 06 22" src="https://user-images.githubusercontent.com/57285121/123444886-580e0000-d612-11eb-91b0-c23d0b63048e.png">
    
