@@ -1,7 +1,7 @@
 TCP & UDP
 =================================
 ## Summary
-- Last Updated : 21.06.25 Fri   
+- Last Updated : 21.07.02 Fri   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -89,13 +89,13 @@ TCP & UDP
 
 ## TCP Keep-Alive
    
-<img width="264" alt="스크린샷 2021-06-26 오전 12 44 05" src="https://user-images.githubusercontent.com/57285121/123450358-9e199280-d617-11eb-9b18-4b25a2fc35fd.png">
+<img width="688" alt="스크린샷 2021-07-02 오후 4 19 59" src="https://user-images.githubusercontent.com/57285121/124236390-5af87b80-db51-11eb-949c-349bbba30a27.png">
    
 * 3-way handshake를 통해 연결된 세션을 없애지 않고 계속 사용하는 방식
-* 일정 시간이 지나면 연결된 세션이 살아있는지 확인하기 위해 연결을 유지하길 원하는 쪽에서 아주 작은 양의 패킷 전송 
-* 3-way handshake를 통해 Keep Alive 타이머를 설정하고, 타이머가 0에 도달하면 연결되어 있던 상대에게 Keep Alive Probe 패킷을 보냄
-* 이 때 Probe 패킷(빈 껍데기 패킷)을 상대방에게 전송하고, 상대방이 연결을 유지하고 싶다면 응답으로 Probe패킷을 다시 전송하여 연결 유지 
-* OS 측면에서의 제어
+* 일정 시간이 지나면 연결된 세션이 살아있는지 확인하기 위해 연결을 유지하길 원하는 쪽에서 아주 작은 양의 패킷 전송(클라이언트, 서버 둘 중 하나라도 Keep-Alive를 사용하면 세션 유지 가능)
+* 3-way handshake 과정에서 타이머 설정
+* 서로 Keep-Alive 확인을 위한 작은 패킷(Payload가 없는 껍데기 ACK 패킷)을 주고 받은 후, 타이머의 값이 0이되면 다시 패킷을 전송하여 설정한 타이머 값으로 다시 조정
+* 설정한 타이머의 값 주기로 종단 간 연결을 유지하는 것이 주 목적
 
 # UDP(User Datagram Protocol)
 * 비연결형 서비스, 데이터그램 방식을 사용하여 패킷을 교환
