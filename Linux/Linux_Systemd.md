@@ -1,7 +1,7 @@
 Linux Systemd 
 ====================================
 ## Summary
-- Last Updated : 21.06.29 Tue   
+- Last Updated : 21.07.01 Thu   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -22,8 +22,8 @@ Linux Systemd
 * 유닛에 대한 일반적인 정보들을 작성
 * Description : 유닛의 이름과 간단한 설명. systemd가 구별할 수 있어야 함
 * Documentation : 유닛의 구성과 관련이 있는 문서표시
-* After : 현재 유닛이 실행된 후 실행되는 유닛들의 순서 목록
-* Before : 현재 유닛이 실행되기 전 실행되어야 할 유닛들의 순서 목록
+* After : 현재 유닛이 **실행되기 전 실행되어야 할 유닛**들의 순서 목록(낚시 주의)
+* Before : 현재 유닛이** 실행된 후 실행할 유닛**들의 순서 목록(헷갈림 주의)
 * Wants : 의존성 관련 옵션. 작성된 유닛들이 전부 실행되지 않더라도 현재 유닛 실행 가능
 * Requires : 의존성 관련 옵션. 작성된 유닛들이 모두 실행되어야 현재 유닛이 실행됨
 
@@ -44,19 +44,22 @@ Linux Systemd
 * 서비스 유닛. 'Service 유닛명.service'
 
 ### Service Unit의 Service 섹션
-* Type : 유닛의 타입 선언   
-> * simple(default) : systemd가 실행될 때 ExecStart가 부모 프로세스가 됨
-> * notify : simple
-> * forking
-> * oneshot
-> * dbus
-> * idle
-* EnvironmentFile : 서비스 유닛의 환경 설정 파일
-* ExecStart
-* ExecReload
-* KillMode
-* Restart
-* RestartSec
+* Type : 유닛이 시작되는 유형 선언. ExecStart에 영향을 줌   
+> * simple(default) : systemd가 실행될 때 ExecStart가 메인 프로세스가 됨   
+> * notify : simple과 비슷. 유닛 작동 시 systmed에 시그널 전송 후 작동   
+> * forking : 해당 유닛의 자식 프로세스까지 생성이 완료 되어야 systemd가 유닛이 작동되었다고 인식   
+> * dbus : DBUS 준비 완료 이후에 유닛 작동   
+* **EnvironmentFile** : 서비스 유닛의 환경 설정 파일(config)의 경로
+* ExecStartPre : ExecStart 전에 실행할 명령어나 유닛의 절대경로
+* **ExecStart** : 실행할 명령어나 유닛의 스크립트가 위치한 절대경로. ``$ systemctl start <서비스명>``
+* ExecStartPost : ExecStart 후에 실행할 명령어나 유닛의 절대경로
+* ExecStop : 유닛이 중지될 때 필요한 명령어나 스크립트의 절대경로. ``$ systemctl stop <서비스명>``
+* ExecReload : 리로드를 위한 명령어나 스크립트의 절대경로.``$ systemctl reload <서비스명>``
+* KillMode : 유닛의 프로세스가 어떻게 중지되는지 결정(KillMode=process는 메인 프로세스만 중지)
+* Restart   
+> * on-failure : 유닛의 종료상태가 0이 아닌 경우(exit!=0, 성공적인 종료상태가 아닐 경우) 유닛 재시작   
+> * on-success : 유닛의 종료상태가 0인 경우(exit==0, 성공적인 종료 상태일 경우) 유닛 재시작   
+* RestartSec : 서비스 재시작 전 sleep 상태 두는 시간
 
 ## Target Unit
 * 시스템 부팅환경과 관련된 유닛. 'Target 유닛명.target'
