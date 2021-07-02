@@ -118,6 +118,12 @@ HTTP & HTTPS
 * 클라이언트의 요청이 많아지면 네트워크의 병목현상 발생
 * HTTP에서 세션의 수립과정에서 Keep-Alive의 Timeout을 정해놓고 해당 시간동안에는 연결을 끊지 않고 유지함
 * 네트워크 병목현상을 어느정도 해소할 수 있음
+* Keep-Alive Timeout 동안 연결을 유지하고, Timeout이 지난 후에도 요청이 없으면 세션 해제
+* TCP Keep-Alive의 타이머가 설정되어 있어도 HTTP Keep-Alive의 Timeout이 설정되어 있다면 HTTP Keep-Alive의 Timout에 맞춰 연결을 종료함(우선 순위가 TCP Keep-Alive의 타이머보다 HTTP-Keep Alive의 Timeout이 더 우선)
+* TCP Keep-Alive가 3-way handshake 과정에서 설정한 타이머 값 주기로 서버와 클라이언트 중 연결을 원하는 쪽에서 Keep-Alive를 요청.
+* HTTP Keep-Alive는 설정한 Timeout이 종료되면 연결을 종료. 주기적으로 Keep-Alive를 설정하기 위해서는 Timeout이 종료될 때마다 다시 Timeout을 설정하여 연결을 해야함
+* 웹 애플리케이션 측면에서 웹 브라우저와 웹 서버간 최대한 연결을 유지하는 것이 주 목적
+
  
 # HTTPS(HyperText Transfer Protocol Secure)
 * HTTP의 보얀 취약점을 개선하기 위해 보안 기능을 추가한 프로토콜   
