@@ -1,7 +1,7 @@
 Linux Network 
 ====================================
 ## Summary
-- Last Updated : 21.06.26 Sat   
+- Last Updated : 21.07.02 Fri   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -91,8 +91,13 @@ Linux Network
 <img width="685" alt="스크린샷 2021-06-26 오전 4 25 27" src="https://user-images.githubusercontent.com/57285121/123475569-8ac9ef80-d636-11eb-9ce0-ef3e7666711d.png">
    
 * 두 개 이상의 네트워크 장치를 논리적으로 묶어 사용하는 방식
+* NetworkManager 데몬이 제공하는 본딩 옵션을 nmcli 명령어로 제어
 * 대역폭 확장 가능
 * 주로 **이중화**목적으로 사용
+
+
+
+
 
 ## netstat
 * network statistics   
