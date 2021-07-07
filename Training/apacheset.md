@@ -97,16 +97,16 @@ Apache Web Server Set
    
 <img width="152" alt="스크린샷 2021-07-07 오후 2 20 20" src="https://user-images.githubusercontent.com/57285121/124704105-789d5a80-df2e-11eb-9b73-664facf5cdda.png">
    
-5-2. httpd 명령어
+5-2. apachectl 명령어
 * 경로는 /usr/local/apache/bin      
-> * ``$ ./httpd -k start`` : httpd 시작   
-> * ``$ ./httpd -k stop`` : httpd 정지   
-> * ``$ ./httpd -k restart`` : httpd 재시작   
-> * ``$ ./httpd -t`` : httpd 설정파일 체크   
-> * ``$ ./httpd -v`` : httpd 버전 확인   
+> * ``$ ./apachectl start`` : httpd 시작   
+> * ``$ ./apachectl stop`` : httpd 정지   
+> * ``$ ./apachectl restart`` : httpd 재시작   
+> * ``$ ./apachectl -t`` : httpd 설정파일 체크   
+> * ``$ ./apachectl -v`` : httpd 버전 확인   
 
 5-3. httpd 시작 및 포트확인   
-* ``$ ./httpd -k start``
+* ``$ ./apachectl start``
 * ``$ netstat -nlpt``
    
 <img width="871" alt="스크린샷 2021-07-07 오후 2 15 28" src="https://user-images.githubusercontent.com/57285121/124703879-13e20000-df2e-11eb-9969-41b99e70eadb.png">
