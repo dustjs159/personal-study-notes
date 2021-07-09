@@ -1,56 +1,17 @@
-Nginx Web Server Set
+Nginx Install & Set
 =================================
 ## Summary
-- Last Updated : 21.07.01 Thu    
+- Last Updated : 21.07.10 Sat    
 - Updated by : 윤연선
 -----------------------------------
+## Nginx 설치과정과 구성환경 및 실습 테스트
+* 본 글은 CentOS 8 환경에서 작성했습니다. 
+---------------------------------
 
-# Nginx Setting
-
-1. ``yum install nginx``
+## Nginx 패키지 설치
+* ``$ yum install nginx``
    
-# nginx 디렉토리 구조와 구성 요소
-* /etc/nginx
-   
-<img width="608" alt="스크린샷 2021-06-12 오전 4 17 10" src="https://user-images.githubusercontent.com/57285121/121738345-102caa80-cb35-11eb-996d-9e203bf72643.png">
-   
-## /etc/nginx/nginx.conf
-* Directive : nginx config 파일 구성 요소
-* Directive는 Block 혹은 Contexts 단위의 그룹으로 구성
-* Directive는 괄호 블록('{ }')이나 세미콜론(';')으로 끝나야함
-* 웹 서버의 기본적인 동작을 정의하는 core directive
-   
-<img width="335" alt="스크린샷 2021-06-12 오전 4 37 47" src="https://user-images.githubusercontent.com/57285121/121740357-f2147980-cb37-11eb-9b53-94ab20dce976.png">
-   
-> * user : nginx 사용자. nginx 웹 서버를 동작시키는 사용자 기술   
-> * worker_processes : worker process의 개수를 지정   
-> * error_log : 에러 로그가 기록될 파일의 경로를 설정   
-> * pid : nginx PID가 기록된 파일   
-* events 블록
-      
-<img width="284" alt="스크린샷 2021-06-12 오후 2 21 18" src="https://user-images.githubusercontent.com/57285121/121765947-77744a00-cb89-11eb-8655-531cbffd3930.png">
-   
-> * worker_connections : worker process 하나당 처리할 connection의 수   
-* http 블록
-   
-<img width="700" alt="스크린샷 2021-06-13 오전 12 08 32" src="https://user-images.githubusercontent.com/57285121/121780484-7f5cda00-cbdb-11eb-92e0-561d7ba7e9c1.png">
-   
-> * 서버의 기본값들을 설정   
-> * http 블록의 설정들은 server 블록과 location 블록에도 적용됨   
-* server 블록
-   
-<img width="578" alt="스크린샷 2021-06-13 오전 12 42 15" src="https://user-images.githubusercontent.com/57285121/121781534-35c2be00-cbe0-11eb-90e0-3bac1576e071.png">
-   
-> * 하나의 웹 사이트를 선언하는데 사용   
-> * 여러 server 블록으로 하나의 호스트에서 여러 서버를 운영할 수 있음**(가상호스트)**   
-* location 블록
-   
-<img width="373" alt="스크린샷 2021-06-13 오전 12 43 35" src="https://user-images.githubusercontent.com/57285121/121781583-6571c600-cbe0-11eb-9027-6b4ee922f407.png">
-   
-> * 웹사이트의 URI를 처리하는데 사용
-
-
-## Nginx 수동 설치하기
+## Nginx 수동 설치
 
 1. nginx 홈페이지에서 wget 명령어로 사용 가능한 최신 버전 압축파일 다운로드(Stable version)   
 > * 설치 링크 : http://nginx.org/en/download.html   
@@ -115,13 +76,14 @@ Nginx Web Server Set
 * nginx 서비스 유닛에 다음과 같은 항목 작성
    
  <img width="477" alt="스크린샷 2021-07-01 오후 11 11 04" src="https://user-images.githubusercontent.com/57285121/124138445-9d727780-dac1-11eb-80aa-39d9bdaa7182.png">
-  
-5-1. 서비스 유닛 수동 등록을 위한 Nginx 명령어
-* ``$ nginx`` : nginx 시작
-* ``$ nginx -s stop`` : nginx 정지
-* ``$ nginx -s reload`` : nginx 리로드
-* ``$ nginx -t`` : nginx 설정파일 체크
-* ``$ nginx -v`` : nginx 버전 확인
+   
+6. Nginx 명령어
+* Nginx 데몬 제어   
+> * ``$ ./nginx`` : nginx 시작   
+> * ``$ ./nginx -s stop`` : nginx 정지   
+> * ``$ ./nginx -s reload`` : nginx 리로드   
+> * ``$ ./nginx -t`` : nginx 설정파일 체크   
+> * ``$ ./nginx -v`` : nginx 버전 확인
 
 6. 테스트
 * ``$ systemctl start nginx``
@@ -179,10 +141,55 @@ Nginx Web Server Set
 * 로그 경로 변경
 
 ## 도메인으로 접속
+* /etc/hosts를 수정하여 로컬 내에서만 접근 가능하도록 IP 주소와 도메인을 매핑
+1. IP 주소와 도메인 작성
+   
+<img width="709" alt="스크린샷 2021-07-10 오전 3 04 08" src="https://user-images.githubusercontent.com/57285121/125119058-80761e00-e12b-11eb-9711-cd35305c71b5.png"> 
+   
+2. 네트워크 재시작
+> * ``$ systemctl restart NetworkManager``   
 
- 
-
-
-
-
+3. 접속 테스트
+   
+<img width="519" alt="스크린샷 2021-07-10 오전 3 06 46" src="https://user-images.githubusercontent.com/57285121/125119300-dd71d400-e12b-11eb-97a2-a7f8ceafa542.png">
+   
+## nginx 디렉토리 구조와 구성 요소
+* /etc/nginx
+   
+<img width="608" alt="스크린샷 2021-06-12 오전 4 17 10" src="https://user-images.githubusercontent.com/57285121/121738345-102caa80-cb35-11eb-996d-9e203bf72643.png">
+   
+## /etc/nginx/nginx.conf
+* Directive : nginx config 파일 구성 요소
+* Directive는 Block 혹은 Contexts 단위의 그룹으로 구성
+* Directive는 괄호 블록('{ }')이나 세미콜론(';')으로 끝나야함
+* 웹 서버의 기본적인 동작을 정의하는 core directive
+   
+<img width="335" alt="스크린샷 2021-06-12 오전 4 37 47" src="https://user-images.githubusercontent.com/57285121/121740357-f2147980-cb37-11eb-9b53-94ab20dce976.png">
+   
+> * user : nginx 사용자. nginx 웹 서버를 동작시키는 사용자 기술   
+> * worker_processes : worker process의 개수를 지정   
+> * error_log : 에러 로그가 기록될 파일의 경로를 설정   
+> * pid : nginx PID가 기록된 파일   
+* events 블록
+      
+<img width="284" alt="스크린샷 2021-06-12 오후 2 21 18" src="https://user-images.githubusercontent.com/57285121/121765947-77744a00-cb89-11eb-8655-531cbffd3930.png">
+   
+> * worker_connections : worker process 하나당 처리할 connection의 수   
+* http 블록
+   
+<img width="700" alt="스크린샷 2021-06-13 오전 12 08 32" src="https://user-images.githubusercontent.com/57285121/121780484-7f5cda00-cbdb-11eb-92e0-561d7ba7e9c1.png">
+   
+> * 서버의 기본값들을 설정   
+> * http 블록의 설정들은 server 블록과 location 블록에도 적용됨   
+* server 블록
+   
+<img width="578" alt="스크린샷 2021-06-13 오전 12 42 15" src="https://user-images.githubusercontent.com/57285121/121781534-35c2be00-cbe0-11eb-90e0-3bac1576e071.png">
+   
+> * 하나의 웹 사이트를 선언하는데 사용   
+> * 여러 server 블록으로 하나의 호스트에서 여러 서버를 운영할 수 있음**(가상호스트)**   
+* location 블록
+   
+<img width="373" alt="스크린샷 2021-06-13 오전 12 43 35" src="https://user-images.githubusercontent.com/57285121/121781583-6571c600-cbe0-11eb-9027-6b4ee922f407.png">
+   
+> * 웹사이트의 URI를 처리하는데 사용
 

@@ -1,16 +1,19 @@
-Apache Web Server Set
+Apache Install & Set
 =================================
 ## Summary
 - Last Updated : 21.07.07 Wed    
 - Updated by : 윤연선
 -----------------------------------
+## Apache 설치과정과 구성환경 및 실습 테스트
+* 본 글은 CentOS 8 환경에서 작성했습니다. 
+---------------------------------
 
-# Apache Setting
+## 1. Apache 패키지 설치
 
-* Apache 패키지 설치   
+* yum을 사용하여 Apache 패키지 설치   
 > * ``$ yum install httpd``
 
-## Apache 수동 설치하기
+## 2. Apache 수동 설치하기
 * ``$ cd /usr/local/src``
 
 1. Apache 홈페이지에서 wget 명령어로 사용 가능한 최신 버전 압축파일 다운로드(Stable Release)   
@@ -101,8 +104,10 @@ Apache Web Server Set
 * 경로는 /usr/local/apache/bin      
 > * ``$ ./apachectl start`` : httpd 시작   
 > * ``$ ./apachectl stop`` : httpd 정지   
+> * ``$ ./apachectl status`` : httpd 상태 확인   
+> * ``$ ./apachectl graceful`` : httpd reload   
 > * ``$ ./apachectl restart`` : httpd 재시작   
-> * ``$ ./apachectl -t`` : httpd 설정파일 체크   
+> * ``$ ./apachectl configtest`` : httpd 설정파일 체크   
 > * ``$ ./apachectl -v`` : httpd 버전 확인   
 
 5-3. httpd 시작 및 포트확인   
@@ -126,7 +131,7 @@ Apache Web Server Set
    
 <img width="316" alt="스크린샷 2021-07-07 오후 2 27 31" src="https://user-images.githubusercontent.com/57285121/124704709-78518f00-df2f-11eb-841d-de97e453d92a.png">
    
-# Apache httpd 디렉토리 구조와 구성 요소
+## Apache httpd 디렉토리 구조와 구성 요소
 * /etc/httpd 확인
    
 <img width="715" alt="스크린샷 2021-06-10 오후 4 05 33" src="https://user-images.githubusercontent.com/57285121/121480115-b24d7500-ca05-11eb-80b9-aa72f667e610.png">
@@ -202,42 +207,55 @@ Apache Web Server Set
 ## /etc/httpd/modules
 * 설치되어 있는 모듈들
 
-
-
-## 포트 번호 18080으로 변경
+# Apache 실습 테스트
+## 포트 번호 변경 (port : 18080)
 
 1. firewall-cmd 명령어로 허용할 port 추가   
-> * ``firewall-cmd --permanent --zone=public --add-port=18080/tcp``   
-> * 확인 : ``firewall-cmd --list-all``   
+> * ``$ firewall-cmd --permanent --zone=public --add-port=18080/tcp``   
+> * reload : ``$ firewall-cmd --list-all``   
    
 <img width="481" alt="스크린샷 2021-06-26 오전 12 06 22" src="https://user-images.githubusercontent.com/57285121/123444886-580e0000-d612-11eb-91b0-c23d0b63048e.png">
-   
-2. semanage 명령어로 port 오픈   
-> * `semanage port -a -t http_port_t -p tcp 18080`   
-> * 확인 : `semanage port -l | grep http_port_t`
-   
-<img width="804" alt="스크린샷 2021-06-26 오전 12 05 04" src="https://user-images.githubusercontent.com/57285121/123444728-2ac15200-d612-11eb-83e0-bcb661d8f0a4.png">
-   
-3. /etc/httpd/conf/httpd.conf 파일의 Listen 지시자에 18080 추가
+
+2. ~/conf/httpd.conf 파일의 Listen 지시자에 18080 추가
    
 <img width="137" alt="스크린샷 2021-06-26 오전 12 11 08" src="https://user-images.githubusercontent.com/57285121/123445605-03b75000-d613-11eb-9244-9e696bfdfb67.png">
    
-4. 결과 확인
+3. 결과 확인
    
 <img width="362" alt="스크린샷 2021-06-26 오전 12 11 40" src="https://user-images.githubusercontent.com/57285121/123445673-16318980-d613-11eb-911f-1091b3dd60fb.png">
    
 ## access / error log 경로 변경
+1. 로그를 생성할 별도의 디렉토리 생성
+* 경로는 /usr/local/apache/mylogs      
+> * ``$ mkdir mylogs``   
 
-1. /etc/httpd/conff/httpd.conf의 CustomLog 지시자의 경로 변경
+2. ~conf/httpd.conf의 CustomLog 지시자의 경로 변경
    
-<img width="486" alt="스크린샷 2021-06-26 오전 12 35 02" src="https://user-images.githubusercontent.com/57285121/123449147-59d9c280-d616-11eb-9ddb-f602d07d4640.png">
+<img width="416" alt="스크린샷 2021-07-09 오후 11 50 38" src="https://user-images.githubusercontent.com/57285121/125096835-77c41e80-e110-11eb-818f-51117d3a0c66.png">
    
-2. ErrorLog 지시자의 경로도 변경
+<img width="300" alt="스크린샷 2021-07-09 오후 11 49 52" src="https://user-images.githubusercontent.com/57285121/125096708-5e22d700-e110-11eb-88a9-8f7bd53a207c.png">
    
-<img width="361" alt="스크린샷 2021-06-26 오전 12 36 23" src="https://user-images.githubusercontent.com/57285121/123449338-8988ca80-d616-11eb-8f8f-e71aa83d5117.png">
+3. 로그 확인
    
-3. 결과 확인
+<img width="758" alt="스크린샷 2021-07-09 오후 11 57 02" src="https://user-images.githubusercontent.com/57285121/125097707-5d3e7500-e111-11eb-9c74-0b129438ce17.png">
    
-<img width="847" alt="스크린샷 2021-06-26 오전 12 33 48" src="https://user-images.githubusercontent.com/57285121/123448955-2eef6e80-d616-11eb-860e-2676324c6ee5.png">
+## 도메인으로 접속하기
+* 리눅스 호스트 파일
+* /etc/hosts
+* DNS보다 먼저 참조하게 하여 외부로 오픈 전 미리 **로컬에서만** 테스트 용도로 사용
+* CentOS의 hosts 기본설정
+   
+<img width="709" alt="스크린샷 2021-07-10 오전 2 07 04" src="https://user-images.githubusercontent.com/57285121/125113358-87009780-e123-11eb-8805-262f3ad8f1f6.png">
+   
+1. 매핑할 IP와 도메인을 설정
+   
+<img width="707" alt="스크린샷 2021-07-10 오전 2 23 28" src="https://user-images.githubusercontent.com/57285121/125115081-d21baa00-e125-11eb-8fb1-98d737b844e2.png">
+   
+2. 네트워크 재시작   
+> * ``$ systemctl restart NetworkManager``   
+
+3. 로컬에서 접속
+   
+<img width="382" alt="스크린샷 2021-07-10 오전 2 46 07" src="https://user-images.githubusercontent.com/57285121/125117290-fb8a0500-e128-11eb-9b3b-6f483f2695e4.png">
    
 
