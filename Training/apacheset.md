@@ -1,7 +1,7 @@
 Apache Install & Set
 =================================
 ## Summary
-- Last Updated : 21.07.07 Wed    
+- Last Updated : 21.07.16 Fri    
 - Updated by : 윤연선
 -----------------------------------
 ## Apache 설치과정과 구성환경 및 실습 테스트
@@ -212,7 +212,7 @@ Apache Install & Set
 
 1. firewall-cmd 명령어로 허용할 port 추가   
 > * ``$ firewall-cmd --permanent --zone=public --add-port=18080/tcp``   
-> * reload : ``$ firewall-cmd --list-all``   
+> * reload : ``$ firewall-cmd --reload``   
    
 <img width="481" alt="스크린샷 2021-06-26 오전 12 06 22" src="https://user-images.githubusercontent.com/57285121/123444886-580e0000-d612-11eb-91b0-c23d0b63048e.png">
 
@@ -243,19 +243,83 @@ Apache Install & Set
 * 리눅스 호스트 파일
 * /etc/hosts
 * DNS보다 먼저 참조하게 하여 외부로 오픈 전 미리 **로컬에서만** 테스트 용도로 사용
+* DNS에 등록되지 않은 사이트를 이용할 때 사용. 대신 로컬에서만.
 * CentOS의 hosts 기본설정
    
 <img width="709" alt="스크린샷 2021-07-10 오전 2 07 04" src="https://user-images.githubusercontent.com/57285121/125113358-87009780-e123-11eb-8805-262f3ad8f1f6.png">
    
+> * 좌측부터 IP, 호스트명(도메인명), Alias 순서   
+
 1. 매핑할 IP와 도메인을 설정
    
-<img width="707" alt="스크린샷 2021-07-10 오전 2 23 28" src="https://user-images.githubusercontent.com/57285121/125115081-d21baa00-e125-11eb-8fb1-98d737b844e2.png">
+<img width="374" alt="스크린샷 2021-07-16 오후 3 43 25" src="https://user-images.githubusercontent.com/57285121/125903957-3bd1a239-d93c-40b1-800a-239ee03699b4.png">
    
+> * 'yysdomain.com' URL로 접속하면 현재 IP인 172.16.123.13로 접속되도록 설정, Alias는 'yys'로 설정   
+
 2. 네트워크 재시작   
 > * ``$ systemctl restart NetworkManager``   
 
-3. 로컬에서 접속
+3. 로컬에서 호스트명과 Alias로 접속
    
 <img width="382" alt="스크린샷 2021-07-10 오전 2 46 07" src="https://user-images.githubusercontent.com/57285121/125117290-fb8a0500-e128-11eb-9b3b-6f483f2695e4.png">
+   
+<img width="307" alt="스크린샷 2021-07-16 오후 3 50 07" src="https://user-images.githubusercontent.com/57285121/125904706-c7300eea-8966-4596-935c-adce44b3bef5.png">
+   
+4. hosts 파일의 변경사항을 확인   
+   
+<img width="690" alt="스크린샷 2021-07-16 오후 4 00 34" src="https://user-images.githubusercontent.com/57285121/125905963-04bd9a68-c847-4416-8e98-080bb615a1a5.png">
+   
+> * ``$ ping 호스트명``
+   
+<img width="689" alt="스크린샷 2021-07-16 오후 4 01 25" src="https://user-images.githubusercontent.com/57285121/125906055-a9d8efff-d8ce-4ac7-b07f-d23b1ea59ccd.png">
+   
+> * ``$ ping 호스트 Alias``   
+> * Alias로 ping을 테스트 해도 호스트명으로 인식   
+
+## 가상 호스트 설정하기
+* 가상 호스트를 구성하여 default 호스트 뿐만 아니라 가상의 호스트들을 구성하여 여러 웹페이지를 출력
+* httpd-vhosts.conf 파일의 기본설정
+   
+<img width="590" alt="스크린샷 2021-07-16 오후 4 36 08" src="https://user-images.githubusercontent.com/57285121/125910299-ee6212ff-e9a1-460e-a447-c98ab36d04bb.png">
+   
+1. /etc/hosts 파일에서 IP 주소와 호스트명(도메인명), Alias를 지정
+   
+<img width="373" alt="스크린샷 2021-07-16 오후 4 39 21" src="https://user-images.githubusercontent.com/57285121/125910705-bc9ff7d8-9d19-4253-8d7f-372f44cfde5a.png">
+   
+2. hosts 파일 변경사항 반영을 위한 NetworkManager 데몬 재시작   
+> * ``$ systemctl restart NetworkManager``
+
+3. httpd-vhosts.conf 파일의 VirtualHost 지시자 설정 변경
+   
+<img width="479" alt="스크린샷 2021-07-16 오후 5 13 43" src="https://user-images.githubusercontent.com/57285121/125915424-45113cc7-5180-41a7-bb9b-c61e74454897.png">
+   
+> * DocumentRoot, ErrorLog/CustomLog, DirectoryIndex는 개별 생성   
+
+4. ~/docs 의 vhost1.html, vhost2.html 내용(출력할 웹 페이지) 입력
+```html
+<html>
+<body>
+<h1> This is Web Page is Vhost1 </h1>
+</body>
+</html>
+```
+> * 두 개 생성. 하나는 Vhost2   
+
+5. 변경사항 반영
+* 가상호스트 httpd.conf 파일에 Include conf/extra/httpd-vhosts.conf 추가
+   
+<img width="342" alt="스크린샷 2021-07-16 오후 5 24 22" src="https://user-images.githubusercontent.com/57285121/125916889-b7192f36-7f50-4813-9034-6ccef6ed8ec9.png">
+    
+6. 접근 권한 설정
+* conf/httpd.conf파일에 다음과 같이 추가
+   
+<img width="325" alt="스크린샷 2021-07-16 오후 5 41 13" src="https://user-images.githubusercontent.com/57285121/125919321-ac8031e1-0b72-4f91-bb47-5b18c9a272d7.png">
+   
+6. 재시작과 테스트   
+> * ``$ ./apachectl graceful``   
+
+<img width="463" alt="스크린샷 2021-07-16 오후 5 43 39" src="https://user-images.githubusercontent.com/57285121/125919670-3658cbd6-3a0c-4c66-bb9d-596d94baa2e6.png">
+   
+<img width="489" alt="스크린샷 2021-07-16 오후 5 43 57" src="https://user-images.githubusercontent.com/57285121/125919719-1e56fac7-f3f0-49d0-b9e9-9fd5ba160289.png">
    
 
