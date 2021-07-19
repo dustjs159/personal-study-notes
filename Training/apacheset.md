@@ -276,50 +276,51 @@ Apache Install & Set
 > * ``$ ping 호스트 Alias``   
 > * Alias로 ping을 테스트 해도 호스트명으로 인식   
 
-## 가상 호스트 설정하기
-* 가상 호스트를 구성하여 default 호스트 뿐만 아니라 가상의 호스트들을 구성하여 여러 웹페이지를 출력
-* httpd-vhosts.conf 파일의 기본설정
+## 가상 호스트(Virtual Host) 설정하기
+* 가상 호스트는 서버에 IP / 도메인 / 포트번호로 접속할 때 각각 다른 웹 사이트를 띄우기 위한 기술
+* 가상 호스트의 구성 방법   
+> * 이름 기반(가장 자주 사용되는 방법)   
+> * 포트 기반   
+> * IP 기반   
+> * 이름- IP 혼합   
+
+* 이름 기반 가상 호스트   
+> * 서버는 하나의 IP 주소에 대해 여러 호스트 이름을 갖고 클라이언트 요청의 Hosts 헤더에 따라 여러 웹 페이지를 호스팅   
+ 
+1. /etc/hosts 파일 수정
+* 호스팅할 서버의 IP 주소와 여러 호스트 이름을 매핑
    
-<img width="590" alt="스크린샷 2021-07-16 오후 4 36 08" src="https://user-images.githubusercontent.com/57285121/125910299-ee6212ff-e9a1-460e-a447-c98ab36d04bb.png">
+<img width="384" alt="스크린샷 2021-07-19 오후 6 32 58" src="https://user-images.githubusercontent.com/57285121/126138500-b8e98181-fb81-486d-a5ab-d0b3777f9958.png">
    
-1. /etc/hosts 파일에서 IP 주소와 호스트명(도메인명), Alias를 지정
-   
-<img width="373" alt="스크린샷 2021-07-16 오후 4 39 21" src="https://user-images.githubusercontent.com/57285121/125910705-bc9ff7d8-9d19-4253-8d7f-372f44cfde5a.png">
-   
-2. hosts 파일 변경사항 반영을 위한 NetworkManager 데몬 재시작   
+* 수정 후 네트워크 재시작   
 > * ``$ systemctl restart NetworkManager``
 
-3. httpd-vhosts.conf 파일의 VirtualHost 지시자 설정 변경
+2. ~/conf/extra/httpd-vhosts.conf 파일 설정
    
-<img width="479" alt="스크린샷 2021-07-16 오후 5 13 43" src="https://user-images.githubusercontent.com/57285121/125915424-45113cc7-5180-41a7-bb9b-c61e74454897.png">
+<img width="502" alt="스크린샷 2021-07-19 오후 6 42 06" src="https://user-images.githubusercontent.com/57285121/126139962-a5df223f-af93-4c6a-a305-eaeaff8452f1.png">
    
-> * DocumentRoot, ErrorLog/CustomLog, DirectoryIndex는 개별 생성   
+> * 여기서 'mydocs', 'mylogs' 디렉토리와 'view.html' 파일은 은 경로에 맞게 생성   
 
-4. ~/docs 의 vhost1.html, vhost2.html 내용(출력할 웹 페이지) 입력
+3. ~/mydocs 의 view.html 내용(출력할 웹 페이지) 입력
 ```html
 <html>
 <body>
-<h1> This is Web Page is Vhost1 </h1>
+<h1>It Virtual Host works!</h1>
 </body>
 </html>
 ```
-> * 두 개 생성. 하나는 Vhost2   
-
 5. 변경사항 반영
-* 가상호스트 httpd.conf 파일에 Include conf/extra/httpd-vhosts.conf 추가
+* ~/conf/httpd.conf 파일에 #Include conf/extra/httpd-vhosts.conf 주석 해제 또는 추가
    
 <img width="342" alt="스크린샷 2021-07-16 오후 5 24 22" src="https://user-images.githubusercontent.com/57285121/125916889-b7192f36-7f50-4813-9034-6ccef6ed8ec9.png">
-    
-6. 접근 권한 설정
-* conf/httpd.conf파일에 다음과 같이 추가
-   
-<img width="325" alt="스크린샷 2021-07-16 오후 5 41 13" src="https://user-images.githubusercontent.com/57285121/125919321-ac8031e1-0b72-4f91-bb47-5b18c9a272d7.png">
    
 6. 재시작과 테스트   
-> * ``$ ./apachectl graceful``   
-
-<img width="463" alt="스크린샷 2021-07-16 오후 5 43 39" src="https://user-images.githubusercontent.com/57285121/125919670-3658cbd6-3a0c-4c66-bb9d-596d94baa2e6.png">
+> * ``$ ./apachectl graceful``
    
-<img width="489" alt="스크린샷 2021-07-16 오후 5 43 57" src="https://user-images.githubusercontent.com/57285121/125919719-1e56fac7-f3f0-49d0-b9e9-9fd5ba160289.png">
+<img width="486" alt="스크린샷 2021-07-19 오후 6 54 14" src="https://user-images.githubusercontent.com/57285121/126141903-43431a2c-ef5a-485f-8384-9d9d968a53e6.png">  
+   
+<img width="430" alt="스크린샷 2021-07-19 오후 6 54 46" src="https://user-images.githubusercontent.com/57285121/126141975-a84db732-c0ce-4fbe-8a46-cd36d41b4045.png">
+   
+<img width="592" alt="스크린샷 2021-07-19 오후 6 56 31" src="https://user-images.githubusercontent.com/57285121/126142244-9b2aee58-a8bf-467d-a0fc-63a480652c29.png">
    
 
