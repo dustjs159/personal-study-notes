@@ -1,7 +1,7 @@
 Shell Script
 ====================================
 ## Summary
-- Last Updated : 21.06.18 Fri   
+- Last Updated : 21.07.20 Tue   
 - Updated by : 윤연선
 -----------------------------------
 
@@ -9,30 +9,16 @@ Shell Script
    
 <img width="592" alt="스크린샷 2021-05-31 오전 1 34 34" src="https://user-images.githubusercontent.com/57285121/120112343-5c303480-c1b0-11eb-8d31-edf15a9edc12.png">
    
-* 명령어 해석기
-* 커널과 사용자 사이에서 사용자가 입력한 명령어를 해석하여 커널로 전달
-* 커널의 처리 결과를 사용자에게 전달
-* Shell에서 명령어를 입력하여 실행 시 Shell이 부모 프로세스가 됨. 즉, 쉘의 PID가 프로세스의 PPID가 됨
+* 사용자와 커널 사이에 위치하여 입력을 커널로 전달
+* 반대로 커널의 출력을 사용자에게 전달
+* 쉘에서 명령어를 입력하여 실행 시 Shell이 부모 프로세스가 됨. 즉, 쉘의 PID가 프로세스의 PPID가 됨
 * 주요 기능 및 역할   
 > * 대화식 사용 : 사용자의 요청을 즉각 처리 및 결과를 출력하는 대화형 구조   
-> * 프로그래밍 가능 : 복잡한 작업을 수행할 수 있도록 일련의 명령어들을 묶어서 사용 가능(Script)   
-* /etc/shells 파일에 현재 사용할 수 있는 shell들의 경로가 설정되어 있음
+> * 프로그래밍 가능 : 복잡한 작업을 수행할 수 있도록 일련의 명령어들을 묶어서 사용 가능(script)   
+* /etc/shells 파일에 현재 사용할 수 있는 쉘들의 경로가 설정되어 있음
    
 <img width="414" alt="스크린샷 2021-05-31 오전 1 37 43" src="https://user-images.githubusercontent.com/57285121/120112441-cd6fe780-c1b0-11eb-89b0-cc6f48ca5d84.png">
    
-## 서브 쉘(Sub Shell) & exit
-* 서브 쉘(Sub Shell) : 한 Shell script에서 실행되는 또다른 Shell scrpit
-* exit : 서브 쉘의 종료 상태를 반환
-* 하나의 Shell script(test10)안에서 실행되는 서브 쉘(test11)과 성공적인 프로세스 종료를 통한(exit 0) 또 다른 서브 쉘(test12)
-   
-<img width="283" alt="스크린샷 2021-06-18 오후 3 12 12" src="https://user-images.githubusercontent.com/57285121/122515287-2b714b80-d048-11eb-8a7d-734a22310cb2.png">
-   
-<img width="125" alt="스크린샷 2021-06-18 오후 3 12 35" src="https://user-images.githubusercontent.com/57285121/122515372-50fe5500-d048-11eb-86f3-d982d08f5371.png">
-   
-<img width="205" alt="스크린샷 2021-06-18 오후 3 13 37" src="https://user-images.githubusercontent.com/57285121/122515397-59ef2680-d048-11eb-8511-7f9a190fc66a.png">
-   
-<img width="341" alt="스크린샷 2021-06-18 오후 3 16 23" src="https://user-images.githubusercontent.com/57285121/122515416-61163480-d048-11eb-942f-4af10f2e57ca.png">
-
 ## Shell의 종류
 * sh(bourne shell)   
 > * 유닉스의 가장 기본적인 shell   
@@ -62,18 +48,52 @@ Shell Script
 > * csh 기반   
 > * tcsh 스크립트 안에 함수를 정의할 수 없음   
 
-## Shell 환경 변수
-* 프로그램을 간편하게 실행시키기 위한 변수를 설정
-* Shell에서 환경 변수 출력 명령어 : ```echo $환경변수```
-* 로컬 환경 변수 값 등록 : ```set 환경변수=값```
-* 전역 환경 변수 값 등록 : ```export 환경변수=값```   
-> * 영구적으로 등록 : .bashrc(bash) / .zshrc(zsh)에 ```export 환경변수=값```   
-* 환경 변수 값 삭제 : ```unset 환경변수```
-* 환경 변수 목록 출력   
-> * 로컬 환경 변수 : ```set```   
-> * 전역 환경 변수 : ```printenv```   
+# Shell 설정 파일
+* Shell을 보다 편리하게 사용하기 위한 설정 파일들
+* **환경변수** 설정
+* 실행 순서는 /etc/profile -> .bash_profile -> .bashrc -> /etc/bashrc -> .bash_history
 
-* 주요 환경 변수
+## .bashrc, /etc/bashrc
+   
+<img width="339" alt="스크린샷 2021-07-20 오전 1 45 37" src="https://user-images.githubusercontent.com/57285121/126196629-915cf2c1-4966-4c1f-bfc3-60edfd9ee73d.png">
+   
+* .bashrc : 리눅스 부팅시 **특정 사용자**의 bash 쉘에서 사용할 **alias 지정**(영구적으로)   
+> * 만약 root 계정으로 .bashrc파일에 alias를 등록하고 다른 계정으로 접속하여 확인하면 반영이 안되어있음   
+> * **사용자 alias**   
+* /etc/bashrc : 모든 사용자들에게 변경사항 공통 적용 가능   
+> * root 계정으로 /etc/bashrc 파일에 alias를 등록하고 다른 계정으로 접속해도 반영 됨   
+> * **시스템 alias**   
+
+## .bash_profile, /etc/profile
+   
+<img width="438" alt="스크린샷 2021-07-20 오전 1 53 09" src="https://user-images.githubusercontent.com/57285121/126197517-0ec1666b-285c-4546-8d56-eedcc5ebc1f4.png">
+   
+* .bash_profile : 프로세스 실행에 있어서 사용되는 **사용자 환경변수** 설정.   
+> * .bashrc에 등록한 alias도 환경변수라고 할 수 있음(사용자 환경변수)   
+* /etc/profile : **시스템 환경변수** 설정   
+* **.bashrc, /etc/bashrc에는 alias**를 작성하고 **.bash_profile, /etc/profile에는 alias를 제외한 환경변수와 스타트업 프로그램**을 작성
+* 시스템 내 모든 사용자에게 적용하기 위해선**/etc/**에 작성
+
+## .bash_history
+* shell에 사용자가 입력했었던 명령어의 히스토리를 저장
+* 사용자가 접속을 종료할 때 저장하고, 다시 접속했을 때 .bash_history에서 명령어 목록을 가져옴
+
+## .bash_logout
+* 사용자가 로그아웃시 실행할 작업들을 작성
+
+# Shell 환경 변수
+* 프로세스를 실행하는데 필요한 변수를 설정
+* Shell에서 환경 변수 출력 명령어 : ``$ echo $환경변수``
+* 로컬 환경 변수 값 등록 : ``$ set 환경변수=값``
+* 전역 환경 변수 값 등록 : ``$ export 환경변수=값``   
+> * 영구적으로 등록 : .bashrc(bash) / .zshrc(zsh)에 'export 환경변수=값' 추가   
+> * 등록 후 변경사항 반영 : ``$ source .bashrc / .zshrc``   
+* 환경 변수 값 삭제 : ``$ unset 환경변수``
+* 환경 변수 목록 출력   
+> * 로컬 환경 변수 : ``$ set``   
+> * 전역 환경 변수 : ``$ env``   
+
+## 주요 환경 변수
    
 |환경변수|설명|
 |------|---|
@@ -88,7 +108,21 @@ Shell Script
 |PWD|사용자의 현재 작업 디렉토리|
 |SHELL|로그인해서 사용하는 셸|
 |OSTYPE|운영체제 타입|
+ 
+# 서브 쉘(Sub Shell) & exit
+* 서브 쉘(Sub Shell) : 한 Shell script에서 실행되는 또다른 Shell scrpit
+* exit : 서브 쉘의 종료 상태를 반환
+* 하나의 Shell script(test10)안에서 실행되는 서브 쉘(test11)과 성공적인 프로세스 종료를 통한(exit 0) 또 다른 서브 쉘(test12)
    
+<img width="283" alt="스크린샷 2021-06-18 오후 3 12 12" src="https://user-images.githubusercontent.com/57285121/122515287-2b714b80-d048-11eb-8a7d-734a22310cb2.png">
+   
+<img width="125" alt="스크린샷 2021-06-18 오후 3 12 35" src="https://user-images.githubusercontent.com/57285121/122515372-50fe5500-d048-11eb-86f3-d982d08f5371.png">
+   
+<img width="205" alt="스크린샷 2021-06-18 오후 3 13 37" src="https://user-images.githubusercontent.com/57285121/122515397-59ef2680-d048-11eb-8511-7f9a190fc66a.png">
+   
+<img width="341" alt="스크린샷 2021-06-18 오후 3 16 23" src="https://user-images.githubusercontent.com/57285121/122515416-61163480-d048-11eb-942f-4af10f2e57ca.png">
+
+  
 # Shell Script
 * 실행되어야 할 명령어의 순서, 방법을 정의한 Batch파일
 * 자동화에서 많이 사용이 됨
