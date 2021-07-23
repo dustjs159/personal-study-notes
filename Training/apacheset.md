@@ -1,7 +1,7 @@
 Apache Install & Set
 =================================
 ## Summary
-- Last Updated : 21.07.16 Fri    
+- Last Updated : 21.07.23 Fri    
 - Updated by : 윤연선
 -----------------------------------
 ## Apache 설치과정과 구성환경 및 실습 테스트
@@ -131,6 +131,12 @@ Apache Install & Set
    
 <img width="316" alt="스크린샷 2021-07-07 오후 2 27 31" src="https://user-images.githubusercontent.com/57285121/124704709-78518f00-df2f-11eb-841d-de97e453d92a.png">
    
+## httpd 제어 command : apachectl vs httpd
+* 아파치의 웹 서버 데몬 이름은 httpd
+* 이 httpd를 제어하는 명령어는 두 가지가 존재
+* apachectl은 ~/apache/bin에 스크립트 파일로 존재하고 httpd는 바이너리 파일로 존재
+* 
+
 ## Apache httpd 디렉토리 구조와 구성 요소
 * /etc/httpd 확인
    
@@ -323,4 +329,75 @@ Apache Install & Set
    
 <img width="592" alt="스크린샷 2021-07-19 오후 6 56 31" src="https://user-images.githubusercontent.com/57285121/126142244-9b2aee58-a8bf-467d-a0fc-63a480652c29.png">
    
+## httpd 서비스 수동 등록
+* 아파치 컴파일 설치시 httpd 데몬이 systemd에 등록되어있지 않습니다.
+* httpd 데몬을 수동으로 등록하는 과정입니다.
+
+1. 파일 생성   
+> * ``$ vi /usr/lib/systemd/system/httpd.service``
+
+2. 유닛 구성 항목 작성
+   
+<img width="462" alt="스크린샷 2021-07-23 오후 5 32 44" src="https://user-images.githubusercontent.com/57285121/126756808-448a05b4-ebf7-4b60-bb0b-5d01f4c0c731.png">
+   
+3. systemd 데몬 재시작 및 httpd 데몬 실행   
+> * ``$ systemctl daemon-reload``   
+> * ``$ systemctl start httpd``   
+
+4. 상태 점검 및 테스트   
+> * ``$ systemctl status httpd``   
+   
+<img width="668" alt="스크린샷 2021-07-23 오후 5 36 06" src="https://user-images.githubusercontent.com/57285121/126757140-57d06930-7bcc-4801-b55a-5f16eb9417ab.png">
+   
+<img width="342" alt="스크린샷 2021-07-23 오후 5 36 28" src="https://user-images.githubusercontent.com/57285121/126757178-1abe9d0e-6021-4c7a-8a8c-844fd3c1d8fa.png">
+   
+## Logrotate
+* 서버를 운영함에 있어서 로그를 관리하는 것은 중요합니다.
+* 로그를 확인하여 외부로 부터의 공격을 방어할 수 있고 시스템 장애를 예방할 수 있습니다.
+* 하지만 로그가 관리되지 않고 지속적으로 쌓여갈 경우 로그 확인이 어려워질 뿐더러 로그 저장공간의 낭비가 발생할 수 있습니다.
+* Logrotate는 이러한 로그를 관리할 수 있는 도구입니다.
+* 설정에 따라 오래되거나 일정 개수 이상의 로그가 보관되면 삭제하거나 등의 로그가 저장된 디렉토리를 정리(rotate)
+* /etc/logrotate.conf : logrotate의 설정
+* /etc/logrotate.d/~ : logrotate를 설정할 데몬들
+* logrotate 설치   
+> * ``$ yum install loglotate``   
+* /etc/logrotate.conf 파일의 기본구성
+  
+<img width="594" alt="스크린샷 2021-07-23 오후 9 49 08" src="https://user-images.githubusercontent.com/57285121/126783821-82307442-b010-4814-9aa7-d0c23e6c8312.png">
+   
+> * weekly : 로그 백업 주기. daily(매일), weekly(매주), monthly(매월), yearly(매년)의 주기를 설정할 수 있음   
+> * rotate 4 : 저장할 로그의 기간. 로그 백업 주기에 따라 설정 가능함. Ex) 로그 백업 주기가 daily에 rotate 5라고 한다면 최대 5일치의 로그만 저장하고 6 일째부터는 1 일차 로그부터 순차적으로 삭제되면서 저장됨   
+> * create : 로그 파일 정리 후 계속해서 새로운 파일을 생성할지 안할지 여부 선택   
+> * dateext : 로그 파일을 저장할 때 파일명에 날짜를 부여하여 저장함   
+> * compress : 로그 파일을 압축하여 저장(크기를 줄여서 저장하기 때문에 저장공간을 효율적으로 사용가능)   
+> * include ~ : logrotate를 적용할 데몬 설정   
+> * missingok : 로그파일이 없더라도 에러처리 안하고 넘어감   
+> * notifempty : 로그 파일이 비어있으면 rotate 안함   
+> * postrotate(or prerotate) ~ endscript : rotate 후 실행할 작업 설정   
+> * sharedscripts : postrotate (or prerotate) ~ endscript의 작업을 한번만 수행
+
+* httpd.conf의 로그 저장경로와 logrotate를 사용하여 rotate할 httpd의 로그의 경로 변경 후 테스트
+> * 새롭게 로그를 저장할 경로는 '/usr/local/mylogs'   
+
+1. httpd.conf에서 httpd 데몬의 CustomLog, ErrorLog 지시자의 경로를 바꿔줌   
+   
+<img width="415" alt="스크린샷 2021-07-23 오후 11 18 09" src="https://user-images.githubusercontent.com/57285121/126795440-0cd746a0-a92c-41f9-ae19-ebe5c9e80078.png">
+   
+<img width="395" alt="스크린샷 2021-07-23 오후 11 18 39" src="https://user-images.githubusercontent.com/57285121/126795497-bf2214ea-43f5-40b7-8788-fc652e456b77.png">
+   
+* 바꾼 후 ``$ systemctl reload httpd``   
+
+2. /etc/logrotate.d/httpd 파일을 수정
+   
+<img width="405" alt="스크린샷 2021-07-23 오후 11 26 09" src="https://user-images.githubusercontent.com/57285121/126796581-cff1d1ed-ec58-4e27-8594-218f67a377f7.png">
+   
+3. rotate 실행   
+> * ``$ /usr/sbin/logrotate -f /etc/logrotate.d/httpd``
+
+
+## log level
+
+## 인증서 발급(Let's encrypt)
+
+## 배치프로그램
 
