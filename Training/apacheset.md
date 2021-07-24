@@ -376,28 +376,70 @@ Apache Install & Set
 > * postrotate(or prerotate) ~ endscript : rotate 후 실행할 작업 설정   
 > * sharedscripts : postrotate (or prerotate) ~ endscript의 작업을 한번만 수행
 
-* httpd.conf의 로그 저장경로와 logrotate를 사용하여 rotate할 httpd의 로그의 경로 변경 후 테스트
-> * 새롭게 로그를 저장할 경로는 '/usr/local/mylogs'   
+1. /etc/logrotate.d/httpd 파일을 수정
+   
+<img width="391" alt="스크린샷 2021-07-24 오전 1 07 12" src="https://user-images.githubusercontent.com/57285121/126810409-60f3e285-f2dd-4463-8ec5-d6fd86042f88.png">   
+   
+2. httpd 실행   
+> * ``$ systemctl start httpd``   
 
-1. httpd.conf에서 httpd 데몬의 CustomLog, ErrorLog 지시자의 경로를 바꿔줌   
-   
-<img width="415" alt="스크린샷 2021-07-23 오후 11 18 09" src="https://user-images.githubusercontent.com/57285121/126795440-0cd746a0-a92c-41f9-ae19-ebe5c9e80078.png">
-   
-<img width="395" alt="스크린샷 2021-07-23 오후 11 18 39" src="https://user-images.githubusercontent.com/57285121/126795497-bf2214ea-43f5-40b7-8788-fc652e456b77.png">
-   
-* 바꾼 후 ``$ systemctl reload httpd``   
-
-2. /etc/logrotate.d/httpd 파일을 수정
-   
-<img width="405" alt="스크린샷 2021-07-23 오후 11 26 09" src="https://user-images.githubusercontent.com/57285121/126796581-cff1d1ed-ec58-4e27-8594-218f67a377f7.png">
-   
 3. rotate 실행   
-> * ``$ /usr/sbin/logrotate -f /etc/logrotate.d/httpd``
-
-
+> * 강제 실행 : ``$ /usr/sbin/logrotate -f /etc/logrotate.d/httpd``   
+> * 디버그 : ``$ /usr/sbin/logrotate -d /etc/logrotate.d/httpd``   
+> * 실행 이력 확인 : ``$ /usr/sbin/logrotate -v /etc/logrotate.d/httpd``
+   
+<img width="570" alt="스크린샷 2021-07-24 오전 1 12 52" src="https://user-images.githubusercontent.com/57285121/126811067-12e18955-7e23-4465-8d20-9e5218e75596.png">
+   
+<img width="672" alt="스크린샷 2021-07-24 오전 1 16 38" src="https://user-images.githubusercontent.com/57285121/126811528-3065cfd3-3b02-4103-b7af-dbefb47a0c65.png">
+   
 ## log level
+* 에러 로그를 기록하는데에 있어서 위험한 정도에 따라 로그 레벨이 다름
+* LogLevel에 설정한 로그 레벨 미만의 위험도의 에러는 로그에 기록하지 않음
+* httpd.conf의 LogLevel 지시자로 변경 가능
+   
+|LogLevel|의미|
+|------|---|
+|emerg|서버 작동이 안될 수준의 심각한 오류|
+|alert|crit보다 심각한 오류|
+|crit|치명적 오류|
+|error|오류|
+|warn|경고|
+|notice|알림메시지|
+|info|서버 정보|
+|debug|디버깅을 위한 정보|
+   
+* 별도의 index.html파일을 만들지 않고 에러 로그 출력해보기
+1. httpd.conf 의 LogLevel을 emerge로 설정 후 테스트   
+> * ``$ tail -f error_log``   
+   
+<img width="1416" alt="스크린샷 2021-07-24 오전 1 31 53" src="https://user-images.githubusercontent.com/57285121/126813278-77b84e85-4486-474c-9e9d-78109777d982.png">
+   
+> * 아무 로그도 출력되지 않음.
+
+2. httpd.conf 의 LogLevel을 warn으로 설정 후 테스트   
+> * 변경 후 ``$ systmectl reload httpd``   
+> * ``$ tail -f error_log``   
+
+<img width="753" alt="스크린샷 2021-07-24 오전 1 36 03" src="https://user-images.githubusercontent.com/57285121/126813708-711972e7-05fa-4eab-8bcc-a2f847a84827.png">
+   
+> * 치명적이진 않지만 경고 수준의 에러 로그 확인 가능
 
 ## 인증서 발급(Let's encrypt)
+* 웹 사이트의 신뢰성을 보장하기 위한 인증서를 발급받아 웹 서버에 적용하기
+* Let's encrypt 인증서를 무료로 발급받아 아파치 웹서버에 적용
+* 무료라는 장점이 있지만 3 개월마다 갱신을 해줘야 하는 단점이 존재
+* Let's encrypt를 통해 인증서를 발급받기 전 Certbot을 먼저 설치해야함
+* 인증서를 발급하기 위해서는 먼저 무료로 도메인을 하나 발급받아야 함   
+> * 무료 인증서 발급(freenom) : www.freenom.com   
 
-## 배치프로그램
+1. Certbot 설치   
+> * EPEL 저장소 설치 : ``$ yum install epel-release``   
+> * ``$ yum install certbot``   
+> * ``$ yum install certbot python3-certbot-apache mod_ssl``   
 
+2. 인증서 받기   
+> * ``$ certbot certonly -d <도메인명>``   
+   
+<img width="753" alt="스크린샷 2021-07-24 오전 2 37 16" src="https://user-images.githubusercontent.com/57285121/126820657-70562251-8b44-4d19-9774-258dcf19090a.png">
+   
+ 
