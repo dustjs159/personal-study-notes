@@ -1,7 +1,7 @@
 Apache Install & Set
 =================================
 ## Summary
-- Last Updated : 21.07.23 Fri    
+- Last Updated : 21.08.06 Fri    
 - Updated by : 윤연선
 -----------------------------------
 ## Apache 설치과정과 구성환경 및 실습 테스트
@@ -429,9 +429,18 @@ Apache Install & Set
 * Let's encrypt 인증서를 무료로 발급받아 아파치 웹서버에 적용
 * 무료라는 장점이 있지만 3 개월마다 갱신을 해줘야 하는 단점이 존재
 * Let's encrypt를 통해 인증서를 발급받기 전 Certbot을 먼저 설치해야함
+
+0. 무료 도메인 발급
 * 인증서를 발급하기 위해서는 먼저 무료로 도메인을 하나 발급받아야 함   
 > * 무료 인증서 발급(freenom) : www.freenom.com   
+   
+<img width="812" alt="스크린샷 2021-08-06 오후 4 11 31" src="https://user-images.githubusercontent.com/57285121/128471094-783fabbe-5c00-47c4-9369-aa86e2c67f68.png">
+   
 
+* 접속 확인
+   
+<img width="277" alt="스크린샷 2021-08-06 오후 3 51 32" src="https://user-images.githubusercontent.com/57285121/128468730-95eddf41-280f-4b68-ae6d-016b3f18fad4.png">
+   
 1. Certbot 설치   
 > * EPEL 저장소 설치 : ``$ yum install epel-release``   
 > * ``$ yum install certbot``   
@@ -440,6 +449,7 @@ Apache Install & Set
 2. 인증서 받기   
 > * ``$ certbot certonly -d <도메인명>``   
    
-<img width="753" alt="스크린샷 2021-07-24 오전 2 37 16" src="https://user-images.githubusercontent.com/57285121/126820657-70562251-8b44-4d19-9774-258dcf19090a.png">
+<img width="713" alt="스크린샷 2021-08-06 오후 3 54 28" src="https://user-images.githubusercontent.com/57285121/128469078-e89cd66d-fd3a-4b11-9e21-c306a739f78b.png">
    
- 
+> * 2번 선택
+
