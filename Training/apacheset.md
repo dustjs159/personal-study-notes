@@ -1,7 +1,7 @@
 Apache Install & Set
 =================================
 ## Summary
-- Last Updated : 21.08.06 Fri    
+- Last Updated : 21.08.19 Thu    
 - Updated by : 윤연선
 -----------------------------------
 ## Apache 설치과정과 구성환경 및 실습 테스트
@@ -432,24 +432,22 @@ Apache Install & Set
 
 0. 무료 도메인 발급
 * 인증서를 발급하기 위해서는 먼저 무료로 도메인을 하나 발급받아야 함   
-> * 무료 인증서 발급(freenom) : www.freenom.com   
+> * 무료 인증서 발급(freenom) : www.freenom.com
    
-<img width="812" alt="스크린샷 2021-08-06 오후 4 11 31" src="https://user-images.githubusercontent.com/57285121/128471094-783fabbe-5c00-47c4-9369-aa86e2c67f68.png">
+<img width="993" alt="스크린샷 2021-08-23 오후 9 10 06" src="https://user-images.githubusercontent.com/57285121/130444742-bbe93505-e3e2-4fcf-be2f-480db56ff36b.png">
    
+1. epel repository 설치   
+> * ``$ yum install epel-release``   
 
-* 접속 확인
+2. 가상호스트와 DocumentRoot 설정      
+> * 가상호스트 경로 : /etc/httpd/conf.d
    
-<img width="277" alt="스크린샷 2021-08-06 오후 3 51 32" src="https://user-images.githubusercontent.com/57285121/128468730-95eddf41-280f-4b68-ae6d-016b3f18fad4.png">
+<img width="578" alt="스크린샷 2021-08-23 오후 9 13 37" src="https://user-images.githubusercontent.com/57285121/130445118-cac06917-fb5f-4299-a6d5-0b9b56e70554.png">
    
-1. Certbot 설치   
-> * EPEL 저장소 설치 : ``$ yum install epel-release``   
-> * ``$ yum install certbot``   
-> * ``$ yum install certbot python3-certbot-apache mod_ssl``   
-
-2. 인증서 받기   
-> * ``$ certbot certonly -d <도메인명>``   
+> * DocumentRoot 에 index.html 파일 생성 : /var/www/homeyys.ml/index.html    
    
-<img width="713" alt="스크린샷 2021-08-06 오후 3 54 28" src="https://user-images.githubusercontent.com/57285121/128469078-e89cd66d-fd3a-4b11-9e21-c306a739f78b.png">
+<img width="354" alt="스크린샷 2021-08-23 오후 9 14 53" src="https://user-images.githubusercontent.com/57285121/130445282-f0c98b0d-af69-49bc-a930-eb64f90d3290.png">
    
-> * 2번 선택
+3. 인증서 발급   
+> * ``$ certbot --apache -d <도메인명>``   
 
