@@ -431,7 +431,8 @@ Apache Install & Set
 * Let's encrypt를 통해 인증서를 발급받기 전 Certbot을 먼저 설치해야함
 
 0. 무료 도메인 발급
-* 인증서를 발급하기 위해서는 먼저 무료로 도메인을 하나 발급받아야 함   
+* 인증서를 발급하기 위해서는 먼저 무료로 도메인을 하나 발급받아야 함
+* 도메인을 발급받은 후에는 `DNS MANAGEMENT`에서 `Target`에는 Static IP를 입력하도록 한다.
 > * 무료 인증서 발급(freenom) : www.freenom.com
    
 <img width="993" alt="스크린샷 2021-08-23 오후 9 10 06" src="https://user-images.githubusercontent.com/57285121/130444742-bbe93505-e3e2-4fcf-be2f-480db56ff36b.png">
@@ -444,10 +445,72 @@ Apache Install & Set
    
 <img width="578" alt="스크린샷 2021-08-23 오후 9 13 37" src="https://user-images.githubusercontent.com/57285121/130445118-cac06917-fb5f-4299-a6d5-0b9b56e70554.png">
    
-> * DocumentRoot 에 index.html 파일 생성 : /var/www/homeyys.ml/index.html    
+> * DocumentRoot 에 index2.html 파일 생성 : /var/www/homeyys.ml/index2.html
    
-<img width="354" alt="스크린샷 2021-08-23 오후 9 14 53" src="https://user-images.githubusercontent.com/57285121/130445282-f0c98b0d-af69-49bc-a930-eb64f90d3290.png">
+<img width="454" alt="스크린샷 2021-08-27 오후 9 05 29" src="https://user-images.githubusercontent.com/57285121/131124781-cceba334-2c24-49bd-8bd1-7f912a85d619.png">
+    
+3. Certbot 설치   
+> * ``$ yum install certbot``   
+> * ``$ yum install python3-certbot-apache``   
+
+4. DNS record TXT 추가
+* 발급받은 도메인이 유효한 도메인인지 판단하기 위해서 DNS TXT 레코드 등록
+
+4-1. record에 추가할 문자열 발급   
+> * ``$ certbot certonly -d <도메인명> --manual --preferred-challenges dns``   
    
-3. 인증서 발급   
-> * ``$ certbot --apache -d <도메인명>``   
+<img width="739" alt="스크린샷 2021-08-27 오후 6 50 17" src="https://user-images.githubusercontent.com/57285121/131108737-9682a18b-e7a6-4325-8017-06c6cddfa6d7.png">
+   
+> * `Enter` 누르지 않고 대기합니다.   
+
+4-2 발급받은 문자열 등록   
+* 이 때 `Name`은 `_acme-challenge`를 입력하고 `Target`에 발급받은 문자열을 입력합니다.
+   
+<img width="994" alt="스크린샷 2021-08-27 오후 6 31 56" src="https://user-images.githubusercontent.com/57285121/131107186-0afe88cb-621d-4c23-be76-02703f539382.png">
+   
+* TXT record 등록 후에는 약간의 시간이 소요됩니다.   
+
+4-3. TXT record가 성공적으로 등록되었는지 확인   
+> * ``$ nslookup -q=txt _acme-challenge.<도메인명>``   
+
+<img width="697" alt="스크린샷 2021-08-27 오후 6 45 35" src="https://user-images.githubusercontent.com/57285121/131108009-9da81f58-3ff6-4859-a557-033fb90f01f5.png">
+   
+4-4. `Enter` 확인
+   
+<img width="649" alt="스크린샷 2021-08-27 오후 6 47 00" src="https://user-images.githubusercontent.com/57285121/131108209-108779a0-e2a7-4581-bf43-c26824bd54e8.png">
+   
+> * 성공적으로 발급   
+
+5. 가상 호스트에 인증서 적용
+* `/etc/letsencrypt/live/<도메인명>`에 발급된 Key들이 존재
+
+<img width="744" alt="스크린샷 2021-08-27 오후 8 04 59" src="https://user-images.githubusercontent.com/57285121/131117986-6697885c-c356-4205-8e18-5da2fb8042b5.png">
+   
+> * 적용 후 ``$ systemctl restart httpd``   
+
+6. 테스트
+* 방화벽 포트 80번과 443번이 열려 있어야 합니다.   
+> * 확인 : ``$ firewall-cmd --list-all``   
+
+* 서비스 등록   
+> * ``$ firewall-cmd --permanent --add-service=http``   
+> * ``$ firewall-cmd --permanent --add-service=https``  
+ 
+* 포트 번호 열기   
+> * ``$ firewall-cmd --permanent --add-port=80/tcp``   
+> * ``$ firewall-cmd --permanent --add-port=443/tcp``   
+
+* 방화벽 재시작   
+> * ``$ firewall-cmd --reload``   
+
+* ``port 80`` 접속
+   
+<img width="325" alt="스크린샷 2021-08-27 오후 9 17 33" src="https://user-images.githubusercontent.com/57285121/131126137-5c69b10a-e029-4b06-9409-dfeb72c76de1.png">
+   
+* ``https``로 접속
+   
+<img width="404" alt="스크린샷 2021-08-27 오후 9 18 53" src="https://user-images.githubusercontent.com/57285121/131126297-9e0671f1-74dc-4373-bb33-85b4a958a9e5.png">
+   
+## 서버 Timer 작성
+* 매일 14시에 on, 14시 05분에 off되는 timer unit 작성
 
