@@ -511,6 +511,4 @@ Apache Install & Set
    
 <img width="404" alt="스크린샷 2021-08-27 오후 9 18 53" src="https://user-images.githubusercontent.com/57285121/131126297-9e0671f1-74dc-4373-bb33-85b4a958a9e5.png">
    
-## 서버 Timer 작성
-* 매일 14시에 on, 14시 05분에 off되는 timer unit 작성
 
