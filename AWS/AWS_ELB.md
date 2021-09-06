@@ -1,7 +1,7 @@
 Amazon ELB
 ====================================
 ## Summary
-- Last Updated : 21.09.02 Thu   
+- Last Updated : 21.09.03 Fri   
 - Updated by : YEONSUN YOON
 -----------------------------------
 
@@ -42,4 +42,6 @@ Amazon ELB
 * NLB(Network Load Balancer)
 * GLB(Gateway Load Balancer)
 * CLB(Classic Load Balancer)
+
+## ALB(Application Load Balacner)
 
