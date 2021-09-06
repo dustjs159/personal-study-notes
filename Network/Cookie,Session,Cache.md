@@ -1,10 +1,9 @@
-Cookie, Session, Cache
+Cookie & Session & Cache
 =================================
 ## Summary
-- Last Updated : 21.05.23 Sun   
+- Last Updated : 21.09.06 Mon   
 - Updated by : 윤연선
 -----------------------------------
-
 
 # Cookie
 * 인터넷 사용자가 웹 서버에 접속할 때 생성되는 ID, PW, 방문한 사이트의 정보를 담은 임시 파일. 서버가 아닌 클라이언트에 텍스트파일로 저장됨   
