@@ -1,7 +1,7 @@
 AWS 2-Tier Architecture
 ====================================
 ## Summary
-- Last Updated : 21.09.03 Fri   
+- Last Updated : 21.09.23 Thu   
 - Updated by : YEONSUN YOON
 -----------------------------------
 
@@ -22,7 +22,7 @@ AWS 2-Tier Architecture
 * Apache <-> Python
 * Apache <-> Tomcat
 
-## Network 구성
+# Network 구성
 1. VPC 생성   
 > * IPv4 CIDR : `10.3.0.0/24` -> 생성할 수 있는 VPC의 IP 범위는 사설 IP 대역 + prefix `/16` ~ `/28`   
 > * 태그 - 키 : `Name`, 값 : `yys_vpc1`
@@ -37,6 +37,6 @@ AWS 2-Tier Architecture
 
 ## Server 구성
 * Amazon EBS
-* ELB
+* Amazon ELB
 
 ## 

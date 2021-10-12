@@ -10,7 +10,7 @@ Amazon ELB
 * 부하 분산이란 처리해야 할 요청을 나누어 처리 하는 것
 * 네트워크 측면에서 이를 **로드밸런싱(Load Balancing)** 이라고 함
 * 서버를 운영하게 되면 규모가 커짐에 따라 자연스럽게 클라이언트의 요청이 늘어날 수 밖에 없고 서버에 과부하가 오게 되어 서버에 장애가 생길 수 있는데, 이 때 서버를 **Scale-Out** 하고 **로드밸런싱**을 통해 적절하게 요청을 분배하여 처리
-* 로드밸런서는 서버들의 상태를 파악하고 요청을 분산하여 전달하는 역할을 수행**(고가용성을 유지)** 
+* 로드밸런서는 서버들의 상태를 파악하고 요청을 분산하여 전달하는 역할을 수행(고가용성을 유지) 
    
 <img width="424" alt="스크린샷 2021-09-02 오후 5 44 41" src="https://user-images.githubusercontent.com/57285121/131812622-57ada7d6-77cc-4f60-9d33-0fa8adc5a5fb.png">
    
@@ -57,16 +57,16 @@ Amazon ELB
 - 기본적으로 NLB는 비활성화, ALB는 활성화
 - 비활성화 상태
    
-![Untitled 9](https://user-images.githubusercontent.com/57285121/135965432-a0535934-8b68-457c-b442-8a63dadbd66d.png)
-   
+<img width="1000" alt="스크린샷 2021-10-05 오후 2 43 17" src="https://user-images.githubusercontent.com/57285121/135966940-fbd21067-b4d9-4418-97b4-b85b38dcf680.png">
+    
 ![Untitled 8](https://user-images.githubusercontent.com/57285121/135965781-41dd82f7-dd1c-4bed-8d4a-dd076a904b1f.png)
    
 > - 각각 인스턴스에 부하 불균형 발생
 
 - 활성화 상태
    
-![Untitled 11](https://user-images.githubusercontent.com/57285121/135965623-f902844a-2ef2-454c-9066-39e9b24703d7.png)
-   
+<img width="1000" alt="스크린샷 2021-10-05 오후 2 44 01" src="https://user-images.githubusercontent.com/57285121/135967008-38a5b1b6-ac97-4bcb-acda-a9b858016690.png">
+    
 ![Untitled 10](https://user-images.githubusercontent.com/57285121/135965874-2112d466-5425-40b6-8899-7176634f0628.png)
    
 > - 각각 인스턴스에 골고루 부하 전달

@@ -1,7 +1,7 @@
 Amazon EC2
 ====================================
 ## Summary
-- Last Updated : 21.08.16 Mon   
+- Last Updated : 21.10.10 Sun   
 - Updated by : YEONSUN YOON
 -----------------------------------
 
