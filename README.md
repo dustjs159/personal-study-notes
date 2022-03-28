@@ -5,13 +5,13 @@
 
 # Contents
 
-## AWS ![AWS](https://img.shields.io/badge/Amazon%20AWS-232F3E?style=flat-square&logo=Amazon%20AWS&logoColor=white)
+## 💡 AWS ![AWS](https://img.shields.io/badge/Amazon%20AWS-232F3E?style=flat-square&logo=Amazon%20AWS&logoColor=white)
 
 * AWS(Amazon Web Service) 스터디 내용 정리 
 * 참고자료
   * AWS Document : https://docs.aws.amazon.com/ko_kr/index.html
 
-## Linux ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=white)
+## 💡 Linux ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=white)
 
 * Linux 스터디 내용 정리 
 * 참고자료   
@@ -22,11 +22,9 @@
   * 리눅스 배포판 : CentOS Stream 8, Ubuntu 20.04 LTS
 
    
-## Infra
+## 💡 Infra
 * 인프라 관련 스터디 내용 정리
 * 분류
   * Server
   * Network
   * Storage 
-
-
