@@ -9,14 +9,13 @@
 
 * AWS(Amazon Web Service) 스터디 내용 정리 
 * 참고자료
-  * AWS Document : https://docs.aws.amazon.com/ko_kr/index.html
+  * AWS Docu : https://docs.aws.amazon.com/ko_kr/index.html
 
 ## 💡 Linux ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=white)
 
 * Linux 스터디 내용 정리 
 * 참고자료   
   * 인프런 강의(이것이 리눅스다) : https://www.inflearn.com/
-  * 블로그 : https://mamu2830.blogspot.com/p/blog-page_13.html
 * 환경 구축
   * 가상 머신 : VMWare Fusion
   * 리눅스 배포판 : CentOS Stream 8, Ubuntu 20.04 LTS
@@ -28,3 +27,6 @@
   * Server
   * Network
   * Storage 
+
+## 💡 Docker
+* Docker 스터디 내용 정리
