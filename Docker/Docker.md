@@ -91,8 +91,10 @@ $ sudo docker run hello-world
 
 ## 📌 Docker Command
 
-* ``$ docker pull  # Docker 이미지 가져오기 + Build까지 수행``
-* ``$ docker push  # Docker 이미지 업로드``
-* ``$ docker images # 갖고 있는 이미지 확인``
-* ``$ docker run    # pull로 가져온 이미지(Build까지 다 된)를 컨테이너로 만들어 실행``
-* ``$ docker ps     # 실행중인 컨테이너 확인``  
+```bash
+$ docker pull  # Docker 이미지 가져오기 + Build까지 수행
+$ docker push  # Docker 이미지 업로드
+$ docker images # 갖고 있는 이미지 확인
+$ docker run    # pull로 가져온 이미지(Build까지 다 된)를 컨테이너로 만들어 실행
+$ docker ps     # 실행중인 컨테이너 확인
+```  
