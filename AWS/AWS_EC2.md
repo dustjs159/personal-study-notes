@@ -1,4 +1,4 @@
-💻 AWS EC2
+💻 [AWS] EC2
 =============
 
 # 💡 Amazon EC2

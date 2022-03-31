@@ -1,11 +1,7 @@
-AWS EC2 Auto Scaling 
+💻 [AWS] Auto Scaling 
 ====================================
-## Summary
-- Last Updated : 21.10.05 Tue   
-- Updated by : YEONSUN YOON
------------------------------------
 
-# AWS EC2 Auto Scaling
+# 💡 EC2 Auto Scaling
    
 <img width="313" alt="스크린샷 2021-09-23 오후 1 05 32" src="https://user-images.githubusercontent.com/57285121/134453158-68a1ba22-a90e-4f70-9f5b-3b1ba696bc44.png">
    

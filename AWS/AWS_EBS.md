@@ -1,5 +1,5 @@
 
-💻 AWS EC2 - Amazon EBS
+💻 [AWS] EC2 - Amazon EBS
 =============
 
 # 💡 EC2 Storage - Amazon EBS
