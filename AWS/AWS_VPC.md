@@ -27,7 +27,7 @@
   * VPC의 리소스를 사용하여 퍼블릭 클라우드 환경에서 망 구축 가능
 * **CIDR(Classless Inter-Domain Routing)** 표기법을 사용하여 IPv4 주소를 표기
   * CIDR 표기법 : 네트워크 영역 + 호스트 영역으로 구성되어 있는 IP 주소에서 네트워크 영역을 숫자로 표기하는 방법(e.g. IPv4 Address가 `10.0.3.0/16`일 때 `10.0` 까지가 네트워크 영역, 그 뒤 `3.0`이 호스트 영역)
-* VPC에서 사용 가능한 Private IP Range
+* VPC에서 사용 가능한 Private IP 대역 : RFC 1918에 명시되어 있는 Private IP Range
   * `10.0.0.0/16 ~ /28`
   * `172.16.0.0/16 ~ /28`
   * `192.168.0.0/16 ~ /28`
@@ -54,8 +54,11 @@
   * 외부 인터넷과의 연결 여부에 따라 Public / Private 서브넷을 구분
   * Public 서브넷 내 리소스들은 외부 인터넷과 연결
   * Private 서브넷 내 리소스들은 외부 인터넷과 차단
+* 서브넷은 두 가용영역(AZ)에 각각 생성이 됨
 
 ## 📌 Routing Table
+
+* 서브넷 내에서의 패킷 Allow / Deny 규칙
 
 ## 📌 Internet Gateway
 
