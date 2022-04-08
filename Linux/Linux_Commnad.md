@@ -34,15 +34,38 @@ NATGateway
 Aurora
 ```
 
-
 ### nc
-* Netcat : TCP/UDP를 통한 네트워크 연결
+* Netcat : TCP/UDP의 Connection 및 Listen Check
+  * 클라이언트와 서버 간 통신이 안될 때 점검 용도로 많이 사용
+* `$ nc [options] host port`
 * 옵션
-  * `-v` : ?
-  * `-z` : ?
+  * `-v` : 더 많은 정보를 확인할 수 있음(?)
+  * `-z` : 최소한의 데이터만 전송(?)
 * 예시
 ```
 $ nc -vz google.com 443
 
 Connection to google.com port 443 [tcp/https] succeeded!
 ```
+
+### nohup
+
+*  세션 종료 시에도 프로세스 무중단
+* `wget` 이나 `curl` 명령어를 사용하여 용량이 큰 파일을 다운로드 받을 때, 터미널 로그인 세션 시간이 종료되면 Parents Shell에게 **SIGHUP(HUP)** Signal을 보내고 프로세스가 종료됨
+* 이 때 `nohup` 명령어와 `&` 를 조합하여 세션 시간 종료 후에도 계속해서 다운로드를 진행(Background)
+* 예시
+```
+$ nuhup 
+```
+
+
+### more
+
+### grep
+
+### du
+
+
+### lsblk
+
+### arp
