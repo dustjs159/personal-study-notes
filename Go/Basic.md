@@ -40,10 +40,12 @@ import (
 
 ```go
 const name string = "who"
-var a int = 755 // a := 755 (축약형)
+var a int = 755 
+a := 7 // 축약형
 ```
 * 상수 & 변수 둘 다 `Type` (`int`, `string` .... 등) 지정
-* const : 변하지 않는 값. / var : 변하는 값.
+* `const` : 변하지 않는 값
+* `var` : 변하는 값.
 * `Type` 을 생략하는 축약형도 사용 가능
   * `Type` 을 알아서 지정해줌. 대신 축약형으로 작성한 변수의 `Type` 은 바꿀 수 없음
   * 축약형은 `func()` 밖에서 사용 불가하며 **변수**에만 사용 가능

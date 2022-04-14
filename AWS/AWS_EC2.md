@@ -3,8 +3,8 @@
 
 # 💡 Amazon EC2
 
-* AWS 클라우드 환경에서 가상의 서버를 구축하기 위한 컴퓨팅 자원을 빌려주는 **컴퓨팅 서비스**
-* EC2 서비스를 통해 생성되는 가상 서버는 **인스턴스**라는 이름으로 생성 됨
+* AWS에서 가상의 서버를 구축하기 위한 컴퓨팅 자원을 빌려주는 **컴퓨팅 서비스**
+* EC2 서비스를 통해 생성되는 가상 서버는 **인스턴스**라는 이름으로 생성
 * EC2 서비스의 리소스들을 조합하여 요구사항에 최적화된 인스턴스를 생성
 * AWS 웹 콘솔을 통해 클릭 몇 번으로 쉽게 생성이 가능
 * EC2 서비스의 리소스는 크게 세 부분으로 나눠 구성
@@ -14,11 +14,12 @@
 
 ## 📌 Instance 
 * 인스턴스(Instance) : EC2 서비스로 생성되는 클라우드 환경의 **가상 서버**
-  * AMI(Amazon Machine Image) 
-  * 인스턴스 유형(Type)
-  * 인스턴스 수명 주기
-  * 인스턴스 구입 옵션
-  * 태그 기능
+  * AMI(Amazon Machine Image)
+  * Instance Type
+  * Instance LifeCycle
+  * Instance Purchasing Options
+  * Launch Template
+  * Tags
 
 ### ✔️ AMI(Amazon Machine Image)
    
@@ -28,37 +29,36 @@
 * AWS에서 제공하는 AMI를 커스터마이징하여 동일한 구성의 여러 인스턴스를 찍어내듯 생성 가능(필요한 소프트웨어를 인스턴스 생성할 때마다 설치하지 않아도 됨)
 * EC2 생성 시 선택할 수 있는 AMI 종류 
   * Linux : Amazon Linux2, Red Hat Enterprise Linux, Ubuntu, SUSE Linux 등
-  * Windows : MS Windows Server 등
+  * Windows : MS Windows Server
 * 이미 만들어져있는 AMI 외에 개인이 직접 제작하여 Marketplace에서 배포도 가능하며 이 경우에는 AMI가 안전하지 않을 수도 있기 때문에 배포자를 잘 확인하고 사용
 
  
-### ✔️ 인스턴스 유형(Type)
+### ✔️ Instance Type
 
 <img width="301" alt="스크린샷 2021-08-16 오후 9 39 24" src="https://user-images.githubusercontent.com/57285121/129565131-d1d32318-148a-47e2-8a13-697e6fb2b35e.png">
 
 * 생성할 인스턴스의 Type
 * AWS에서는 다양한 인스턴스 Type을 제공하며 목적에 맞게 선택하여 사용
 * 각 인스턴스 유형마다 그룹화(T Class, C Class, .. 등)
-* 범용적 인스턴스(General) : 가장 범용적인 인스턴스 생성을 위한 인스턴스 유형. 일반적인 인스턴스를 생성하고자 할 때 선택
+* General : 가장 범용적인 인스턴스 생성을 위한 인스턴스 유형. 일반적인 인스턴스를 생성하고자 할 때 선택
   * Class
     * M : Most Scenarios(General Purpose)
     * T : Turbo(Burstable)
   * T 클래스는 버스트 기능을 지원
   * 버스트 기능이란 필요한 만큼 성능을 높일 수 있는 성능 순간 확장 기능. 버스트 기능을 사용하여 기준 사용률을 초과하게 될 경우 추가 요금이 부과됨
- 
-* 컴퓨팅 최적화 인스턴스 : 고성능의 CPU 연산작업을 위한 인스턴스 유형
+* 컴퓨팅 최적화 유형 : 고성능의 CPU 연산작업을 위한 인스턴스 유형
   * Class
     * C : Computing
-* 메모리 최적화 인스턴스 : 메모리 상에서 큰 규모의 데이터를 처리하는 작업을 위한 인스턴스 유형
+* 메모리 최적화 유형 : 메모리 상에서 큰 규모의 데이터를 처리하는 작업을 위한 인스턴스 유형
   * Class
     * R : Random-Access Memory
     * X : Extra-Large Memory
-* 스토리지 최적화 인스턴스 : 로컬 스토리지의 대규모 데이터베이스에 대해 잦은 I/O가 발생하는 작업을 위한 인스턴스 유형
+* 스토리지 최적화 유형 : 로컬 스토리지의 대규모 데이터베이스에 대해 잦은 I/O가 발생하는 작업을 위한 인스턴스 유형
   * Class
     * D : Dense Storage
     * H : Hard Disk (HDD)
     * I : I/O. (NVMe, SSD)
-* 가속화된 컴퓨팅 최적화 인스턴스 : GPU를 활용한 영상 처리나 그래픽 기능을 활용하기 위한 인스턴스 유형
+* 가속화된 컴퓨팅 최적화 유형 : GPU를 활용한 영상 처리나 그래픽 기능을 활용하기 위한 인스턴스 유형
   * Class
     * G : GPU
     * P : GPU (G와 유사)
@@ -71,7 +71,44 @@
   * g : Graviton2 Processors
   * z : High Frequency
 
-### ✔️ 인스턴스 구매 옵션
+### ✔️ Instance LifeCycle
+   
+<img width="544" alt="스크린샷 2021-08-17 오전 1 55 09" src="https://user-images.githubusercontent.com/57285121/129600700-8489a965-d112-4563-9b3b-0364ff013f0e.png">
+
+* EC2 인스턴스는 `Launch ~ Terminate` 사이에 다양한 상태로 전환
+* Instance `Launch`
+  * 인스턴스를 생성하기 위해 AMI, Instance Type, 네트워킹 설정 등을 거쳐서 Launch 하게 되면 즉각적으로 가동되는 것이 아닌 `Pending` 상태를 거쳐 가동됨
+  * `Pending` 상태에서는 비용이 청구되지 않음
+* `Running` : 인스턴스가 정상적으로 가동중인 상태
+  * 비용이 청구됨
+* `Rebooting` : 인스턴스 재부팅
+* `Stopped` : 인스턴스 중지
+  * EBS 볼륨 기반의(root 볼륨이 EBS 볼륨인) 인스턴스만 가능
+    * 인스턴스 스토어 기반의 인스턴스는 볼륨의 데이터가 휘발성이기 때문에 `Stop` 해도 볼륨 재사용 불가 및 데이터 증발
+  * 비용이 청구되지 않음
+* `Terminated` : 인스턴스 종료
+
+#### - Reboot vs Stop/Start
+
+* `Reboot` 은 호스트(Physical)가 변경 되지 않음(단순 재시작)
+  * 인스턴스의 기존 정보(Private IP 등) 모두 유지(인스턴스 스토어 볼륨 마저도)
+* `Stop/Start` 는 호스트가 변경될 수도 있고, 변경되지 않을 수도 있음
+  * Private IP는 유지되며 Public IP는 변경될 수 있음
+
+#### - Termination Protection
+
+* 인스턴스가 실제로 종료되는 것을 막기 위한 추가 설정
+* `Termination Protection` 옵션이 활성화된 인스턴스는 삭제 불가능
+* 옵션이 활성화된 인스턴스를 삭제하기 위해서는 옵션을 비활성화해야 삭제가 가능함
+
+#### - Hibernate
+
+* 최대 절전 모드
+* 인스턴스 `Stop` 시 OS가 인스턴스의 RAM에 있는 데이터들을 루트 디바이스로 옮겨서 저장하고 `Stopped` 상태가 됨
+* 인스턴스 `Start` 시 OS가 루트 디바이스에 있던 RAM 데이터들을 읽고 시작
+
+
+### ✔️ Instance Purchasing Options
 
 * **On-Demand Instances**
   * 인스턴스를 생성하는 순간부터 초 단위로 비용을 지불하는 방식. 
@@ -84,36 +121,20 @@
 * 스팟 인스턴스
   * 사용중이지 않은 잉여 EC2를 사용하여 상대적으로 적은 비용으로 인스턴스 생성이 가능. AWS에서 언제든지 회수할 수 있기 때문에 그에 대한 대비책을 마련해야함.
 
+### ✔️ Launch Template
 
-### ✔️ 태그
+
+
+
+### ✔️ Tags
    
 ![](https://images.velog.io/images/dustjs159/post/39de7459-917e-4163-a86b-cad4a723c460/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-09%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.24.36.png)
    
 * 인스턴스를 구분하기 위한 태그
-* ``Key`` 와 ``Value`` 로 구성
+* `Key` 와 `Value` 로 구성
 * 여러 인스턴스들 사이에서 특정 인스턴스만 작업을 수행하고 싶을 때 지정한 태그를 통해 해당 인스턴스만 작업 가능
 
-### ✔️ 인스턴스의 수명 주기
-   
-<img width="544" alt="스크린샷 2021-08-17 오전 1 55 09" src="https://user-images.githubusercontent.com/57285121/129600700-8489a965-d112-4563-9b3b-0364ff013f0e.png">
 
-* EC2 인스턴스는 시작 ~ 종료 사이에 다양한 상태로 전환
-
-* 인스턴스 시작
-  * 인스턴스를 시작하면 `running` 상태 이전에 먼저 `pending`상태로 전환
-  * `pending` 상태에서는 비용이 청구되지 않으며 선택한 인스턴스 유형과 AMI에 따라 인스턴스 생성 준비
-  * AMI의 부팅정보를 참조하여 부팅을 위한 준비를 마치면 `running` 상태로 전환되며 인스턴스 시작
-  * 인스턴스가 `running` 상태가 되면서 비용이 청구
-
-* 인스턴스 중지
-  * 인스턴스가 `running` 상태일 때 중지를 하게되면 `stopping`상태를 거친 후 `stopped` 상태가 됨
-  * 인스턴스에 연결되어 있던 EBS 볼륨과 볼륨 내 데이터들은 그대로 유지되며 언제든지 다시 재연결하여 사용 가능
-  * 인스턴스가 `stopped` 상태일 경우에는 인스턴스 비용이 청구되지 않지만 EBS 볼륨에 대한 스토리지 비용은 청구됨. 이 때 인스턴스에 대해 변경사항(인스턴스 유형 등)을 반영 가능
-
-* 인스턴스 종료
-  * 인스턴스를 종료하면 `shutting-down` 상태를 거쳐 `terminated` 상태가 됨
-  * `shutting-down`, `terminated` 두 상태 모두 비용이 청구되지 않음
-  * 루트 디바이스 볼륨은 삭제되며 그 이외에 EBS 볼륨은 삭제되지 않고 유지
 
 
 ## 📌 Storage
