@@ -21,10 +21,10 @@ Network Equipment
 * 리피터에 여러 개의 포트를 장착
 * 리피터의 기능 포함
 * 더미 허브(Dummy Hub)   
-> * 컴퓨터간 네트워크를 단순히 연결   
-> * 데이터를 받으면 포트에 연결된 모든 장비에 전송(브로드캐스팅)   
-> * 보유한 대역폭을 연결한 컴퓨터 수 만큼 나누어 제공함   
-> * 포트에 많은 장비가 연결될 경우 전송 속도가 감소   
+  * 컴퓨터간 네트워크를 단순히 연결   
+  * 데이터를 받으면 포트에 연결된 모든 장비에 전송(브로드캐스팅)   
+  * 보유한 대역폭을 연결한 컴퓨터 수 만큼 나누어 제공함   
+  * 포트에 많은 장비가 연결될 경우 전송 속도가 감소   
 
 # 브리지(Bridge)
 * LAN내의 컴퓨터들을 연결
@@ -45,20 +45,18 @@ Network Equipment
 * 네트워크와 네트워크를 연결
 * 라우팅 테이블(최적의 라우팅 정보를 기록한 테이블)을 참조해서 라우팅 진행
 * 라우팅 알고리즘
-> * 거리 벡터 알고리즘 : 인접한 라우터 간 거리와 벡터(방향)에 대한 정보를 바탕으로 경로를 찾고, 그 경로를 이용할 수 없다면 다른 경로를 찾음. (RIP, IGRP)
-> * 링크 상태 알고리즘 : 라우터와 라우터간 모든 경로를 파악하고 미리 대체 경로를 마련하는 알고리즘. 거리 벡터 알고리즘의 단점을 보완. (OSPF)   
+  * 거리 벡터 알고리즘 : 인접한 라우터 간 거리와 벡터(방향)에 대한 정보를 바탕으로 경로를 찾고, 그 경로를 이용할 수 없다면 다른 경로를 찾음. (RIP, IGRP)
+  * 링크 상태 알고리즘 : 라우터와 라우터간 모든 경로를 파악하고 미리 대체 경로를 마련하는 알고리즘. 거리 벡터 알고리즘의 단점을 보완. (OSPF)   
 * 라우팅 프로토콜 
-> * RIP(Routing  Information Protocol)
-> * IGRP(Interior Gataway Routing Protocol)
-> * OSPF(Open Shortest Path First Protocol)
-> * BGP(Border Gateway Protocol)
-* 라우터와 공유기의 차이점     
+  * RIP(Routing  Information Protocol)
+  * IGRP(Interior Gataway Routing Protocol)
+  * OSPF(Open Shortest Path First Protocol)
+  * BGP(Border Gateway Protocol)
+
+## 라우터와 공유기의 차이점     
    
 |구분|공유기|라우터|   
 |------|---|---|   
 |주 사용장소|가정|기업|   
 |포인트 기능|NAT|Routing|   
-|가격|비교적 저렴|고가의 장비|    
-
-# 게이트웨이(Gateway)
-
+|가격|비교적 저렴|고가의 장비|

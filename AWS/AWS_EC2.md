@@ -31,6 +31,7 @@
   * Linux : Amazon Linux2, Red Hat Enterprise Linux, Ubuntu, SUSE Linux 등
   * Windows : MS Windows Server
 * 이미 만들어져있는 AMI 외에 개인이 직접 제작하여 Marketplace에서 배포도 가능하며 이 경우에는 AMI가 안전하지 않을 수도 있기 때문에 배포자를 잘 확인하고 사용
+* 계정 간 공유 가능
  
 ### ✔️ Instance Type
 
@@ -121,7 +122,12 @@
   * 사용중이지 않은 잉여 EC2를 사용하여 상대적으로 적은 비용으로 인스턴스 생성이 가능. AWS에서 언제든지 회수할 수 있기 때문에 그에 대한 대비책을 마련해야함.
 
 
-### ✔️ Launch Template 
+### ✔️ Launch Template
+* 인스턴스 생성을 위한 구성 요소(AMI, Instance Type, 네트워크 구성 등)를 템플릿으로 저장
+* 템플릿을 이용하여 반복적인 인스턴스 생성 작업을 보다 수월하게 진행 가능
+* 버전 별로 템플릿을 관리
+
+
 
 ### ✔️ Tags
    
