@@ -54,6 +54,14 @@
 * Subnet : VPC를 작은 단위로 분할한 IP 주소 범위
 * Availability Zone(AZ) Level
 * 서브넷은 가용 영역당 하나씩 생성
+  * 고가용성을 위해 서브넷을 여러 가용영역에 생성하는 것이 best practice
+* 서브넷을 목적에 따라 크게 세 가지의 서브넷으로 분류 가능
+  * Public 서브넷 : 인터넷 외부에서 접속 가능
+    * Default Gateway : IGW
+  * Private 서브넷 : 인터넷 외부에서 접속은 불가능하나 내부에서 인터넷과 통신 가능
+    * Default Gateway : NAT GW
+  * Local 서브넷 : 인터넷 외부에서 접근 불가능 + 내부에서도 인터넷과 통신 불가능
+    * Default Gateway : Local 
 
 ### ✔️ **Public Subnet** & **Private Subnet**
 
@@ -77,12 +85,15 @@
 
 ![Untitled 9](https://user-images.githubusercontent.com/57285121/161435551-ebaf37a6-ee4b-42b8-9146-fec5b1ddc2fa.png)
 
-* 외부 인터넷과 통신하기 위한 게이트웨이(Gateway)
+* 외부 인터넷과 통신하기 위한 Gateway
   * 외부로 나가거나 외부에서 들어오는 게이트웨이 역할
 
 ## 📌 NAT Gateway
 
 ![Untitled 10](https://user-images.githubusercontent.com/57285121/161435576-e01ed955-515b-43e7-a9d6-3e156ced5a6d.png)
+
+* NAT 기능을 수행하는 Gateway 
+  * Private 서브넷에서 인터넷과 통신이 가능
 
 ## 📌 Security Group & Network Access Control List(ACL)
 
