@@ -12,8 +12,8 @@
  
 
 ## 📌 DNS 동작 과정
-![dns3](https://user-images.githubusercontent.com/57285121/115513296-dfab5b80-a2bd-11eb-9374-469e9c97ba1c.PNG)   
- 
+
+![dns3](https://user-images.githubusercontent.com/57285121/115513296-dfab5b80-a2bd-11eb-9374-469e9c97ba1c.PNG) 
 
 1. 클라이언트는 브라우저를 통해서 도메인을 입력하면 `/etc/hosts` 파일에서 입력한 도메인과 매핑된 IP를 먼저 찾고 `/etc/hosts`에 매핑된 정보가 없다면 ISP의 DNS 서버에게 도메인 주소에 해당하는 IP 주소를 Request
 
@@ -23,11 +23,11 @@
 
 4. ISP DNS 서버는 TLD DNS 서버에게 다시 IP 주소를 Request
 
-5. TLD DNS 서버는 요청한 도메인의 Hostname을 확인하고 해당 Hostname을 관리하는 도메인 호스팅 업체의 DNS 서버 주소를 Response
+5. TLD DNS 서버는 요청한 도메인의 Hostname을 확인하고 해당 Hostname을 관리하는 Authoritative DNS 서버의 주소를 Response
 
-6. ISP DNS 서버는 호스팅 업체의 DNS 서버에게 또 다시 IP 주소 Request
+6. ISP DNS 서버는 Authoritative DNS 서버에게 또 다시 IP 주소 Request
 
-7. 호스트 업체의 DNS 서버는 Namespace에 요청받은 도메인이 있는지 확인하고 해당 도메인에 매핑된 IP 주소를 확인하고 Response. 동시에 ISP DNS 서버는 해당 정보를 캐시에 저장
+7. Authoritative DNS 서버는 Namespace에 요청받은 도메인이 있는지 확인하고 해당 도메인에 매핑된 IP 주소를 확인하고 Response. 동시에 ISP DNS 서버는 해당 정보를 캐시에 저장
 
 8. ISP DNS 서버는 브라우저에게 IP 주소 Response
 
@@ -45,6 +45,7 @@
   * 각 층의 Domain Name Space는 도메인과 그 하위 도메인에 관한 정보를 트리구조로 관리
 ![DNS](https://user-images.githubusercontent.com/57285121/115060392-c5baf300-9f22-11eb-8b78-70527a4f04ba.PNG)
   * Root : TLD 정보만을 갖고 있으며 요청받은 도메인의 TLD를 확인하고 해당 TDL DNS 서버의 정보를 반환함
+    * ICANN(국제 인터넷 주소 관리 기구)에서 관리
   * TLD(Top Level Domain) : Root 바로 아래에 위치하는 최상위 도메인
     * gTLD(generic) : 조직의 특성에 따라 구분. e.g. `.com, .info, .org `등
     * ccTLD(country code) : 국가 코드. e.g. `.kr, .jp, .us` 등
@@ -52,46 +53,24 @@
 * Resource Record : Domain Name Space의 트리구조에서 각 노드에 포함된 도메인의 Type  
   * A : IPv4 주소   
   * AAAA : IPv6 주소
-  * CNAME(Canonical Name) : 호스트명의 Alias
-  * NS(Name Server) : Name Server.
-  * MX(Mail eXchange) : 메일 교환 레코드; →  메일서버에 도착할 수 있는 라우팅 정보 제공   
-  * SRV(SeRVice) : 서비스 위치 레코드; →  비슷한 TCP/IP 서비스를 제공하는 다수의 서버 위치 정보 제공   
+  * CNAME(Canonical Name) : 도메인의 Alias
+  * NS(Name Server) : 네임 서버의 역할을 다른 서버에게 위임
+  * MX(Mail Exchange) : 메일 서버
   * SOA(Start Of Authority) : 권한 시작 레코드; →  DNS영역의 메인DNS서버를 정의하고 영역의 변경사항을 기록하고 영역의 기본 TTL(Time To Live)값을 정의   
   
 
 ### ✔️ Name Server
 * 도메인 이름을 IP주소로 변환하기 위한 Domain Name Space + Resource Record의 데이터를 갖고 있는 서버
-
 * Resolver로부터 요청받은 도메인 이름에 대한 IP정보를 다시 Resolver로 전달
 
 ### ✔️ Resolver(Client S/W)
 * 클라이언트의 요청을 네임 서버로 전달 및 네임 서버로부터 도메인 이름과 IP주소를 받아 클라이언트에게 제공
 * 네임 서버에 요청을 했을 때, 해당 서버의 정보가 없으면 다른 네임 서버에게 요청을 보내 정보를 받아온다
 
-# DNS 서버 종류  
-* DNS서버 하나만으로는 사실상 운영 불가
-* DNS서버 종류를 디렉토리/계층형태로 계층화해서 단계적으로 처리
-* 도메인의 총 관리는 ICANN(국제 인터넷주소 관리 기구)에서 함   
-![dns2](https://user-images.githubusercontent.com/57285121/115511329-b12c8100-a2bb-11eb-891a-b0d295ded98d.PNG)
-* Root DNS Server : ICANN이 직접 관리. TLD DNS 서버의 IP들을 저장해두고 안내하는 역할.
-* TLD(Top Level Domain) DNS Server : 도메인 등록 기관(Registry)이 관리. Authoritative DNS Server의 IP주소를 저장해두고 안내하는 역할. 도메인 업체의 DNS 변경 사항을 이 곳에 저장하기 때문에 Authoritative DNS Server의 정보를 알고있다.
-* Authoritative DNS Server : 실제 개인 도메인과 IP주소의 관계가 기록, 저장, 변경되는 서버. 도메인/호스팅 업체의 Name Server, 개인 DNS Server가 여기에 해당.
-* Recursive DNS Server : 클라이언트가 웹 사이트 접속시 가장 먼저 접근하는 DNS서버. 클라이언트가 자주 방문하는 주소의 정보를 캐시에 저장하는 서버. ISP(통신사.SK,KT,LG 등) DNS Server가 여기에 해당됨
-* **브라우저는 캐시가 저장된 Recursive DNS Server를 사용하고 실제 Name Server를 설정하는 곳은 Authoritative Server.**
 
-
-# DNS 상세 동작 원리
-   
-
-
-# URL & URI 차이점
-* URL : Uniform Resource Locator
-> * 정형화 된 리소스 위치 표시(리소스의 위치)   
-
-* URI : Uniform Resource Identifier
-> * 해당 서버의 자원 식별자(리소스 식별자)   
-
-* http://google.com/rabel : 웹 페이지에서 rabel의 리소스의 위치를 나타냄(URL)
-* http://google.com/132 : 132라는 식별자를 통해 해당 웹 페이지의 리소스를 나타냄(URI)
-* **URI**가 더 상위 개념
-
+## 📌 관련 명령어
+* `nslookup` : 네임 서버에 특정 도메인의 IP를 질의
+  * `$ nslookup {domain}`
+  * 대화형으로도 가능
+* `dig` : DNS Record 조회
+  * `$ dig {domain}`
