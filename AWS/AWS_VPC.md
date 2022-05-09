@@ -11,27 +11,38 @@
 
 * VPC 서비스를 사용하여 네트워크 망을 구성할 때 사용하는 VPC 리소스 및 개념
   * VPC
+    * ENI(Elastic Network Interface)
   * Subnet
   * Routing Table
   * Internet Gateway
   * NAT Gateway
   * Security Group(SG) & Network Access Control List(ACL)
-  * Elastic IP
-  * VPC Endpoint
   * DHCP(Dynamic Host Configuration Protocol)
- 
+  * Elastic IP
+  * VPC Endpoints
 
 ## 📌 VPC(Virtual Private Cloud)
 
-* AWS에서 제공하는 네트워크 서비스
-  * VPC의 리소스를 사용하여 퍼블릭 클라우드 환경에서 망 구축 가능
+* AWS에서 제공하는 네트워킹 서비스
+* Region Level
 * **CIDR(Classless Inter-Domain Routing)** 표기법을 사용하여 IPv4 주소를 표기
   * CIDR 표기법 : 네트워크 영역 + 호스트 영역으로 구성되어 있는 IP 주소에서 네트워크 영역을 숫자로 표기하는 방법(e.g. IPv4 Address가 `10.0.3.0/16`일 때 `10.0` 까지가 네트워크 영역, 그 뒤 `3.0`이 호스트 영역)
-* Region Level
 * VPC에서 사용 가능한 Private IP 대역 : RFC 1918에 명시되어 있는 Private IP Range
   * `10.0.0.0/16 ~ /28`
   * `172.16.0.0/16 ~ /28`
   * `192.168.0.0/16 ~ /28`
+
+### ✔️ ENI (Elastic Network Interface)
+
+* 네트워크 인터페이스
+  * 가상의 NIC라고 보면 된다.
+* 인스턴스를 생성할 때 선택한 VPC CIDR Block 내에서 Private IP를 할당 받는 대상
+* 이게 없으면 IP를 할당 받지 못하니 당연히 네트워크 통신이 되지 않음!
+* 인스턴스에 Attach 및 Detach 가능
+* 하나의 인스턴스에 여러 ENI를 Attach할 수 있지만 하나의 ENI를 여러 인스턴스에 Attach할 수 없음
+  * 1:N 관계
+* 보안 그룹(SG)이 Attach 되는 지점!
+
 
 ### ✔️ 기본 VPC 삭제
 
@@ -123,4 +134,18 @@
 
 ## 📌 Elastic IP
 
+* 탄력적 IP
+
 ## 📌 VPC Endpoint
+
+* Private Link
+
+# 💡 VPC 네트워킹 기본 수칙
+
+1. VPC가 가장 먼저 생성되어야 하고 그 다음에 서브넷이 생성되어야 함
+
+2. 서브넷이 생성되어야만 인스턴스에 Attach할 ENI를 생성할 수 있음
+
+3. ENI는 반드시 보안 그룹(SG)을 가지고 있어야 함(즉 ENI = SG 붙는 지점)
+
+4. VPC 내에 생성된 서브넷들은 최소 1개 이상의 네트워크 ACL, Routing Table이 자동으로 연결됨( 변경 가능)
