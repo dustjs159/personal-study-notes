@@ -1,25 +1,38 @@
 
 💻 [AWS] AWS VPC
-===============
+=================
 # 💡 AWS VPC 
 
 * AWS VPC(Virtual Private Cloud) : AWS의 **가상의 사설 네트워킹** 서비스
 * 논리적으로 독립되어 있는 사설 네트워크 망을 구성할 수 있고 구성한 망에 AWS의 서비스(e.g. EC2 인스턴스)를 배치할 수 있음
 * 기존 데이터 센터의 망 구성과 유사
+  * 온프레미스 환경에서 서버 랙(Rack)이라고 보면 된다.
 
-# 💡 VPC Resource
+# 💡 VPC 주요 용어
 
-* VPC 서비스를 사용하여 네트워크 망을 구성할 때 사용하는 VPC 리소스 및 개념
+* VPC 서비스를 사용하여 네트워크를 구성할 때 알아야 할 주요 용어 
   * VPC
     * ENI(Elastic Network Interface)
   * Subnet
-  * Routing Table
+  * Router : Routing Table
   * Internet Gateway
   * NAT Gateway
   * Security Group(SG) & Network Access Control List(ACL)
   * DHCP(Dynamic Host Configuration Protocol)
   * Elastic IP
-  * VPC Endpoints
+  * VPC Endpoints(Private Link)
+
+# 💡 VPC 기본 수칙
+
+* VPC 리소스에 대해 알기 전 기본적인 수칙.
+* 이 4가지를 기억하고 VPC 서비스를 스터디하면 조금 더 와닿지 않을까 싶다.
+```
+ 1. VPC 위에 서비스를 올리기 위해서는 반드시 ENI가 필요하다.
+ 2. ENI는 반드시 보안 그룹(SG)을 수반한다.
+ 3. ENI를 생성하기 위해서는 서브넷이 존재해야 한다.
+ 4. 서브넷이 존재하기 위해서는 VPC가 존재해야 한다.
+ 5. VPC내의 서브넷들은 최초 생성 시에 Routing Table과 Network ACL이 자동으로 붙는다. (다른 것으로 교체 가능하다)
+```
 
 ## 📌 VPC(Virtual Private Cloud)
 
@@ -36,13 +49,12 @@
 
 * 네트워크 인터페이스
   * 가상의 NIC라고 보면 된다.
-* 인스턴스를 생성할 때 선택한 VPC CIDR Block 내에서 Private IP를 할당 받는 대상
+* 인스턴스를 생성할 때 선택한 VPC CIDR Block 내에서 IP를 할당 받는 대상
 * 이게 없으면 IP를 할당 받지 못하니 당연히 네트워크 통신이 되지 않음!
 * 인스턴스에 Attach 및 Detach 가능
 * 하나의 인스턴스에 여러 ENI를 Attach할 수 있지만 하나의 ENI를 여러 인스턴스에 Attach할 수 없음
   * 1:N 관계
-* 보안 그룹(SG)이 Attach 되는 지점!
-
+* **보안 그룹(SG)이 Attach 되는 지점**
 
 ### ✔️ 기본 VPC 삭제
 
@@ -50,9 +62,9 @@
 
 ![](https://images.velog.io/images/dustjs159/post/f0332ff4-3d16-44d1-88f3-9b2eddf1400d/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-03-07%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.54.40.png)
 
-* 이것이 ``default VPC`` 인데, 네트워크 뿐 만 아니라 인프라를 구축할 때 이 VPC를 지워주도록 합니다. 
-* 첫 번째 이유로는 리전 당 생성할 수 있는 VPC의 수는 5개(default 값이며 조정이 가능하긴 함)로 제한됩니다. 그런데 이 ``default VPC`` 가 존재한다면 생성할 수 있는 VPC의 수 가 하나 줄어듭니다. 여러 대역의 네트워크 환경을 구성해야할 때 방해가 될 수도 있기에, 지워주도록 합니다.
-* 두 번째 이유로는 EC2 인스턴스 등 여러 AWS 서비스들을 사용하고자 할 때, VPC가 ``default VPC`` 로 설정되어 있는 경우가 있습니다. 자칫 엉뚱한 대역에 서비스를 배치하게 될 수도 있으므로 지워줍니다.
+* 이것이 ``default VPC`` 인데, 네트워크 뿐 만 아니라 인프라를 구축할 때 이 VPC를 지워주도록 한다. 
+* 첫 번째 이유로는 리전 당 생성할 수 있는 VPC의 수는 5개(default 값이며 조정이 가능하긴 함)로 제한. 그런데 이 ``default VPC`` 가 존재한다면 생성할 수 있는 VPC의 수 가 하나 줄어듦. 여러 대역의 네트워크 환경을 구성해야할 때 방해가 될 수도 있기에, 지워주도록 한다.
+* 두 번째 이유로는 EC2 인스턴스 등 여러 AWS 서비스들을 사용하고자 할 때, VPC가 ``default VPC`` 로 설정되어 있는 경우가 있는데, 자칫 엉뚱한 대역에 서비스를 배치하게 될 수도 있으므로 지워준다.
 
 ![](https://images.velog.io/images/dustjs159/post/94f8ccff-1825-45af-a7c1-f2b375fe7425/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-03-07%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.12.06.png)
 
