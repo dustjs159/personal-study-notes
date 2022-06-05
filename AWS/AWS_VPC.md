@@ -20,7 +20,7 @@
   * Security Group(SG) & Network Access Control List(ACL)
   * DHCP(Dynamic Host Configuration Protocol)
   * Elastic IP
-  * VPC Endpoints(Private Link)
+  * VPC Endpoint(Private Link)
 
 # 💡 VPC 기본 수칙
 
@@ -38,6 +38,7 @@
 
 * AWS에서 제공하는 네트워킹 서비스
 * Region Level
+  * 하나의 리전에 여러 VPC가 포함되며 여러 리전에 중복 포함될 수 없음!
 * **CIDR(Classless Inter-Domain Routing)** 표기법을 사용하여 IPv4 주소를 표기
   * CIDR 표기법 : 네트워크 영역 + 호스트 영역으로 구성되어 있는 IP 주소에서 네트워크 영역을 숫자로 표기하는 방법(e.g. IPv4 Address가 `10.0.3.0/16`일 때 `10.0` 까지가 네트워크 영역, 그 뒤 `3.0`이 호스트 영역)
 * VPC에서 사용 가능한 Private IP 대역 : RFC 1918에 명시되어 있는 Private IP Range

@@ -21,8 +21,8 @@
   * 이 때 각 IAM User들에게 부여되는 권한은 최소 권한 부여 원칙에 의해 최소한의 권한만을 부여한다
 
 ## 📌 Region & Availability Zone
-* Region : 물리적으로 격리된 데이터 센터
-* Availability Zone(AZ) : 물리적인 데이터 센터를 여러 구역으로 나눈 구역
+* Region : 물리적인 데이터 센터가 위치한 지역
+* Availability Zone(AZ) : 리전 내 물리적 데이터 센터를 논리적으로 나눠놓은 구역 
   * 리전마다 AZ의 수가 다르다(서울은 4개)
   * 가용성을 보장하기 위함
 * AWS의 서비스들은 크게 3 Level로 나눌 수 있다. 각 Level마다 서비스들이 생성되는 위치가 다름
@@ -40,6 +40,5 @@
 
 
 ## 📌 ARN(Amazon Resource Name)
-* 
 
 
