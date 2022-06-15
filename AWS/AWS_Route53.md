@@ -11,14 +11,31 @@
 
 ## 📌 Route 53 주요 기능
 
-* 도메인 등록
-* DNS Routing
+* 도메인 등록 & 트래픽 라우팅
 * Health Check
 
-## 📌 Route 53 도메인 등록 과정
-* 도메인 등록
-  * 도메인 이름과 같은 이름의 Hostzone 생성
-  * **Public** or **Private** 선택
-* Public Zone : 외부에서 사용 가능
-* Private Zone : VPC 내부에서만 사용 가능
+## 📌 Route 53 동작 원리
+
+<img width="579" alt="스크린샷 2022-06-14 오후 11 13 27" src="https://user-images.githubusercontent.com/57285121/173598824-b52d29fa-e0bd-41f0-b7bd-fb3fc16ee728.png">
+
+* 일반적인 DNS 동작 원리와 동일하나 Public Zone / Private Zone에 대한 이해가 필요
+* 계층적 구조
+  * Root DNS > TLD DNS > Route 53 순서로 쿼리
+
+## 📌 Route 53 호스팅 영역
+
+* 호스팅 영역은 **Public Zone** or **Private Zone** 으로 나누어져 있음 
+* 각 Zone에는 다음과 같은 정보가 매핑되어 있는 Zone File이 포함되어 있음
+  * 도메인
+  * 리소스(IP Address, ALB DNS Name, CloudFront Distribution, API Gateway 등)
+  * DNS Record
+* Public Zone
+  * DNS 쿼리에 응답하는 DNS Name Server가 누구나 접근 가능한 인터넷 상에 있음
+  * 즉, 외부에서 해당 도메인을 쿼리하면 Public IP 가 나옴
+    * `nslookup` 커맨드로 도메인 쿼리 시 Public IP
+* Private Zone
+  * DNS 쿼리에 응답하는 DNS Name Server가 VPC 내부에 있음
+  * VPC 내 호스트가 특정 도메인을 쿼리했을 때 가장 먼저 Private Zone의 DNS 서버에 쿼리하게 되며 쿼리한 도메인의 정보가 DNS 서버 내 Zone File에 있는 정보일 경우 VPC 외부에 다시 쿼리하지 않고 해당 Zone File의 정보를 반환
+* TTL(Time To Live)
+
 

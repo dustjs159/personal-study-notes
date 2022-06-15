@@ -38,3 +38,18 @@
   * S3 Glacier는 장기간 저비용 데이터 보관이 가능하며 주로 **아카이브** 목적으로 사용됩니다.
   * 데이터를 객체가 아닌 볼트(Vault)단위의 컨테이너로 저장
   * 다량의 데이터를 장기간 저장해야 할 경우에 적합
+
+
+### S3 접근 관리
+
+* S3에 접근하고자 하는 Principal에 Policy를 Custom하여 Attach할 때 유의점
+```json
+1. "Action": "ListAllMyBuckets"
+2. "Action": "ListBucket"
+```
+* 위 1번은 계정 내 존재하는 버킷의 리스트를 조회하는 Action
+  * `ls bucket` 
+* 위 2번은 버킷 내 존재하는 객체(Object)의 리스트를 조회하는 Action
+  * `ls object` 
+* 따라서, 정책을 할당할 때 `ListAllMyBuckets`으로 버킷 리스트를 조회할 수 있도록 하고 `ListBucket` + 특정 bucket name을 통해 특정 버킷의 object들만 확인할 수 있도록 할당
+  * `ListAllMyBuckets` 를 허용하지 않으면 `ListBucket` 를 모든 버킷에 허용해도 버킷 리스트 자체가 조회가 되지 않기 때문에 아무것도 볼 수 없다.
