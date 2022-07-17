@@ -53,3 +53,9 @@
   * `ls object` 
 * 따라서, 정책을 할당할 때 `ListAllMyBuckets`으로 버킷 리스트를 조회할 수 있도록 하고 `ListBucket` + 특정 bucket name을 통해 특정 버킷의 object들만 확인할 수 있도록 할당
   * `ListAllMyBuckets` 를 허용하지 않으면 `ListBucket` 를 모든 버킷에 허용해도 버킷 리스트 자체가 조회가 되지 않기 때문에 아무것도 볼 수 없다.
+
+
+### S3 Website Hosting
+
+  * S3를 웹페이지로 사용하고자 할 때 설정 할 수 있음
+    * 버킷 생성 시에는 옵션이 없고 아무 버킷이나 생성한 후에 생기는 듯?

@@ -8,11 +8,11 @@
 * 서비스의 엔드포인트와 도메인 이름을 매핑
   * 도메인의 CNAME Record에 Endpoint 등록
 
-
 ## 📌 Route 53 주요 기능
 
 * 도메인 등록 & 트래픽 라우팅
 * Health Check
+* ACM(AWS Certificate Manager)에서 생성 및 관리하는 인증서가 포함된 도메인 등록을 통해 HTTPS 가 적용된 도메인 사용
 
 ## 📌 Route 53 동작 원리
 
@@ -38,4 +38,5 @@
   * VPC 내 호스트가 특정 도메인을 쿼리했을 때 가장 먼저 Private Zone의 DNS 서버에 쿼리하게 되며 쿼리한 도메인의 정보가 DNS 서버 내 Zone File에 있는 정보일 경우 VPC 외부에 다시 쿼리하지 않고 해당 Zone File의 정보를 반환
 * TTL(Time To Live)
 
-
+## 📌 호스팅 영역에 다른 VPC를 연결하는 방법
+* AWS CLI 사용해야 함
