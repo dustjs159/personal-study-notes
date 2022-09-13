@@ -8,19 +8,21 @@
 * 기존 데이터 센터의 망 구성과 유사
   * 온프레미스 환경에서 서버 랙(Rack)이라고 보면 된다.
 
-# 💡 VPC 주요 용어
+# 💡 VPC 주요 개념
 
-* VPC 서비스를 사용하여 네트워크를 구성할 때 알아야 할 주요 용어 
+* VPC 서비스를 사용하여 네트워크를 구성할 때 알아야 할 주요 개념들 
   * VPC
     * ENI(Elastic Network Interface)
   * Subnet
-  * Router : Routing Table
+  * Routing Table
   * Internet Gateway
   * NAT Gateway
   * Security Group(SG) & Network Access Control List(ACL)
   * DHCP(Dynamic Host Configuration Protocol)
   * Elastic IP
   * VPC Endpoint(Private Link)
+  * VPC Peering
+  * Transit Gateway
 
 # 💡 VPC 기본 수칙
 
@@ -85,7 +87,8 @@
   * Private 서브넷 : 인터넷 외부에서 접속은 불가능하나 내부에서 인터넷과 통신 가능
     * Default Gateway : NAT GW
   * Local 서브넷 : 인터넷 외부에서 접근 불가능 + 내부에서도 인터넷과 통신 불가능
-    * Default Gateway : Local 
+    * Default Gateway : Local
+ 
 
 ### ✔️ **Public Subnet** & **Private Subnet**
 
@@ -103,7 +106,7 @@
 * 서브넷 내에서의 라우팅(Routing) 규칙
 * 서브넷마다 각각 다른 Routing Table을 정의하고 Table의 내용에 따라 해당 서브넷이 Public or Private이 되는지 결정하게 됨
 * Table의 내용에는 다음 홉(Hop)으로 갈 수 있는 목적지들의 리스트가 담겨있음
-
+* VPC를 생성하게 되면 자동으로 메인 라우팅 테이블이 생성되는데 서브넷에 별도의 라우팅 테이블을 연결하지 않았다면, 메인 라우팅 테이블의 적용을 받음
 
 ## 📌 Internet Gateway
 

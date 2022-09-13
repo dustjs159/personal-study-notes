@@ -44,6 +44,10 @@
   * AWS 웹 콘솔에서 클릭(Action)하는 User
   * AWS API를 호출하는 User or APP
 
+# 💡 IAM 동작 원리
+
+![스크린샷 2022-07-22 오전 12 40 19](https://user-images.githubusercontent.com/57285121/180255247-457ac69f-6a2b-4171-8ef4-a371b7c1ad7f.png)
+
 # 💡 IAM Resource
 
 * IAM Resource에는 User, Group, Role, Policy 네 가지가 있음
@@ -75,7 +79,6 @@
 
 * 특정 권한을 갖는 IAM Identity
 * User와 유사
-
 
 ## 📌 Policy
 
