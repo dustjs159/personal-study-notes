@@ -5,8 +5,7 @@
 
 * AWS VPC(Virtual Private Cloud) : AWS의 **가상의 사설 네트워킹** 서비스
 * 논리적으로 독립되어 있는 사설 네트워크 망을 구성할 수 있고 구성한 망에 AWS의 서비스(e.g. EC2 인스턴스)를 배치할 수 있음
-* 기존 데이터 센터의 망 구성과 유사
-  * 온프레미스 환경에서 서버 랙(Rack)이라고 보면 된다.
+* 기존 데이터 센터의 서버 랙(Rack)이라고 보면 된다.
 
 # 💡 VPC 주요 개념
 
@@ -23,6 +22,8 @@
   * VPC Endpoint(Private Link)
   * VPC Peering
   * Transit Gateway
+  * VPN
+    * Site To Site VPN
 
 # 💡 VPC 기본 수칙
 
@@ -43,10 +44,13 @@
   * 하나의 리전에 여러 VPC가 포함되며 여러 리전에 중복 포함될 수 없음!
 * **CIDR(Classless Inter-Domain Routing)** 표기법을 사용하여 IPv4 주소를 표기
   * CIDR 표기법 : 네트워크 영역 + 호스트 영역으로 구성되어 있는 IP 주소에서 네트워크 영역을 숫자로 표기하는 방법(e.g. IPv4 Address가 `10.0.3.0/16`일 때 `10.0` 까지가 네트워크 영역, 그 뒤 `3.0`이 호스트 영역)
-* VPC에서 사용 가능한 Private IP 대역 : RFC 1918에 명시되어 있는 Private IP Range
-  * `10.0.0.0/16 ~ /28`
-  * `172.16.0.0/16 ~ /28`
-  * `192.168.0.0/16 ~ /28`
+* AWS VPC에서 사용 가능한 Private IP 범위는 RFC 1918에 명시되어 있는 Private IP 범위와 같으나 CIDR Block에 차이가 있음   
+
+|RFC 1918|AWS VPC|
+|---|---|
+|10.0.0.0/8|10.0.0.0/16 ~ /28|
+|172.16.0.0/12|172.16.0.0/16 ~ /28|
+|192.168.0.0/16|192.168.0.0/16 ~ /28|
 
 ### ✔️ ENI (Elastic Network Interface)
 
@@ -59,7 +63,7 @@
   * 1:N 관계
 * **보안 그룹(SG)이 Attach 되는 지점**
 
-### ✔️ 기본 VPC 삭제
+#### 기본 VPC 삭제하기
 
 * AWS 계정을 생성하고 VPC 서비스를 확인해보면 별도의 VPC를 생성하지 않았음에도 해당 리전에  IPv4 CIDR가 `172.31.0.0/16` 인 VPC가 있음
 
@@ -87,8 +91,7 @@
   * Private 서브넷 : 인터넷 외부에서 접속은 불가능하나 내부에서 인터넷과 통신 가능
     * Default Gateway : NAT GW
   * Local 서브넷 : 인터넷 외부에서 접근 불가능 + 내부에서도 인터넷과 통신 불가능
-    * Default Gateway : Local
- 
+    * Default Gateway : Local 
 
 ### ✔️ **Public Subnet** & **Private Subnet**
 
@@ -98,7 +101,6 @@
 * Public 서브넷 내 리소스들은 외부 인터넷과 연결
 * Private 서브넷 내 리소스들은 외부 인터넷과 차단
 
-
 ## 📌 Routing Table
 
 ![Untitled 8](https://user-images.githubusercontent.com/57285121/161435365-00fddcf9-7983-4266-98cc-716eb1dfde69.png)
@@ -106,21 +108,26 @@
 * 서브넷 내에서의 라우팅(Routing) 규칙
 * 서브넷마다 각각 다른 Routing Table을 정의하고 Table의 내용에 따라 해당 서브넷이 Public or Private이 되는지 결정하게 됨
 * Table의 내용에는 다음 홉(Hop)으로 갈 수 있는 목적지들의 리스트가 담겨있음
-* VPC를 생성하게 되면 자동으로 메인 라우팅 테이블이 생성되는데 서브넷에 별도의 라우팅 테이블을 연결하지 않았다면, 메인 라우팅 테이블의 적용을 받음
+* **서브넷의 Route Table 구성**
+  * 서브넷 내 리소스들이 참조하는 라우팅 테이블은 묵시적(implicit)/명시적(explicit)인 성격으로 구분 할 수 있다.
+  * 먼저 VPC 생성시 Main Route Table이 생성된다. 별도의 라우팅 테이블을 생성하여 서브넷에 지정하지 않는다면 모든 서브넷들은 Main Route Table의 적용을 받는다(implicit).
+  * 허나 서브넷에 별도로 생성한 Route Table(Custom)을 지정(Association)할 경우 Main Route Table이 아닌 직접 생성한 Route Table 적용을 받는다(explicit).
 
-## 📌 Internet Gateway
+## 📌 Internet Gateway(IGW)
 
 ![Untitled 9](https://user-images.githubusercontent.com/57285121/161435551-ebaf37a6-ee4b-42b8-9146-fec5b1ddc2fa.png)
 
 * 외부 인터넷과 통신하기 위한 Gateway
   * 외부로 나가거나 외부에서 들어오는 게이트웨이 역할
 
-## 📌 NAT Gateway
+## 📌 NAT Gateway(NAT GW)
 
 ![Untitled 10](https://user-images.githubusercontent.com/57285121/161435576-e01ed955-515b-43e7-a9d6-3e156ced5a6d.png)
 
-* NAT 기능을 수행하는 Gateway 
-  * Private 서브넷에서 인터넷과 통신이 가능
+* NAT 기능을 수행하는 Gateway
+  * NAT 기능은 쉽게 말해서 Public IP <-> Private IP 전환을 가능하게 해줌(Network Address Translation)
+  * Private 서브넷은 NAT를 이용하여 외부로 Outbound는 허용할 수 있음
+    * NAT Gateway를 거쳐야하기 때문에 트래픽 I/O가 많고 기밀성이 낮은 리소스들은 Private 서브넷이 아닌 Public 서브넷에 배치하여 비용 절감효과를 가져올 수 있음(NAT 비용이 꽤 비쌉니다.)
 
 ## 📌 Security Group & Network Access Control List(ACL)
 
@@ -140,7 +147,6 @@
 
 * 인바운드/아웃바운드 규칙은 적용할 **프로토콜**과 **포트번호**단위로 접근 규칙을 설정합니다. 포트번호는 **Well-Known Port**를 사용합니다.
    
-
 ### ✔️ Stateful / Stateless
 * Stateful : 요청 정보를 저장하여 **인바운드 규칙에 따라 허용된 트래픽은 별도의 아웃바운드 규칙 없이도 인바운드 트래픽의 요청에 응답** 
   * e.g. 인바운드 규칙에 http 80번 포트가 허용되어 있으면 아웃바운드 규칙 설정 없이도 요청에 응답할 수 있습니다.   
