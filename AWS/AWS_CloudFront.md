@@ -16,39 +16,47 @@
 
 1. 사용자가 웹 페이지에 접근 (컨텐츠 요청)
 2. DNS가 사용자가 요청한 지점으로 부터 가장 가까운 Edge Location으로 요청을 라우팅
-3. Edge Location에 캐시가 있는 경우 사용자에게 캐시 전달   
-  3-a. Edge Location에 캐시가 없다면, Origin(S3 버킷 or 웹 서버)에 사용자의 요청 전달   
+3. Edge Location에 캐시가 있는 경우 사용자에게 캐시 전달(이것이 Cache Hit)   
+  3-a. Edge Location에 캐시가 없다면(이것이 Cache Miss), Origin(S3 버킷 or 웹 서버)에 사용자의 요청 전달   
   3-b. Origin은 Edge Location로 응답을 전달   
   3-c. Edge Location는 Origin에게 받은 응답을 사용자에게 전달 + 캐시 저장
 
-## 📌 CloudFront 주요 설정 및 개념
+## 📌 CloudFront 개념
 
-* Origin : 실제 컨텐츠가 존재하는 지점(S3, EC2, ELB 등)
+![CloudFront](https://user-images.githubusercontent.com/57285121/197563147-00c99569-86d4-44eb-a796-3e7052f866ec.jpg)
+
+* **Distribution**
+  * CDN 캐싱 서버(CDN의 구분 단위)
+  * 여러 Edge Location에서 컨텐츠를 제공하기 위한 채널. Distribution 하나가 여러 Edge Location에서 컨텐츠를 제공
+* **Origin** : 실제 컨텐츠가 존재하는 지점(S3, EC2, ELB 등)
   * Origin Request : CloudFront가 Origin에게 요청을 보내는 시점
   * Origin Response : Origin으로 부터 CloudFront에 응답이 오는 시점
-* TTL(Time To Live)
+* **TTL(Time To Live)**
   * 캐싱이 존재하는 기간
   * TTL 시간이 지나면 캐싱 서버에서 캐싱이 제거되며 새로 Origin으로 부터 캐싱 정보를 가져옴
 * Invalidation
   * 캐시 무효화(삭제)
   * 비용 발생
-* Distribution
-  * CDN 캐싱 서버(CDN의 구분 단위)
-  * 여러 Edge Location에서 컨텐츠를 제공하기 위한 채널. Distribution 하나가 여러 Edge Location에서 컨텐츠를 제공 
-* Cache Key
-  * 어떤 컨텐츠를 캐싱할 지 결정
-  * 기준 : 기본적으로 URL 단위. 부가적으로 Header, Cookie, Query String으로도 가능
-* Cache Policy
+* Viewer
+  * Viewer Request : CloudFront에 사용자의 요청을 보내는 시점
+    * CloudFront는 뷰어의 정보를 헤더에 더해 Origin에 데이터를 전송하는데 이 때 헤더를 통해 확인할 수 있는 정보는 IP 주소, 국가, 도시, Timezone, 디바이스 타입(Desktop, Mobile 등) 등이 있다 
+  * Viewer Response : CloudFront로 부터 사용자에게 응답이 오는 시점
+
+## 📌 CloudFront 주요 설정 옵션
+* Origin 도메인 및 경로 설정(Optional)
+  * Origin 도메인을 S3 버킷으로 설정하고 경로를 설정하면 해당 경로의 폴더가 루트 폴더가 된다.
+  * Origin 도메인의 버킷이 `example-test`, Origin 경로가 `/dev` 일 때 사용자가 CloudFront Distribution에 `index.html` 파일을 요청하면 `example-test/index.html`이 아닌 `example-test/dev/index.html`을 응답으로 반환
+* **Cache Policy**
   * 캐싱 정책
   * Policy 설정 옵션
     * Cache Key
     * TTL
     * Compression Support
-* Viewer
-  * Viewer Request : CloudFront에 사용자의 요청을 보내는 시점
-    * CloudFront는 뷰어의 정보를 헤더에 더해 Origin에 데이터를 전송하는데 이 때 헤더를 통해 확인할 수 있는 정보는 IP 주소, 국가, 도시, Timezone, 디바이스 타입(Desktop, Mobile 등) 등이 있다 
-  * Viewer Response : CloudFront로 부터 사용자에게 응답이 오는 시점
+* Cache Key
+  * 어떤 컨텐츠를 캐싱할 지 결정
+  * 기준 : 기본적으로 URL 단위. 부가적으로 Header, Cookie, Query String으로도 가능
 * Behavior
+  * CDN의 분기점이 되는 지점
 * OAI(Origin Access Identity)
   * S3 버킷 내 오브젝트를 CloudFront를 통해서만 접근할 수 있도록 제한
   * S3 버킷 정책을 통해 CloudFront를 제외한 나머지 접근을 제한하여 사용자들의 버킷 직접 접근을 막음 
@@ -60,12 +68,12 @@
 
 ## 📌 CloudFront 동적 컨텐츠 처리
 
+![CloudFront](https://user-images.githubusercontent.com/57285121/180594680-d88161ba-13a0-4558-a797-d0d60c07d3bc.jpg)
+
 * CloudFront에서 정적/동적 컨텐츠는 URL 경로 패턴 매칭으로 분기 처리
 * 정적 컨텐츠는 S3 버킷 내 CSS, HTML 등을 캐싱하여 컨텐츠 제공 속도 최적화 
 * 동적 컨텐츠는 TCP Connection 유지, 파일 압축(Gzip 등)등을 통해 컨텐츠 제공 속도 최적화
 
-
-![CloudFront](https://user-images.githubusercontent.com/57285121/180594680-d88161ba-13a0-4558-a797-d0d60c07d3bc.jpg)
 
 ## 📌 CloudFront에서 HTTPS 지원
 
@@ -73,8 +81,11 @@
 
 * CloudFront에 ACM(AWS Certificate Manager)에서 발급받은 SSL/TLS 인증서를 적용하여 Origin의 웹 서버에서 따로 HTTPS를 적용하지 않고도 HTTPS를 적용할 수 있음
 
-## CloudFront + S3 Static 웹 페이지 호스팅
+## 📌 CloudFront + S3 Static 웹 페이지 호스팅
 
+* 정적 컨텐츠에 보다 더 특화되어 있는 CloudFront + 정적 웹 페이지를 호스팅할 수 있는 S3의 조합은 아주 좋다.
 * CORS 주의!
 * CloudFront + S3 연동 웹 페이지 구성할 때 CORS 에러 허용
 
+## 📌 CloudFront 잘 사용하기
+* CloudFront를 잘 사용하기 위해서는 호스팅하고 있는 웹 페이지의 컨텐츠마다 캐싱시간을 알맞게 설정하여 자주 바뀌는 컨텐츠는 캐싱 시간을 적게, 그렇지 않은 컨텐츠는 캐싱 시간을 많이 잡아두는 것이 중요.

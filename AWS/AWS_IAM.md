@@ -116,6 +116,7 @@
 ```
 - `Effect` : 허용(Allow) or 차단(Deny)
 - `Principal` : 접근을 허용 or 차단하고자 하는 대상(보안 주체)
+  * **Resource 기반 정책에서 필수로 작성**
 - `Action` : 리소스에 대한 작업(형식 : [서비스명]:[작업명]. Ex, s3:GetObject)
 - `Resource` : 서비스에 대한 리소스들의 상세 조건. ARN(Amazon Resource Number)사용
 - `Condition` : 어떤 조건에서
