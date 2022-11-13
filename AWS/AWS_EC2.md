@@ -32,6 +32,8 @@
   * Windows : MS Windows Server
 * 이미 만들어져있는 AMI 외에 개인이 직접 제작하여 Marketplace에서 배포도 가능하며 이 경우에는 AMI가 안전하지 않을 수도 있기 때문에 배포자를 잘 확인하고 사용
 * 계정 간 공유 가능
+* 마스터 이미지를 만들어 두고 사용하는 방법 이용
+  * 보안 패치 및 필요한 소프트웨어 설치
  
 ### ✔️ Instance Type
 
@@ -107,7 +109,6 @@
 * 인스턴스 `Stop` 시 OS가 인스턴스의 RAM에 있는 데이터들을 루트 디바이스로 옮겨서 저장하고 `Stopped` 상태가 됨
 * 인스턴스 `Start` 시 OS가 루트 디바이스에 있던 RAM 데이터들을 읽고 시작
 
-
 ### ✔️ Instance Purchasing Options
 
 * **On-Demand Instances**
@@ -121,13 +122,10 @@
 * 스팟 인스턴스
   * 사용중이지 않은 잉여 EC2를 사용하여 상대적으로 적은 비용으로 인스턴스 생성이 가능. AWS에서 언제든지 회수할 수 있기 때문에 그에 대한 대비책을 마련해야함.
 
-
 ### ✔️ Launch Template
 * 인스턴스 생성을 위한 구성 요소(AMI, Instance Type, 네트워크 구성 등)를 템플릿으로 저장
 * 템플릿을 이용하여 반복적인 인스턴스 생성 작업을 보다 수월하게 진행 가능
 * 버전 별로 템플릿을 관리
-
-
 
 ### ✔️ Tags
    
@@ -136,8 +134,6 @@
 * 인스턴스를 구분하기 위한 태그
 * `Key` 와 `Value` 로 구성
 * 여러 인스턴스들 사이에서 특정 인스턴스만 작업을 수행하고 싶을 때 지정한 태그를 통해 해당 인스턴스만 작업 가능
-
-
 
 
 ## 📌 Storage
@@ -155,7 +151,6 @@
   * Amazon Linux 2 : /dev/xvda
   * RHEL, Ubuntu, SUSE Linux, Windows : /dev/sda1
 * 루트 디바이스 외 추가되는 스토리지의 이름은 /dev/sd[f~p]
-* EC2와 함께 Amazon EFS, Amazon S3도 사용 가능
 
 ## 📌 Network & Security
    

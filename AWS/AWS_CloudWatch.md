@@ -20,12 +20,10 @@
 
 ### ✔️ CloudWatch가 측정 대상을 감시하고 측정 데이터를 가져오는 방법
 
-
-<img src="https://images.velog.io/images/dustjs159/post/a6570b1e-51b6-4b53-a429-ece4b0a46eef/image.png" width="75%">
+![cloudwatch drawio](https://user-images.githubusercontent.com/57285121/201511729-a868359e-bd30-4806-84b4-c345ae4b8d57.png)
 
 * 측정 데이터는 **최대 15개월까지만 보관**
-* Basic Monitoring : AWS의 System(H/W, Physical Machine 등 물리적인 장비의 개념? 이라고 보면 될 듯 합니다.)이 CloudWatch로 데이터를 전송
-  * CloudWatch를 통해 확인할 수 있는 측정 데이터들중 AWS System을 확인하여 수집이 가능한 데이터들이 있음 → **default metric**
+* 기본 지표(Metric) : Amazon의 물리적인 장비가 CloudWatch로 데이터를 전송
   * EC2 인스턴스의 경우 **5분 주기**로 측정 데이터를 CloudWatch에 전송
   * **요금 무료**
   * EC2 인스턴스의 namespace(AWS/EC2)에 포함된 default metric
@@ -35,13 +33,14 @@
     * ``StatusCheckFailed_System/Instance`` : 시스템/인스턴스의 상태 체크
     * ``EBSRead/WriteOps`` : 인스턴스의 EBS 볼륨 Read/Write 작업 성능
 
-* Detailed Monitoring : CloudWatch Agent 를 설치하고 내부 수준(Detail) 데이터를 CloudWatch로 데이터를 전송
-  * 인스턴스 내부 수준의 Detail한 데이터들은 AWS System을 감시하는 것으로는 확인이 불가능 하기 때문에 인스턴스 내부에 별도의 CloudWatch Agent를 설치하고 내부의 Agent가 CloudWatch로 데이터 전송
+* 상세 지표 및 로그 수집 : **CloudWatch Agent** 를 설치하고 내부 수준 데이터(주로 Disk 및 메모리 사용률)를 CloudWatch로 데이터를 전송
+  * 시스템 내부의 상세 지표들은 물리적인 장비를 감시하는 것으로는 확인이 어렵기 때문에 인스턴스 내부에 별도의 CloudWatch Agent를 설치하고 내부의 Agent가 CloudWatch로 데이터 전송
   * 설치한 Agent는 보다 더 Detail한 데이터(Memory Usage, Disk Usage 등)를 수집하고 CloudWatch로 측정 데이터를 전송
   * EC2 인스턴스의 경우 **1분 주기**로 측정 데이터를 CloudWatch로 전송
   * 별도의 Agent 설치 과정이 필요하며 **비용이 발생**
+    * 비용은 CloudWatch API 호출 (`cloudwatch:PutMetricData`, `logs:PutLogEvents`) + EC2 Data Transfer 비용으로 청구
 
-|구분|Basic Monitoring|Detailed Monitoring|
+|구분|기본 지표|상세 지표 및 로그|
 |------|---|---|
 |Agent 설치 여부|X|O|
 |비용|무료|유료|
@@ -72,13 +71,11 @@
     * 분/시간/일/주/월 단위로 설정이 가능하고 최대 15개월 동안의 데이터까지 확인 가능
     
 * **Dimensions**
-
   * **차원**
   * Metrics를 구별하기 위한 ``Name/Value`` Pair
   * 차원을 사용하여 Metric 데이터들 중 모니터링 하고자 하는 대상들만 필터링 할 수 있음
     * Ex) ``InstanceId="i-06ac2bb2633df9ebe"`` 인 대상의 Metric 데이터를 모니터링 하고자 할 때 ``InstanceId="i-06ac2bb2633df9ebe"`` 를 검색하여 특정 대상의 Metric 만을 모니터링 할 수 있음
     ![](https://images.velog.io/images/dustjs159/post/5f7cc37a-210d-4541-9d6d-e862817d2efa/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-28%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.38.00.png)
-    
   * 차원을 검색할 때 검색 조건에 ``Name`` 같은 **Tag를 사용할 수 없음**
   
   ![](https://images.velog.io/images/dustjs159/post/980619a5-7b09-4eca-907e-e55d505e980b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-28%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.40.47.png)
@@ -109,7 +106,6 @@
 
 
 ## 📌 CloudWatch 리소스
-
 
 ![](https://images.velog.io/images/dustjs159/post/fd3d581f-0b92-4898-ab40-8d130ebe320a/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-01-24%2011.30.47.png)
 

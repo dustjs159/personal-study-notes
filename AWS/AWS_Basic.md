@@ -33,12 +33,28 @@
 ## 📌 Service Endpoint
 * API 사용시 접근하는 AWS 서비스 자체의 Endpoint
 
-`protocol://service-code.region-code.amazonaws.com`
-  * protocol : http or https
-  * service-code : AWS 서비스 고유의 코드. e.g. EC2, CloudWatch, S3 등
-  * region-code : region 별 고유 코드. e.g ap-northeast-2, us-east-2 등
+```bash
+protocol://service-code.region-code.amazonaws.com
+```
+
+* protocol : http or https
+* service-code : AWS 서비스 고유의 코드. e.g. EC2, CloudWatch, S3 등
+* region-code : region 별 고유 코드. e.g ap-northeast-2, us-east-2 등
 
 
 ## 📌 ARN(Amazon Resource Name)
+* AWS 리소스들을 구별하기 위한 이름
+```bash
+arn:aws:service:region:account-id:resource-type:resource-id
+```
 
+* service : AWS 서비스 prefix
+  * s3, iam 등등
+* region : 리전 코드
+  * ap-northeast-2(서울), us-east-1(버지니아) 등
+* account id : AWS Account(사용자 아님!) ID
+* resource-type : AWS 서비스 내 리소스
+  * IAM 내의 Role이나 User, Policy같이 AWS 서비스 내 리소스들
+* resource-id : AWS 서비스 내 리소스의 이름
+  * IAM 내의 User의 이름 watson
 
