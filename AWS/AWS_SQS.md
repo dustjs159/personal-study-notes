@@ -1,7 +1,9 @@
-SQS
+💻 [AWS] AWS SQS
 ===============
-* Simple Queue Service
-    * 큐 서비스
+# 💡 Simple Queue Service
+* 큐 서비스
+
+## 📌  SQS 기본 개념
 
 ### Type
 * Standard
@@ -12,5 +14,6 @@ SQS
 * Content-based deduplication : 중복 제거
     * 큐에 같은 내용의 메시지가 들어오면 Drop.
 * Visibility timeout : ?
+
 
 
