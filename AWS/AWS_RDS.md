@@ -29,4 +29,20 @@
     * **Amazon Aurora**
     
 
+## 📌 Amazon Aurora MySQL 버전 업그레이드
 
+* Aurora MySQL 버전 1 (MySQL 5.6)의 2023-02-28 EOL(End Of Life)에 따른 버전 업그레이드 진행 필요
+    * Aurora MySQL 버전 2 ==> MySQL 5.7
+    * Aurora MySQL 버전 3 ==> MySQL 8.0
+* Aurora MySQL 버전 1 → 버전 3 불가능
+    * 순차적으로 가야함. 버전 1 → 2 → 3
+    * 1.x → 2.x 참조 문서
+        * https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MajorVersionUpgrade.html#AuroraMySQL.Updates.MajorVersionUpgrade.1to2
+    * 2.x → 3.x 참조 문서
+        * https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MajorVersionUpgrade.html#AuroraMySQL.Updates.MajorVersionUpgrade.2to3
+* 현재 위치에서 DB 클러스터의 버전을 업그레이드(In-Place)하는 방법과 스냅샷 복구를 통해 버전 업그레이드를 하는 방법 두 가지가 존재.
+
+### 1.x → 2.x 업그레이드
+* 엔진 속성 변경
+    * `aurora` → `aurora-mysql`
+    

@@ -2,9 +2,17 @@
 =============================
 # 💡 AWS Transit Gateway (TGW)
 
-* Transit Gateway VPC와 VPC 혹은 온프레미스와 VPC를 연결할 수 있는 라우터(허브)
-* VPC간 연결에 있어서 1:1만 지원하던 VPC Peering과는 달리 중앙 집중형 방식으로 VPC들을 연결할 수 있음
-    * 망 분리 환경 구성이 가능 
+* Transit Gateway VPC와 VPC 혹은 온프레미스와 VPC를 연결할 수 있는 L3 라우터(허브)
+* VPC를 연결하는 방법 중 하나인 VPC Peering의 단점을 개선
+* VPC Peering의 단점은 다음과 같다.
+    * VPC간 전이성 Peering이 지원되지 않음(Non-Transitive). VPC간 Peering이 1:1만 지원된다. 
+        * 따라서 1:1로 하나씩 연결해줘야 함.
+    * 운영중인 VPC의 수가 점점 늘어날 수록 일일이 Peering 연결을 하는 것은 상당히 번거로운 일.
+        * 즉, Peering의 수가 `n(n-1)/2` 개가 된다.
+* 이러한 단점을 개선한 것이 Transit Gateway.
+    * 연결 할 VPC의 수가 늘어날 수록 간편해진다. (다만 BGP에 대한 개념이 없으면 초기 구축에 있어서 다소 난이도가 있는 편.)
+* 또한 VPC Peering에 비해 비용이 상당히 비싸므로 상황에 맞게 사용하는 것이 바람직.
+    * 규모가 크지 않다면 VPC Peering을 사용하는 것이 더 저렴하고 편리하다.
 
 ## 📌 Transit Gateway 주요 개념
 
