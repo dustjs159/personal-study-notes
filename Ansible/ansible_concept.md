@@ -13,14 +13,6 @@ Ansible 기초 개념
     * Managed Node에는 Ansible이 설치되지 않는다.
 * Inventory
     * Control Node가 제어할 Managed Node의 목록
-    * 여러 매개 변수를 통해 Host의 정보를 저장할 수 있다.
-    * 매개 변수 종류
-```
-Ansible_host : 대상 서버의 호스트명 or IP 주소
-Ansible_port : 대상 서버에 SSH 접속할 포트 (default는 당연히 22다.)
-Ansible_user : 대상 서버에 SSH 접속할 user
-Ansible_private_key_file : SSH 접속을 위한 마스터 서버의 Private Key 경로
-``` 
 * Playbook
     * Managed Node가 작업할 목록을 작성한 파일
     * `yaml` 형식으로 작성
