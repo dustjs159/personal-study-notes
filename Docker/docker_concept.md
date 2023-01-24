@@ -1,4 +1,4 @@
-💻 Docker Concept
+💻 [Docker] Concept
 ==================
 # Docker 개념
  
@@ -24,7 +24,6 @@
 
 
 ## 이미지(Image)
-
 * 이미지는 컨테이너 실행에 필요한 파일과 설정값(App, Config)을 포함
 
 ![스크린샷 2022-03-29 오후 5 55 56](https://user-images.githubusercontent.com/57285121/160574048-9e59cac1-84a7-424e-b755-a24f0741011a.png)
@@ -33,3 +32,14 @@
 * 컨테이너가 삭제되거나 변경되어도 이미지는 그대로
 * 만들어 놓은 이미지를 다운받고 컨테이너를 생성하고 실행하면 됨
 * 도커 이미지는 Docker Hub에 등록하거나 Docker Registry 저장소를 만들어 직접 관리 가능
+
+
+## Docker LifeCycle
+
+![docker-lifecycle](https://user-images.githubusercontent.com/57285121/214293603-2f8a14ea-f6cc-4cb2-9930-3acda4dc3cab.png)
+
+
+* `docker create` / `docker run` 차이점
+  * `docker create` 는 컨테이너만 만들고 그 이후에 특정 이미지를 지정하고 `docker start` 를 해야 실행된다.
+  * `docker run` 은 컨테이너를 생성함과 동시에 실행까지 한다.
+    * 물론 옵션에 컨테이너에서 실행할 이미지(pull로 받아온)를 지정해줘야 한다.

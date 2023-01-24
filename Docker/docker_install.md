@@ -1,4 +1,4 @@
-💻 Docker Install
+💻 [Docker] Install
 ==================
 # 💡 Docker 설치 및 사용법
 * Docker 설치 - Linux OS

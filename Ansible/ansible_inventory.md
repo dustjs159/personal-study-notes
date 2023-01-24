@@ -1,4 +1,4 @@
-Ansible Inventory 구성하기
+💻 [Ansible] Ansible Inventory 구성하기
 =========================
 * Inventory는 Control Node의 작업 대상 목록
     * Control Node가 참조할 Inventory 파일의 경로는 `/etc/ansible/ansible.cfg` 에서 지정할 수 있다.

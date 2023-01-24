@@ -1,4 +1,4 @@
-💻 Docker Demo - Nginx Install
+💻 [Docker] Demo - Nginx Install
 ===============================
 # 💡 Docker Demo - Nginx 웹서버 실행하기
 * Docker Hub에서 최신 버전의 Nginx 이미지를 받아 컨테이너 실행하기
@@ -34,6 +34,10 @@ nginx         latest    d8906c7d4c44   13 days ago     135MB
 ### 3. pull한 이미지를 바탕으로 컨테이너를 실행
 * pull한 이미지를 실행할 떄 컨테이너 단위로 실행이 됨
 * 그 과정에서 **포트 매핑, 컨테이너에서 실행할 이미지, 컨테이너 이름** 등을 지정해줘야한다.
+    * `-d` : 백그라운드 실행(daemon으로 실행하고자 할 때)
+    * `-p` : port 매핑
+        * 호스트에서 LISTEN하는 포트와 컨테이너가 LISTEN하는 포트번호를 매핑
+    * `--name` : 컨테이너 이름 지정할 때 사용
 ```bash
 docker run -d --name nginx-demo -p 80:80 nginx
 ```
@@ -50,13 +54,32 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS        
 
 아주 잘 나온다.
 
+### 4. 컨테이너 중지, 재시작, 삭제
+* 컨테이너만 중지
+    * 컨테이너 내 프로세스를 일시적으로 `stop`
+```
+docker pause {container}
+```
+* 컨테이너 재시작
+```
+docker unpause {container}
+```
+* 컨테이너 삭제
+```
+docker rm -f {container}
+```
+### 번외
+* `docker run`이 아닌 `docker create` 로 컨테이너를 실행시켜보자.
+```
+docker rm -f nginx-demo # 기존에 실행중인 컨테이너 삭제
 
-### 요약 및 사용했던 커맨드 정리
-
-```bash
-docker search {image} # pull할 이미지 찾아보기
-docker pull {image} # Docker 이미지 가져오기
-docker images # 갖고 있는 이미지 확인
-docker run    # pull로 가져온 이미지를 컨테이너로 만들어 실행
-docker ps     # 실행중인 컨테이너 확인
-```  
+docker create nginx # pull했던 이미지로 컨테이너 생성
+```
+* 여기까지 진행한 후 `docker ps -a` 로 컨테이너를 확인해보면, 이름이 이상하게 되어있다. 이거를 이전과 동일하게 `nginx-demo` 로 변경해준다.
+```
+docker rename {old_container} nginx-demo
+```
+* 그리고 시작
+```
+docker start nginx-demo
+```
