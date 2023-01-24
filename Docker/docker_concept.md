@@ -1,4 +1,4 @@
-💻 Docker
+💻 Docker Concept
 ==================
 # 💡 Docker 개념
  
@@ -33,68 +33,3 @@
 * 컨테이너가 삭제되거나 변경되어도 이미지는 그대로
 * 만들어 놓은 이미지를 다운받고 컨테이너를 생성하고 실행하면 됨
 * 도커 이미지는 Docker Hub에 등록하거나 Docker Registry 저장소를 만들어 직접 관리 가능
-
-# 💡 Docker 사용법
-
-* Docker 설치 - Linux OS
-* Docker Hub에 이미지 업로드 & 다운로드
-* Docker Command
-
-## 📌 Docker 설치
-* Ubuntu 20.04 LTS 에서 진행
-  * URL : https://docs.docker.com/engine/install/ubuntu/
-
-Repository Set up
-```bash
- $ sudo apt-get update
- 
- $ sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-```
-Docker GPG Key Add
-```bash
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-```
-Repository Status set ``Stable``
-```bash
-$ echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-Docker Engine Install
-```bash
-$ sudo apt-get update
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-Check Docker Engine Version List
-```bash
-$ apt-cache madison docker-ce
-```
-Install Specific Version
-```bash
-$ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
-```
-Run Test
-```bash
-$ sudo docker run hello-world
-```
-
-## 📌 Docker Hub 사용법
-
-* Docker Hub에 이미지 업로드 & 다운로드
-* Docker Hub 가입
-  * https://hub.docker.com
-* Repository 생성
-
-## 📌 Docker Command
-
-```bash
-$ docker pull  # Docker 이미지 가져오기 + Build까지 수행
-$ docker push  # Docker 이미지 업로드
-$ docker images # 갖고 있는 이미지 확인
-$ docker run    # pull로 가져온 이미지(Build까지 다 된)를 컨테이너로 만들어 실행
-$ docker ps     # 실행중인 컨테이너 확인
-```  

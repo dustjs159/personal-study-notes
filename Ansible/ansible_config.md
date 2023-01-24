@@ -1,7 +1,7 @@
 Ansible config 파일 알아보기
 ========================
 
-* Ansible이 설치된 장비의 `/etc/ansible/ansible.cfg` 파일 구조 살펴보기
+* Ansible이 설치된 서버의 `/etc/ansible/ansible.cfg` 파일 구조 살펴보기
 
 ```
 [defaults]

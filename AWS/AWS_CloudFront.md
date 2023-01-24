@@ -1,6 +1,6 @@
 💻 [AWS] AWS CloudFront
 ===============
-# 💡 Amazon CloudFront
+# Amazon CloudFront
 
 * 사용자들에게 좀 더 빠르게 컨텐츠를 제공하기 위한 서비스 : **CDN(Content Delivery Network)**
 * 사용자의 요청 지점과 본래 서버간 거리가 지리적으로 먼 경우에 요청 지점과 가까운 CDN을 통해 빠르게 컨텐츠 제공 
@@ -9,7 +9,7 @@
   * Edge Location(POP) : 컨텐츠가 캐싱되는 지점이자 사용자에게 컨텐츠가 제공되는 지점
 * 웹 서버로 직접 요청하는 것이 아니기 때문에 서버의 부하를 줄일 수 있음
 
-## 📌 사용자의 요청에 대한 CloudFront의 캐시 응답 방식
+## 사용자의 요청에 대한 CloudFront의 캐시 응답 방식
 
 ![스크린샷 2022-07-18 오전 12 36 12](https://user-images.githubusercontent.com/57285121/179405715-f26481fc-7f51-4ded-a3ff-988732951b0a.png)
 
@@ -20,7 +20,7 @@
   3-b. Origin은 Edge Location로 응답을 전달   
   3-c. Edge Location는 Origin에게 받은 응답을 사용자에게 전달 + 캐시 저장
 
-## 📌 CloudFront 개념
+## CloudFront 개념
 
 ![CloudFront](https://user-images.githubusercontent.com/57285121/197563147-00c99569-86d4-44eb-a796-3e7052f866ec.jpg)
 
@@ -41,7 +41,7 @@
     * CloudFront는 뷰어의 정보를 헤더에 더해 Origin에 데이터를 전송하는데 이 때 헤더를 통해 확인할 수 있는 정보는 IP 주소, 국가, 도시, Timezone, 디바이스 타입(Desktop, Mobile 등) 등이 있다 
   * Viewer Response : CloudFront로 부터 사용자에게 응답이 오는 시점
 
-## 📌 CloudFront 주요 설정 옵션
+## CloudFront 주요 설정 옵션
 
 * Origin 도메인 및 경로 설정
   * Origin 도메인을 S3 버킷으로 설정하고 경로를 설정하면 해당 경로의 폴더가 루트 폴더가 된다.
@@ -77,7 +77,7 @@
 * Origin Shield
   * Regional level의 cache 계층을 하나 추가하여 오리진을 보호할 수 있음
 
-## 📌 CloudFront 동적 컨텐츠 처리
+## CloudFront 동적 컨텐츠 처리
 
 ![CloudFront](https://user-images.githubusercontent.com/57285121/180594680-d88161ba-13a0-4558-a797-d0d60c07d3bc.jpg)
 
@@ -86,14 +86,14 @@
 * 동적 컨텐츠는 TCP Connection 유지, 파일 압축(Gzip 등)등을 통해 컨텐츠 제공 속도 최적화
 
 
-## 📌 CloudFront에서 HTTPS 지원
+## CloudFront에서 HTTPS 지원
 
 ![CloudFront](https://user-images.githubusercontent.com/57285121/180595009-6016e94c-8f7e-45aa-96bf-99d676772907.jpg)
 
 * CloudFront에 ACM(AWS Certificate Manager)에서 발급받은 SSL/TLS 인증서를 적용하여 Origin의 웹 서버에서 따로 HTTPS를 적용하지 않고도 HTTPS를 적용할 수 있음
 * 이 때 CloudFront에 적용할 인증서는 **버지니아 리전**에서 발급받은 인증서만 적용할 수 있다.
 
-## 📌 CloudFront + S3 조합으로 Static 웹 페이지 호스팅하기
+## CloudFront + S3 조합으로 Static 웹 페이지 호스팅하기
 
 * 정적 컨텐츠에 보다 더 특화되어 있는 CloudFront + 정적 웹 페이지를 호스팅할 수 있는 S3의 조합은 아주 좋다.
 * 빌드 결과물에 따라 조금 씩 다를 수 있다는 점...
