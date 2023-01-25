@@ -5,7 +5,7 @@
 * EC2 인스턴스(OS : Ubuntu 22.04 ARM)에서 진행
 * 진행 전, Docker가 정상적으로 실행중이라고 가정.
 
-### 1. pull할 이미지(nginx) 검색
+### 1. pull할 이미지 검색
 ```
 app@demo:~$ docker search nginx
 NAME                                              DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED

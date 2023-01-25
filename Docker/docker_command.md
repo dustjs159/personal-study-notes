@@ -28,8 +28,9 @@ docker pull {iamge}:{version}
     * `-d` : daemon (백그라운드 데몬)으로 실행
     * `--name {container name}` : 컨테이너 이름 지정
     * `-p {host-port}:{container-port}` : 매핑할 포트 지정
+    * `--restart=always` : 서버 재시작 후 Docker 데몬까지 정상 작동 되어 있을 경우, 컨테이너도 자동 재시작 
 ```
-docker run -d --name {container name} {image} -p {host-port}:{container-port}
+docker run -d --restart=always --name {container name} {image} -p {host-port}:{container-port}
 ```
 * 컨테이너 생성
 ```
@@ -38,6 +39,10 @@ docker craete {image}
 * 컨테이너 시작(Start)
 ```
 docker start {container}
+```
+* 컨테이너 이름 변경
+```
+docker rename {old_container} {new_container}
 ```
 * 컨테이너만 중지
     * 컨테이너 내 프로세스를 일시적으로 `stop`
