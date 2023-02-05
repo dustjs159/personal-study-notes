@@ -19,5 +19,5 @@
 * 인프라 관련 스터디 내용 정리
 * 분류는 서버 OS(Linux), Network, Storage 총 3가지 부류로 정리
 
-## 💡 Docker <img src="http://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white"/>
+## 💡 Docker ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 * Docker 스터디 내용 정리

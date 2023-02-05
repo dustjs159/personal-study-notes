@@ -1,7 +1,7 @@
 💻 [Docker] Storage
 ======================
 
-# Docker의 이미지 파일은 어디에 위치?
+## Docker의 이미지 파일은 어디에 위치?
 * docker pull로 받은 이미지들은 어디에 저장될까?
 * `docker info` 로 확인 가능하다.
     * Ubuntu 22.04 기준

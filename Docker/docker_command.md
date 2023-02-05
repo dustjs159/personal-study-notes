@@ -86,3 +86,18 @@ docker logs {container}
 ```
 
 
+## MacOS에서 docker 자동완성 설정하기
+* 편리한 docker 커맨드 사용을 위해 `tab` 으로 커맨드 자동완성 기능 설정
+* zshell 설정
+    * `~/.zshrc` 파일 수정 (없으면 생성)
+```vim
+plugins=(
+docker
+docker-compose
+)
+```
+
+* 변경 사항 적용
+```bash
+source ~/.zshrc
+```

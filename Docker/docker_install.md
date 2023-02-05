@@ -1,11 +1,9 @@
 💻 [Docker] Install
 ==================
-# 💡 Docker 설치 및 사용법
+# Docker 설치 및 사용법
 * Docker 설치 - Linux OS
-* Docker Hub에 이미지 업로드 & 다운로드
-* Docker Command
 
-## 📌 Docker 설치
+## Docker 설치
 * Ubuntu 22.04 LTS 에서 진행
   * URL : https://docs.docker.com/engine/install/ubuntu/
 
@@ -31,12 +29,12 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 ```bash
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 3. Docker 엔진(CE, Community Edition), CLI, containerd 패키지 설치
 ```bash
-apt-get update
+apt-get update # 패키지 업데이트를 해줘야 한다.
 apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
