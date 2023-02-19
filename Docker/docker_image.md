@@ -120,6 +120,7 @@ CMD ["node", "server.js"]
 
 `npm install` 은 `package.json` 에 명시된 의존성 패키지를 설치하게 된다. 그러나 위 상황에서는 이전 레이어의 이미지와 비교했을 때 추가로 설치해야할 의존성 패키지가 없고 코드만 변경됐기 때문에 `npm install` 을 추가로 할 필요가 없다. 그렇기에 `package.json` 을 `/app` 경로에 COPY 이후 `npm install` 을 하게되면 새로 `npm install` 하는 것이 아닌 기존 레이어를 가져와 사용할 수 있게 되기에 이미지 빌드 속도가 단축될 수 있다.
 
+* 또한 `Dockerfile` 의 모든 명령어가 전부 레이어로 구성되는 것은 아님.
 
 ### 이미지 관련 command
 ```bash
@@ -130,5 +131,6 @@ docker images
 docker rmi {image}
 
 # Image Analyzed
-docker images inspect
+docker image inspect {image}
 ```
+

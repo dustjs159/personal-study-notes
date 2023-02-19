@@ -22,7 +22,7 @@ docker run -d --restart=always --name {container name} {image} -p {host-port}:{c
 ```
 docker craete {image}
 ```
-* 컨테이너 시작(Start)
+* 컨테이너 시작(Start) - 특정 이미지로 실행되었던 컨테이너의 이미지에 대한 변경사항이 없을 때 사용. 백그라운드에서 실행됩니다.
 ```
 docker start {container}
 ```
@@ -69,4 +69,15 @@ docker container prune
 * log 확인하기
 ```
 docker logs {container}
+docker logs -f {container} # Tailing
 ```
+
+## docker run vs start 
+* `docker run` 명령어로 컨테이너를 실행하면 포그라운드로 실행이 된다. 그런데 `docker start` 로 컨테이너를 실행하게 되면 백그라운드로 실행이 된다. 두 명령어의 default 실행 모드가 다르기 때문이다.
+* `docker run` 은 default가 attached 모드(포그라운드)로 컨테이너가 실행되며 `docker start` 는 default로 detached 모드(백그라운드)로 실행이 된다.
+* `docker run` 으로 백그라운드에서 컨테이너를 실행시키고자 한다면 `-d` 옵션(detached)을 사용한다.
+    * `docker run -d ....`
+* `docker start` 로 포그라운드에서 컨테이너를 실행시키고자 한다면 `-a` 옵션(attached)을 사용한다.
+    * `docker start -a ....`
+* 이미 실행중인 컨테이너에 직접 연결하고자 한다면...
+    * `docker attach {container}`
