@@ -14,9 +14,10 @@
     * `-d` : daemon (백그라운드 데몬)으로 실행
     * `--name {container name}` : 컨테이너 이름 지정
     * `-p {host-port}:{container-port}` : 매핑할 포트 지정
-    * `--restart=always` : 서버 재시작 후 Docker 데몬까지 정상 작동 되어 있을 경우, 컨테이너도 자동 재시작 
+    * `--restart=always` : 서버 재시작 후 Docker 데몬까지 정상 작동 되어 있을 경우, 컨테이너도 자동 재시작
+    * `--rm` : 가동중이던 컨테이너가 미사용 상태(`Stop`)가 될 경우 자동으로 컨테이너 삭제
 ```
-docker run -d --restart=always --name {container name} {image} -p {host-port}:{container-port}
+docker run -d --rm --restart=always --name {container name} {image} -p {host-port}:{container-port}
 ```
 * 컨테이너 생성
 ```
@@ -81,3 +82,13 @@ docker logs -f {container} # Tailing
     * `docker start -a ....`
 * 이미 실행중인 컨테이너에 직접 연결하고자 한다면...
     * `docker attach {container}`
+
+## 컨테이너 내부에 진입하기 - Interactive 모드
+* `-i` 옵션을 통해 컨테이너의 내부에 진입하여 커맨드 입력이 가능
+    * `STDIN` 상태 유지
+* `-t` 옵션을 통해 커맨드를 입력할 터미널을 띄움
+* 즉 컨테이너 내부에 명령어를 전달하고자 할 때 `-i` 옵션을 통해 컨테이너가 STDIN으로 명령어를 입력 받을 준비하고 `-t` 옵션으로 입력 받을 터미널을 띄운다.
+    * 합쳐서 `-it`로 많이 사용함
+    * 근데 이러한 방식으로 컨테이너를 실행하고 특정 값을 입력받는 경우 한번만 입력값을 받고 컨테이너가 중지된다... 그리고 다시 띄우기 위해 `docker start` 를 하게 되면 default 실행 모드(detached)로 실행된다.(아무것도 변화가 없을 듯)
+    * 그래서 `-a` 옵션으로 attached 모드로 실행하니 한 번의 입력값만을 받고 더 이상 입력 값을 받지 않는 현상이 있었는데 이는 `-i` 옵션이 없어서(= STDIN으로 받을 준비가 안되어 있어서) 한 번 받고 끝난 경우다. 함께 사용하면 입력값을 받을 수 있다.
+        * `docker start -i -a {container}`
