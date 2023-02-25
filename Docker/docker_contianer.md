@@ -15,62 +15,9 @@
     * `--name {container name}` : 컨테이너 이름 지정
     * `-p {host-port}:{container-port}` : 매핑할 포트 지정
     * `--restart=always` : 서버 재시작 후 Docker 데몬까지 정상 작동 되어 있을 경우, 컨테이너도 자동 재시작
-    * `--rm` : 가동중이던 컨테이너가 미사용 상태(`Stop`)가 될 경우 자동으로 컨테이너 삭제
+    * `--rm` : 컨테이너가 미사용 상태(`Stop`)가 될 경우 자동으로 컨테이너 삭제되도록 설정
 ```
 docker run -d --rm --restart=always --name {container name} {image} -p {host-port}:{container-port}
-```
-* 컨테이너 생성
-```
-docker craete {image}
-```
-* 컨테이너 시작(Start) - 특정 이미지로 실행되었던 컨테이너의 이미지에 대한 변경사항이 없을 때 사용. 백그라운드에서 실행됩니다.
-```
-docker start {container}
-```
-* 컨테이너 이름 변경
-```
-docker rename {old_container} {new_container}
-```
-* 컨테이너만 중지
-    * 컨테이너 내 프로세스를 일시적으로 `stop`
-```
-docker pasue {container}
-```
-* 컨테이너 재시작
-```
-docker unpause {container}
-```
-* 컨테이너 종료
-    * SIGTERM 시그널 전달
-```
-docker stop {container}
-```
-* 모든 컨테이너 종료
-```
-docker stop $(docker ps -a -q)
-```
-* 컨테이너 강제 종료
-    * SIGKILL 시그널 전달
-```
-docker kill {container}
-```
-* 컨테이너 삭제(실행중이지 않을 때)
-```
-docker rm {container}
-```
-* 컨테이너 강제 종료 && 삭제 (SIGKILL 시그널 전달)
-```
-docker rm -f {container}
-```
-* 중지 상태인 컨테이너 삭제
-```
-docker container prune
-```
-
-* log 확인하기
-```
-docker logs {container}
-docker logs -f {container} # Tailing
 ```
 
 ## docker run vs start 
@@ -92,3 +39,35 @@ docker logs -f {container} # Tailing
     * 근데 이러한 방식으로 컨테이너를 실행하고 특정 값을 입력받는 경우 한번만 입력값을 받고 컨테이너가 중지된다... 그리고 다시 띄우기 위해 `docker start` 를 하게 되면 default 실행 모드(detached)로 실행된다.(아무것도 변화가 없을 듯)
     * 그래서 `-a` 옵션으로 attached 모드로 실행하니 한 번의 입력값만을 받고 더 이상 입력 값을 받지 않는 현상이 있었는데 이는 `-i` 옵션이 없어서(= STDIN으로 받을 준비가 안되어 있어서) 한 번 받고 끝난 경우다. 함께 사용하면 입력값을 받을 수 있다.
         * `docker start -i -a {container}`
+
+### 컨테이너 관련 command
+```bash
+# 컨테이너 실행
+docker run {image} # 실행 모드 : attached (default) 
+
+# 컨테이너 시작(특정 이미지로 실행되었던 컨테이너의 이미지에 대한 변경사항이 없을 때 사용)
+docker start {container} # 실행 모드 : detached (default)
+
+# 컨테이너 중지
+docker stop {container} # SIGTERM
+
+# 미사용 컨테이너 삭제
+docker container prune
+
+# 컨테이너 강제 종료 && 삭제
+docker rm -f {container}
+
+# 파일 복사 
+docker cp {local file path} {container}:{container file path} # local -> container
+docker cp {container}:{container file path} {local file path}  # container -> local
+
+# 컨테이너 로그 확인
+docker logs {container}
+docker logs -f {container} # Tailing
+
+# 컨테이너 생성
+docker create {image}
+
+# 컨테이너 이름(Alias) 바꾸기
+docker rename {old_container} {new_container}
+```

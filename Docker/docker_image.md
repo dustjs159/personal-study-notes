@@ -124,16 +124,16 @@ CMD ["node", "server.js"]
 
 ### 이미지 관련 command
 ```bash
-# Image Listing
+# 이미지 목록 확인
 docker images
 
-# Image Remove
+# 이미지 제거
 docker rmi {image} # 컨테이너가 사용중이지 않은 이미지일 경우에만 삭제 가능. 중지 상태의 컨테이너여도 삭제 불가. 오직 컨테이너가 삭제되었을 때만.
 
-# Image prune
+# 이미지 비우기
 docker image prune # 어떠한 컨테이너에서도 사용중이지 않은 이미지 전부 삭제
 
-# Image Analyzed
+# 이미지 분석
 docker image inspect {image}
 ```
 

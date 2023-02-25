@@ -17,7 +17,7 @@
   * 역할 - Role
 
 # 인증 & 인가
-* IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가도록 하자.
+IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가도록 하자.
 ![](https://images.velog.io/images/dustjs159/post/d0ce58f3-cd3f-4145-92f6-4428175ce225/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-03-20%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.32.06.png)
 
 * 인증(Authentication) : Who Are You?
@@ -26,7 +26,7 @@
 * 인가(Authorization) : Are you allowed to do that?
   * 사용자의 특정 행위에 대한 제어
   * e.g. 인증 절차를 통과한 후에 건물 출입은 가능하나 특정 사무실에는 출입할 수 없음
-* 한국어로써 인증과 인가의 단어가 주는 느낌은 비슷할 수 있으나, 영어로 번역된 Authentication(인증)과 Authorization(인가)는 엄연히 다른 의미이므로 주의!
+* **한국어로써 인증과 인가의 단어가 주는 느낌은 비슷할 수 있으나, 영어로 번역된 Authentication(인증)과 Authorization(인가)는 엄연히 다른 의미이므로 주의!**
 
 # Root 계정 (Account)
 * Root Account : AWS에 회원 가입 후 최초에 로그인하게 되는 계정
