@@ -55,6 +55,7 @@ CMD ["node", "server.js"]
 * Dockerfile이 위치한 현재 경로에서
 ```bash
 docker build . # Dockerfile을 알아서 읽는다.
+docker build . -t {tag} # 이미지에 태그 붙이기
 ```
 * 생성된 이미지 확인
 ```bash
@@ -121,6 +122,28 @@ CMD ["node", "server.js"]
 `npm install` 은 `package.json` 에 명시된 의존성 패키지를 설치하게 된다. 그러나 위 상황에서는 이전 레이어의 이미지와 비교했을 때 추가로 설치해야할 의존성 패키지가 없고 코드만 변경됐기 때문에 `npm install` 을 추가로 할 필요가 없다. 그렇기에 `package.json` 을 `/app` 경로에 COPY 이후 `npm install` 을 하게되면 새로 `npm install` 하는 것이 아닌 기존 레이어를 가져와 사용할 수 있게 되기에 이미지 빌드 속도가 단축될 수 있다.
 
 * 또한 `Dockerfile` 의 모든 명령어가 전부 레이어로 구성되는 것은 아님.
+
+## TAG 기반으로 이미지 관리하기
+이미지를 빌드하고 나면, 임의의 이미지 ID가 부여되는데 이 ID로 이미지를 구별하는 것은 쉽지 않기에 이름과 태그를 통해 이미지의 
+식별자를 만들어 관리한다. 이미지에 붙일 수 있는 식별자의 구조는 아래와 같다.
+```
+name : tag
+```
+* 특정 app의 이름을 name으로 지정하고, 해당 app의 버전을 태그로 사용하면 좋지 않을까 싶다.
+    * app 이름이 trade라고 한다면, `trade:v1.1.0` 뭐 이런식으로 ..?
+* 위 구조로 이미지를 빌드하고자 하면 빌드 하는 시점에 `-t` 옵션을 주고 이름과 태그를 지정해주면 된다.
+    * 별도 태그를 지정하지않고 이름만 입력하면 latest로 빌드된다.
+```bash
+docker build -t {name:tag} . 
+```
+
+## 이미지 공유하기
+빌드 결과로 생성된 이미지를 dockerhub에 push해보자. 사전에 dockerhub 계정이 준비되어 있어야 한다.
+1. repository 생성
+2. 로컬에서 push 할 이미지를 선택
+3. 이미지 네이밍 맞춰서 변경
+4. local에서 `docker login`
+5. push
 
 ### 이미지 관련 command
 ```bash

@@ -11,11 +11,17 @@
 ## 빌드한 이미지로 컨테이너 실행하기
 
 * 컨테이너 시작(Run)
-    * `-d` : daemon (백그라운드 데몬)으로 실행
-    * `--name {container name}` : 컨테이너 이름 지정
-    * `-p {host-port}:{container-port}` : 매핑할 포트 지정
-    * `--restart=always` : 서버 재시작 후 Docker 데몬까지 정상 작동 되어 있을 경우, 컨테이너도 자동 재시작
-    * `--rm` : 컨테이너가 미사용 상태(`Stop`)가 될 경우 자동으로 컨테이너 삭제되도록 설정
+
+`docker run --help` 명령어로 옵션을 확인할 수 있다. 
+```
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+주요한 옵션(자주 쓰는 것들)
+ * `-d` : detached 모드로 실행(백그라운드)
+ * `--name {container name}` : 컨테이너 이름 지정
+ * `-p {host-port}:{container-port}` : 매핑할 포트 지정(publisher)
+ * `--restart=always` : 서버 재시작 후 Docker 데몬까지 정상 작동 되어 있을 경우, 컨테이너도 자동 재시작
+ * `--rm` : 컨테이너가 미사용 상태(`Stop`)가 될 경우 자동으로 컨테이너 삭제되도록 설정
 ```
 docker run -d --rm --restart=always --name {container name} {image} -p {host-port}:{container-port}
 ```
