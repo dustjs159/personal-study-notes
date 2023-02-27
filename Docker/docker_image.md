@@ -2,7 +2,7 @@
 ==================
 ## Image
 * 이미지는 컨테이너 실행에 필요한 파일을 포함
-    * 컨테이너 실행헤 필요한 파일 => 코드와 코드 실행에 필요한 도구
+    * 컨테이너 실행헤 필요한 파일 : 코드와 코드 실행에 필요한 도구
 
 <img width="1145" alt="스크린샷 2023-02-05 오후 2 46 42" src="https://user-images.githubusercontent.com/57285121/216803895-561842ea-3267-41b5-953d-17ccdc873315.png">
 
@@ -81,6 +81,15 @@ docker images
 * Dockerfile의 커맨드 한줄 한줄이 레이어가 되고, 도커 내부적으로 해당 커맨드의 수행 결과가 캐싱된 레이어와 변화가 없음을 인지하고 캐싱을 시도한다.
     * 레이어의 변화를 인지하지 못하면 => 캐싱된 레이어를 사용
     * 레이어의 변화를 인지하면 => 새 레이어를 생성
+* Dockerfile의 모든 명령어가 전부 레이어로 저장되어 캐싱되지는 않음
+    * `WORKDIR` => Layer저장 O. 캐싱 O
+    * `RUN`, `ADD`, `COPY` => Layer 저장 O. 캐싱 O
+    * `EXPOSE`, `LABEL`, `CMD` => Layer 저장X. 캐싱 X
+
+조금 더 이해하기 쉬운 그림
+<img width="842" alt="스크린샷 2023-02-27 오후 10 03 52" src="https://user-images.githubusercontent.com/57285121/221570973-d63a31b7-00b3-4078-abcf-96c0ce015fdc.png"> 
+
+* 결론 : **Dockerfile의 명령어들이 Layer를 구성(Read-Only)하며 이것들이 모여 컨테이너가 실행하는(Runtime) 이미지가 된다.(Read-Write)**
 
 ### Dockerfile 최적화를 통해 이미지 빌드 속도 단축
 * 이미지 레이어에 대한 이해를 위하여 -
@@ -138,12 +147,17 @@ docker build -t {name:tag} .
 ```
 
 ## 이미지 공유하기
-빌드 결과로 생성된 이미지를 dockerhub에 push해보자. 사전에 dockerhub 계정이 준비되어 있어야 한다.
-1. repository 생성
-2. 로컬에서 push 할 이미지를 선택
-3. 이미지 네이밍 맞춰서 변경
-4. local에서 `docker login`
-5. push
+빌드 결과로 생성된 이미지를 dockerhub에 push해보자. 사전에 dockerhub 계정이 준비되어 있어야 한다. free tier는 1개의 이미지만 올릴 수 있음.
+1. dockerhub에서 repository 생성
+2. local에서 `docker login`
+    * login하지 않으면 Access denied 발생.. 웹에서 가입한 ID/Password로 로그인하자.
+3. push
+    * 이 때 dockerhub에서 생성한 repository의 이름과 push하고자 하는 이미지의 이름이 같아야한다. 만약 이미지의 이름이 생성한 repository의 이름과 다르다면 `docker tag` 커맨드로 수정하자.
+        * `docker tag {local image} {remote image}` 
+    * 그 후 `docker push {image}`
+
+* public repository의 이미지 pull은 login 필요 없음. 
+    * `docker pull {image}`
 
 ### 이미지 관련 command
 ```bash
@@ -154,7 +168,8 @@ docker images
 docker rmi {image} # 컨테이너가 사용중이지 않은 이미지일 경우에만 삭제 가능. 중지 상태의 컨테이너여도 삭제 불가. 오직 컨테이너가 삭제되었을 때만.
 
 # 이미지 비우기
-docker image prune # 어떠한 컨테이너에서도 사용중이지 않은 이미지 전부 삭제
+docker image prune # 어떠한 컨테이너에서도 사용중이지 않은 이미지 전부 삭제(태그 없는 이미지만 비움)
+docker image prune -a # 이미지의 이름과 태그가 지정된 것도 전부 삭제
 
 # 이미지 분석
 docker image inspect {image}
