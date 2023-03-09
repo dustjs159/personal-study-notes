@@ -3,6 +3,7 @@
 * AWS IAM(Identity & Access Management) : **AWS 내 서비스에 대한 접근 제어 서비스**
 * **모든 요청은 API 호출이다.**
   * AWS 콘솔이나 CDK or SDK를 통해 AWS 자원에 접근하는 행위는 모두 API 호출!
+  * 따라서 AWS IAM 서비스는 사용자의 API 호출에 대해 접근 제어하는 서비스. 
 * 글로벌 서비스
 
 목차
