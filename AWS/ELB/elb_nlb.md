@@ -4,3 +4,5 @@
 * TCP /UDP 요청에 대한 트래픽 처리 - L4 스위치 역할
 * TCP, UDP, TLS 등 지원
 * IP 고정이 가능 - Elastic IP 활용
+
+## ALB 앞단에 NLB를 배치하여 IP 고정하기
