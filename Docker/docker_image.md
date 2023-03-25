@@ -2,20 +2,19 @@
 ==================
 ## Image
 * 이미지는 컨테이너 실행에 필요한 파일을 포함
-    * 컨테이너 실행헤 필요한 파일 : 코드와 코드 실행에 필요한 도구
+    * 컨테이너 실행에 필요한 파일 : 코드와 코드 실행에 필요한 도구
 
 <img width="1145" alt="스크린샷 2023-02-05 오후 2 46 42" src="https://user-images.githubusercontent.com/57285121/216803895-561842ea-3267-41b5-953d-17ccdc873315.png">
 
-* AWS EC2 인스턴스를 만들 때 AMI를 지정하는 것 처럼 하나의 컨테이너를 실행하기 위해서는 이미지가 필요하다.
-    * **인스턴스의 AMI == 컨테이너의 이미지**
-    * AMI와 마찬가지로 같은 이미지에서 여러 컨테이너 생성이 가능
+* 하나의 컨테이너를 실행하기 위해서는 이미지가 필요하다.
+    * 하나의 이미지에서 여러 컨테이너 생성이 가능
     * 컨테이너가 삭제되거나 변경되어도 이미지는 그대로 보존이 가능
 * 만들어 놓은 이미지를 다운받고 컨테이너를 생성하고 실행하면 됨
 * 일반적으로 이미 만들어져 있는 이미지를 사용하거나(보통 docker hub에서 가져옴) 직접 이미지를 커스텀하여 사용한다.
     * docker hub : https://hub.docker.com/
 
-## Image Build를 위한 Dockerfile 생성
-* Dockerfile 이란 컨테이너에서 실행할 이미지를 빌드하기 위한 스크립트
+## Image Build를 위한 Dockerfile
+* **Dockerfile : 컨테이너에서 실행할 이미지를 빌드하기 위한 스크립트**
     * 베이스 이미지 + application 코드 + 필요한 라이브러리 or 패키지 설치 커맨드 등 컨테이너에서 실행할 이미지를 빌드하기 위해 필요한 스크립트 파일
     * 해당 프로젝트 폴더에서 `Dockerfile` 이라는 이름의 파일을 생성.
 
@@ -55,7 +54,7 @@ CMD ["node", "server.js"]
 * Dockerfile이 위치한 현재 경로에서
 ```bash
 docker build . # Dockerfile을 알아서 읽는다.
-docker build . -t {tag} # 이미지에 태그 붙이기
+docker build -t {tag} . # 이미지에 태그 붙이기
 ```
 * 생성된 이미지 확인
 ```bash
@@ -82,7 +81,7 @@ docker images
     * 레이어의 변화를 인지하지 못하면 => 캐싱된 레이어를 사용
     * 레이어의 변화를 인지하면 => 새 레이어를 생성
 * Dockerfile의 모든 명령어가 전부 레이어로 저장되어 캐싱되지는 않음
-    * `WORKDIR` => Layer저장 O. 캐싱 O
+    * `WORKDIR` => Layer 저장 O. 캐싱 O
     * `RUN`, `ADD`, `COPY` => Layer 저장 O. 캐싱 O
     * `EXPOSE`, `LABEL`, `CMD` => Layer 저장X. 캐싱 X
 
