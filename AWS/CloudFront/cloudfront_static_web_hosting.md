@@ -1,18 +1,12 @@
 💻 [AWS] CloudFront + S3
-===============
+==========================
+## CloudFront + S3 구조의 Static Web Application 배포하기
+* CDN의 장점인 컨텐츠 전송 속도를 잘 활용하여 Static Web App을 배포해보자. 정적 컨텐츠에 보다 더 특화되어 있는 CloudFront + 정적 웹 페이지를 호스팅할 수 있는 S3의 조합은 아주 좋다.
 
-## CloudFront + S3 구조의 Web Application 배포하기
-먼저 Front Web app을 배포할 때 여러 구조를 생각해볼 수 있다. 
-```
-1. CloudFront + S3
-2. AWS Amplify
-3. AWS Elastic Beanstalk
-4. ALB + EC2
-5. Container(ECS, EC2 In Docker)
-```
-* 정적 컨텐츠에 보다 더 특화되어 있는 CloudFront + 정적 웹 페이지를 호스팅할 수 있는 S3의 조합은 아주 좋다. 
-* 빌드 결과물에 따라 조금 씩 다를 수 있다는 점...
-* 웹 앱의 빌드 결과물은 `index.html` 파일이라 가정한다.
+### CloudFront + S3 구조의 장점
+1. 빠른 속도 
+2. 별도의 Auto Scaling 설정이 필요 없어 트래픽 대응에 수월
+3. EC2 인스턴스 OS의 보안패치 및 EOL/EOS 걱정이 없음
 
 ## 사전에 알아두어야 할 CloudFront 주요 설정 옵션
 * Origin 도메인 및 경로 설정
