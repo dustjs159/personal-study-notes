@@ -18,11 +18,12 @@
     * 사용자의 불필요한 HTTP 메소드를 제한하기 위해 사용 - 권고 : Read 수준의 GET, HEAD만 사용하는 것
 * **Cache Policy** : 캐싱 정책
   * Policy 설정 옵션
-    * Cache Key
+    * Cache Key : 어떤 콘텐츠를 캐싱할지 결정한다. 그 기준은 기본적으로 URL 단위. 부가적으로 Header, Cookie, Query String으로도 가능
     * **TTL**
     * Compression Support
 
 ### TTL 설정
+* **TTL(Time To Live)** : 캐싱이 존재하는 기간
 * TTL 설정할 때, Min/Max TTL과 Default TTL이 있는데 문득 든 생각이 Min TTL과 Default TTL중 어떤 것이 먼저 적용되는지 궁금했다.
     * Minimum TTL : 최소 캐시 적용 기간
     * Maximum TTL : 최대 캐시 적용 기간
@@ -36,15 +37,7 @@
 * Response headers policy
     * Origin 측에서 CloudFront의 요청에 대해 응답할 때(Origin Response) 적용할 정책
 * Function 지정 가능
-    * JavaScript 기반의 함수를 통해 이벤트 기반의 함수를 실행할 수 있음.
+    * JavaScript 기반의 경량 함수 혹은 Lambda@Edge를 통해 이벤트 기반의 함수를 실행할 수 있음.
     * Lambda@Edge : Edge Location에서 실행되는 Lambda 함수.
-
-## CloudFront TTL 설정
-* **TTL(Time To Live)** : 캐싱이 존재하는 기간
-  * TTL 시간이 지나면 캐싱 서버에서 캐싱이 제거되며 새로 Origin으로 부터 캐싱 정보를 가져옴
-* Invalidation
-  * 캐시 무효화(삭제)
-  * 새로운 버전의 app을 배포할 경우 새 버전 app을 사용자에게 즉각적으로 서비스하고자 할 때, Invalidation 후 새 버전 app을 서비스 할 수 있도록 함.
-* Cache Key
-  * 어떤 컨텐츠를 캐싱할 지 결정
-  * 기준 : 기본적으로 URL 단위. 부가적으로 Header, Cookie, Query String으로도 가능
+    * Viewer Req/Res, Origin Req/Res 총 4개의 지점에 적용할 수 있음.
+    
