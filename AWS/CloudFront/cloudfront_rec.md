@@ -7,7 +7,7 @@
 * REC(Regional Edge Cache) : AWS에서 제공하는 계층형 캐시 - CloudFront Distribution (POP)과 Origin사이의 추가적인 캐싱 레이어.
   * **POP보다 Origin에 더 가까이 위치**하며 사용자가 POP에 요청을 했을 때 **POP에 캐시가 없다면 REC에 요청**을 하고 REC에도 캐시가 없다면 Origin에 요청하여 컨텐츠를 전달받는다.
   * POP보다 더 고성능의 캐싱 서버를 사용하여 이를 바탕으로 같은 리전 내 여러 POP들이 동일한 요청을 받았을 때, REC는 Origin으로부터 가져온 컨텐츠를 여러 POP에 공유할 수 있도록 캐싱한다.
-    * 위 그림에서 두개의 POP (Edger Location)에서 하나의 REC에 요청을 전달하는 것을 볼 수 있다. (그리고 POP보다 크기도 더 크다.)
+    * 위 그림에서 두 개의 POP (Edger Location)에서 하나의 REC에 요청을 전달하는 것을 볼 수 있다. (그리고 POP보다 크기도 더 크다.)
 * REC는 CloudFront POP 생성시 내부적으로 자동 생성된다. (별도의 비용 없음)
 
 REC 레이어가 추가된 CloudFront 캐시 응답 방식은 다음과 같다.

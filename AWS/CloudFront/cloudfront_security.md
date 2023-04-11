@@ -22,3 +22,6 @@ CloudFront를 보다 안전하게 사용하기
 
 * CloudFront에 ACM(AWS Certificate Manager)에서 발급받은 SSL/TLS 인증서를 적용하여 Origin의 웹 서버에서 따로 HTTPS를 적용하지 않고도 HTTPS를 적용할 수 있음
 * 이 때 CloudFront에 적용할 인증서는 **버지니아 리전**에서 발급받은 인증서만 적용할 수 있다.
+
+### CloudFront 앞단에 WAF 설정하기
+* 외부의 비정상적인 행위를 탐지 및 차단하여 CloudFront를 보호  
