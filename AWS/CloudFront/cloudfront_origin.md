@@ -30,4 +30,7 @@ Distribution을 생성하기 위해 지정하는 Origin 설정
 * 비용이 발생하기에 대규모의 트래픽으로 부터 Origin을 보호하고 효율적인 Cache Hit을 통해 사용자에게 더 빠른 속도를 제공하고 싶다면 Origin Shield를 활성화하도록 하자.
     * 소규모 프로젝트에서는 적절하지 않은 듯.
 
-
+## Origin DNS Setting
+* CloudFront + S3 구조의 Web Hosting 아키텍처를 구성할 때 DNS 이슈가 발생했었다.
+    * Origin의 Alternative Domain Name을 등록하지 않고 Route 53 Public Zone에만 Record Type A에 CloudFront의 Alias만 등록을 한 상태였던 것.
+* Origin의 Alternative Domain Name 설정은 DNS Record에 Type이 CNAME인 Record를 설정해주는 것인데 CNAME

@@ -1,9 +1,9 @@
-💻 [AWS] CloudFront + S3
+💻 [AWS] CloudFront + S3 Static Web Hosting
 ==========================
-## CloudFront + S3 구조의 Static Web Application 배포하기
+# CloudFront + S3 구조의 Static Web Application 배포하기
 * CDN의 장점인 컨텐츠 전송 속도를 잘 활용하여 Static Web App을 배포해보자. 정적 컨텐츠에 보다 더 특화되어 있는 CloudFront + 정적 웹 페이지를 호스팅할 수 있는 S3의 조합은 아주 좋다.
 
-### CloudFront + S3 구조의 장점
+## CloudFront + S3 구조의 장점
 1. 빠른 속도 
 2. 별도의 Auto Scaling 설정이 필요 없어 트래픽 대응에 수월
 3. EC2 인스턴스 OS의 보안패치 및 EOL/EOS 걱정이 없음
@@ -37,7 +37,8 @@
 
 * Default Root Object 지정 : `index.html`
 * Alterdate Domain Name : 도메인 입력
-    * 이거도 설정 안하면 잘 안되더라고.. 마찬가지로 추가 테스트 좀 더 해봐야 함.
+
+
 * WAF, SSL/TLS 인증서 적용 등 옵션 사용
 
 ### 3. 빌드 결과물 S3에 파일 업로드 및 DNS 등록

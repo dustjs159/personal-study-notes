@@ -15,20 +15,14 @@
     * 사용자의 요청에 대한 처리 정책. Redirect HTTP to HTTPS이나 HTTPS Only를 쓰자. 웬만하면.
 * Allowed HTTP methods
     * CloudFront POP에서 허용할 HTTP 메소드를 지정할 수 있음.
-    * 사용자의 불필요한 HTTP 메소드를 제한하기 위해 사용 - 권고 : Read 수준의 GET, HEAD만 사용하는 것
+    * 사용자의 불필요한 HTTP 메소드를 제한하기 위해 사용
+        * 정적 컨텐츠일 경우 Read 수준의 GET, HEAD만 사용하도록 하자.
+        * 동적 컨텐츠일 경우 GET, HEAD 이외에도 POST, PUT 등의 메소드도 같이 사용할 수 있도록 한다.
 * **Cache Policy** : 캐싱 정책
   * Policy 설정 옵션
     * Cache Key : 어떤 콘텐츠를 캐싱할지 결정한다. 그 기준은 기본적으로 URL 단위. 부가적으로 Header, Cookie, Query String으로도 가능
-    * **TTL**
+    * **TTL 설정**
     * Compression Support
-
-### TTL 설정
-* **TTL(Time To Live)** : 캐싱이 존재하는 기간
-* TTL 설정할 때, Min/Max TTL과 Default TTL이 있는데 문득 든 생각이 Min TTL과 Default TTL중 어떤 것이 먼저 적용되는지 궁금했다.
-    * Minimum TTL : 최소 캐시 적용 기간
-    * Maximum TTL : 최대 캐시 적용 기간
-    * Default TTL : 기본 캐시 적용
-* TTL은 최초에 요청을 한 시점부터 캐싱된다. 
 
 <img width="520" alt="스크린샷 2023-04-12 오전 12 04 38" src="https://user-images.githubusercontent.com/57285121/231205686-4551bae6-4608-4e9e-8e42-679dd66ec465.png">
 

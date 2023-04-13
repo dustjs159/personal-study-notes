@@ -1,18 +1,12 @@
 💻 [Network] HTTP
 =====================
-
-# 💡 HTTP(HyperText Transfer Protocol)
-* HyperText ?
-  * 일반적인 책을 읽을 때는 순서대로 책을 읽음(순차적인 정보습득)   
-  * HyperText는 이러한 순차적 방법으로 정보를 습득하는 것이 아니라 문서들을 넘나들며 원하는 정보를 습득(비순차적 정보습득)
-* 클라이언트 - 서버 구조로써 클라이언트와 서버 간 HyperText를 주고 받기 위한 프로토콜  
+# HTTP(HyperText Transfer Protocol)
+* Client - Server 구조로써 양측 간 HyperText를 주고 받기 위한 프로토콜  
 * Port번호는 80번을 사용하고 클라이언트의 요청(Request)과 서버의 응답(Response)으로 구성   
 * 클라이언트가 HTTP를 이용해 서버에 웹 페이지의 정보를 요청하면 서버는 이 요청에 응답하여 정보제공
-   
-![http](https://user-images.githubusercontent.com/57285121/116813732-3b17fc00-ab90-11eb-9229-15149a7d1e61.png)   
-   
-## 📌 HTTP 주요 특징
+![http](https://user-images.githubusercontent.com/57285121/116813732-3b17fc00-ab90-11eb-9229-15149a7d1e61.png)
 
+## HTTP 주요 특징
 * Client - Server Model
   * Client : Request의 주체
   * Server : Response의 주체
@@ -20,36 +14,31 @@
   * 서버는 Response 후 Connection 종료
 * Stateless : 상태 비저장
   * 서버는 이전의 클리이언트의 Request를 저장하지 않음
-* Connectionless, Stateless 특성을 극복하기 위해 Cookie 를 만들어 저장
+* Connectionless, Stateless 특성을 극복하기 위해 쿠키를 만들어 저장
 
+## HTTP 통신 과정
+* HTTP의 통신은 모두 Client의 Request와 Server의 Response로 진행된다.
 
-## 📌 HTTP 통신 과정
-1. 클라이언트가 웹 브라우저에 방문하고자 하는 사이트의 URL 주소 입력
-2. DNS 서버에서 클라이언트가 입력한 URL 주소에 대한 웹 서버의 IP 주소를 반환
-3. 웹 서버와 TCP 3 way-handshake 과정을 통해 세션 수립
-4. 클라이언트의 요청(HTTP Request)을 서버로 전달
-5. 서버는 클라이언트의 요청에 대해 응답(HTTP Response)을 클라이언트에게 전달
-6. 데이터 통신 종료 후 TCP 4 way-handshake 과정을 통해 세션 해제
+<img width="917" alt="스크린샷 2023-04-13 오후 11 56 41" src="https://user-images.githubusercontent.com/57285121/231800117-bfed6cf6-d0ef-4e2b-b89e-ed2444d4c910.png">
 
-## 📌 HTTP Request
-* 요청라인 + 헤더(Header) + 본문(Body)으로 구성 
+### HTTP Request
+* **HTTP Request Message 구조 : Start Line + Header + Body**
 
-1. 요청라인 : HTTP Request Method + 요청URL + HTTP 버전
+<img width="686" alt="스크린샷 2023-04-14 오전 12 07 45" src="https://user-images.githubusercontent.com/57285121/231803397-103c3faf-d9b0-4547-bbbf-8985c8cb26d3.png">
 
-* HTTP Request Method   
-  * GET : 데이터 요청   
-  * POST : 데이터 입력   
-  * PUT : 데이터 갱신   
-  * DELETE : 데이터 삭제   
-  * HEAD : 웹 서버의 정보 또는 정상 작동 여부 확인시 사용   
-  * OPTIONS : 웹 서버가 지원하는 메소드 종류 확인   
-* 요청 URL   
-  * HTTP 요청이 전송되는 목표 주소   
-* HTTP 버전   
-  * HTTP/1.1, HTTP/2.0등 HTTP의 버전   
+Start Line : 요청에 대한 기본 정보 포함
+```
+[HTTP Method] [Request Target] HTTP/[Version]
+```
+  * **HTTP Request Method** : 클라이언트가 서버 사이드에서 수행할 동작 정의
+  * Target URI : HTTP 요청이 전송되는 목표 주소 
+  * HTTP Version : HTTP/1.1, HTTP/2.0등 HTTP의 버전
 
-2. 헤더(Header)
+#### HTTP Method에 관해 - 
+* HTTP Method는 서버에게 특정 동작의 수행을 요청(전달)하기 위해 사용된다.
+  * 예시) 클라이언트에서 GET으로 Request하면 서버는 GET 요청에 대해 응답하여 요청한 정보를 Response로 반환한다. 
 
+Header
 * 요청에 대한 추가정보가 담겨있음
   * Host : 요청하는 호스트에 대한 호스트명 및 포트번호
   * User-Agent : 요청을 보내는 클라이언트의 소프트웨어 정보
@@ -59,8 +48,7 @@
   * Referer : 바로 직전에 머물렀던 웹 주소
   * Content-Length : 요청이 보내는 메시지 body의 총 사이즈 정보
 
-3. 본문(Body)
-
+Body
 * 요청이 전송하는 데이터를 담고있는 부분. Request Method가 GET일때는 비어있고 POST나 PUT일 때 채워짐
 
 ## 📌 HTTP Response
