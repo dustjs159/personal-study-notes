@@ -27,7 +27,6 @@ IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가�
   * 조직 내에서 Root Account로 Admin User를 생성하고 Admin User로 여러 다른 계정을 만들어서 관리 
 
 # IAM 동작 원리
-동작 원리
 
 ![스크린샷 2022-07-22 오전 12 40 19](https://user-images.githubusercontent.com/57285121/180255247-457ac69f-6a2b-4171-8ef4-a371b7c1ad7f.png)
 
@@ -37,7 +36,7 @@ IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가�
     * API 호출 : Access Key + Secret Access key + MFA Token(Optional)
   * 인가(Authorization) : 로그인 한 사용자의 Action에 대해 주어진 권한으로 접근 제어(Permission Control)
 
-# IAM 리소스 
+# IAM 리소스
 * IAM Resource : User, Group, Role, Policy
   * 다른 AWS 서비스들과 마찬가지로 생성, 변경, 삭제 가능
 * IAM Entities : User, Role
@@ -48,5 +47,5 @@ IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가�
 * Principal
   * 보안 주체. AWS에 무언가를 Request하는 주체
   * AWS 웹 콘솔에서 클릭(Action)하는 User
-  * AWS API를 호출하는 User or APP
+  * AWS 서비스를 사용하기 위해 API를 호출하는 주체 
 

@@ -61,3 +61,25 @@
 * IP 제어하기
 	* 특정 IP 이외는 모두 접근 차단하여 보다 안전하게 계정 관리 가능
 		* 다만 Public IP에 대해서만 접근 제어할 수 있고 Private IP에 대해서는 접근 제한할 수 없음.
+
+### IP 접근 제어 정책 예시
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": {
+        "Effect": "Deny",
+        "Action": "*",
+        "Resource": "*",
+        "Condition": {
+            "NotIpAddress": {
+                "aws:SourceIp": [
+					"[PublicIpAddress]"
+                ]
+            },
+            "Bool": {
+                "aws:ViaAWSService": "false"
+            }
+        }
+    }
+}
+```
