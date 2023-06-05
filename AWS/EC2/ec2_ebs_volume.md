@@ -1,50 +1,23 @@
 💻 [AWS] EBS Volume
 ===================
 
-* EBS Volume : 인스턴스의 볼륨
-  * 인스턴스를 생성할 때 필요한 Root Volume이 될 수도 있고 추가로 Attach 한 Volume이 될 수도 있음
-  * 루트 디바이스에는 인스턴스 부팅을 위해 필요한 정보들이 포함됨.
-  * 인스턴스의 볼륨으로 사용 가능한 스토리지 옵션
-    * 인스턴스 스토어
-    * **Amazon EBS(Elastic Block Store)**
-* 사용 가능한 디바이스의 이름(루트 포함)은 AMI에 따라 조금씩 다름
-* 가질 수 있는 루트 디바이스의 이름
-  * Amazon Linux 2 : `/dev/xvda`
-  * RHEL, Ubuntu, SUSE Linux, Windows : `/dev/sda1`
-* 루트 디바이스 외 추가되는 스토리지의 이름 :  `/dev/sd[f~p]`
+(인스턴스 스토어에 대한 설명은 제외하겠습니다.)
 
-* 인스턴스 스토어 : **임시적인 블록 스토리지**
-  * 내장 디스크
-* **데이터를 영구적으로 저장하지 않음**
-* 인스턴스 스토어는 인스턴스 중지 및 종료할 경우 스토리지가 증발(물론 스토리지 내 데이터들도)하기 때문에 인스턴스 유형을 변경하기 위해 인스턴스 종료 및 중지 불가 → 동적인 인스턴스 구성(기존 볼륨을 다른 인스턴스에 연결 등)이 불가능
-* 과거에는 인스턴스 스토어가 EC2 인스턴스 부팅을 위한 정보들이 담겨있는 루트 디바이스였지만 Amazon EBS 출시 이후에는 루트 디바이스가 **Amazon EBS** 로 변경
-
-## 📌 Amazon EBS
-   
 <img width="400" alt="스크린샷 2021-08-28 오후 11 48 50" src="https://user-images.githubusercontent.com/57285121/131221914-e6ddfae0-fe98-4279-8de6-e443e4943c51.png">
 
-* Amazon EBS(Elastic Block Store)는 EC2 인스턴스에 연결하여 사용할 수 있는 볼륨
-  * 인스턴스에 연결할 수 있는 디스크
-* Amazon EBS는 **블록 스토리지** 형태의 스토리지 서비스
-* 인스턴스에 EBS 볼륨을 연결하여 사용하기 위해서는 EBS 볼륨과 EC2 인스턴스가 같은 가용영역에 있어야 함
-* Amazon EBS는 인스턴스 스토어와는 다르게 **영구적으로 데이터 보관이 가능**
-* 인스턴스의 수명주기와 관계없이 지속되기 때문에 기존에 인스턴스에 연결되어 있던 EBS 볼륨을 분리하여 다른 인스턴스에 연결하여 사용이 가능하고 인스턴스 중지 및 종료할 경우에도 삭제되지 않고 필요에 따라 재사용이 가능
-* **Snapshot** 기능 지원
-  * Snapshot을 생성하여 볼륨 내 데이터를 백업 가능
-* 대부분의 AMI의 루트 디바이스는 EBS 볼륨을 사용
+* Amazon EBS(Elastic Block Store) Volume : 인스턴스에 연결하여 사용할 수 있는 **블록 스토리지**
+  * 인스턴스에 EBS 볼륨을 연결하여 사용하기 위해서는 EBS 볼륨과 EC2 인스턴스가 같은 가용영역에 있어야 함 (AZ Level)
+  * Amazon EBS는 인스턴스 스토어와는 다르게 **영구적으로 데이터 보관이 가능**
+    * 인스턴스의 수명주기와 관계없이 지속되기 때문에 기존에 인스턴스에 연결되어 있던 EBS 볼륨을 분리하여 다른 인스턴스에 연결하여 사용이 가능하고 인스턴스 중지 및 종료할 경우에도 삭제되지 않고 필요에 따라 재사용이 가능
+  * **Snapshot** 기능 지원
+  * 대부분의 AMI의 루트 디바이스는 EBS 볼륨을 사용
   * EBS 볼륨이 **인스턴스 중지 후 인스턴스 유형을 수정할 수 있기 때문**
-  * 기존 볼륨에 대해 변동 사항이 발생하면 인스턴스 유형을 수정해야할 경우가 있는데, 이 때 EBS 볼륨은 인스턴스 중지 후 인스턴스의 유형을 변경 후에 다시 볼륨을 연결하여 사용할 수 있지만 인스턴스 스토어는 인스턴스 생성 시 최초의 인스턴스 유형을 설정하면 변경할 수 없기 때문에 대부분의 루트 디바이스가 EBS 볼륨으로 지정 
+  * 기존 볼륨에 대해 변동 사항이 발생하면 인스턴스 유형을 수정해야할 경우가 있는데, 이 때 EBS 볼륨은 인스턴스 중지 후 인스턴스의 유형을 변경 후에 다시 볼륨을 연결하여 사용할 수 있지만 인스턴스 스토어는 인스턴스 생성 시 최초의 인스턴스 유형을 설정하면 변경할 수 없기 때문에 대부분의 루트 디바이스가 EBS 볼륨으로 지정
+* EBS 볼륨의 디바이스 이름은 OS마다 조금씩 차이가 있다.
+  * Amazon Linux 2 : `/dev/xvda`
+  * RHEL, Ubuntu, SUSE Linux, Windows : `/dev/sda1`
    
-|특징|Amazon EBS 지원 AMI|인스턴스 스토어 지원 AMI|
-|------|---|---|
-|부팅 시간|빠름(1분 이하)|상대적으로 느림(5분 이하)|
-|루트 디바이스 볼륨| **Amazon EBS** |인스턴스 스토어|
-|데이터 지속성| **영구적**으로 보관|영구적이지 않고 임시 보관(휘발성)|
-|인스턴스 유형 변경| **인스턴스 중지 후 인스턴스 유형 변경 가능** |최초 인스턴스 유형 선택 후 변경 불가|
-|인스턴스 중지 및 종료|인스턴스 중지 및 종료 후 **언제든지 재시작 가능** |인스턴스 중지 및 종료 불가|
-   
-## 📌 Amazon EBS 볼륨 유형
-
+# EBS Volume Type
 * **SSD(Solid-State Drive)**
   * General-Purpose SSD(gp2 / gp3)
       * gp3는 IOPS / Throughput 최소/최대 값이 있음
@@ -57,21 +30,17 @@
   * Cold HDD (sc1)
       * 자주 액세스 하지 않는 데이터를 보관할 때 사용
 
-## 📌 EBS Snapshot
-
-* Amazon EBS는 스냅샷 기능을 제공
-* 특정 시점에 대한 볼륨 스냅샷 기능을 통해 EBS 볼륨의 백업이 가능
-* 생성한 EBS 볼륨의 스냅샷은 계정 간 공유 및 복제, 리전 간 복제가 가능
-
-<img width="723" alt="스크린샷 2021-08-29 오전 12 24 05" src="https://user-images.githubusercontent.com/57285121/131222831-62538d84-8d35-4488-8ef3-d6e73829175b.png">
-
+# EBS Volume Snapshot
+* EBS 볼륨 백업 목적으로 Snapshot을 생성하여 복원 가능
+  * 생성한 EBS 볼륨의 스냅샷은 계정 간 공유 및 복제, 리전 간 복제가 가능
 * EBS 볼륨의 스냅샷은 **증분식 백업**으로 저장
   * 새 스냅샷을 생성할 때는 마지막 스냅샷 이후 변경된 사항만 저장
 
-## 📌 EBS 볼륨의 성능 평가 기준
+# EBS Volume 성능 지표
 * IOPS(Input/Output operations Per Second)
 * Throughput (처리량)
-* **IOPS와 Throughput의 차이점**
+
+## IOPS vs Throughput
 
 <img width="997" alt="스크린샷 2022-11-13 오후 5 23 11" src="https://user-images.githubusercontent.com/57285121/201512690-08540cba-93c9-4e1c-9c48-a918501ac912.png">
 
@@ -83,18 +52,18 @@
 즉, 작은 크기의 데이터를 빠른 속도로 처리하기 위해서는 IOPS가 높아야 하고 처리해야 할 데이터의 크기가 큰 경우에는 Throughput이 높아야 함. 
 ```
 
-### ✔️ EBS 볼륨 증설 작업
-* 웹 콘솔에서 디스크의 크기를 늘려도 직접 EC2에 접속하여 크기를 확인해보면 크기가 늘어나지 않은 것을 확인할 수 있음
+# EBS Volume Modify
+* 콘솔에서 인스턴스에 Attach된 디스크의 크기를 늘려도 직접 인스턴스에 접속하여 크기를 확인해보면 크기가 늘어나지 않은 것을 확인할 수 있음
     * `df -Th` 커맨드로 확인해봐도 그대로
     * `lsblk`  커맨드로 확인하면 디스크 용량이 늘어나 있는 것을 확인할 수 있다 
-* 이것은 디스크의 크기는 늘어나긴 했으나, 파티션과 파일시스템의 크기가 늘어나지 않아서 그런 것
-* 직접 인스턴스에서 파티션과 파일시스템의 크기를 늘려줘야 함
+* 이것은 디스크의 크기는 늘어나긴 했으나, 파일시스템의 크기가 늘어나지 않아서 그런 것
+* 직접 인스턴스에서 파일시스템의 크기를 늘려줘야 함
 
 ```
 # root 계정에서 실행
 
-# 파티션 증설
-growpart {partition name}
+# 파티션 증설 (파티션을 나누지 않고 볼륨 전체를 마운트하여 사용중인 경우 Skip)
+growpart {device name} {n} # n : n번째 파티션.
 
 # 파일시스템 확장
 resize2fs {partition name} # ext4
@@ -107,7 +76,7 @@ xfs_growfs {partition name} # xfs
 gdisk {device name}
 ```
 
-### ✔️ EBS 볼륨을 LVM을 사용하여 묶기
+# LVM으로 EBS Volume 묶어 사용하기
 * LVM : Logical Volume Manager
 * 논리적인 볼륨을 만들어, 디바이스들을 하나로 묶고 크기를 나눠서 사용
 * LVM으로 볼륨을 묶어서 사용했을 때 장점
@@ -123,7 +92,7 @@ gdisk {device name}
 * 참조
   * https://aws.amazon.com/ko/premiumsupport/knowledge-center/create-lv-on-ebs-partition/
 
-### ✔️ EBS 볼륨 비용 절감 방안
+# EBS Volume 비용 절감 방안
 * 일단 안쓰는거 먼저 삭제하는게 가장 먼저 해야할 방법(당연히)
 * 그다음에는 gp2 → gp3 이전
     * gp3가 GB당 비용이 더 저렴
@@ -133,7 +102,7 @@ gdisk {device name}
 * 참조
     * https://silashansen.medium.com/looking-into-the-new-ebs-gp3-volumes-8eaaa8aff33e 
     * https://www.whatap.io/ko/blog/83/
-* AWS CLI로 사용해보자
-```bash
-aws ec2 modify-volume --volume-type gp3 --volume-id vol-******
-```
+
+# DLM - EBS Volume Backup
+* 백업 정책을 생성하고 정책에 해당하는 인스턴스 대상의 EBS 볼륨을 정책에 따라 백업
+  * 태그 등등...
