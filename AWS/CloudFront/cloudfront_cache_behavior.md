@@ -28,6 +28,7 @@
 
 * Origin Request Policy
     * Cache Miss가 발생했을 때, CloudFront는 Origin에 요청을 전달하게 된다(Origin Request). 이 때 적용할 정책을 설정할 수 있다.
+    * CloudFront가 Origin에게 추가로 전달할 Header 설정 가능 (ALB 연동하면서 애먹었던 부분...)
 * Response headers policy
     * Origin 측에서 CloudFront의 요청에 대해 응답할 때(Origin Response) 적용할 정책
 * Function 지정 가능

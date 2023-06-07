@@ -8,7 +8,8 @@
         * 인스턴스 생성 시 private IPv4가 할당되는 primary network interface의 이름은 `eth0`
     * 인스턴스에 Attach / Detach 가능 (Elastic이 붙은 이유)
     * 하나의 인스턴스에 여러 ENI를 Attach할 수 있지만 하나의 ENI를 여러 인스턴스에 Attach할 수 없음
-    * AZ Level    
+    * AZ Level
+    * ENI 자체에 대한 비용은 무료    
 
 ## ENI Type
 * VPC Endpoint
