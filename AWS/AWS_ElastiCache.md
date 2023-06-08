@@ -1,11 +1,10 @@
-ElastiCache
+💻 [AWS] ElastiCache
 =======================
-* In-Memory DB
+* ElastiCache : In-Memory DB
     * DB의 데이터를 디스크에 저장하는 것이 아닌 메모리에 저장
     * 메모리내에 저장되어 있는 데이터에 접근하는 것이기에 처리속도가 매우 빠르다.
     * 하지만 메모리는 내 데이터는 휘발성이 있으므로 전원이 꺼지면 데이터가 전부 삭제된다.
     * 따라서 삭제되어도 큰 문제가 없는(로그인 세션 정보 등)데이터를 저장할 때 사용한다.
-
 
 ## ElastiCache Type
 * 두 종류 지원
@@ -28,7 +27,25 @@ ElastiCache
     * 클러스터 내 여러 노드에 데이터 분산 저장가능 → 가용성이 높아지고 위치 투명성(어떤 데이터가 어떤 노드에 위치해있는지 알 필요가 없음)이 높아짐
     * 파티셔닝과는 차이점이 있다. 파티셔닝은 하나의 DB 인스턴스에서 테이블을 분할하는 방식이고 샤딩은 데이터를 여러 DB 인스턴스에 분할하여 저장하는 방식.
 
-Parameter groups
+## Redis Logging 설정하기
+* Log 종류 : Slow-log, Engine-log
+    * Slow-log : 노드의 성능에 저하를 줄 수 있는 요소에 대한 로그
+    * Engine-log : 엔진 업데이트나 Failover 등의 유지보수 성격의 로그를
 
+## Redis Reserved Node 사용 시 주의점
 
+EC2 인스턴스를 보다 저렴하게 사용하고자 RI (Reserved Instance)를 적용할 때는 한 단계 작은 크기의 인스턴스 2개를 구매하면 상위 단계의 인스턴스에 적용이 가능했었다.
 
+```
+(예시) t3.micro 2개 구매 → t3.small에 적용
+```
+
+그런데 Redis Memory 부족 현상이 있어서 Node Type을 한 단계 증설하고 기존 Node Type에 적용되어 있던 Reserved Node와 동일한 수량을 구매했었다. (당연히 적용 되는 줄 알고)
+
+며칠 뒤 확인해보니 ElastiCache Redis Cluster의 비용이 온디맨드로 청구되고 있는 것을 확인하고 설마 EC2 인스턴스의 그것과는 다른 것인가 해서 확인해본 결과 ...
+
+**탄력적인 Reserved Node가 적용이 안된다.**
+
+<img width="596" alt="스크린샷 2023-06-09 오전 12 59 47" src="https://github.com/dustjs159/Study/assets/57285121/f3b4c423-e8cd-4c5a-bced-de148034d31c">
+
+그래서 기존에 Reserved Node 적용 받던 비용도 온드맨드로 전환되어 청구되고 있었고 신규 구매한 Reserved Node도 동시에 비용이 청구되고 있었다....
