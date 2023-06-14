@@ -17,7 +17,7 @@
   * Amazon Linux 2 : `/dev/xvda`
   * RHEL, Ubuntu, SUSE Linux, Windows : `/dev/sda1`
    
-# EBS Volume Type
+## EBS Volume Type
 * **SSD(Solid-State Drive)**
   * General-Purpose SSD(gp2 / gp3)
       * gp3는 IOPS / Throughput 최소/최대 값이 있음
@@ -30,7 +30,7 @@
   * Cold HDD (sc1)
       * 자주 액세스 하지 않는 데이터를 보관할 때 사용
 
-# EBS Volume Snapshot
+## EBS Volume Snapshot
 * EBS Snapshot : 특정 시점에 대한 백업본
 * EBS 볼륨 백업 목적으로 스냅샷을 생성하여 복원 가능
   * 생성한 EBS 볼륨의 스냅샷은 계정 간 공유 및 복제, 리전 간 복제가 가능
@@ -39,12 +39,12 @@
 * 복원할 일이 많이 없는 스냅샷은 Archive화 하여 비용 절감 가능
 * 스냅샷 Recycle bin : 스냅샷 휴지통. 실수로 스냅샷을 삭제하는 경우를 대비하여 복구 가능한 휴지통에 저장하고 보관기간 이후에는 휴지통에서 삭제됨
 
-# EBS Volume 성능 지표
+## EBS Volume 성능 지표
 * IOPS(Input/Output operations Per Second)
 * Throughput (처리량)
 
-## IOPS vs Throughput
-
+### IOPS vs Throughput
+* EBS 볼륨의 성능 지표인 IOPS와 Throughput의 차이점
 <img width="997" alt="스크린샷 2022-11-13 오후 5 23 11" src="https://user-images.githubusercontent.com/57285121/201512690-08540cba-93c9-4e1c-9c48-a918501ac912.png">
 
 <img width="1005" alt="스크린샷 2022-11-13 오후 5 24 21" src="https://user-images.githubusercontent.com/57285121/201512723-2c1d9ee8-4c21-471c-9bcb-89b553431d16.png">
@@ -55,7 +55,7 @@
 즉, 작은 크기의 데이터를 빠른 속도로 처리하기 위해서는 IOPS가 높아야 하고 처리해야 할 데이터의 크기가 큰 경우에는 Throughput이 높아야 함. 
 ```
 
-# EBS Volume Modify
+## EBS Volume Modify
 * 콘솔에서 인스턴스에 Attach된 디스크의 크기를 늘려도 직접 인스턴스에 접속하여 크기를 확인해보면 크기가 늘어나지 않은 것을 확인할 수 있음
     * `df -Th` 커맨드로 확인해봐도 그대로
     * `lsblk`  커맨드로 확인하면 디스크 용량이 늘어나 있는 것을 확인할 수 있다 
@@ -78,8 +78,10 @@ xfs_growfs {partition name} # xfs
 ```bash
 gdisk {device name}
 ```
+* 하지만 IOPS, Throughput 조정은 일정 시간이 필요하지만 무중단으로 가능하다. 
 
-# LVM으로 EBS Volume 묶어 사용하기
+
+## LVM으로 EBS Volume 묶어 사용하기
 * LVM : Logical Volume Manager
 * 논리적인 볼륨을 만들어, 디바이스들을 하나로 묶고 크기를 나눠서 사용
 * LVM으로 볼륨을 묶어서 사용했을 때 장점
@@ -95,7 +97,7 @@ gdisk {device name}
 * 참조
   * https://aws.amazon.com/ko/premiumsupport/knowledge-center/create-lv-on-ebs-partition/
 
-# EBS Volume 비용 절감 방안
+## EBS Volume 비용 절감 방안
 * 일단 안쓰는거 먼저 삭제하는게 가장 먼저 해야할 방법(당연히)
 * 그다음에는 gp2 → gp3 이전
     * gp3가 GB당 비용이 더 저렴
@@ -106,6 +108,6 @@ gdisk {device name}
     * https://silashansen.medium.com/looking-into-the-new-ebs-gp3-volumes-8eaaa8aff33e 
     * https://www.whatap.io/ko/blog/83/
 
-# DLM - EBS Volume Backup
+## DLM - EBS Volume Backup
 * 백업 정책을 생성하고 정책에 해당하는 인스턴스 대상의 EBS 볼륨을 정책에 따라 백업
   * 태그 등등...

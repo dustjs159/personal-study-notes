@@ -13,6 +13,6 @@ Public IP를 자동으로 할당하는 Subnet에 배치되어 할당받은 Publi
 (Elastic IP가 아닌 Public IP를 할당했을 때)
 
 
-# Elastic IP의 비용이 발생하는 경우
+## Elastic IP의 비용이 발생하는 경우
 
 할당받은 Elastic IP를 인스턴스에 연결하여 사용중이라면 비용이 발생하지 않는다. 그러나 한정된 Public IPv4 주소를 낭비 없이 효율적으로 사용하기 위해 할당받은 Elastic IP가 인스턴스의 Network Interface에 연결되어 있지 않거나 중지된 인스턴스에 연결되어 있는 경우에는 추가 비용이 발생한다.

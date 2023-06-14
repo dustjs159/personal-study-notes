@@ -19,15 +19,15 @@ IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가�
   * e.g. 인증 절차를 통과한 후에 건물 출입은 가능하나 특정 사무실에는 출입할 수 없음
 * **한국어로써 인증과 인가의 단어가 주는 느낌은 비슷할 수 있으나, 영어로 번역된 Authentication(인증)과 Authorization(인가)는 엄연히 다른 의미이므로 주의!**
 
-# Root Account
+## AWS Root Account
 * Root Account : AWS에 회원 가입 후 최초에 로그인하게 되는 계정
   * Root Account는 너무 많은 권한을 갖고 있기에 **최초 로그인하는 경우와 첫 IAM User 를 생성하는 경우를 제외하면 사용하지 않는다.** (그냥 무조건 쓰지 마)
   * 고유한 Account ID (혹은 Owner ID)를 가지고 있음
-  * Account 내에 여러 서비스를 생성하고 다른 Account간에 접근이 불가능 
+  * Account 내에 여러 서비스를 생성하고 다른 Account간에 접근이 불가능
+    * 서로 Trust 관계를 설정하거나 특정 정책을 통해 접근 허용을 할 수는 있으나, 별 다른 설정이 없다면 불가능. 
   * 조직 내에서 Root Account로 Admin User를 생성하고 Admin User로 여러 다른 계정을 만들어서 관리 
 
-# IAM 동작 원리
-
+## IAM 동작 원리
 ![스크린샷 2022-07-22 오전 12 40 19](https://user-images.githubusercontent.com/57285121/180255247-457ac69f-6a2b-4171-8ef4-a371b7c1ad7f.png)
 
 * IAM의 접근 제어는 인증과 인가로 수행
@@ -36,7 +36,7 @@ IAM을 사용하기 전, 인증과 인가에 대한 개념을 짚고 넘어가�
     * API 호출 : Access Key + Secret Access key + MFA Token(Optional)
   * 인가(Authorization) : 로그인 한 사용자의 Action에 대해 주어진 권한으로 접근 제어(Permission Control)
 
-# IAM 리소스
+## IAM 리소스
 * IAM Resource : User, Group, Role, Policy
   * 다른 AWS 서비스들과 마찬가지로 생성, 변경, 삭제 가능
 * IAM Entities : User, Role

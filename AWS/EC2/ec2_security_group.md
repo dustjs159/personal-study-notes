@@ -1,7 +1,7 @@
 💻 [AWS] EC2 Security Group
 ===========================
 
-# 인스턴스의 방화벽 - 보안 그룹(Security Group)
+## 인스턴스의 방화벽 - 보안 그룹(Security Group)
 * 인스턴스에 대한 트래픽을 제어하는 **방화벽**
 * **보안 그룹이 적용되는 지점은 인스턴스의 ENI(Elastic Network Interface)**
 * Inbound / Outbound 트래픽에 대해 허용할 규칙 지정

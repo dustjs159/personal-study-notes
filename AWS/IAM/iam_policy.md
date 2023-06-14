@@ -11,7 +11,7 @@
 	* SCP
 	* Session Policy
 
-# Policy 구조
+## Policy 구조
 ``` json
 {
 "Version" : "2012-10-17",
@@ -48,12 +48,12 @@
     * `Resource` : 서비스에 대한 리소스들의 상세 조건. ARN format 사용
     * `Condition` : 위 정책을 적용하기 위한 특정 조건
 
-# 정책 적용 우선 순위
+## 정책 적용 우선 순위
 * 여러 정책들이 있을 때, 정책 적용 우선 순위는 명시적 **Deny**가 가장 먼저 적용된다.
 	* 명시적 Deny > 암묵적 Deny > 명시적 Allow
 		* 허용되지 않은 Action에 대해서는 모두 Deny.
 
-# AWS 계정을 보다 안전하게
+## AWS 계정을 보다 안전하게
 * Password 정책 설정
 	* 특수문자/대문자 포함, 길이 설정, 유효기간 설정 등
 * MFA 설정하기

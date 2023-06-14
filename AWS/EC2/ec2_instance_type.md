@@ -4,7 +4,7 @@
 * 인스턴스 유형 : 물리적인 장비로부터 VM을 생성할 때 VM에 할당할 리소스(vCPU, Memory 등)의 양
   * AWS에서는 다양한 인스턴스 유형을 제공하며 목적에 맞게 선택하여 사용
 
-# 인스턴스 유형 naming convention
+## 인스턴스 유형 naming convention
 <img width="379" alt="스크린샷 2023-06-03 오후 1 18 38" src="https://github.com/dustjs159/Study/assets/57285121/37770e2f-0946-4cad-afc0-eeb843e4dc56">
 
 * Instance Family : 인스턴스에서 실행할 app의 특성에 따라 5개의 유형으로 구분
@@ -34,7 +34,7 @@
 * Instance Size
 
 
-# T Family의 Burst 기능과 Credit에 대하여
+## T Family의 Burst 기능과 Credit에 대하여
 인스턴스의 CPU 사용률이 아래와 같다고 가정해보자.
 
 <img width="676" alt="스크린샷 2023-05-31 오전 12 38 12" src="https://github.com/dustjs159/Study/assets/57285121/c14a11b2-740d-481b-acfc-c6af5ae9c71a">
