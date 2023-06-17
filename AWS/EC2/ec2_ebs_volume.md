@@ -1,13 +1,12 @@
 💻 [AWS] EBS Volume
 ===================
 
-(인스턴스 스토어에 대한 설명은 제외하겠습니다.)
-
 <img width="400" alt="스크린샷 2021-08-28 오후 11 48 50" src="https://user-images.githubusercontent.com/57285121/131221914-e6ddfae0-fe98-4279-8de6-e443e4943c51.png">
 
 * Amazon EBS(Elastic Block Store) Volume : 인스턴스에 연결하여 사용할 수 있는 **블록 스토리지**
   * Amazon EBS는 인스턴스 스토어와는 다르게 **영구적으로 데이터 보관이 가능**
-    * 인스턴스의 수명주기와 관계없이 지속되기 때문에 기존에 인스턴스에 연결되어 있던 EBS 볼륨을 분리하여 다른 인스턴스에 연결하여 사용이 가능하고 인스턴스 중지 및 종료할 경우에도 삭제되지 않고 필요에 따라 재사용이 가능
+    * 인스턴스 스토어 : 인스턴스의 내장 디스크. 내장 디스크이다 보니 외장 디스크보다는 성능이 좋지만 인스턴스 스토어 내에 저장되는 데이터들은 **휘발성**이라는 단점이 존재(중지하면 데이터 날아감)
+  * 인스턴스의 수명주기와 관계없이 지속되기 때문에 기존에 인스턴스에 연결되어 있던 EBS 볼륨을 분리하여 다른 인스턴스에 연결하여 사용이 가능하고 인스턴스 중지 및 종료할 경우에도 삭제되지 않고 필요에 따라 재사용이 가능
   * **Snapshot** 기능 지원
   * 대부분의 AMI의 루트 디바이스는 EBS 볼륨을 사용
   * EBS 볼륨이 **인스턴스 중지 후 인스턴스 유형을 수정할 수 있기 때문**
@@ -17,18 +16,30 @@
   * Amazon Linux 2 : `/dev/xvda`
   * RHEL, Ubuntu, SUSE Linux, Windows : `/dev/sda1`
    
-## EBS Volume Type
-* **SSD(Solid-State Drive)**
-  * General-Purpose SSD(gp2 / gp3)
-      * gp3는 IOPS / Throughput 최소/최대 값이 있음
-      * 최소 3000 IOPS, 125MiB/s (보다 크면 비용 청구)
-  * Provisioned IOPS (io1 / io2)
-      * 작은 크기의 데이터를 빠르게 처리하고자 할 때 사용
-* **HDD(Hard Disk Drive)**
-  * Throughput-Optimized HDD (st1)
-      * 큰 크기의 데이터를 처리하고자 할 때 사용
-  * Cold HDD (sc1)
-      * 자주 액세스 하지 않는 데이터를 보관할 때 사용
+## EBS Volume 유형
+* SSD / HDD 둘 다 지원
+
+### SSD(Solid-State Drive)
+* 범용 SSD(gp2 / gp3)
+  * 가장 일반적으로 사용할 수 있는 볼륨 유형.
+  * 최대 16 TiB
+  * gp2 : 1 GiB 당 3 IOPS 제공. 기본 제공 없음.
+  * gp3 : 3000 IOPS, 125 MiB/s 기본 제공 (보다 크면 비용 청구)
+    * MAX IOPS : 16000 IOPS
+    * MAX Throughput : 1000 MiB/s
+* Provisioned IOPS (io1 / io2)
+  * 작은 크기의 데이터를 빠르게 처리하고자 할 때 사용
+  * 최대 16TB
+  * Multi Attach 기능 지원 : 같은 AZ 내 여러 인스턴스(최대 16대)에 하나의 볼륨 Attach 가능
+  * io2의 Block expres : io2 보다 더 고성능의 볼륨 유형. 최대 64TB 지원
+  
+### HDD(Hard Disk Drive)
+* HDD는 root 볼륨으로 사용할 수 없음. 인스턴스 생성 시 HDD로 부팅 불가능
+* 최소 125MB, 최대 16TB
+* 처리량 최적화 HDD (st1)
+    * 큰 크기의 데이터를 처리하고자 할 때 사용
+* Cold HDD (sc1)
+    * 아카이빙용
 
 ## EBS Volume Snapshot
 * EBS Snapshot : 특정 시점에 대한 백업본
@@ -80,7 +91,6 @@ gdisk {device name}
 ```
 * 하지만 IOPS, Throughput 조정은 일정 시간이 필요하지만 무중단으로 가능하다. 
 
-
 ## LVM으로 EBS Volume 묶어 사용하기
 * LVM : Logical Volume Manager
 * 논리적인 볼륨을 만들어, 디바이스들을 하나로 묶고 크기를 나눠서 사용
@@ -99,9 +109,9 @@ gdisk {device name}
 
 ## EBS Volume 비용 절감 방안
 * 일단 안쓰는거 먼저 삭제하는게 가장 먼저 해야할 방법(당연히)
-* 그다음에는 gp2 → gp3 이전
+* gp2 → gp3 전환
     * gp3가 GB당 비용이 더 저렴
-    * 추가로 gp3는 기본적으로 3000 IOPS를 제공하는데 반해 gp2는 GB당 3 IOPS가 제공이 됨
+    * **gp3는 기본적으로 3000 IOPS를 제공**하는데 반해 gp2는 GB당 3 IOPS가 제공이 됨
     * 즉, gp2의 용량이 1TB이 되는 순간부터 gp3와 만나게 되는데 1TB 미만의 디스크는 gp3를 쓰는 것이 비용이 더 저렴할 뿐더러 성능도 더 좋다.
     * 디스크의 용량이 1TB를 넘어가는 순간부터는 gp3의 비용 이점이 조금씩 줄어들 수도 있다. (그래도 더 싸다)
 * 참조
@@ -111,3 +121,12 @@ gdisk {device name}
 ## DLM - EBS Volume Backup
 * 백업 정책을 생성하고 정책에 해당하는 인스턴스 대상의 EBS 볼륨을 정책에 따라 백업
   * 태그 등등...
+
+## EBS Encryption
+* EBS 볼륨 암호화 기능을 통해 데이터 전송시/저장시 암호화 둘 다 가능
+* 암호화 Key는 AWS KMS 서비스에서 제공하는 default Key(`aws/ebs`)나 custom으로 생성한 Key 둘 다 사용 가능
+  * `aws/ebs` Key는 대칭키(symmetric) 암호화 방식에서 사용하는 Key
+* 암호화 기능을 활성화하지 않은 볼륨으로 스냅샷 "생성" 시 스냅샷에 암호화 기능 활성화 불가.
+  * 대신에 암호화 기능이 활성화되지 않은 스냅샷을 "복사"할 때, 암호화 기능 활성화 가능
+  * 암호화 기능이 활성화된 스냅샷으로 볼륨을 생성할 경우 암호화 기능 자동 활성화됨. (해제 불가)
+  * 암호화되지 않은 스냅샷으로 볼륨을 생성할 때 암호화 기능 활성화 가능
