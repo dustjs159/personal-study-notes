@@ -7,3 +7,4 @@
     * Security Group으로 접근 제어
     * Linux 기반 인스턴스만 사용 가능함. 윈도우 불가
     * VPC Level 서비스
+    * 성능모드 / 처리량모드

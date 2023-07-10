@@ -1,12 +1,20 @@
 💻 [AWS] ALB
 =================
-# ALB (Application Load Balancer)
-* HTTP/HTTPS 요청에 대한 트래픽 처리 - L7 스위치 역할
+## ALB (Application Load Balancer)
+* HTTP/HTTPS 요청에 대한 트래픽 분산 처리 - L7 스위치 역할
+    * HTTP/HTTPS 트래픽을 라우팅하는 용도로 사용.
 * **IP 고정이 불가능.** 대신 DNS Record를 제공하여 도메인으로 접근할 수 있도록 함.
 
-## Listener / Target Group
-* Listener : 수신
+## Listener
+* Listener : 외부로부터 request를 받아 라우팅하는 역할
+* ALB가 전달받은 HTTP/HTTPS request를 받아 Target Group에 전달할 때 추가되는 헤더
+    * X-Forwarded-For
+    * X-Forwarded-Proto
+    * X-Forwarded-Port
+
+## Target Group
 * Target Group : 전달할 대상
+    * 그룹에 포함시킬 수 있는 대상은 EC2 인스턴스, Lambda 함수, Private IP 등이 있음
 
 ## 교차 영역 로드 밸런싱
 * 단순히 AZ 단위로만 트래픽을 분산하는 것이 아닌 AZ내 Target의 수 까지 고려하여 트래픽을 분산
@@ -37,4 +45,5 @@ AWS에서 제공하는 ALB는 HTTP/HTTPS 요청을 처리하기 위한 장비다
 
 ## ALB에서의 Health Check
 
-## ALB에 인증서를 적용
+## ALB에 여러 인증서를 적용
+* HTTPS 리스너에 인증서 여러개를 적용할 수 있음.
