@@ -4,7 +4,11 @@
 * Placement Group : EC2 인스턴스의 배치 방식을 정의
 * 그룹에 대한 비용은 무료(그룹 내 인스턴스 비용은 당연히 청구됨)
 
-## 유형
+## 배치 그룹 유형
+* Cluster
+* Spread
+* Partition
+
 ### Cluster
 <img width="247" alt="스크린샷 2023-06-06 오후 12 58 04" src="https://github.com/dustjs159/Study/assets/57285121/a05d182f-f815-4713-9591-410cb57e4360">
 

@@ -20,9 +20,3 @@
     * **MySQL MariaDB**
     * **Amazon Aurora**
 
-
-## 📌 RDS 인증 방식
-* User/Password
-* IAM 
-* Kerberos
-    
