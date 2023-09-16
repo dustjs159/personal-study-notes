@@ -28,18 +28,18 @@ docker run -d --rm --restart=always --name {container name} {image} -p {host-por
 
 ## docker run vs start 
 * `docker run` 명령어로 컨테이너를 실행하면 포그라운드로 실행이 된다. 그런데 `docker start` 로 컨테이너를 실행하게 되면 백그라운드로 실행이 된다. 두 명령어의 default 실행 모드가 다르기 때문이다.
-* `docker run` 은 default가 attached 모드(포그라운드)로 컨테이너가 실행되며 `docker start` 는 default로 detached 모드(백그라운드)로 실행이 된다.
-* `docker run` 으로 백그라운드에서 컨테이너를 실행시키고자 한다면 `-d` 옵션(detached)을 사용한다.
+* `docker run` 은 default가 attached 모드(foreground)로 컨테이너가 실행되며 `docker start` 는 default로 detached 모드(background)로 실행이 된다.
+* `docker run` 으로 background에서 컨테이너를 실행시키고자 한다면 `-d` 옵션(detached)을 사용한다.
     * `docker run -d ....`
-* `docker start` 로 포그라운드에서 컨테이너를 실행시키고자 한다면 `-a` 옵션(attached)을 사용한다.
+* `docker start` 로 foreground에서 컨테이너를 실행시키고자 한다면 `-a` 옵션(attached)을 사용한다.
     * `docker start -a ....`
 * 이미 실행중인 컨테이너에 직접 연결하고자 한다면...
     * `docker attach {container}`
 
 ## 컨테이너 내부에 진입하기 - Interactive 모드
-* `-i` 옵션을 통해 컨테이너의 내부에 진입하여 커맨드 입력이 가능
+* `-i` 옵션을 통해 컨테이너의 내부에 진입하여 커맨드 입력이 가능 (interactive)
     * `STDIN` 상태 유지
-* `-t` 옵션을 통해 커맨드를 입력할 터미널을 띄움
+* `-t` 옵션을 통해 커맨드를 입력할 터미널을 띄움 (tty)
 * 즉 컨테이너 내부에 명령어를 전달하고자 할 때 `-i` 옵션을 통해 컨테이너가 STDIN으로 명령어를 입력 받을 준비하고 `-t` 옵션으로 입력 받을 터미널을 띄운다.
     * 합쳐서 `-it`로 많이 사용함
     * 근데 이러한 방식으로 컨테이너를 실행하고 특정 값을 입력받는 경우 한번만 입력값을 받고 컨테이너가 중지된다... 그리고 다시 띄우기 위해 `docker start` 를 하게 되면 default 실행 모드(detached)로 실행된다.(아무것도 변화가 없을 듯)
@@ -59,6 +59,9 @@ docker stop {container} # SIGTERM
 
 # 미사용 컨테이너 삭제
 docker container prune
+
+# 컨테이너 삭제
+docker rm {container} # SIGKILL
 
 # 컨테이너 강제 종료 && 삭제
 docker rm -f {container}

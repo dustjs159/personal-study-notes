@@ -9,9 +9,9 @@ docker info
 * Docker Hub에서 특정 이미지 검색
     * 웹 URL : https://hub.docker.com/
 ```
-docker search {image}
+docker search {image name}
 ```
-* 서버 내 저장된 이미지 확인
+* 호스트 내 저장된 이미지 확인
 ```
 docker images
 ```
@@ -22,7 +22,7 @@ docker inspect {image}
 * 이미지 pull
     * version은 선택. 특정 버전을 지정하지 않을 경우 생략한다. 그러면 최신 버전(latest)을 pull
 ```
-docker pull {iamge}:{version}
+docker pull {iamge name}:{version}
 ```
 
 ## MacOS에서 docker 자동완성 설정하기
