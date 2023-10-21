@@ -1,57 +1,35 @@
-Shell Script
-====================================
-## Summary
-- Last Updated : 21.07.20 Tue   
-- Updated by : 윤연선
------------------------------------
-
-# Shell
-   
+Shell
+===================
 <img width="592" alt="스크린샷 2021-05-31 오전 1 34 34" src="https://user-images.githubusercontent.com/57285121/120112343-5c303480-c1b0-11eb-8d31-edf15a9edc12.png">
    
-* 사용자와 커널 사이에 위치하여 입력을 커널로 전달
-* 반대로 커널의 출력을 사용자에게 전달
-* 쉘에서 명령어를 입력하여 실행 시 Shell이 부모 프로세스가 됨. 즉, 쉘의 PID가 프로세스의 PPID가 됨
-* 주요 기능 및 역할   
-> * 대화식 사용 : 사용자의 요청을 즉각 처리 및 결과를 출력하는 대화형 구조   
-> * 프로그래밍 가능 : 복잡한 작업을 수행할 수 있도록 일련의 명령어들을 묶어서 사용 가능(script)   
-* /etc/shells 파일에 현재 사용할 수 있는 쉘들의 경로가 설정되어 있음
-   
-<img width="414" alt="스크린샷 2021-05-31 오전 1 37 43" src="https://user-images.githubusercontent.com/57285121/120112441-cd6fe780-c1b0-11eb-89b0-cc6f48ca5d84.png">
-   
-## Shell의 종류
-* sh(bourne shell)   
-> * 유닉스의 가장 기본적인 shell   
-> * 프로그래밍 언어를 사용하여 shell script구성 가능   
+* **shell : 사용자와 os 커널 사이에서 인터페이스 역할을 하는 프로그램**
 
-* bash(bourne again shell)   
-> * **리눅스 표준 shell**   
-> * sh 기반으로 만들어짐(sh와 호환됨)   
-> * Alias(명령어 단축), History, 자동완성 등의 기능을 제공   
+현재 사용중인 shell 확인
+```sh
+echo $SHELL
 
-* csh(C shell)   
-> * C언어 구문과 유사한 문법의 shell   
+/bin/zsh
+```
+현재 shell의 PID 확인
+```sh
+echo $$
 
-* ksh(korn shell)   
-> * sh 기반으로 C shell을 추가하여 만든 shell
+3029 
+```
 
-* zsh(z shell)   
-> * sh 기반으로 만들어짐   
-> * 실행 중인 shell끼리 명령어의 history 공유 가능   
-> * 다양한 테마 지원   
+### shell의 종류
+* sh(bourne shell) : unix 기반 os의 최초 shell
+* **bash(bourne again shell) : 확장된 sh. 리눅스 배포판에서 기본 shell로 많이 사용된다.** 또한 제한적인 sh보다 더 다양한 shell script 사용이 가능함
+* zsh(z shell) : macos 기본 shell로 채택됨. 보다 더 다양한 플려그인과 테마 지원.( 이쁜 테마 많다.)
 
-* dash   
-> * Ubuntu의 기본 shell   
-> * Ubuntu에서는 가볍다는 장점때문에 일부 기능(history, 로그인 등)을 제외하고 기본 shell로 전환   
+그 외에도 csh(C shell), ksh(korn shell), dash, tcsh(tc shell)등이 있다고 하는데 안써봄.
 
-* tcsh(tc shell)   
-> * csh 기반   
-> * tcsh 스크립트 안에 함수를 정의할 수 없음   
-
-# Shell 설정 파일
-* Shell을 보다 편리하게 사용하기 위한 설정 파일들
-* **환경변수** 설정
-* 실행 순서는 /etc/profile -> .bash_profile -> .bashrc -> /etc/bashrc -> .bash_history
+### shell environment variable
+* `/etc/profile` 
+* `~/.bash_profile`
+* `~/.bashrc`
+* `/etc/bashrc`
+* `~/.bash_history`
 
 ## .bashrc, /etc/bashrc
    
@@ -195,30 +173,3 @@ Shell Script
 		명령;;
 	exac
 ```
-   
-## Shell Script 문법 : 반복문(for & while)
-* for ~ in
-```
-	for 변수 in 값1, 값2, 값3 ...
-	do
-		반복할 명령
-	done
-```
-
-
-* while
-```
-	while [ 조건 ]
-	do
-		계속 반복할 명령
-	done
-		반복이 끝난 후 명령
-```
-
-* `seq {n, m}`
-	* 숫자 반복 출력
-	* n ~ m 까지 숫자를 개행으로 출력
-* `read`
-	* 사용자로부터 입력을 받음
-
-* `set +e`
