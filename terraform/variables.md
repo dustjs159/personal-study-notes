@@ -1,14 +1,16 @@
 Terraform 변수 다루기
 =====================
 ### 사용 가능한 변수
-* string
-* number
-* bool
-* list
-* set
-* map
-* object
-* tuple
+* 단순 변수
+  * string
+  * number
+  * bool
+* 복합 변수 
+  * list
+  * set
+  * map
+  * object
+  * tuple
 * input
 * output
 
@@ -38,7 +40,7 @@ variable mynumber {
 ```
 
 #### list
-* 리스트
+* 리스트 (파이썬의 리스트와 유사)
 * 인덱싱은 0부터.
 * `element()`, `slice()` 등으로 리스트 내 요소 추출 가능
 ```
@@ -49,7 +51,7 @@ variable mylist {
 ```
 
 #### map
-* key-value 형태로 데이터 저장 가능 (파이썬으로 치자면 딕셔너리)
+* key-value 형태로 데이터 저장 가능 (파이썬의 딕셔너리와 유사)
 ```
 variable mymap {
   type        = map(string)
