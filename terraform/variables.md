@@ -1,4 +1,4 @@
-Terraform 변수 다루기
+Terraform Variable Management
 =====================
 ### 사용 가능한 변수
 * 단순 변수
@@ -15,13 +15,14 @@ Terraform 변수 다루기
 * output
 
 ### terraform console에서 변수 확인
-```bash
+```shell
 $ terraform console
 > var.varname
+# 또는
 > "${var.varname}" 
 ```
 
-#### string
+### string
 * 문자열
 ```
 variable mystr {
@@ -30,7 +31,46 @@ variable mystr {
 }
 ```
 
-#### number
+### map
+* key-value 형태로 데이터 저장 가능 (파이썬의 딕셔너리와 유사)
+```
+variable mymap {
+  type        = map(string)
+  default     = {
+    "key1" = "value1"
+    "key2" = "value2"
+  }
+}
+```
+```shell
+$ terraform console
+> "${var.mymap["key1"]}"
+> lookup(var.mymap, "key1") # lookup 함수를 사용하여 변수 참조
+```
+### list
+* 리스트 (파이썬의 리스트와 유사)
+  * 인덱싱은 0부터.
+* `element()`, `slice()` 등으로 리스트 내 요소 추출 가능
+```
+variable mylist {
+  type        = list
+  default     = [ 1, "string1", 3 ]
+}
+```
+
+### set
+* list와 유사하나 중복값에 대해 하나의 값만, 작은 요소부터 출력
+  * 내부 요소들의 순서를 보장해주지는 않음.
+* 단, type을 지정해주지 않으면 오류 발생.
+  * `set(any)`로 지정 시 오류 발생하지 않음. 그러나 지정하는 것을 권고
+```
+variable mylist {
+  type        = set(any) # 형식을 지정해줘야 함.
+  default     = [ 1, "string1", 3 ]
+}
+```
+
+### number
 * 정수형(실수도 가능)
 ```
 variable mynumber {
@@ -39,32 +79,7 @@ variable mynumber {
 }
 ```
 
-#### list
-* 리스트 (파이썬의 리스트와 유사)
-* 인덱싱은 0부터.
-* `element()`, `slice()` 등으로 리스트 내 요소 추출 가능
-```
-variable mylist {
-  type        = list
-  default     = [1,"string1",3]
-}
-```
-
-#### map
-* key-value 형태로 데이터 저장 가능 (파이썬의 딕셔너리와 유사)
-```
-variable mymap {
-  type        = map(string)
-  default     = {
-    key1 = "value1"
-    key2 = "value2"
-  }
-}
-```
-* `"${var.mymap["key1"]}"` 형태로 사용
-
-
- ### 변수 관리 
+### 변수 관리 
  * 변수 재사용을 위해 별도의 변수 지정 파일을 생성하고 외부에서 변수를 사용할 때 해당 파일을 참조하여 변수를 사용.
     * `variables.tf`, `terraform.tfvars` 를 통해 관리
 

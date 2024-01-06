@@ -1,10 +1,9 @@
-Terraform 리소스 다루기
+Terraform Resource Management
 =====================
-### 클라우드 공급자 지정
-(AWS 예시)
+
+### resource : 생성할 인프라 자원 명시
 ```
-provider "aws" {
+resource "" "" {
 
 }
 ```
-
