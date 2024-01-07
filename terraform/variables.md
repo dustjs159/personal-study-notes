@@ -114,3 +114,18 @@ ami_id = {
 * 하이픈(-) 이아닌 언더바(_)를 사용한다.
   * `aws_region` (O), `aws-region` (x)
 * 참조 링크 : https://www.terraform-best-practices.com/naming
+
+### 변수 입력 받기
+* 변수 선언 시 default 값을 지정하지 않으면, `terraform apply` 시점에서 입력받을 수 있음.
+* 대화식이 아닌 선언식으로 변수를 입력할 때는 `-var <variable>` 형식으로 사용
+  * `terraform apply -var <variable>`
+
+### 출력 변수 설정하기 
+* 생성한 리소스의 특정 정보를 출력 변수로 뽑아내고 싶을 때 사용하도록 한다.
+
+```
+output "<NAME>" {
+    value = <VALUE>
+    [CONFIG...]
+}
+```
